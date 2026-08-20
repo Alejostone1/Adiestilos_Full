@@ -1,5 +1,9 @@
 # Cloudinary (almacenamiento de imágenes en producción)
 
+> **Estado (20/08/2026):** credenciales cargadas en el servicio `api` de Railway
+> (`CLOUDINARY_CLOUD_NAME/api_key/api_secret`) y **validadas** (ping OK + subida y
+> borrado de prueba en la nube `dm5qezkoc`). El código ya las usa.
+
 En producción las imágenes **no** se guardan en el disco del servidor (Railway usa
 un filesystem efímero). Todas las subidas se envían a **Cloudinary** y en la base
 de datos se guarda la **URL remota** (`https://res.cloudinary.com/...`).
