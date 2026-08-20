@@ -59,7 +59,7 @@ import ReportesPagosPage from "../pages/admin/reportes/ReportesPagosPage";
 // El Vendedor ve su panel de ventas; el resto, el panel de administración.
 const DashboardPage = () => {
   const { usuario } = useAuth();
-  const esVendedor = usuario?.rol?.nombreRol === 'Vendedor' || usuario?.idRol === 2;
+  const esVendedor = usuario?.rol?.nombreRol === 'Vendedor';
   return esVendedor ? <VendedorDashboardPage /> : <AdminDashboardPage />;
 };
 

@@ -431,7 +431,7 @@ const Sidebar = () => {
                 </h1>
                 <div className="flex items-center gap-1.5">
                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                   <Text className="!text-[11px] !font-semibold !text-slate-400 dark:!text-slate-500 uppercase tracking-wide leading-none">Admin Panel</Text>
+                   <Text className="!text-[11px] !font-semibold !text-slate-400 dark:!text-slate-500 uppercase tracking-wide leading-none">{usuario?.rol?.nombreRol === 'Vendedor' ? 'Panel de Ventas' : 'Admin Panel'}</Text>
                 </div>
               </div>
             )}

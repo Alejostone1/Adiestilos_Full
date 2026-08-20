@@ -35,13 +35,8 @@ const AuthRedirect = () => {
 
   if (estaAutenticado) {
     const nombreRol = usuario?.rol?.nombreRol || '';
-    const idRol = usuario?.idRol;
 
-    if (nombreRol === 'Administrador' || idRol === 1) {
-      return <Navigate to="/admin/dashboard" replace />;
-    }
-
-    if (nombreRol === 'Vendedor' || idRol === 2) {
+    if (nombreRol === 'Administrador' || nombreRol === 'Vendedor') {
       return <Navigate to="/admin/dashboard" replace />;
     }
 
@@ -59,6 +54,24 @@ const ProtectedRoute = () => {
   const { estaAutenticado } = useAuth();
 
   return estaAutenticado ? <Outlet /> : <Navigate to="/login" />;
+};
+
+/**
+ * @component RequireRoles
+ * @brief Protege rutas según el rol del usuario (por nombre de rol).
+ *        Si no está autenticado → /login. Si el rol no está permitido → fallback.
+ */
+const RequireRoles = ({ roles, fallback }) => {
+  const { estaAutenticado, usuario } = useAuth();
+
+  if (!estaAutenticado) return <Navigate to="/login" replace />;
+
+  const nombreRol = usuario?.rol?.nombreRol || '';
+  if (!roles.includes(nombreRol)) {
+    return <Navigate to={fallback} replace />;
+  }
+
+  return <Outlet />;
 };
 
 
@@ -90,12 +103,19 @@ const AppRoutes = () => {
       {/* Estas rutas también pueden usar un layout específico de "Dashboard" o el MainLayout */}
       <Route element={<ProtectedRoute />}>
          <Route path="/perfil" element={<MainLayout><PerfilPage /></MainLayout>} />
+      </Route>
 
+      {/* Zona de administración: solo Administrador y Vendedor */}
+      <Route element={<RequireRoles roles={['Administrador', 'Vendedor']} fallback="/cliente/dashboard" />}>
          {/* Rutas específicas para Detalles de Ventas */}
          <Route path="/admin/ventas/detalles" element={<DetallesVentasPage />} />
          <Route path="/admin/ventas/detalles/:id" element={<DetallesVentasPage />} />
 
          <Route path="/admin/*" element={<AdminRoutes />} />
+      </Route>
+
+      {/* Zona del cliente: solo rol Cliente. Admin/Vendedor vuelven a su panel. */}
+      <Route element={<RequireRoles roles={['Cliente']} fallback="/admin/dashboard" />}>
          <Route path="/cliente/*" element={<ClienteRoutes />} />
       </Route>
 
