@@ -67,7 +67,7 @@ npm run dev
 |---|---|
 | `npm run dev` | Levanta backend + frontend juntos (concurrently) |
 | `npm run install:all` | Instala dependencias de todo el proyecto |
-| `npm run build` | Build de producción del frontend |
+| `npm run build` | Build de producción del frontend (instala deps si faltan) |
 | `npm run db:migrate` / `db:deploy` / `db:seed` | Gestión de Prisma |
 
 ---
