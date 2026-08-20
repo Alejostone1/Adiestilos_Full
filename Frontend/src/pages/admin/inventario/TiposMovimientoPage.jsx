@@ -193,7 +193,7 @@ const TiposMovimientoPage = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-6 transition-colors duration-300">
       <div className="flex justify-between items-start mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Tipos de Movimiento</h1>
+          <h1 className="text-4xl font-semibold text-gray-900 dark:text-white mb-2">Tipos de Movimiento</h1>
           <p className="text-gray-600 dark:text-gray-400">
             Gestiona los tipos de movimientos de inventario del sistema
           </p>

@@ -210,7 +210,7 @@ export default function CategoriasPage() {
               <Eye className="w-4 h-4 text-gray-700 dark:text-gray-300" />
             </button>
             <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/60 to-transparent">
-              <span className="text-white text-xs font-bold flex items-center justify-center gap-2">
+              <span className="text-white text-xs font-semibold flex items-center justify-center gap-2">
                  <LayoutGrid className="w-3 h-3" /> Explorar Inventario
               </span>
             </div>
@@ -278,7 +278,7 @@ export default function CategoriasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+              <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
                 <Tag className="w-6 h-6" />
                 Gestión de Categorías
               </h1>
@@ -425,10 +425,10 @@ export default function CategoriasPage() {
                             )}
                           </div>
                           <div className="ml-4">
-                            <div className="text-sm font-black text-gray-900 dark:text-gray-100 group-hover/item:text-blue-600 transition-colors">
+                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover/item:text-blue-600 transition-colors">
                               {categoria.nombreCategoria}
                             </div>
-                            <div className="text-[10px] uppercase font-bold text-gray-400 dark:text-gray-500 flex items-center gap-1">
+                            <div className="text-[11px] uppercase font-semibold text-gray-400 dark:text-gray-500 flex items-center gap-1">
                                <LayoutGrid className="w-3 h-3" /> Ver productos
                             </div>
                           </div>

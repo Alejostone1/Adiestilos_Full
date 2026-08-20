@@ -134,8 +134,8 @@ export default function TallasPage() {
                 <stat.icon className={`w-6 h-6 text-${stat.color}-600 dark:text-${stat.color}-400`} />
              </div>
              <div>
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white leading-none">{stat.val}</p>
+                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">{stat.label}</span>
+                <p className="text-2xl font-semibold text-slate-900 dark:text-white leading-none">{stat.val}</p>
              </div>
           </div>
         ))}
@@ -159,7 +159,7 @@ export default function TallasPage() {
 
             <button
               onClick={() => setMostrarFiltros(!mostrarFiltros)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-2xl border font-bold text-sm transition-all ${
+              className={`flex items-center gap-2 px-5 py-3 rounded-2xl border font-semibold text-sm transition-all ${
                 mostrarFiltros
                   ? 'bg-purple-50 border-purple-200 text-purple-700 dark:bg-purple-900/20 dark:border-purple-800'
                   : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300'
@@ -179,7 +179,7 @@ export default function TallasPage() {
             </button>
             <button
               onClick={() => setMostrarFormulario(true)}
-              className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-purple-600 text-white rounded-2xl font-black text-sm tracking-tight hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-slate-900/10"
+              className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-purple-600 text-white rounded-2xl font-semibold text-sm tracking-tight hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-slate-900/10"
             >
               <Plus className="w-4 h-4" />
               Nueva Talla
@@ -191,22 +191,22 @@ export default function TallasPage() {
         {mostrarFiltros && (
           <div className="mt-4 pt-4 border-t border-slate-50 dark:border-slate-700 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block">Tipo Dimensional</label>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] mb-2 block">Tipo Dimensional</label>
               <select
                 value={filtroTipo}
                 onChange={(e) => setFiltroTipo(e.target.value)}
-                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl text-sm font-bold"
+                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl text-sm font-semibold"
               >
                 <option value="todos">Todos los Tipos</option>
                 {tiposTalla.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 block">Estado Sistema</label>
+              <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] mb-2 block">Estado Sistema</label>
               <select
                 value={filtroEstado}
                 onChange={(e) => setFiltroEstado(e.target.value)}
-                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl text-sm font-bold"
+                className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-700 rounded-xl text-sm font-semibold"
               >
                 <option value="todos">Cualquier Estado</option>
                 <option value="activo">Activo (Visible)</option>
@@ -216,7 +216,7 @@ export default function TallasPage() {
             <div className="flex items-end">
               <button 
                 onClick={limpiarFiltros}
-                className="text-xs font-black text-rose-500 hover:text-rose-600 flex items-center gap-1.5 p-2"
+                className="text-xs font-semibold text-rose-500 hover:text-rose-600 flex items-center gap-1.5 p-2"
               >
                 <X className="w-3 h-3" /> Limpiar Selección
               </button>
@@ -230,14 +230,14 @@ export default function TallasPage() {
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="w-10 h-10 animate-spin text-purple-600 mb-4" />
-            <span className="text-sm font-black text-slate-400 animate-pulse uppercase tracking-widest">Sincronizando tallaje...</span>
+            <span className="text-sm font-semibold text-slate-400 animate-pulse uppercase tracking-wide">Sincronizando tallaje...</span>
           </div>
         ) : tallasFiltradas.length === 0 ? (
           <div className="text-center py-20 px-6">
             <div className="w-20 h-20 bg-slate-50 dark:bg-slate-900/50 rounded-full flex items-center justify-center mx-auto mb-6">
                <Layers className="w-10 h-10 text-slate-300" />
             </div>
-            <h3 className="text-xl font-black text-slate-900 dark:text-white">Sin resultados</h3>
+            <h3 className="text-xl font-semibold text-slate-900 dark:text-white">Sin resultados</h3>
             <p className="text-sm text-slate-400 mt-2 max-w-xs mx-auto">No hay registros que coincidan con los criterios actuales.</p>
           </div>
         ) : (
@@ -246,11 +246,11 @@ export default function TallasPage() {
               <table className="w-full border-collapse">
                 <thead className="bg-slate-50/50 dark:bg-slate-900/50">
                   <tr>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-700">Identificador</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-700">Tipo</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-700">Estado</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-700">Fecha Registro</th>
-                    <th className="px-12 py-4 text-right text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-100 dark:border-slate-700">Acciones</th>
+                    <th className="px-6 py-4 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wide border-b border-slate-100 dark:border-slate-700">Identificador</th>
+                    <th className="px-6 py-4 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wide border-b border-slate-100 dark:border-slate-700">Tipo</th>
+                    <th className="px-6 py-4 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wide border-b border-slate-100 dark:border-slate-700">Estado</th>
+                    <th className="px-6 py-4 text-left text-[11px] font-semibold text-slate-400 uppercase tracking-wide border-b border-slate-100 dark:border-slate-700">Fecha Registro</th>
+                    <th className="px-12 py-4 text-right text-[11px] font-semibold text-slate-400 uppercase tracking-wide border-b border-slate-100 dark:border-slate-700">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-50 dark:divide-slate-700/50">
@@ -258,10 +258,10 @@ export default function TallasPage() {
                     <tr key={talla.idTalla} className="group hover:bg-slate-50/80 dark:hover:bg-slate-900/30 transition-colors">
                       <td className="px-6 py-5">
                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center border border-purple-100 dark:border-purple-800/30 text-purple-600 font-black text-xs">
+                            <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center border border-purple-100 dark:border-purple-800/30 text-purple-600 font-semibold text-xs">
                                {talla.nombreTalla?.substring(0, 2).toUpperCase()}
                             </div>
-                            <span className="text-sm font-black text-slate-900 dark:text-white">{talla.nombreTalla}</span>
+                            <span className="text-sm font-semibold text-slate-900 dark:text-white">{talla.nombreTalla}</span>
                          </div>
                       </td>
                       <td className="px-6 py-5">
@@ -270,28 +270,29 @@ export default function TallasPage() {
                       <td className="px-6 py-5">
                          <div className="flex items-center gap-2">
                            <div className={`w-2 h-2 rounded-full ${talla.estado === 'activo' ? 'bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]' : 'bg-rose-500'}`} />
-                           <span className={`text-xs font-bold uppercase tracking-tighter ${talla.estado === 'activo' ? 'text-emerald-600' : 'text-rose-500'}`}>
+                           <span className={`text-xs font-semibold uppercase tracking-tighter ${talla.estado === 'activo' ? 'text-emerald-600' : 'text-rose-500'}`}>
                              {talla.estado}
                            </span>
                          </div>
                       </td>
                       <td className="px-6 py-5">
                         <div className="flex flex-col">
-                           <span className="text-xs font-black text-slate-700 dark:text-slate-300">
+                           <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
                              {talla.creadoEn ? new Date(talla.creadoEn).toLocaleDateString() : '--/--/----'}
                            </span>
-                           <span className="text-[10px] font-bold text-slate-400">Hace {Math.floor(Math.random()*10)} días</span>
+                           <span className="text-[11px] font-semibold text-slate-400">Hace {Math.floor(Math.random()*10)} días</span>
                         </div>
                       </td>
                       <td className="px-6 py-5 text-right">
-                         <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button 
+                         <div className="flex items-center justify-end gap-2">
+                            <button
                               onClick={() => { setTallaEditando(talla); setMostrarFormulario(true); }}
-                              className="w-9 h-9 flex items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-100 transition-all"
+                              title="Editar talla"
+                              className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             >
                                <Edit className="w-4 h-4" />
                             </button>
-                            <button 
+                            <button
                               onClick={async () => {
                                 if (window.confirm(`¿Confirmar desactivación de "${talla.nombreTalla}"?`)) {
                                    try {
@@ -302,7 +303,8 @@ export default function TallasPage() {
                                    finally { setCargandoAccion(false); }
                                 }
                               }}
-                              className="w-9 h-9 flex items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 hover:bg-rose-100 transition-all"
+                              title="Desactivar talla"
+                              className="w-10 h-10 flex items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white border border-rose-100 dark:border-rose-800/60 hover:border-rose-600 shadow-sm hover:shadow-md hover:shadow-rose-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             >
                                <Trash2 className="w-4 h-4" />
                             </button>
@@ -317,7 +319,7 @@ export default function TallasPage() {
             {/* Paginación Premium */}
             {totalPaginas > 1 && (
               <div className="px-6 py-6 bg-slate-50/30 dark:bg-slate-900/40 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
-                <p className="text-xs font-bold text-slate-400">
+                <p className="text-xs font-semibold text-slate-400">
                    Mostrando <span className="text-slate-900 dark:text-white">{(paginaActual - 1) * itemsPorPagina + 1} - {Math.min(paginaActual * itemsPorPagina, tallasFiltradas.length)}</span> de {tallasFiltradas.length} registros
                 </p>
                 <div className="flex items-center gap-1.5">
@@ -332,7 +334,7 @@ export default function TallasPage() {
                     <button
                       key={i}
                       onClick={() => setPaginaActual(i + 1)}
-                      className={`w-9 h-9 rounded-xl font-black text-xs transition-all shadow-sm ${
+                      className={`w-9 h-9 rounded-xl font-semibold text-xs transition-all shadow-sm ${
                         paginaActual === i + 1
                           ? 'bg-slate-900 dark:bg-purple-600 text-white shadow-xl shadow-purple-500/20'
                           : 'bg-white dark:bg-slate-800 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-700'
@@ -386,7 +388,7 @@ export default function TallasPage() {
 function BadgeTipo({ tipo, tipos }) {
   const t = tipos.find(x => x.value === tipo) || { label: tipo, color: 'bg-slate-50 text-slate-600' };
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-tight border ${t.color}`}>
+    <span className={`inline-flex items-center px-3 py-1 rounded-lg text-[11px] font-semibold uppercase tracking-tight border ${t.color}`}>
       {t.label}
     </span>
   );
@@ -417,33 +419,33 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
                  <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center border border-purple-100 dark:border-purple-800/30">
                     <Settings2 className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                  </div>
-                 <h2 className="text-2xl font-black text-slate-900 dark:text-white leading-tight">
+                 <h2 className="text-2xl font-semibold text-slate-900 dark:text-white leading-tight">
                    {talla ? 'Editar Registro' : 'Configurar Nueva Talla'}
                  </h2>
               </div>
               <button onClick={onClose} className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all"><X className="w-6 h-6 text-slate-400" /></button>
            </div>
 
-           {errorForm && <div className="mb-6 p-4 bg-rose-50 text-rose-600 text-xs font-bold rounded-2xl border border-rose-100">{errorForm}</div>}
+           {errorForm && <div className="mb-6 p-4 bg-rose-50 text-rose-600 text-xs font-semibold rounded-2xl border border-rose-100">{errorForm}</div>}
 
            <form onSubmit={submit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                  <div>
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Nombre Visual</label>
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide mb-2 block">Nombre Visual</label>
                     <input 
                       type="text" 
                       value={formData.nombreTalla}
                       onChange={e => setFormData({...formData, nombreTalla: e.target.value})}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl font-bold text-sm outline-none focus:ring-2 focus:ring-purple-500/20"
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl font-semibold text-sm outline-none focus:ring-2 focus:ring-purple-500/20"
                       placeholder="Ej: Extra-Large"
                     />
                  </div>
                  <div>
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Clasificación</label>
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide mb-2 block">Clasificación</label>
                     <select
                       value={formData.tipoTalla}
                       onChange={e => setFormData({...formData, tipoTalla: e.target.value})}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl font-bold text-sm"
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl font-semibold text-sm"
                     >
                        {tiposTalla.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
                     </select>
@@ -451,14 +453,14 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
               </div>
 
               <div>
-                 <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 block">Estado de Disponibilidad</label>
+                 <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide mb-2 block">Estado de Disponibilidad</label>
                  <div className="grid grid-cols-2 gap-3">
                     {['activo', 'inactivo'].map(est => (
                       <button
                         key={est}
                         type="button"
                         onClick={() => setFormData({...formData, estado: est})}
-                        className={`py-3 rounded-2xl text-xs font-black uppercase transition-all border ${
+                        className={`py-3 rounded-2xl text-xs font-semibold uppercase transition-all border ${
                           formData.estado === est 
                             ? 'bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-500/20' 
                             : 'bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-400'
@@ -474,11 +476,11 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
                  <button 
                   type="submit" 
                   disabled={loading || !formData.nombreTalla.trim()}
-                  className="w-full py-4 bg-slate-900 dark:bg-purple-600 text-white rounded-2xl font-black text-sm tracking-widest hover:scale-[1.01] active:scale-95 transition-all shadow-xl shadow-slate-900/10"
+                  className="w-full py-4 bg-slate-900 dark:bg-purple-600 text-white rounded-2xl font-semibold text-sm tracking-wide hover:scale-[1.01] active:scale-95 transition-all shadow-xl shadow-slate-900/10"
                  >
                     {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : 'CONFIRMAR Y GUARDAR'}
                  </button>
-                 <button type="button" onClick={onClose} className="text-xs font-black text-slate-400 uppercase hover:text-slate-600 transition-colors">Cancelar operación</button>
+                 <button type="button" onClick={onClose} className="text-xs font-semibold text-slate-400 uppercase hover:text-slate-600 transition-colors">Cancelar operación</button>
               </div>
            </form>
         </div>

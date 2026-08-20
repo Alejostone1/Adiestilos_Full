@@ -34,14 +34,14 @@ const FiltrosDashboard = ({ filtros, onFiltrosChange, onRefresh }) => {
           <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-500">
              <FilterOutlined />
           </div>
-          <Text className="!font-black !text-sm !tracking-tight">FILTRAR RESULTADOS</Text>
+          <Text className="!font-semibold !text-sm !tracking-tight">FILTRAR RESULTADOS</Text>
         </div>
       </Col>
       
       <Col xs={24} md={18}>
         <Space wrap size="middle" className="w-full justify-end">
           <div className="flex flex-col">
-            <Text className="!text-[10px] !font-bold !text-slate-400 !mb-1 uppercase tracking-widest">Período Predefinido</Text>
+            <Text className="!text-[10px] !font-medium !text-slate-400 !mb-1 uppercase tracking-wide">Período Predefinido</Text>
             <Select
               value={filtros.rango}
               onChange={handleRangoChange}
@@ -56,7 +56,7 @@ const FiltrosDashboard = ({ filtros, onFiltrosChange, onRefresh }) => {
           </div>
 
           <div className="flex flex-col">
-            <Text className="!text-[10px] !font-bold !text-slate-400 !mb-1 uppercase tracking-widest">Rango Personalizado</Text>
+            <Text className="!text-[10px] !font-medium !text-slate-400 !mb-1 uppercase tracking-wide">Rango Personalizado</Text>
             <RangePicker
               onChange={handleFechaRangeChange}
               format="DD/MM/YYYY"
@@ -73,7 +73,7 @@ const FiltrosDashboard = ({ filtros, onFiltrosChange, onRefresh }) => {
               size="large"
               icon={<ReloadOutlined />}
               onClick={handleRefresh}
-              className="!bg-blue-600 !border-0 !font-bold shadow-lg shadow-blue-500/20"
+              className="!bg-blue-600 !border-0 !font-semibold shadow-lg shadow-blue-500/20"
             >
               Aplicar
             </Button>

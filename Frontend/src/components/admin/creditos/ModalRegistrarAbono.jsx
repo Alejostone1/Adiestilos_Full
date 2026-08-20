@@ -140,7 +140,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
         confirmButtonColor: '#4F46E5',
         customClass: {
           popup: 'rounded-[2rem]',
-          confirmButton: 'rounded-xl font-black px-8 py-3'
+          confirmButton: 'rounded-xl font-semibold px-8 py-3'
         }
       });
 
@@ -182,8 +182,8 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                     <FiActivity className="h-8 w-8 text-white" />
                  </div>
                  <div>
-                    <h2 className="text-2xl font-black tracking-tight leading-none mb-1">Registrar Abono</h2>
-                    <p className="text-white/70 font-bold uppercase text-[10px] tracking-[0.2em]">Expediente de Crédito #{credito.idCredito}</p>
+                    <h2 className="text-2xl font-semibold tracking-tight leading-none mb-1">Registrar Abono</h2>
+                    <p className="text-white/70 font-semibold uppercase text-[11px] tracking-[0.1em]">Expediente de Crédito #{credito.idCredito}</p>
                  </div>
               </div>
               <button onClick={onClose} className="p-3 hover:bg-white/10 rounded-2xl transition-all">
@@ -195,16 +195,16 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
         {/* Resumen de Estado */}
         <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-800 bg-gray-50/50 dark:bg-gray-800/20 border-b border-gray-100 dark:border-gray-800">
            <div className="p-6 flex flex-col items-center">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Deuda Pendiente</span>
-              <p className="text-xl font-black text-rose-500">{formatearPrecio(credito.saldoPendiente)}</p>
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Deuda Pendiente</span>
+              <p className="text-xl font-semibold text-rose-500">{formatearPrecio(credito.saldoPendiente)}</p>
            </div>
            <div className="p-6 flex flex-col items-center bg-indigo-50/30 dark:bg-indigo-900/5">
-              <span className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">Total a Abonar</span>
-              <p className="text-2xl font-black text-indigo-600 dark:text-indigo-400">{formatearPrecio(totalAbono)}</p>
+              <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wide mb-1">Total a Abonar</span>
+              <p className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400">{formatearPrecio(totalAbono)}</p>
            </div>
            <div className="p-6 flex flex-col items-center">
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Nuevo Saldo</span>
-              <p className={`text-xl font-black ${saldoRestante <= 0 ? 'text-emerald-500' : 'text-gray-700 dark:text-gray-200'}`}>
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Nuevo Saldo</span>
+              <p className={`text-xl font-semibold ${saldoRestante <= 0 ? 'text-emerald-500' : 'text-gray-700 dark:text-gray-200'}`}>
                 {formatearPrecio(Math.max(0, saldoRestante))}
               </p>
            </div>
@@ -215,7 +215,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
            
            {/* Selector de Métodos de Pago */}
            <section>
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.1em] mb-6 flex items-center gap-2">
                  <FiPlus className="text-indigo-500" /> Selecciona Formas de Pago
               </h3>
               <div className="flex flex-wrap gap-3">
@@ -228,7 +228,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                        <button
                           key={idKey}
                           onClick={() => toggleMetodo(metodo)}
-                          className={`px-5 py-3 rounded-2xl border-2 font-black text-[11px] uppercase tracking-wider transition-all duration-300 flex items-center gap-3 ${
+                          className={`px-5 py-3 rounded-2xl border-2 font-semibold text-[11px] uppercase tracking-wider transition-all duration-300 flex items-center gap-3 ${
                              activo 
                              ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-500/30 -translate-y-1' 
                              : 'bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 text-gray-400 hover:border-indigo-200 hover:text-indigo-500 shadow-sm'
@@ -256,7 +256,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                              className="bg-white dark:bg-gray-800 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl hover:border-indigo-100 dark:hover:border-indigo-900/30 transition-all group animate-in slide-in-from-bottom-2"
                           >
                              <div className="flex justify-between items-center mb-4">
-                                <span className="text-[10px] font-black text-gray-500 dark:text-gray-400 uppercase tracking-widest">{metodo.nombreMetodo}</span>
+                                <span className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">{metodo.nombreMetodo}</span>
                                 <div className="flex items-center gap-2">
                                    <button 
                                       onClick={() => {
@@ -265,7 +265,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                                           .reduce((acc, [_, v]) => acc + (Number(v) || 0), 0);
                                         updateMonto(idKey, Math.max(0, Number(credito.saldoPendiente) - totalOtros));
                                       }}
-                                      className="text-[9px] font-black text-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded-lg hover:bg-indigo-100 transition-colors uppercase"
+                                      className="text-[11px] font-semibold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded-lg hover:bg-indigo-100 transition-colors uppercase"
                                    >
                                       Saldar
                                    </button>
@@ -277,13 +277,13 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
 
                              <div className="relative mb-3">
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                   <span className="text-gray-400 font-black text-lg">$</span>
+                                   <span className="text-gray-400 font-semibold text-lg">$</span>
                                 </div>
                                 <input 
                                    type="number"
                                    value={pagosMultimetodo[idKey] || ''}
                                    onChange={(e) => updateMonto(idKey, e.target.value)}
-                                   className="w-full bg-gray-50 dark:bg-gray-900/50 border-none rounded-2xl py-4 pl-10 pr-4 text-xl font-black text-gray-800 dark:text-white focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:text-gray-300"
+                                   className="w-full bg-gray-50 dark:bg-gray-900/50 border-none rounded-2xl py-4 pl-10 pr-4 text-xl font-semibold text-gray-800 dark:text-white focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:text-gray-300"
                                    placeholder="0.00"
                                    autoFocus
                                 />
@@ -293,7 +293,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                                 type="text"
                                 value={pagosMultimetodo[`referencia_${idKey}`] || ''}
                                 onChange={(e) => updateReferencia(idKey, e.target.value)}
-                                className="w-full bg-gray-50/50 dark:bg-gray-900/30 border-none rounded-xl py-3 px-4 text-xs font-bold text-gray-500 placeholder:text-gray-300"
+                                className="w-full bg-gray-50/50 dark:bg-gray-900/30 border-none rounded-xl py-3 px-4 text-xs font-semibold text-gray-500 placeholder:text-gray-300"
                                 placeholder={`Referencia ${metodo.nombreMetodo}...`}
                              />
                           </div>
@@ -305,14 +305,14 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                     <div className="h-16 w-16 bg-white dark:bg-gray-800 rounded-3xl shadow-sm flex items-center justify-center text-gray-300 mb-4">
                        <FiCreditCard className="h-8 w-8" />
                     </div>
-                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Diligencia las formas de pago</p>
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Diligencia las formas de pago</p>
                  </div>
               )}
            </section>
 
            {/* Notas y Extras */}
            <section className="bg-gray-50/50 dark:bg-gray-800/20 p-8 rounded-[3rem] border border-gray-100 dark:border-gray-800">
-              <h3 className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.1em] mb-4 flex items-center gap-2">
                  Observaciones Adicionales
               </h3>
               <textarea 
@@ -330,14 +330,14 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
         <div className="p-8 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex gap-4">
            <button
               onClick={onClose}
-              className="flex-1 px-8 py-5 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-black rounded-3xl hover:bg-gray-100 transition-all uppercase text-xs tracking-widest"
+              className="flex-1 px-8 py-5 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-semibold rounded-3xl hover:bg-gray-100 transition-all uppercase text-xs tracking-wide"
            >
               Cancelar
            </button>
            <button
               onClick={handleSubmit}
               disabled={procesando || totalAbono <= 0}
-              className="flex-[2] px-8 py-5 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-black rounded-3xl shadow-xl shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3 uppercase text-xs tracking-widest"
+              className="flex-[2] px-8 py-5 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-3xl shadow-xl shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3 uppercase text-xs tracking-wide"
            >
               {procesando ? (
                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

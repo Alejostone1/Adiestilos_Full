@@ -57,7 +57,7 @@ const HistorialCreditosPage = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div>
-            <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">Historial de Créditos</h1>
+            <h1 className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tight">Historial de Créditos</h1>
             <p className="text-gray-500 dark:text-gray-400 font-medium mt-1">Registro completo de cartera y cobranza</p>
           </div>
           
@@ -67,8 +67,8 @@ const HistorialCreditosPage = () => {
                    <FiDollarSign />
                 </div>
                 <div>
-                   <p className="text-[10px] font-bold text-gray-400 uppercase">Cartera Activa</p>
-                   <p className="text-sm font-black text-gray-900 dark:text-gray-200">{formatearPrecio(totalCartera)}</p>
+                   <p className="text-[11px] font-semibold text-gray-400 uppercase">Cartera Activa</p>
+                   <p className="text-sm font-semibold text-gray-900 dark:text-gray-200">{formatearPrecio(totalCartera)}</p>
                 </div>
              </div>
              <div className="flex items-center gap-3 px-4 py-2">
@@ -76,8 +76,8 @@ const HistorialCreditosPage = () => {
                    <FiCheckCircle />
                 </div>
                 <div>
-                   <p className="text-[10px] font-bold text-gray-400 uppercase">Recaudado</p>
-                   <p className="text-sm font-black text-gray-900 dark:text-gray-200">{formatearPrecio(totalRecaudado)}</p>
+                   <p className="text-[11px] font-semibold text-gray-400 uppercase">Recaudado</p>
+                   <p className="text-sm font-semibold text-gray-900 dark:text-gray-200">{formatearPrecio(totalRecaudado)}</p>
                 </div>
              </div>
           </div>
@@ -101,7 +101,7 @@ const HistorialCreditosPage = () => {
                 <button
                   key={filtro}
                   onClick={() => setFiltroEstado(filtro)}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wide transition-all ${
+                  className={`px-4 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide transition-all ${
                     filtroEstado === filtro 
                     ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-sm' 
                     : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
@@ -119,13 +119,13 @@ const HistorialCreditosPage = () => {
              <table className="min-w-full">
                <thead>
                  <tr className="bg-gray-50/50 dark:bg-gray-800/20 text-left">
-                   <th className="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Cliente</th>
-                   <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Venta Ref.</th>
-                   <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Monto Crédito</th>
-                   <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Abonado</th>
-                   <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Saldo</th>
-                   <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Estado</th>
-                   <th className="px-8 py-6 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Acción</th>
+                   <th className="px-8 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Cliente</th>
+                   <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Venta Ref.</th>
+                   <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Monto Crédito</th>
+                   <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Abonado</th>
+                   <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Saldo</th>
+                   <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Estado</th>
+                   <th className="px-8 py-6 text-right text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Acción</th>
                  </tr>
                </thead>
                <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -137,26 +137,26 @@ const HistorialCreditosPage = () => {
                    creditosFiltrados.map((credito) => (
                      <tr key={credito.idCredito} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
                        <td className="px-8 py-5">
-                          <p className="font-bold text-gray-900 dark:text-white text-sm">{credito.usuarioCliente?.nombres} {credito.usuarioCliente?.apellidos}</p>
-                          <p className="text-[10px] text-gray-400 mt-0.5">ID: {credito.idUsuario}</p>
+                          <p className="font-semibold text-gray-900 dark:text-white text-sm">{credito.usuarioCliente?.nombres} {credito.usuarioCliente?.apellidos}</p>
+                          <p className="text-[11px] text-gray-400 mt-0.5">ID: {credito.idUsuario}</p>
                        </td>
                        <td className="px-6 py-5">
-                          <span className="font-mono text-xs font-bold text-gray-600 dark:text-gray-300">{credito.venta?.numeroFactura}</span>
-                          <p className="text-[10px] text-gray-400 mt-0.5">{new Date(credito.fechaInicio).toLocaleDateString()}</p>
+                          <span className="font-mono text-xs font-semibold text-gray-600 dark:text-gray-300">{credito.venta?.numeroFactura}</span>
+                          <p className="text-[11px] text-gray-400 mt-0.5">{new Date(credito.fechaInicio).toLocaleDateString()}</p>
                        </td>
                        <td className="px-6 py-5">
-                          <span className="font-black text-sm text-gray-900 dark:text-white">{formatearPrecio(credito.montoTotal)}</span>
+                          <span className="font-semibold text-sm text-gray-900 dark:text-white">{formatearPrecio(credito.montoTotal)}</span>
                        </td>
                        <td className="px-6 py-5">
-                          <span className="font-bold text-xs text-emerald-600">{formatearPrecio(credito.totalAbonado)}</span>
+                          <span className="font-semibold text-xs text-emerald-600">{formatearPrecio(credito.totalAbonado)}</span>
                        </td>
                        <td className="px-6 py-5">
-                          <span className={`font-black text-sm ${Number(credito.saldoPendiente) > 0 ? 'text-rose-500' : 'text-gray-400'}`}>
+                          <span className={`font-semibold text-sm ${Number(credito.saldoPendiente) > 0 ? 'text-rose-500' : 'text-gray-400'}`}>
                             {formatearPrecio(credito.saldoPendiente)}
                           </span>
                        </td>
                        <td className="px-6 py-5">
-                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wide border ${
+                          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide border ${
                             credito.estado === 'pagado' 
                             ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/20 dark:border-emerald-900' 
                             : 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/20 dark:border-amber-900'

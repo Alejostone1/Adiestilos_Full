@@ -140,7 +140,7 @@ const GaleriaImagenes = ({ imagenes = [], imagenPrincipal, nombreProducto }) => 
               {imagen.tipo === 'variante' && (
                 <div className="absolute bottom-1 left-1 right-1">
                   <div className="bg-black/60 backdrop-blur-sm rounded px-1.5 py-0.5">
-                    <span className="text-[9px] text-white truncate block">
+                    <span className="text-[11px] text-white truncate block">
                       {imagen.color || imagen.talla || 'Variante'}
                     </span>
                   </div>

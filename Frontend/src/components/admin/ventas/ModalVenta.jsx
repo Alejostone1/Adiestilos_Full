@@ -283,8 +283,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
             </div>
             <div className="flex flex-col md:flex-row md:items-center gap-4">
               <div>
-                <h2 className="text-xl font-black text-gray-800 dark:text-gray-100">Nueva Venta Enterprise</h2>
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Paso {paso} de 5: {
+                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Nueva Venta Enterprise</h2>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Paso {paso} de 5: {
                   paso === 1 ? 'Cliente' : paso === 2 ? 'Catálogo' : paso === 3 ? 'Detalle' : paso === 4 ? 'Logística' : 'Confirmación'
                 }</p>
               </div>
@@ -297,8 +297,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                       <FiUser className="h-4 w-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter leading-none">Cliente</span>
-                      <span className="text-xs font-bold text-gray-800 dark:text-gray-200">{cliente.nombres} {cliente.apellidos}</span>
+                      <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter leading-none">Cliente</span>
+                      <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">{cliente.nombres} {cliente.apellidos}</span>
                     </div>
                   </div>
                 )}
@@ -308,8 +308,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                       <FiShoppingBag className="h-4 w-4" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter leading-none">Items</span>
-                      <span className="text-xs font-bold text-gray-800 dark:text-gray-200">{carrito.reduce((acc, i) => acc + i.cantidad, 0)} Prod.</span>
+                      <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter leading-none">Items</span>
+                      <span className="text-xs font-semibold text-gray-800 dark:text-gray-200">{carrito.reduce((acc, i) => acc + i.cantidad, 0)} Prod.</span>
                     </div>
                   </div>
                 )}
@@ -351,20 +351,20 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                 {/* Resumen Superior Financiero */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                   <div className="bg-indigo-600 p-6 rounded-[2rem] text-white shadow-xl shadow-indigo-500/20">
-                    <p className="text-[10px] font-black uppercase opacity-70 mb-1">Total Venta</p>
-                    <p className="text-2xl font-black">{formatearPrecio(totalFinal)}</p>
+                    <p className="text-[11px] font-semibold uppercase opacity-70 mb-1">Total Venta</p>
+                    <p className="text-2xl font-semibold">{formatearPrecio(totalFinal)}</p>
                   </div>
                   <div className="bg-emerald-500 p-6 rounded-[2rem] text-white shadow-xl shadow-emerald-500/20">
-                    <p className="text-[10px] font-black uppercase opacity-70 mb-1">Abonado</p>
-                    <p className="text-2xl font-black">{formatearPrecio(montoAbonado)}</p>
+                    <p className="text-[11px] font-semibold uppercase opacity-70 mb-1">Abonado</p>
+                    <p className="text-2xl font-semibold">{formatearPrecio(montoAbonado)}</p>
                   </div>
                   <div className="bg-rose-500 p-6 rounded-[2rem] text-white shadow-xl shadow-rose-500/20">
-                    <p className="text-[10px] font-black uppercase opacity-70 mb-1">A Crédito</p>
-                    <p className="text-2xl font-black">{formatearPrecio(montoCredito)}</p>
+                    <p className="text-[11px] font-semibold uppercase opacity-70 mb-1">A Crédito</p>
+                    <p className="text-2xl font-semibold">{formatearPrecio(montoCredito)}</p>
                   </div>
                   <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border-2 border-dashed border-gray-200 dark:border-gray-700">
-                    <p className="text-[10px] font-black uppercase text-gray-400 mb-1">Faltante / Cambio</p>
-                    <p className={`text-2xl font-black ${totalFinal - totalAsignado > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
+                    <p className="text-[11px] font-semibold uppercase text-gray-400 mb-1">Faltante / Cambio</p>
+                    <p className={`text-2xl font-semibold ${totalFinal - totalAsignado > 0 ? 'text-rose-500' : 'text-emerald-500'}`}>
                       {formatearPrecio(Math.abs(totalFinal - totalAsignado))}
                     </p>
                   </div>
@@ -377,8 +377,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                          <FiCreditCard className="h-6 w-6" />
                       </div>
                       <div>
-                         <h4 className="text-lg font-black text-gray-800 dark:text-gray-100 uppercase tracking-tight">Desglose de Pagos</h4>
-                         <p className="text-xs text-gray-400 font-bold uppercase">Define cómo pagará el cliente esta factura</p>
+                         <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100 uppercase tracking-tight">Desglose de Pagos</h4>
+                         <p className="text-xs text-gray-400 font-semibold uppercase">Define cómo pagará el cliente esta factura</p>
                       </div>
                    </div>
 
@@ -438,7 +438,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                 }
                               }}
                               className={`
-                                flex-shrink-0 px-4 py-3 rounded-2xl border font-bold text-xs uppercase tracking-wide transition-all
+                                flex-shrink-0 px-4 py-3 rounded-2xl border font-semibold text-xs uppercase tracking-wide transition-all
                                 ${estaSeleccionado 
                                   ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-500/30 scale-105' 
                                   : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500 hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-gray-700'
@@ -466,7 +466,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                           return (
                             <div key={idKey} className="group relative space-y-3 bg-gray-50/50 dark:bg-gray-700/30 p-4 rounded-2xl border border-gray-200 dark:border-gray-600 transition-all hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg hover:border-indigo-200 dark:hover:border-indigo-900">
                                <div className="flex items-center justify-between">
-                                  <label className="text-[10px] font-black text-gray-600 dark:text-gray-300 uppercase tracking-widest truncate max-w-[120px]" title={metodo.nombreMetodo}>
+                                  <label className="text-[11px] font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide truncate max-w-[120px]" title={metodo.nombreMetodo}>
                                     {metodo.nombreMetodo}
                                   </label>
                                   <div className="flex items-center gap-2">
@@ -484,7 +484,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                            [idKey]: restante
                                          }));
                                        }}
-                                       className="text-[9px] font-black text-indigo-600 uppercase hover:underline whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/40 px-2 py-1 rounded-lg"
+                                       className="text-[11px] font-semibold text-indigo-600 uppercase hover:underline whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/40 px-2 py-1 rounded-lg"
                                     >
                                       Cubrir
                                     </button>
@@ -506,7 +506,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
 
                                <div className="relative">
                                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                     <span className="text-gray-400 font-bold">$</span>
+                                     <span className="text-gray-400 font-semibold">$</span>
                                   </div>
                                   <input 
                                     type="number"
@@ -519,7 +519,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                       }));
                                     }}
                                     autoFocus
-                                    className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-3 pl-8 pr-4 text-sm font-black text-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all shadow-sm"
+                                    className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-3 pl-8 pr-4 text-sm font-semibold text-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all shadow-sm"
                                     placeholder="0.00"
                                   />
                                </div>
@@ -532,7 +532,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                      ...prev,
                                      [`referencia_${idKey}`]: e.target.value
                                    }))}
-                                   className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-2 px-3 text-[10px] font-bold text-gray-500 focus:ring-1 focus:ring-indigo-500 mt-2 shadow-sm animate-in fade-in slide-in-from-top-1"
+                                   className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-2 px-3 text-[11px] font-semibold text-gray-500 focus:ring-1 focus:ring-indigo-500 mt-2 shadow-sm animate-in fade-in slide-in-from-top-1"
                                    placeholder={`Ref. ${metodo.nombreMetodo}...`}
                                  />
                                )}
@@ -559,7 +559,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                          return (
                            <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800 rounded-2xl flex items-center gap-3">
                               <FiInfo className="h-5 w-5 text-amber-500" />
-                              <p className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-tighter">
+                              <p className="text-xs font-semibold text-amber-700 dark:text-amber-400 uppercase tracking-tighter">
                                 Atención: El total ingresado ({formatearPrecio(totalIngresado)}) excede el total de la venta en {formatearPrecio(totalIngresado - totalFinal)}.
                               </p>
                            </div>
@@ -575,7 +575,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                   <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-3 mb-4">
                       <FiPercent className="h-4 w-4 text-indigo-500" />
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Cupones & IVA</span>
+                      <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Cupones & IVA</span>
                     </div>
                     <div className="flex gap-2 mb-4">
                         <input 
@@ -583,17 +583,17 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                           value={codigoCupon}
                           onChange={(e) => setCodigoCupon(e.target.value)}
                           disabled={infoCupon}
-                          className="flex-1 bg-white dark:bg-gray-800 border-none rounded-xl py-3 px-4 text-xs font-bold disabled:opacity-50"
+                          className="flex-1 bg-white dark:bg-gray-800 border-none rounded-xl py-3 px-4 text-xs font-semibold disabled:opacity-50"
                           placeholder="CÓDIGO..."
                         />
                         {!infoCupon ? (
-                          <button onClick={aplicarCupon} className="bg-indigo-600 text-white px-4 rounded-xl text-[9px] font-black uppercase">Validar</button>
+                          <button onClick={aplicarCupon} className="bg-indigo-600 text-white px-4 rounded-xl text-[11px] font-semibold uppercase">Validar</button>
                         ) : (
                           <button onClick={() => setInfoCupon(null)} className="bg-rose-50 text-rose-500 px-4 rounded-xl"><FiX /></button>
                         )}
                     </div>
                     <div className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-xl shadow-sm">
-                       <span className="text-[10px] font-bold text-gray-500 uppercase italic">Aplica IVA ({porcentajeIva}%)</span>
+                       <span className="text-[11px] font-semibold text-gray-500 uppercase italic">Aplica IVA ({porcentajeIva}%)</span>
                        <button 
                         onClick={() => setAplicaIva(!aplicaIva)}
                         className={`h-5 w-9 rounded-full transition-all relative ${aplicaIva ? 'bg-amber-500' : 'bg-gray-200 dark:bg-gray-700'}`}
@@ -606,20 +606,20 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                   <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-3 mb-4">
                       <FiTruck className="h-4 w-4 text-indigo-500" />
-                      <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Logística & Notas</span>
+                      <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Logística & Notas</span>
                     </div>
                     <input 
                       type="text"
                       value={direccionEntrega}
                       onChange={(e) => setDireccionEntrega(e.target.value)}
-                      className="w-full bg-white dark:bg-gray-800 border-none rounded-xl py-3 px-4 text-xs font-bold mb-3"
+                      className="w-full bg-white dark:bg-gray-800 border-none rounded-xl py-3 px-4 text-xs font-semibold mb-3"
                       placeholder="Dirección de entrega..."
                     />
                     <textarea 
                       value={notas}
                       onChange={(e) => setNotas(e.target.value)}
                       rows={1}
-                      className="w-full bg-white dark:bg-gray-800 border-none rounded-xl py-3 px-4 text-xs font-bold"
+                      className="w-full bg-white dark:bg-gray-800 border-none rounded-xl py-3 px-4 text-xs font-semibold"
                       placeholder="Alguna nota o instrucción especial..."
                     />
                   </div>
@@ -634,8 +634,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                   <div className="mx-auto h-16 w-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 shadow-xl shadow-green-500/10 mb-4 animate-bounce">
                     <FiCheck className="h-8 w-8" />
                   </div>
-                  <h3 className="text-2xl font-black text-gray-800 dark:text-white tracking-tight">Confirmación Final</h3>
-                  <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Revisa los detalles antes de procesar</p>
+                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-white tracking-tight">Confirmación Final</h3>
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Revisa los detalles antes de procesar</p>
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
@@ -643,34 +643,34 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                    {/* Columna Izquierda: Resumen Venta */}
                    <div className="space-y-4">
                       <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm">
-                          <h4 className="text-sm font-black text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
+                          <h4 className="text-sm font-semibold text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
                             <FiUser className="text-indigo-500" /> Datos del Cliente
                           </h4>
                           <div className="grid grid-cols-2 gap-4">
                              <div>
-                                <p className="text-[10px] text-gray-400 font-bold uppercase">Nombre Completo</p>
-                                <p className="text-sm font-bold text-gray-700 dark:text-gray-200">{cliente?.nombres} {cliente?.apellidos}</p>
+                                <p className="text-[11px] text-gray-400 font-semibold uppercase">Nombre Completo</p>
+                                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">{cliente?.nombres} {cliente?.apellidos}</p>
                              </div>
                              <div>
-                                <p className="text-[10px] text-gray-400 font-bold uppercase">Identificación</p>
-                                <p className="text-sm font-bold text-gray-700 dark:text-gray-200">{cliente?.usuario}</p>
+                                <p className="text-[11px] text-gray-400 font-semibold uppercase">Identificación</p>
+                                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">{cliente?.usuario}</p>
                              </div>
                              <div className="col-span-2">
-                                <p className="text-[10px] text-gray-400 font-bold uppercase">Dirección de Entrega</p>
-                                <p className="text-sm font-bold text-gray-700 dark:text-gray-200 truncate">{direccionEntrega || 'Misma del perfil'}</p>
+                                <p className="text-[11px] text-gray-400 font-semibold uppercase">Dirección de Entrega</p>
+                                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200 truncate">{direccionEntrega || 'Misma del perfil'}</p>
                              </div>
                           </div>
                       </div>
 
                       <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm">
-                          <h4 className="text-sm font-black text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
+                          <h4 className="text-sm font-semibold text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
                             <FiCreditCard className="text-indigo-500" /> Detalle de Pagos
                           </h4>
                           
                           <div className="space-y-3">
                              <div className="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-700">
-                                <span className="text-xs text-gray-500 font-bold">Tipo de Transacción</span>
-                                <span className="text-xs font-black uppercase bg-indigo-50 text-indigo-600 px-2 py-1 rounded-lg">
+                                <span className="text-xs text-gray-500 font-semibold">Tipo de Transacción</span>
+                                <span className="text-xs font-semibold uppercase bg-indigo-50 text-indigo-600 px-2 py-1 rounded-lg">
                                   {montoCredito > 0 && montoAbonado > 0 ? 'Mixto (Crédito + Contado)' : montoCredito > 0 ? 'Crédito' : 'Contado'}
                                 </span>
                              </div>
@@ -682,14 +682,14 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                 return (
                                   <div key={key} className="flex justify-between items-center">
                                      <span className="text-xs font-medium text-gray-600 dark:text-gray-300">{metodo?.nombreMetodo}</span>
-                                     <span className="text-xs font-bold text-gray-800 dark:text-white">{formatearPrecio(valor)}</span>
+                                     <span className="text-xs font-semibold text-gray-800 dark:text-white">{formatearPrecio(valor)}</span>
                                   </div>
                                 );
                               })}
                              
                              <div className="pt-2 mt-2 border-t border-dashed border-gray-200 dark:border-gray-600 flex justify-between items-center text-indigo-600">
-                                <span className="text-xs font-black uppercase">Total a Pagar</span>
-                                <span className="text-lg font-black">{formatearPrecio(totalFinal)}</span>
+                                <span className="text-xs font-semibold uppercase">Total a Pagar</span>
+                                <span className="text-lg font-semibold">{formatearPrecio(totalFinal)}</span>
                              </div>
                           </div>
                       </div>
@@ -697,8 +697,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
 
                    {/* Columna Derecha: Productos */}
                    <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col h-full max-h-[400px]">
-                      <h4 className="text-sm font-black text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
-                        <FiShoppingBag className="text-indigo-500" /> Productos en Orden <span className="bg-gray-100 text-gray-600 text-[10px] px-2 py-0.5 rounded-full">{carrito.length}</span>
+                      <h4 className="text-sm font-semibold text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
+                        <FiShoppingBag className="text-indigo-500" /> Productos en Orden <span className="bg-gray-100 text-gray-600 text-[11px] px-2 py-0.5 rounded-full">{carrito.length}</span>
                       </h4>
                       
                       <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-3">
@@ -708,19 +708,19 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                  <img src={`${UPLOAD_URL}${item.imagenVariante}`} alt="" className="h-full w-full object-cover" />
                               </div>
                               <div className="flex-1 min-w-0 flex flex-col justify-center">
-                                 <h5 className="text-xs font-bold text-gray-800 dark:text-gray-200 truncate">{item.producto.titulo}</h5>
+                                 <h5 className="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate">{item.producto.titulo}</h5>
                                  <div className="flex flex-col gap-1.5 mt-1.5">
                                     <div className="flex flex-wrap gap-2">
                                       {item.talla && (
                                           <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700/50 px-2 py-1 rounded-lg border border-gray-100 dark:border-gray-600">
-                                            <span className="text-[9px] text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">Talla</span>
-                                            <span className="text-[10px] font-bold text-gray-800 dark:text-gray-200">{item.talla.nombreTalla}</span>
+                                            <span className="text-[11px] text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Talla</span>
+                                            <span className="text-[11px] font-semibold text-gray-800 dark:text-gray-200">{item.talla.nombreTalla}</span>
                                           </div>
                                       )}
                                       {item.color && (
                                           <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-700/50 px-2 py-1 rounded-lg border border-gray-100 dark:border-gray-600">
-                                            <span className="text-[9px] text-gray-500 dark:text-gray-400 uppercase tracking-wider font-bold">Color</span>
-                                            <span className="text-[10px] font-bold text-gray-800 dark:text-gray-200">{item.color.nombreColor}</span>
+                                            <span className="text-[11px] text-gray-500 dark:text-gray-400 uppercase tracking-wider font-semibold">Color</span>
+                                            <span className="text-[11px] font-semibold text-gray-800 dark:text-gray-200">{item.color.nombreColor}</span>
                                             <div className="h-2.5 w-2.5 rounded-full border border-gray-200 dark:border-gray-500 ml-1" style={{ backgroundColor: item.color.codigoHex }} />
                                           </div>
                                       )}
@@ -728,8 +728,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                  </div>
                               </div>
                               <div className="flex flex-col justify-center items-end text-right">
-                                 <p className="text-xs font-bold text-gray-400">x{item.cantidad}</p>
-                                 <p className="text-sm font-black text-indigo-600">{formatearPrecio(item.precioUnitario)}</p>
+                                 <p className="text-xs font-semibold text-gray-400">x{item.cantidad}</p>
+                                 <p className="text-sm font-semibold text-indigo-600">{formatearPrecio(item.precioUnitario)}</p>
                               </div>
                            </div>
                          ))}
@@ -754,7 +754,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           {/* Visualización de items resumida */}
           {carrito.length > 0 && (
   <div className="mt-10">
-    <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4">
+    <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-[0.1em] mb-4">
       Items Seleccionados
     </p>
 
@@ -775,7 +775,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
 
           {/* Información */}
           <div className="flex-1 min-w-0">
-            <p className="text-xs font-bold text-gray-800 dark:text-gray-100 truncate">
+            <p className="text-xs font-semibold text-gray-800 dark:text-gray-100 truncate">
               {item.producto?.titulo}
             </p>
 
@@ -784,14 +784,14 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                 className="h-2.5 w-2.5 rounded-full border border-gray-200 dark:border-gray-600 shadow-sm"
                 style={{ backgroundColor: item.color?.codigoHex || '#cbd5e1' }}
               />
-              <p className="text-[9px] text-gray-400 font-medium uppercase tracking-tighter">
+              <p className="text-[11px] text-gray-400 font-medium uppercase tracking-tighter">
                 Cant: {item.cantidad}
               </p>
             </div>
           </div>
 
           {/* Precio */}
-          <p className="text-xs font-black text-indigo-600">
+          <p className="text-xs font-semibold text-indigo-600">
             {formatearPrecio(
               item.cantidad * item.precioUnitario - (item.descuentoLinea || 0)
             )}
@@ -809,7 +809,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           <button 
             onClick={handleAnterior}
             disabled={paso === 1}
-            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold transition-all ${
               paso === 1 ? 'opacity-0 invisible' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
             }`}
           >
@@ -817,11 +817,11 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           </button>
 
           <div className="flex items-center gap-4">
-            <span className="hidden sm:block text-[10px] font-black text-gray-300 uppercase tracking-widest">Enterprise Edition v2026</span>
+            <span className="hidden sm:block text-[11px] font-semibold text-gray-300 uppercase tracking-wide">Enterprise Edition v2026</span>
             {paso < 5 ? (
               <button 
                 onClick={handleSiguiente}
-                className="flex items-center gap-2 px-10 py-4 bg-indigo-600 text-white font-black rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
+                className="flex items-center gap-2 px-10 py-4 bg-indigo-600 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
               >
                 Siguiente <FiChevronRight />
               </button>
@@ -829,7 +829,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
               <button 
                 onClick={handleCrearVenta}
                 disabled={procesando}
-                className="flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-black rounded-2xl shadow-lg shadow-green-500/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
+                className="flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-2xl shadow-lg shadow-green-500/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
               >
                 {procesando ? 'Procesando...' : 'Confirmar Venta Enterprise'} <FiCheck />
               </button>

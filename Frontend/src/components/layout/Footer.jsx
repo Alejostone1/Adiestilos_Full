@@ -109,7 +109,7 @@ const Footer = () => {
 
           {/* Tienda */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-neutral-300 mb-6">
+            <h4 className="text-xs uppercase tracking-[0.1em] text-neutral-300 mb-6">
               Tienda
             </h4>
             <ul className="space-y-3">
@@ -128,7 +128,7 @@ const Footer = () => {
 
           {/* Ayuda */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-neutral-300 mb-6">
+            <h4 className="text-xs uppercase tracking-[0.1em] text-neutral-300 mb-6">
               Ayuda
             </h4>
             <ul className="space-y-3">
@@ -147,7 +147,7 @@ const Footer = () => {
 
           {/* Empresa */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-neutral-300 mb-6">
+            <h4 className="text-xs uppercase tracking-[0.1em] text-neutral-300 mb-6">
               Empresa
             </h4>
             <ul className="space-y-3">

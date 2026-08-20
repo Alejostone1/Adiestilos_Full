@@ -75,8 +75,8 @@ const VentasChart = ({ data, loading, tipo = 'line' }) => {
     if (active && payload && payload.length) {
       return (
         <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl p-4 border border-pink-200/50 dark:border-pink-500/20 rounded-2xl shadow-2xl transition-all">
-          <Text className="!text-slate-400 !text-[10px] !font-black block mb-1 uppercase tracking-widest">{label}</Text>
-          <Text className="!text-pink-600 dark:!text-pink-400 !text-xl !font-black block">
+          <Text className="!text-slate-400 !text-[11px] !font-semibold block mb-1 uppercase tracking-wide">{label}</Text>
+          <Text className="!text-pink-600 dark:!text-pink-400 !text-lg !font-semibold block">
             {formatCurrency(payload[0].value)}
           </Text>
         </div>
@@ -102,13 +102,13 @@ const VentasChart = ({ data, loading, tipo = 'line' }) => {
         <div>
           <div className="flex items-center gap-2 mb-1.5">
              <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" />
-             <Title level={4} className="!m-0 !font-black !text-pink-950 dark:!text-pink-100 uppercase !text-[10px] tracking-[0.2em] opacity-70">Rendimiento Operativo</Title>
+             <Title level={4} className="!m-0 !font-semibold !text-pink-950 dark:!text-pink-100 uppercase !text-[11px] tracking-[0.16em] opacity-70">Rendimiento Operativo</Title>
           </div>
-          <Title level={2} className="!m-0 !font-black !text-slate-900 dark:!text-white !tracking-tight">Flujo de Ventas</Title>
+          <Title level={2} className="!m-0 !font-semibold !text-slate-900 dark:!text-white !tracking-tight">Flujo de Ventas</Title>
         </div>
         <div className="hidden sm:flex flex-col items-end">
            <div className="bg-pink-500/10 dark:bg-pink-500/20 px-4 py-1.5 rounded-2xl border border-pink-500/20 mb-2">
-             <Text className="!text-pink-600 dark:!text-pink-300 !text-[10px] !font-black uppercase tracking-widest flex items-center gap-2">
+             <Text className="!text-pink-600 dark:!text-pink-300 !text-[11px] !font-semibold uppercase tracking-wide flex items-center gap-2">
                 <RiseOutlined /> En tiempo real
              </Text>
            </div>
@@ -139,13 +139,13 @@ const VentasChart = ({ data, loading, tipo = 'line' }) => {
                   dataKey="fecha"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: axisColor, fontSize: 10, fontWeight: 800 }}
+                  tick={{ fill: axisColor, fontSize: 11, fontWeight: 500 }}
                   dy={15}
                 />
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: axisColor, fontSize: 10, fontWeight: 800 }}
+                  tick={{ fill: axisColor, fontSize: 11, fontWeight: 500 }}
                   tickFormatter={(val) => `$${val / 1000}k`}
                 />
                 <Tooltip cursor={{ fill: 'rgba(236, 72, 153, 0.05)' }} content={<CustomTooltip />} />
@@ -171,13 +171,13 @@ const VentasChart = ({ data, loading, tipo = 'line' }) => {
                   dataKey="fecha"
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: axisColor, fontSize: 10, fontWeight: 800 }}
+                  tick={{ fill: axisColor, fontSize: 11, fontWeight: 500 }}
                   dy={15}
                 />
                 <YAxis
                   axisLine={false}
                   tickLine={false}
-                  tick={{ fill: axisColor, fontSize: 10, fontWeight: 800 }}
+                  tick={{ fill: axisColor, fontSize: 11, fontWeight: 500 }}
                   tickFormatter={(val) => val === 0 ? '$0' : `$${val / 1000}k`}
                 />
                 <Tooltip content={<CustomTooltip />} />
@@ -185,7 +185,7 @@ const VentasChart = ({ data, loading, tipo = 'line' }) => {
                   type="monotone"
                   dataKey="ventas"
                   stroke="var(--accent-primary)"
-                  strokeWidth={4}
+                  strokeWidth={3}
                   fillOpacity={1}
                   fill="url(#colorSales)"
                   animationDuration={1500}

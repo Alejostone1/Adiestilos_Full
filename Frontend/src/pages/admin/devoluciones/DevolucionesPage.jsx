@@ -307,7 +307,7 @@ const DevolucionesPage = () => {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Devoluciones</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Devoluciones</h1>
           <p className="text-gray-600">Gestiona las devoluciones de productos</p>
         </div>
         <button

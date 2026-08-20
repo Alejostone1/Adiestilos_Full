@@ -110,7 +110,7 @@ const ComprasPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
-          <h1 className="text-3xl font-black text-gray-900 dark:text-white tracking-tight">
+          <h1 className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tight">
             Gestión de Compras
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 font-medium">
@@ -120,14 +120,14 @@ const ComprasPage = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/admin/compras/detalle')}
-            className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-bold rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 transition-all"
+            className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-semibold rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 transition-all"
           >
             <FiPackage className="text-indigo-500" />
             <span>Ver Análisis de Ítems</span>
           </button>
           <button
             onClick={() => setModalCompraOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-black rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 transition-all"
           >
             <FiPlus />
             <span>Nueva Compra</span>
@@ -160,7 +160,7 @@ const ComprasPage = () => {
         {/* Tabla Principal */}
         <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden">
           <div className="p-8 border-b border-gray-100 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white flex items-center gap-3">
               Historial Reabastecimiento
               <span className="text-sm font-medium bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full text-gray-500">
                 {compras.length} registros
@@ -270,12 +270,12 @@ const ComprasPage = () => {
               <table className="min-w-full">
                 <thead>
                   <tr className="bg-gray-50/50 dark:bg-gray-800/50">
-                    <th className="px-8 py-5 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Identificación</th>
-                    <th className="px-8 py-5 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Socio Proveedor</th>
-                    <th className="px-8 py-5 text-left text-xs font-bold text-gray-400 uppercase tracking-widest">Cronología</th>
-                    <th className="px-8 py-5 text-right text-xs font-bold text-gray-400 uppercase tracking-widest">Monto Total</th>
-                    <th className="px-8 py-5 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">Estado Vital</th>
-                    <th className="px-8 py-5 text-center text-xs font-bold text-gray-400 uppercase tracking-widest">Acciones</th>
+                    <th className="px-8 py-5 text-left text-xs font-semibold text-gray-400 uppercase tracking-wide">Identificación</th>
+                    <th className="px-8 py-5 text-left text-xs font-semibold text-gray-400 uppercase tracking-wide">Socio Proveedor</th>
+                    <th className="px-8 py-5 text-left text-xs font-semibold text-gray-400 uppercase tracking-wide">Cronología</th>
+                    <th className="px-8 py-5 text-right text-xs font-semibold text-gray-400 uppercase tracking-wide">Monto Total</th>
+                    <th className="px-8 py-5 text-center text-xs font-semibold text-gray-400 uppercase tracking-wide">Estado Vital</th>
+                    <th className="px-8 py-5 text-center text-xs font-semibold text-gray-400 uppercase tracking-wide">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -283,21 +283,21 @@ const ComprasPage = () => {
                     <tr key={compra.idCompra} className="hover:bg-indigo-50/30 dark:hover:bg-indigo-900/10 transition-colors group">
                       <td className="px-8 py-6">
                         <div className="flex items-center space-x-3">
-                          <div className="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-bold">
+                          <div className="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-semibold">
                             <FiHash />
                           </div>
                           <div>
-                            <span className="block font-black text-gray-900 dark:text-white text-sm">
+                            <span className="block font-semibold text-gray-900 dark:text-white text-sm">
                               {compra.numeroCompra || `#${compra.idCompra}`}
                             </span>
-                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">ID: {compra.idCompra}</span>
+                            <span className="text-[11px] text-gray-400 font-semibold uppercase tracking-tighter">ID: {compra.idCompra}</span>
                           </div>
                         </div>
                       </td>
                       <td className="px-8 py-6">
                         <div className="flex flex-col">
-                          <span className="text-sm font-bold text-gray-700 dark:text-gray-200">{compra.proveedor?.nombreProveedor || 'N/A'}</span>
-                          <span className="text-[10px] text-gray-400 font-medium">Verificado por {compra.usuarioRegistro?.usuario || 'Sist.'}</span>
+                          <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{compra.proveedor?.nombreProveedor || 'N/A'}</span>
+                          <span className="text-[11px] text-gray-400 font-medium">Verificado por {compra.usuarioRegistro?.usuario || 'Sist.'}</span>
                         </div>
                       </td>
                       <td className="px-8 py-6">
@@ -307,13 +307,13 @@ const ComprasPage = () => {
                         </div>
                       </td>
                       <td className="px-8 py-6 text-right">
-                        <span className="text-base font-black text-indigo-600 dark:text-indigo-400">
+                        <span className="text-base font-semibold text-indigo-600 dark:text-indigo-400">
                           ${formatearPrecioColombia(compra.total)}
                         </span>
                       </td>
                       <td className="px-8 py-6 text-center">
                         <div
-                          className="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border"
+                          className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-semibold uppercase tracking-wide border"
                           style={{
                             backgroundColor: `${compra.estadoPedido?.color}15` || '#F3F4F6',
                             color: compra.estadoPedido?.color || '#6B7280',
@@ -325,17 +325,17 @@ const ComprasPage = () => {
                         </div>
                       </td>
                       <td className="px-8 py-6 text-center">
-                        <div className="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => abrirDetalle(compra)}
-                            className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-all shadow-sm"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 hover:bg-blue-600 hover:text-white border border-blue-100 dark:border-blue-800/60 hover:border-blue-600 shadow-sm hover:shadow-md hover:shadow-blue-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             title="Ver Detalle"
                           >
                             <FiEye className="h-4 w-4" />
                           </button>
                           <button
                             onClick={() => abrirCambioEstado(compra)}
-                            className="p-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-lg hover:bg-emerald-100 dark:hover:bg-emerald-800 transition-all shadow-sm"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white border border-emerald-100 dark:border-emerald-800/60 hover:border-emerald-600 shadow-sm hover:shadow-md hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             title="Flujo de Estado"
                           >
                             <FiEdit3 className="h-4 w-4" />
@@ -387,8 +387,8 @@ const KPICard = ({ title, value, icon, color }) => {
       <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${themes[color]} opacity-5 rounded-bl-full translate-x-6 -translate-y-6 group-hover:scale-150 transition-transform duration-700`} />
       <div className="flex items-center justify-between">
         <div className="space-y-1">
-          <span className="text-xs font-black text-gray-400 uppercase tracking-widest">{title}</span>
-          <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter">{value}</p>
+          <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide">{title}</span>
+          <p className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tighter">{value}</p>
         </div>
         <div className={`h-14 w-14 bg-gradient-to-br ${themes[color]} rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg`}>
           {icon}
@@ -404,11 +404,11 @@ const EmptyState = ({ onClick }) => (
       <div className="absolute inset-0 bg-indigo-500 rounded-full blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
       <FiPackage className="h-20 w-20 text-gray-200 dark:text-gray-800 mx-auto relative z-10" />
     </div>
-    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-2">Bóveda de Compras Vacía</h3>
+    <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Bóveda de Compras Vacía</h3>
     <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-xs mx-auto">Comienza abastecer tu inventario registrando tu primera orden de compra estratégica.</p>
     <button
       onClick={onClick}
-      className="inline-flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 font-black uppercase tracking-widest text-[10px] transition-all"
+      className="inline-flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 font-semibold uppercase tracking-wide text-[11px] transition-all"
     >
       <span>Ejecutar Primera Compra</span>
       <FiArrowRight className="h-3 w-3" />

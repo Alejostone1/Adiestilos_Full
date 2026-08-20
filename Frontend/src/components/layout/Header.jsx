@@ -94,7 +94,7 @@ const Header = () => {
                   key={link.to}
                   to={link.to}
                   className={({ isActive }) => `
-                    text-xs uppercase tracking-[0.2em] transition-all duration-300
+                    text-xs uppercase tracking-[0.1em] transition-all duration-300
                     ${isActive 
                       ? textColor 
                       : `${textColorMuted} hover:${textColor}`
@@ -242,7 +242,7 @@ const Header = () => {
                       key={link.to}
                       to={link.to}
                       className={({ isActive }) => `
-                        block py-4 text-sm uppercase tracking-[0.2em] border-b border-neutral-100 transition-colors
+                        block py-4 text-sm uppercase tracking-[0.1em] border-b border-neutral-100 transition-colors
                         ${isActive ? 'text-neutral-900' : 'text-neutral-500 hover:text-neutral-900'}
                       `}
                     >

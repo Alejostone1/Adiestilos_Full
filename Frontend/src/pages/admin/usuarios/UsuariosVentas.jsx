@@ -65,24 +65,24 @@ export default function UsuariosVentas() {
            
            <div>
               <div className="flex items-center gap-3 mb-2">
-                 <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-tight">Historial de Ventas</h1>
-                 <span className="px-3 py-1 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-full text-[10px] font-bold uppercase tracking-widest">Auditoría Cliente</span>
+                 <h1 className="text-2xl font-semibold text-gray-900 dark:text-white tracking-tight">Historial de Ventas</h1>
+                 <span className="px-3 py-1 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-full text-[11px] font-semibold uppercase tracking-wide">Auditoría Cliente</span>
               </div>
               <div className="flex items-center gap-4">
                  {usuario && (
                     <div className="flex items-center gap-3 bg-white dark:bg-gray-900 px-5 py-2.5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
-                       <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-bold">
+                       <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-semibold">
                           {usuario.nombres?.charAt(0)}
                        </div>
                        <div>
-                          <p className="text-sm font-bold text-gray-800 dark:text-gray-200 leading-tight">{usuario.nombres} {usuario.apellidos}</p>
-                          <p className="text-xs font-bold text-gray-400">@{usuario.usuario}</p>
+                          <p className="text-sm font-semibold text-gray-800 dark:text-gray-200 leading-tight">{usuario.nombres} {usuario.apellidos}</p>
+                          <p className="text-xs font-semibold text-gray-400">@{usuario.usuario}</p>
                        </div>
                     </div>
                  )}
                  <div className="hidden md:flex flex-col">
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Acuñado</span>
-                    <span className="text-lg font-bold text-indigo-600 dark:text-indigo-400 leading-tight">
+                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Total Acuñado</span>
+                    <span className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 leading-tight">
                         <PrecioFormateado precio={ventas.reduce((acc, v) => acc + parseFloat(v.total), 0)} />
                     </span>
                  </div>
@@ -96,7 +96,7 @@ export default function UsuariosVentas() {
               <input 
                 type="text" 
                 placeholder="Nº Factura..."
-                className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all shadow-sm font-bold"
+                className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all shadow-sm font-semibold"
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
               />
@@ -117,8 +117,8 @@ export default function UsuariosVentas() {
                <Receipt size={24} />
             </div>
             <div>
-               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">T. Transacciones</p>
-               <h4 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{paginacion.totalRegistros || 0}</h4>
+               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">T. Transacciones</p>
+               <h4 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">{paginacion.totalRegistros || 0}</h4>
             </div>
          </div>
          <div className="bg-white dark:bg-gray-900 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-5">
@@ -126,8 +126,8 @@ export default function UsuariosVentas() {
                <DollarSign size={24} />
             </div>
             <div>
-               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Total Recaudado</p>
-               <h4 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Total Recaudado</p>
+               <h4 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
                   <PrecioFormateado precio={ventas.filter(v => v.estadoPago === 'pagado').reduce((acc, v) => acc + parseFloat(v.total), 0)} />
                </h4>
             </div>
@@ -137,8 +137,8 @@ export default function UsuariosVentas() {
                <Activity size={24} />
             </div>
             <div>
-               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Por Cobrar</p>
-               <h4 className="text-xl font-bold text-rose-600 leading-tight">
+               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Por Cobrar</p>
+               <h4 className="text-xl font-semibold text-rose-600 leading-tight">
                   <PrecioFormateado precio={ventas.reduce((acc, v) => acc + parseFloat(v.saldoPendiente || 0), 0)} />
                </h4>
             </div>
@@ -148,8 +148,8 @@ export default function UsuariosVentas() {
                <Clock size={24} />
             </div>
             <div>
-               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Promedio Mes</p>
-               <h4 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">
+               <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Promedio Mes</p>
+               <h4 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">
                   <PrecioFormateado precio={ventas.length > 0 ? (ventas.reduce((acc, v) => acc + parseFloat(v.total), 0) / (ventas.length || 1)) : 0} />
                </h4>
             </div>
@@ -168,7 +168,7 @@ export default function UsuariosVentas() {
                   <div className="w-24 h-24 bg-gray-50 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300">
                      <ShoppingBag size={48} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Sin historial registrado</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Sin historial registrado</h3>
                   <p className="text-gray-500 dark:text-gray-400 mt-2 max-w-sm mx-auto font-medium">Este usuario aún no ha concretado transacciones comerciales en el sistema.</p>
                </motion.div>
             ) : (
@@ -189,12 +189,12 @@ export default function UsuariosVentas() {
                               </div>
                               <div>
                                  <div className="flex items-center gap-3 mb-1">
-                                    <span className="text-lg font-bold text-gray-900 dark:text-white uppercase">{venta.numeroFactura}</span>
-                                    <span className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${getEstadoEstilo(venta.estadoPedido?.nombreEstado)}`}>
+                                    <span className="text-lg font-semibold text-gray-900 dark:text-white uppercase">{venta.numeroFactura}</span>
+                                    <span className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold uppercase tracking-wide border ${getEstadoEstilo(venta.estadoPedido?.nombreEstado)}`}>
                                        {venta.estadoPedido?.nombreEstado || 'Completada'}
                                     </span>
                                  </div>
-                                 <div className="flex items-center gap-3 text-xs font-bold text-gray-400">
+                                 <div className="flex items-center gap-3 text-xs font-semibold text-gray-400">
                                     <span className="flex items-center gap-1"><Calendar size={14}/> {new Date(venta.creadoEn).toLocaleDateString()}</span>
                                     <span className="w-1 h-1 bg-gray-300 rounded-full" />
                                     <span className="flex items-center gap-1 uppercase tracking-tighter"><Tag size={14} /> {venta.tipoVenta}</span>
@@ -205,26 +205,26 @@ export default function UsuariosVentas() {
                            {/* Financial Details */}
                            <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-6 px-10 border-x border-gray-100 dark:border-gray-800">
                                <div>
-                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-none">Subtotal</p>
-                                 <p className="text-sm font-bold text-gray-600 dark:text-gray-400 leading-none truncate">
+                                 <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1 leading-none">Subtotal</p>
+                                 <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 leading-none truncate">
                                     <PrecioFormateado precio={venta.subtotal} />
                                  </p>
                               </div>
                               <div>
-                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-none">Impuestos</p>
-                                 <p className="text-sm font-bold text-gray-600 dark:text-gray-400 leading-none truncate">
+                                 <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1 leading-none">Impuestos</p>
+                                 <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 leading-none truncate">
                                     <PrecioFormateado precio={venta.impuestos} />
                                  </p>
                               </div>
                               <div>
-                                 <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 leading-none">Descuento</p>
-                                 <p className="text-sm font-bold text-rose-500 dark:text-rose-400 leading-none truncate">
+                                 <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1 leading-none">Descuento</p>
+                                 <p className="text-sm font-semibold text-rose-500 dark:text-rose-400 leading-none truncate">
                                     - <PrecioFormateado precio={venta.descuentoTotal} />
                                  </p>
                               </div>
                               <div>
-                                 <p className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-1 leading-none">Total Neto</p>
-                                 <p className="text-lg font-bold text-gray-900 dark:text-white leading-none truncate">
+                                 <p className="text-[11px] font-semibold text-indigo-500 uppercase tracking-wide mb-1 leading-none">Total Neto</p>
+                                 <p className="text-lg font-semibold text-gray-900 dark:text-white leading-none truncate">
                                     <PrecioFormateado precio={venta.total} />
                                  </p>
                               </div>
@@ -233,13 +233,13 @@ export default function UsuariosVentas() {
                            {/* Summary Expansion / Actions */}
                            <div className="flex items-center gap-6">
                                <div className="hidden sm:block text-right">
-                                 <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Estado Financiero</div>
+                                 <div className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Estado Financiero</div>
                                  {Number(venta.saldoPendiente) > 0 ? (
-                                    <span className="px-4 py-2 bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 rounded-xl text-[10px] font-bold uppercase ring-1 ring-rose-200 dark:ring-0">
+                                    <span className="px-4 py-2 bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 rounded-xl text-[11px] font-semibold uppercase ring-1 ring-rose-200 dark:ring-0">
                                        Deuda: <PrecioFormateado precio={venta.saldoPendiente} />
                                     </span>
                                  ) : (
-                                    <span className="px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-xl text-[10px] font-bold uppercase ring-1 ring-emerald-200 dark:ring-0">
+                                    <span className="px-4 py-2 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 rounded-xl text-[11px] font-semibold uppercase ring-1 ring-emerald-200 dark:ring-0">
                                        Saldado
                                     </span>
                                  )}
@@ -257,7 +257,7 @@ export default function UsuariosVentas() {
                         </div>
 
                         {/* Extra Trace Info */}
-                        <div className="px-10 py-4 bg-gray-50 dark:bg-gray-800/40 border-t border-gray-100 dark:border-gray-800 flex flex-wrap gap-8 items-center text-[10px] font-black text-gray-400 uppercase tracking-wider">
+                        <div className="px-10 py-4 bg-gray-50 dark:bg-gray-800/40 border-t border-gray-100 dark:border-gray-800 flex flex-wrap gap-8 items-center text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
                            <div className="flex items-center gap-2">
                               <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
                               ID Operación: <span className="text-gray-600 dark:text-gray-300 ml-1">#VNT-{venta.idVenta}</span>
@@ -284,7 +284,7 @@ export default function UsuariosVentas() {
                <button 
                   disabled={paginacion.paginaActual === 1}
                   onClick={() => fetchDatos(paginacion.paginaActual - 1)}
-                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-black text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
+                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-semibold text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
                > Anterior </button>
                
                <div className="flex items-center gap-2">
@@ -292,7 +292,7 @@ export default function UsuariosVentas() {
                     <button 
                         key={i}
                         onClick={() => fetchDatos(i + 1)}
-                        className={`w-12 h-12 rounded-2xl text-sm font-black transition-all ${paginacion.paginaActual === i + 1 ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-200 dark:shadow-none' : 'bg-white dark:bg-gray-900 text-gray-400 border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+                        className={`w-12 h-12 rounded-2xl text-sm font-semibold transition-all ${paginacion.paginaActual === i + 1 ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-200 dark:shadow-none' : 'bg-white dark:bg-gray-900 text-gray-400 border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
                     > {i + 1} </button>
                   ))}
                </div>
@@ -300,7 +300,7 @@ export default function UsuariosVentas() {
                <button 
                   disabled={paginacion.paginaActual === paginacion.totalPaginas}
                   onClick={() => fetchDatos(paginacion.paginaActual + 1)}
-                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-black text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
+                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-semibold text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
                > Siguiente </button>
             </div>
          )}

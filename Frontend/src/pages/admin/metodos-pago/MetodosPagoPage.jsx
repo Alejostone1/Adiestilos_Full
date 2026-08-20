@@ -144,7 +144,7 @@ const MetodosPagoPage = () => {
             <CreditCard className="h-8 w-8 text-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Pasarelas de Pago</h1>
+            <h1 className="text-3xl font-semibold text-slate-900 dark:text-white tracking-tight uppercase">Pasarelas de Pago</h1>
             <p className="text-slate-500 dark:text-slate-400 font-medium">Configura los canales de recepción de dinero para tu negocio.</p>
           </div>
         </div>
@@ -162,7 +162,7 @@ const MetodosPagoPage = () => {
           </div>
           <button 
             onClick={() => handleOpenModal()}
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95"
+            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95"
           >
             <Plus className="h-5 w-5" />
             Nueva Pasarela
@@ -174,7 +174,7 @@ const MetodosPagoPage = () => {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
           <RefreshCcw className="h-10 w-10 text-indigo-500 animate-spin" />
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-xs">Sincronizando pasarelas...</p>
+          <p className="text-slate-400 font-semibold uppercase tracking-wide text-xs">Sincronizando pasarelas...</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -200,16 +200,18 @@ const MetodosPagoPage = () => {
                   }`}>
                     <CreditCard className="h-6 w-6" />
                   </div>
-                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="flex gap-2">
                     <button 
                       onClick={() => handleOpenModal(metodo)}
-                      className="p-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-indigo-600 hover:text-white transition-all"
+                      className="w-9 h-9 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                      title="Editar pasarela"
                     >
                       <Edit2 className="h-4 w-4" />
                     </button>
                     <button 
                       onClick={() => confirmarEliminacion(metodo.idMetodoPago)}
-                      className="p-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-xl hover:bg-red-600 hover:text-white transition-all"
+                      className="w-9 h-9 flex items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white border border-rose-100 dark:border-rose-800/60 hover:border-rose-600 shadow-sm hover:shadow-md hover:shadow-rose-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                      title="Eliminar pasarela"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -218,8 +220,8 @@ const MetodosPagoPage = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1 block">Pasarela</span>
-                    <h3 className="text-xl font-black text-slate-900 dark:text-white truncate uppercase">{metodo.nombreMetodo}</h3>
+                    <span className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 uppercase tracking-wide mb-1 block">Pasarela</span>
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white truncate uppercase">{metodo.nombreMetodo}</h3>
                   </div>
 
                   <p className="text-sm text-slate-500 dark:text-slate-400 font-medium line-clamp-2 min-h-[2.5rem]">
@@ -228,24 +230,24 @@ const MetodosPagoPage = () => {
 
                   <div className="pt-6 border-t border-slate-50 dark:border-slate-800 grid grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Tipo</span>
+                      <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Tipo</span>
                       <div className="flex items-center gap-2">
                         <Layers className="h-3 w-3 text-slate-400" />
-                        <span className="text-xs font-bold text-slate-700 dark:text-slate-300">{metodo.tipoMetodo?.nombre}</span>
+                        <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">{metodo.tipoMetodo?.nombre}</span>
                       </div>
                     </div>
                     <div className="space-y-1">
-                      <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Referencia</span>
+                      <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Referencia</span>
                       <div className="flex items-center gap-2">
                         {metodo.requiereReferencia ? (
                           <>
                             <ShieldCheck className="h-3 w-3 text-emerald-500" />
-                            <span className="text-xs font-bold text-emerald-600">Requerida</span>
+                            <span className="text-xs font-semibold text-emerald-600">Requerida</span>
                           </>
                         ) : (
                           <>
                             <AlertCircle className="h-3 w-3 text-slate-400" />
-                            <span className="text-xs font-bold text-slate-400">Opcional</span>
+                            <span className="text-xs font-semibold text-slate-400">Opcional</span>
                           </>
                         )}
                       </div>
@@ -260,7 +262,7 @@ const MetodosPagoPage = () => {
                 <div className="h-20 w-20 bg-slate-100 dark:bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-6">
                     <XCircle className="h-10 w-10 text-slate-300" />
                 </div>
-                <h3 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Sin resultados</h3>
+                <h3 className="text-xl font-semibold text-slate-900 dark:text-white uppercase tracking-tight">Sin resultados</h3>
                 <p className="text-slate-500 mt-2">No encontramos ninguna pasarela con ese nombre.</p>
              </div>
           )}
@@ -292,10 +294,10 @@ const MetodosPagoPage = () => {
                       <Settings2 className="h-6 w-6" />
                     </div>
                     <div>
-                      <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase leading-tight">
+                      <h2 className="text-2xl font-semibold text-slate-900 dark:text-white uppercase leading-tight">
                         {editingMetodo ? 'Editar Pasarela' : 'Nueva Pasarela'}
                       </h2>
-                      <p className="text-xs text-slate-500 font-bold uppercase tracking-widest">Configuración de recepción</p>
+                      <p className="text-xs text-slate-500 font-semibold uppercase tracking-wide">Configuración de recepción</p>
                     </div>
                   </div>
                   <button onClick={() => setShowModal(false)} className="p-3 bg-slate-50 dark:bg-slate-800 text-slate-400 rounded-2xl hover:text-red-500 transition-colors">
@@ -305,11 +307,11 @@ const MetodosPagoPage = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Nombre Comercial</label>
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] ml-2">Nombre Comercial</label>
                     <input 
                       required
                       type="text"
-                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-bold placeholder:text-slate-300"
+                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300"
                       placeholder="Ej. Nequi, Tarjeta Visa..."
                       value={formData.nombreMetodo}
                       onChange={(e) => setFormData({...formData, nombreMetodo: e.target.value})}
@@ -318,10 +320,10 @@ const MetodosPagoPage = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Tipo de Pasarela</label>
+                      <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] ml-2">Tipo de Pasarela</label>
                       <select 
                         required
-                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-bold appearance-none cursor-pointer"
+                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold appearance-none cursor-pointer"
                         value={formData.idTipoMetodo}
                         onChange={(e) => setFormData({...formData, idTipoMetodo: e.target.value})}
                       >
@@ -344,16 +346,16 @@ const MetodosPagoPage = () => {
                           }`}>
                             {formData.requiereReferencia && <CheckCircle className="h-4 w-4 text-white" />}
                           </div>
-                          <span className="text-xs font-black text-slate-600 dark:text-slate-400 uppercase tracking-widest">¿Pedir Referencia?</span>
+                          <span className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wide">¿Pedir Referencia?</span>
                        </label>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] ml-2">Instrucciones / Notas</label>
+                    <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] ml-2">Instrucciones / Notas</label>
                     <textarea 
                       rows="3"
-                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-bold placeholder:text-slate-300 resize-none"
+                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300 resize-none"
                       placeholder="Indica al vendedor qué datos pedir..."
                       value={formData.descripcion}
                       onChange={(e) => setFormData({...formData, descripcion: e.target.value})}
@@ -363,7 +365,7 @@ const MetodosPagoPage = () => {
                   <div className="pt-6">
                     <button 
                       type="submit"
-                      className="w-full py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-3xl flex items-center justify-center gap-3 shadow-2xl shadow-indigo-500/20 transition-all active:scale-95 text-lg uppercase tracking-widest"
+                      className="w-full py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-3xl flex items-center justify-center gap-3 shadow-2xl shadow-indigo-500/20 transition-all active:scale-95 text-lg uppercase tracking-wide"
                     >
                       {editingMetodo ? 'Guardar Cambios' : 'Activar Pasarela'}
                     </button>

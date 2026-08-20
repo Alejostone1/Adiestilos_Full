@@ -138,7 +138,7 @@ const AbonosCreditosPage = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Gestión de Abonos y Créditos</h1>
+        <h1 className="text-3xl font-semibold text-gray-800">Gestión de Abonos y Créditos</h1>
         {/* <ButtonComponent onClick={() => handleAbrirModal()} variant="primary">
           <FiPlus className="mr-2"/> Registrar Abono
         </ButtonComponent> */}

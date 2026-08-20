@@ -37,7 +37,7 @@ const DevolucionDetalleModal = ({ devolucion, onClose }) => {
         {/* Header */}
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
           <div>
-            <h2 className="text-xl font-bold text-gray-900">
+            <h2 className="text-xl font-semibold text-gray-900">
               Detalle de Devolución
             </h2>
             <p className="text-sm text-gray-500 mt-1">
@@ -236,7 +236,7 @@ const DevolucionDetalleModal = ({ devolucion, onClose }) => {
               <div className="border-t border-gray-300 pt-3">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold text-gray-900">Total Devolución:</span>
-                  <span className="text-lg font-bold text-blue-600">
+                  <span className="text-lg font-semibold text-blue-600">
                     {formatearMoneda(devolucion.totalDevolucion)}
                   </span>
                 </div>

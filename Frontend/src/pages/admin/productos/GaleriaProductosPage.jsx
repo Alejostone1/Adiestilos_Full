@@ -403,7 +403,7 @@ export default function GaleriaProductosPage() {
           <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold">Galería de Producto</h2>
+                <h2 className="text-2xl font-semibold">Galería de Producto</h2>
                 <p className="text-purple-100 mt-1">{selectedProduct.nombreProducto}</p>
               </div>
               <button
@@ -527,7 +527,7 @@ export default function GaleriaProductosPage() {
           <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold">Galería de Variante</h2>
+                <h2 className="text-2xl font-semibold">Galería de Variante</h2>
                 <p className="text-purple-100 mt-1">
                   {selectedProduct.nombreProducto} - {selectedVariant.codigoSku}
                 </p>
@@ -687,7 +687,7 @@ export default function GaleriaProductosPage() {
           <div className="flex items-center gap-3 mb-2">
             <ImageIcon className="w-8 h-8 text-purple-600" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Galería de Productos</h1>
+              <h1 className="text-3xl font-semibold text-gray-900">Galería de Productos</h1>
               <p className="text-gray-600">Panel central de gestión visual de imágenes</p>
             </div>
           </div>
@@ -698,7 +698,7 @@ export default function GaleriaProductosPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500">Total Productos</span>
-                  <p className="text-2xl font-bold text-gray-900">{productos.length}</p>
+                  <p className="text-2xl font-semibold text-gray-900">{productos.length}</p>
                 </div>
                 <Package className="w-8 h-8 text-purple-600 opacity-20" />
               </div>
@@ -707,7 +707,7 @@ export default function GaleriaProductosPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500">Total Imágenes</span>
-                  <p className="text-2xl font-bold text-green-600">
+                  <p className="text-2xl font-semibold text-green-600">
                     {productos.reduce((total, p) => total + (p.imagenesProductos?.length || 0), 0)}
                   </p>
                 </div>
@@ -718,7 +718,7 @@ export default function GaleriaProductosPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500">Total Variantes</span>
-                  <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-semibold text-blue-600">
                     {productos.reduce((total, p) => total + (p.variantes?.length || 0), 0)}
                   </p>
                 </div>
@@ -729,7 +729,7 @@ export default function GaleriaProductosPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500">Imágenes Variantes</span>
-                  <p className="text-2xl font-bold text-purple-600">
+                  <p className="text-2xl font-semibold text-purple-600">
                     {productos.reduce((total, p) =>
                       total + (p.variantes?.reduce((subtotal, v) => subtotal + (v.imagenesVariantes?.length || 0), 0) || 0), 0
                     )}

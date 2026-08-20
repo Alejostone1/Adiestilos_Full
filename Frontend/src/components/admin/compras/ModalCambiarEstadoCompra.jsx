@@ -93,7 +93,7 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
           <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-4 flex justify-between items-center text-white">
             <div className="flex items-center space-x-3">
               <FiRefreshCw className={`h-6 w-6 ${procesando ? 'animate-spin' : ''}`} />
-              <h3 className="text-xl font-bold">Cambiar Estado</h3>
+              <h3 className="text-xl font-semibold">Cambiar Estado</h3>
             </div>
             <button onClick={onClose} className="hover:bg-white/20 p-2 rounded-lg transition-colors">
               <FiX className="h-6 w-6" />
@@ -102,7 +102,7 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
 
           <div className="p-6 bg-gray-50 dark:bg-gray-900">
             <p className="text-sm text-gray-500 mb-6">
-              Selecciona el nuevo estado para la compra <span className="font-bold text-gray-900 dark:text-white">{compra.numeroCompra || `#${compra.idCompra}`}</span>:
+              Selecciona el nuevo estado para la compra <span className="font-semibold text-gray-900 dark:text-white">{compra.numeroCompra || `#${compra.idCompra}`}</span>:
             </p>
 
             {cargando ? (

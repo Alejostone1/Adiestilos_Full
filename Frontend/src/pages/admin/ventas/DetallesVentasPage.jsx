@@ -136,26 +136,26 @@ const DetallesVentasPage = () => {
               </button>
               <div>
                 <div className="flex items-center gap-3 mb-1">
-                   <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
+                   <span className={`px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide border ${
                      isPaid 
                      ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/20 dark:border-emerald-900' 
                      : 'bg-rose-50 text-rose-600 border-rose-100 dark:bg-rose-900/20 dark:border-rose-900'
                    }`}>
                      {isPaid ? 'Pagado Completamente' : 'Saldo Pendiente'}
                    </span>
-                   <span className="text-gray-400 text-xs font-bold uppercase tracking-widest">{new Date(venta.creadoEn).toLocaleDateString()}</span>
+                   <span className="text-gray-400 text-xs font-semibold uppercase tracking-wide">{new Date(venta.creadoEn).toLocaleDateString()}</span>
                 </div>
-                <h1 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-3">
+                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white tracking-tight flex items-center gap-3">
                   Orden #{venta.numeroFactura}
                 </h1>
               </div>
             </div>
 
             <div className="flex gap-3">
-              <button onClick={() => window.print()} className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-bold rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 shadow-sm transition-all">
+              <button onClick={() => window.print()} className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-semibold rounded-xl border border-gray-200 dark:border-gray-700 hover:bg-gray-50 shadow-sm transition-all">
                  <FiPrinter /> <span className="hidden sm:inline">Imprimir</span>
               </button>
-              <button className="flex items-center gap-2 px-5 py-3 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 transition-all">
+              <button className="flex items-center gap-2 px-5 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/20 hover:bg-indigo-700 transition-all">
                  <FiDownload /> <span className="hidden sm:inline">Exportar PDF</span>
               </button>
             </div>
@@ -167,17 +167,17 @@ const DetallesVentasPage = () => {
              <div className="space-y-8">
                 {/* Cliente */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-800">
-                   <h3 className="text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                   <h3 className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] mb-6 flex items-center gap-2">
                       <FiUser className="text-indigo-500" /> Información del Cliente
                    </h3>
                    <div className="flex items-center gap-4 mb-6">
-                      <div className="h-16 w-16 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 text-xl font-black">
+                      <div className="h-16 w-16 rounded-2xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 text-xl font-semibold">
                          {venta.usuarioCliente?.nombres?.[0]}
                       </div>
                       <div>
-                         <p className="font-bold text-gray-900 dark:text-white text-lg">{venta.usuarioCliente?.nombres} {venta.usuarioCliente?.apellidos}</p>
+                         <p className="font-semibold text-gray-900 dark:text-white text-lg">{venta.usuarioCliente?.nombres} {venta.usuarioCliente?.apellidos}</p>
                          <p className="text-xs text-gray-500 font-medium">ID: {venta.usuarioCliente?.usuario}</p>
-                         <span className="inline-block mt-1 px-2 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase rounded-md">Cliente Frecuente</span>
+                         <span className="inline-block mt-1 px-2 py-0.5 bg-blue-50 text-blue-600 text-[11px] font-semibold uppercase rounded-md">Cliente Frecuente</span>
                       </div>
                    </div>
                    <div className="space-y-4">
@@ -194,17 +194,17 @@ const DetallesVentasPage = () => {
 
                 {/* Logística */}
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-800">
-                   <h3 className="text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                   <h3 className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] mb-6 flex items-center gap-2">
                       <FiMapPin className="text-indigo-500" /> Datos de Entrega
                    </h3>
                    <div className="relative pl-4 border-l-2 border-dashed border-gray-200 dark:border-gray-700 space-y-4">
                       <div>
-                         <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Dirección de Envío</p>
-                         <p className="text-sm font-bold text-gray-800 dark:text-gray-200">{venta.direccionEntrega || 'Misma dirección de facturación'}</p>
+                         <p className="text-[11px] font-semibold text-gray-400 uppercase mb-1">Dirección de Envío</p>
+                         <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{venta.direccionEntrega || 'Misma dirección de facturación'}</p>
                       </div>
                       {venta.notas && (
                         <div>
-                           <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Notas / Instrucciones</p>
+                           <p className="text-[11px] font-semibold text-gray-400 uppercase mb-1">Notas / Instrucciones</p>
                            <p className="text-xs text-gray-600 dark:text-gray-400 italic bg-amber-50 dark:bg-amber-900/10 p-3 rounded-lg border border-amber-100 dark:border-amber-900/30">
                              "{venta.notas}"
                            </p>
@@ -217,9 +217,9 @@ const DetallesVentasPage = () => {
              {/* Columna 2: Productos */}
              <div className="bg-white dark:bg-gray-900 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-800 flex flex-col overflow-hidden">
                 <div className="p-6 border-b border-gray-100 dark:border-gray-800">
-                   <h3 className="text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                   <h3 className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] flex items-center gap-2">
                       <FiPackage className="text-indigo-500" /> Items Comprados 
-                      <span className="bg-gray-100 dark:bg-gray-800 text-gray-500 px-2 py-0.5 rounded-full text-[9px]">{venta.detalleVentas?.length}</span>
+                      <span className="bg-gray-100 dark:bg-gray-800 text-gray-500 px-2 py-0.5 rounded-full text-[11px]">{venta.detalleVentas?.length}</span>
                    </h3>
                 </div>
                 <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar max-h-[600px]">
@@ -240,17 +240,17 @@ const DetallesVentasPage = () => {
                            </div>
                            <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
                               <div>
-                                 <p className="text-[11px] font-black text-gray-800 dark:text-white leading-tight uppercase" title={item.variante?.producto?.nombreProducto}>
+                                 <p className="text-[11px] font-semibold text-gray-800 dark:text-white leading-tight uppercase" title={item.variante?.producto?.nombreProducto}>
                                    {item.variante?.producto?.nombreProducto}
                                  </p>
                                  <div className="flex flex-wrap gap-1.5 mt-2">
                                     {item.variante?.talla && (
-                                      <span className="text-[8px] font-black bg-white dark:bg-gray-700 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-300 uppercase shadow-sm">
+                                      <span className="text-[8px] font-semibold bg-white dark:bg-gray-700 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-300 uppercase shadow-sm">
                                         T: {item.variante.talla.nombreTalla}
                                       </span>
                                     )}
                                     {item.variante?.color && (
-                                      <div className="flex items-center gap-1 text-[8px] font-black bg-white dark:bg-gray-700 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-300 uppercase shadow-sm">
+                                      <div className="flex items-center gap-1 text-[8px] font-semibold bg-white dark:bg-gray-700 px-1.5 py-0.5 rounded border border-gray-200 dark:border-gray-600 text-gray-500 dark:text-gray-300 uppercase shadow-sm">
                                         C: {item.variante.color.nombreColor}
                                         <div className="h-1.5 w-1.5 rounded-full ring-1 ring-gray-200" style={{ backgroundColor: item.variante.color.codigoHex }} />
                                       </div>
@@ -261,18 +261,18 @@ const DetallesVentasPage = () => {
                               <div className="mt-3 flex justify-between items-end">
                                  <div className="space-y-1">
                                     <div className="flex items-center gap-2">
-                                       <span className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Cant: {Number(item.cantidad)}</span>
+                                       <span className="text-[11px] text-gray-400 font-semibold uppercase tracking-tighter">Cant: {Number(item.cantidad)}</span>
                                        {mov && (
-                                          <div className="flex items-center gap-1 px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded text-[8px] font-black border border-indigo-100 dark:border-indigo-900/30">
+                                          <div className="flex items-center gap-1 px-1.5 py-0.5 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded text-[8px] font-semibold border border-indigo-100 dark:border-indigo-900/30">
                                              <span>Stock: {Number(mov.stockAnterior)}</span>
                                              <span>→</span>
                                              <span>{Number(mov.stockNuevo)}</span>
                                           </div>
                                        )}
                                     </div>
-                                    <p className="text-[9px] text-gray-400 font-medium">SKU: {item.variante?.codigoSku}</p>
+                                    <p className="text-[11px] text-gray-400 font-medium">SKU: {item.variante?.codigoSku}</p>
                                  </div>
-                                 <p className="text-sm font-black text-indigo-600 dark:text-indigo-400">{formatearPrecio(item.subtotal)}</p>
+                                 <p className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">{formatearPrecio(item.subtotal)}</p>
                               </div>
                            </div>
                         </div>
@@ -282,17 +282,17 @@ const DetallesVentasPage = () => {
                 <div className="p-6 bg-gray-50/80 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-800 space-y-2">
                    <div className="flex justify-between text-xs text-gray-500">
                       <span>Subtotal</span>
-                      <span className="font-bold">{formatearPrecio(venta.subtotal)}</span>
+                      <span className="font-semibold">{formatearPrecio(venta.subtotal)}</span>
                    </div>
                    <div className="flex justify-between text-xs text-gray-500">
                       <span>Descuentos</span>
-                      <span className="font-bold text-rose-500">-{formatearPrecio(venta.descuentoTotal)}</span>
+                      <span className="font-semibold text-rose-500">-{formatearPrecio(venta.descuentoTotal)}</span>
                    </div>
                    <div className="flex justify-between text-xs text-gray-500">
                       <span>Impuestos</span>
-                      <span className="font-bold">+{formatearPrecio(venta.impuestos)}</span>
+                      <span className="font-semibold">+{formatearPrecio(venta.impuestos)}</span>
                    </div>
-                   <div className="flex justify-between text-lg font-black text-gray-900 dark:text-white pt-2 border-t border-gray-200 dark:border-gray-700 mt-2">
+                   <div className="flex justify-between text-lg font-semibold text-gray-900 dark:text-white pt-2 border-t border-gray-200 dark:border-gray-700 mt-2">
                       <span>Total</span>
                       <span>{formatearPrecio(venta.total)}</span>
                    </div>
@@ -303,10 +303,10 @@ const DetallesVentasPage = () => {
              <div className="space-y-8">
                 <div className="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-800">
                    <div className="flex justify-between items-center mb-6">
-                     <h3 className="text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                     <h3 className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] flex items-center gap-2">
                         <FiCreditCard className="text-indigo-500" /> Historial de Pagos
                      </h3>
-                     <span className="px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 text-[8px] font-black uppercase rounded-lg">
+                     <span className="px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 text-[8px] font-semibold uppercase rounded-lg">
                         {venta.pagos?.length} Pagos
                      </span>
                    </div>
@@ -317,14 +317,14 @@ const DetallesVentasPage = () => {
                           <div key={pago.idPago} className="relative bg-gray-50 dark:bg-gray-800/50 p-4 rounded-xl border border-gray-100 dark:border-gray-800">
                              <div className="flex justify-between items-start mb-2">
                                 <div>
-                                   <p className="text-xs font-black text-gray-700 dark:text-gray-200 uppercase">{pago.metodoPago?.nombreMetodo || 'Método Desconocido'}</p>
-                                   <p className="text-[10px] text-gray-400 font-bold">{new Date(pago.fechaPago).toLocaleString()}</p>
+                                   <p className="text-xs font-semibold text-gray-700 dark:text-gray-200 uppercase">{pago.metodoPago?.nombreMetodo || 'Método Desconocido'}</p>
+                                   <p className="text-[11px] text-gray-400 font-semibold">{new Date(pago.fechaPago).toLocaleString()}</p>
                                 </div>
-                                <span className="text-sm font-black text-emerald-600">+{formatearPrecio(pago.monto)}</span>
+                                <span className="text-sm font-semibold text-emerald-600">+{formatearPrecio(pago.monto)}</span>
                              </div>
                              {pago.referencia && (
                                <div className="bg-white dark:bg-gray-800 px-3 py-1.5 rounded-lg inline-block border border-gray-100 dark:border-gray-700">
-                                  <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wide">Ref: <span className="text-gray-800 dark:text-gray-300 select-all">{pago.referencia}</span></p>
+                                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide">Ref: <span className="text-gray-800 dark:text-gray-300 select-all">{pago.referencia}</span></p>
                                </div>
                              )}
                           </div>
@@ -338,12 +338,12 @@ const DetallesVentasPage = () => {
                    
                    <div className="mt-6 pt-4 border-t border-dashed border-gray-200 dark:border-gray-700">
                       <div className="flex justify-between items-center mb-2">
-                         <span className="text-xs font-bold text-gray-500 uppercase">Total Abonado</span>
-                         <span className="text-sm font-black text-emerald-600">{formatearPrecio(venta.totalPagado)}</span>
+                         <span className="text-xs font-semibold text-gray-500 uppercase">Total Abonado</span>
+                         <span className="text-sm font-semibold text-emerald-600">{formatearPrecio(venta.totalPagado)}</span>
                       </div>
                       <div className="flex justify-between items-center">
-                         <span className="text-xs font-bold text-gray-500 uppercase">Saldo Pendiente</span>
-                         <span className={`text-xl font-black ${venta.saldoPendiente > 0 ? 'text-rose-500' : 'text-gray-400'}`}>{formatearPrecio(venta.saldoPendiente)}</span>
+                         <span className="text-xs font-semibold text-gray-500 uppercase">Saldo Pendiente</span>
+                         <span className={`text-xl font-semibold ${venta.saldoPendiente > 0 ? 'text-rose-500' : 'text-gray-400'}`}>{formatearPrecio(venta.saldoPendiente)}</span>
                       </div>
                    </div>
                 </div>
@@ -352,34 +352,34 @@ const DetallesVentasPage = () => {
                  {venta.credito && (
                     <div className="bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-xl shadow-gray-200/40 dark:shadow-none border border-gray-100 dark:border-gray-800 relative overflow-hidden group">
                        <div className="absolute -right-8 -top-8 h-32 w-32 bg-indigo-500/5 group-hover:bg-indigo-500/10 rounded-full transition-colors duration-500" />
-                       <h3 className="text-[11px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em] mb-6 relative z-10 flex items-center gap-2">
+                       <h3 className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.1em] mb-6 relative z-10 flex items-center gap-2">
                           <FiFileText className="text-indigo-500" /> Información de Crédito
                        </h3>
                        <div className="space-y-6 relative z-10">
                           <div className="grid grid-cols-2 gap-4">
                              <div className="bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl border border-gray-100 dark:border-gray-700">
-                                <p className="text-[9px] font-bold text-gray-400 uppercase mb-1">Inicio</p>
-                                <p className="text-sm font-black text-gray-700 dark:text-gray-200">{new Date(venta.credito.fechaInicio).toLocaleDateString()}</p>
+                                <p className="text-[11px] font-semibold text-gray-400 uppercase mb-1">Inicio</p>
+                                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">{new Date(venta.credito.fechaInicio).toLocaleDateString()}</p>
                              </div>
                              <div className="bg-rose-50 dark:bg-rose-900/10 p-3 rounded-xl border border-rose-100 dark:border-rose-900/30">
-                                <p className="text-[9px] font-bold text-rose-400 uppercase mb-1">Vencimiento</p>
-                                <p className="text-sm font-black text-rose-600 dark:text-rose-400">{venta.credito.fechaVencimiento ? new Date(venta.credito.fechaVencimiento).toLocaleDateString() : 'N/A'}</p>
+                                <p className="text-[11px] font-semibold text-rose-400 uppercase mb-1">Vencimiento</p>
+                                <p className="text-sm font-semibold text-rose-600 dark:text-rose-400">{venta.credito.fechaVencimiento ? new Date(venta.credito.fechaVencimiento).toLocaleDateString() : 'N/A'}</p>
                              </div>
                           </div>
 
                           <div className="space-y-3">
                              <div className="flex justify-between items-center text-xs">
-                                <span className="font-bold text-gray-500 uppercase tracking-tight">Monto Total</span>
-                                <span className="font-black text-gray-800 dark:text-white">{formatearPrecio(venta.credito.montoTotal)}</span>
+                                <span className="font-semibold text-gray-500 uppercase tracking-tight">Monto Total</span>
+                                <span className="font-semibold text-gray-800 dark:text-white">{formatearPrecio(venta.credito.montoTotal)}</span>
                              </div>
                              <div className="flex justify-between items-center text-xs">
-                                <span className="font-bold text-gray-500 uppercase tracking-tight">Total Abonado</span>
-                                <span className="font-black text-emerald-600">{formatearPrecio(venta.credito.totalAbonado)}</span>
+                                <span className="font-semibold text-gray-500 uppercase tracking-tight">Total Abonado</span>
+                                <span className="font-semibold text-emerald-600">{formatearPrecio(venta.credito.totalAbonado)}</span>
                              </div>
                              <div className="relative pt-2">
                                 <div className="flex justify-between items-end mb-1.5">
-                                   <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Saldo Pendiente</span>
-                                   <span className="text-lg font-black text-indigo-600">{formatearPrecio(venta.credito.saldoPendiente)}</span>
+                                   <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Saldo Pendiente</span>
+                                   <span className="text-lg font-semibold text-indigo-600">{formatearPrecio(venta.credito.saldoPendiente)}</span>
                                 </div>
                                 <div className="h-2 w-full bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                                    <div 
@@ -391,8 +391,8 @@ const DetallesVentasPage = () => {
                           </div>
 
                           <div className="flex items-center justify-between pt-2 border-t border-gray-100 dark:border-gray-800">
-                             <span className="text-[10px] font-bold text-gray-400 uppercase">Estado del Crédito</span>
-                             <span className={`px-2 py-0.5 rounded-lg text-[10px] font-black uppercase tracking-tighter shadow-sm border ${
+                             <span className="text-[11px] font-semibold text-gray-400 uppercase">Estado del Crédito</span>
+                             <span className={`px-2 py-0.5 rounded-lg text-[11px] font-semibold uppercase tracking-tighter shadow-sm border ${
                                 venta.credito.estado === 'activo' 
                                 ? 'bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-900/20 dark:border-emerald-900' 
                                 : 'bg-amber-50 text-amber-600 border-amber-100 dark:bg-amber-900/20 dark:border-amber-900'
@@ -425,12 +425,12 @@ const DetallesVentasPage = () => {
               <FiArrowLeft className="h-6 w-6" />
             </button>
             <div>
-              <nav className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-widest text-indigo-500 mb-1">
+              <nav className="flex items-center space-x-2 text-[11px] font-semibold uppercase tracking-wide text-indigo-500 mb-1">
                 <Link to="/admin/ventas" className="hover:underline">Operaciones</Link>
                 <span>/</span>
-                <span className="text-gray-400 text-[10px]">Auditoría de Salidas</span>
+                <span className="text-gray-400 text-[11px]">Auditoría de Salidas</span>
               </nav>
-              <h1 className="text-4xl font-black text-gray-900 dark:text-white tracking-tight">
+              <h1 className="text-4xl font-semibold text-gray-900 dark:text-white tracking-tight">
                 Dashboard de Auditoría de Ventas
               </h1>
               <p className="text-gray-500 dark:text-gray-400 font-medium flex items-center gap-2 mt-1">
@@ -490,11 +490,11 @@ const DetallesVentasPage = () => {
         <div className="bg-white dark:bg-gray-950 rounded-[40px] shadow-2xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden">
           <div className="px-10 py-8 border-b border-gray-50 dark:border-gray-900 flex justify-between items-center bg-gray-50/50 dark:bg-gray-900/30">
             <div>
-              <h2 className="text-xl font-black text-gray-900 dark:text-white">Relación de Ítems Vendidos</h2>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Relación de Ítems Vendidos</h2>
               <p className="text-sm text-gray-400 font-medium tracking-tight">Consolidado dinámico de variantes comercializadas</p>
             </div>
             <div className="bg-indigo-600 px-6 py-2 rounded-2xl shadow-lg shadow-indigo-500/20">
-              <span className="text-xs font-black text-white uppercase tracking-widest">{detallesFiltrados.length} Registros</span>
+              <span className="text-xs font-semibold text-white uppercase tracking-wide">{detallesFiltrados.length} Registros</span>
             </div>
           </div>
 
@@ -502,19 +502,19 @@ const DetallesVentasPage = () => {
             {cargando ? (
               <div className="py-32 flex flex-col items-center justify-center space-y-4">
                 <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
-                <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Sincronizando auditoría...</p>
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Sincronizando auditoría...</p>
               </div>
             ) : (
               <table className="min-w-full">
                 <thead>
                   <tr className="bg-white dark:bg-gray-950 text-left">
-                    <th className="px-10 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Variante & Producto</th>
-                    <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Factura Ref</th>
-                    <th className="px-6 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Destinatario</th>
-                    <th className="px-6 py-6 text-center text-[10px] font-black text-gray-400 uppercase tracking-widest">Cant.</th>
-                    <th className="px-6 py-6 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Precio Unit.</th>
-                    <th className="px-6 py-6 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Dcto. Línea</th>
-                    <th className="px-10 py-6 text-right text-[10px] font-black text-gray-400 uppercase tracking-widest">Total Transacción</th>
+                    <th className="px-10 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Variante & Producto</th>
+                    <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Factura Ref</th>
+                    <th className="px-6 py-6 text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Destinatario</th>
+                    <th className="px-6 py-6 text-center text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Cant.</th>
+                    <th className="px-6 py-6 text-right text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Precio Unit.</th>
+                    <th className="px-6 py-6 text-right text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Dcto. Línea</th>
+                    <th className="px-10 py-6 text-right text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Total Transacción</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50 dark:divide-gray-900">
@@ -538,14 +538,14 @@ const DetallesVentasPage = () => {
                               )}
                             </div>
                             <div>
-                              <p className="text-sm font-black text-gray-900 dark:text-white leading-tight">
+                              <p className="text-sm font-semibold text-gray-900 dark:text-white leading-tight">
                                 {detalle.variante?.producto?.nombreProducto}
                               </p>
                               <div className="flex items-center gap-2 mt-1.5">
-                                <span className="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-lg text-[10px] font-bold text-gray-500 uppercase">
+                                <span className="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-lg text-[11px] font-semibold text-gray-500 uppercase">
                                   {detalle.variante?.color?.nombreColor || 'N/A'}
                                 </span>
-                                <span className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-lg text-[10px] font-black uppercase">
+                                <span className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-lg text-[11px] font-semibold uppercase">
                                   {detalle.variante?.talla?.nombreTalla || 'Única'}
                                 </span>
                               </div>
@@ -555,34 +555,34 @@ const DetallesVentasPage = () => {
                         <td className="px-6 py-6">
                           <Link to={`/admin/ventas`} className="flex items-center space-x-2 text-indigo-500 hover:underline">
                             <FiHash className="h-3 w-3" />
-                            <span className="text-sm font-black tracking-tight">{detalle.ventaRef}</span>
+                            <span className="text-sm font-semibold tracking-tight">{detalle.ventaRef}</span>
                           </Link>
-                          <div className="flex items-center space-x-1 mt-1 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                          <div className="flex items-center space-x-1 mt-1 text-[11px] text-gray-400 font-semibold uppercase tracking-wide">
                             <FiCalendar className="h-2.5 w-2.5" />
                             <span>{new Date(detalle.fecha).toLocaleDateString()}</span>
                           </div>
                         </td>
                         <td className="px-6 py-6">
                            <div className="flex items-center space-x-2">
-                            <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-[10px] font-black">
+                            <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-[11px] font-semibold">
                               {detalle.cliente?.[0]}
                             </div>
-                            <span className="text-sm font-bold text-gray-700 dark:text-gray-300 tracking-tight">{detalle.cliente}</span>
+                            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 tracking-tight">{detalle.cliente}</span>
                           </div>
                         </td>
                         <td className="px-6 py-6 text-center">
-                          <span className="text-sm font-black text-gray-900 dark:text-gray-200">{detalle.cantidad}</span>
+                          <span className="text-sm font-semibold text-gray-900 dark:text-gray-200">{detalle.cantidad}</span>
                         </td>
                         <td className="px-6 py-6 text-right font-medium text-sm text-gray-600 dark:text-gray-400">
                           {formatearPrecio(detalle.precioUnitario)}
                         </td>
                         <td className="px-6 py-6 text-right">
-                          <span className={`text-[10px] font-black border px-2 py-1 rounded-lg ${Number(detalle.descuentoLinea) > 0 ? 'bg-rose-50 text-rose-500 border-rose-100 dark:bg-rose-900/20' : 'text-gray-300 border-transparent'}`}>
+                          <span className={`text-[11px] font-semibold border px-2 py-1 rounded-lg ${Number(detalle.descuentoLinea) > 0 ? 'bg-rose-50 text-rose-500 border-rose-100 dark:bg-rose-900/20' : 'text-gray-300 border-transparent'}`}>
                             {Number(detalle.descuentoLinea) > 0 ? `-${formatearPrecio(detalle.descuentoLinea)}` : '$0'}
                           </span>
                         </td>
                         <td className="px-10 py-6 text-right">
-                          <span className="text-base font-black text-indigo-600 dark:text-indigo-400 tracking-tighter">
+                          <span className="text-base font-semibold text-indigo-600 dark:text-indigo-400 tracking-tighter">
                             {formatearPrecio(detalle.totalLinea)}
                           </span>
                         </td>
@@ -618,11 +618,11 @@ const AnalyticsCard = ({ title, value, subtitle, icon, color }) => {
           {icon}
         </div>
         <div>
-          <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{title}</h4>
-          <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter mt-1">{value}</p>
+          <h4 className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{title}</h4>
+          <p className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tighter mt-1">{value}</p>
           <div className="flex items-center space-x-2 mt-2">
             <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">{subtitle}</p>
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter">{subtitle}</p>
           </div>
         </div>
       </div>

@@ -41,7 +41,7 @@ const SelectorVariantes = ({ alAgregar }) => {
   return (
     <div className="flex flex-col h-[600px] space-y-6">
       <div className="flex flex-col gap-1">
-        <h3 className="text-lg font-black text-gray-800 dark:text-white flex items-center gap-2">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
           <div className="h-8 w-8 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center text-orange-600">
             <FiShoppingBag className="h-5 w-5" />
           </div>
@@ -70,15 +70,15 @@ const SelectorVariantes = ({ alAgregar }) => {
               <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-100 border-t-indigo-600"></div>
               <FiBox className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 text-indigo-600 animate-pulse" />
             </div>
-            <p className="mt-6 text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Cargando Inventario</p>
+            <p className="mt-6 text-xs font-semibold text-gray-400 uppercase tracking-[0.1em]">Cargando Inventario</p>
           </div>
         ) : productosFiltrados.length === 0 ? (
           <div className="text-center py-20 bg-gray-50/50 dark:bg-gray-800/30 rounded-[2.5rem] border-2 border-dashed border-gray-100 dark:border-gray-700">
             <div className="h-20 w-20 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
               <FiSearch className="h-10 w-10 text-gray-200" />
             </div>
-            <h4 className="text-gray-800 dark:text-gray-200 font-black">Sin resultados</h4>
-            <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-bold">No se encontraron productos coincidentes</p>
+            <h4 className="text-gray-800 dark:text-gray-200 font-semibold">Sin resultados</h4>
+            <p className="text-xs text-gray-400 mt-1 uppercase tracking-wide font-semibold">No se encontraron productos coincidentes</p>
           </div>
         ) : (
           productosFiltrados.map(producto => (
@@ -115,12 +115,12 @@ const SelectorVariantes = ({ alAgregar }) => {
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[9px] font-bold uppercase tracking-widest text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg border border-indigo-100 dark:border-indigo-800/50">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg border border-indigo-100 dark:border-indigo-800/50">
                       {producto.nombreCategoria || 'General'}
                     </span>
-                    <span className="text-[9px] font-bold text-gray-400">Ref: {producto.subtitulo}</span>
+                    <span className="text-[11px] font-semibold text-gray-400">Ref: {producto.subtitulo}</span>
                   </div>
-                  <h3 className="text-sm font-bold text-gray-800 dark:text-gray-100 truncate group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate group-hover:text-indigo-600 transition-colors">
                     {producto.titulo}
                   </h3>
                   <div className="flex items-center gap-4 mt-2">
@@ -135,12 +135,12 @@ const SelectorVariantes = ({ alAgregar }) => {
                            />
                          ))}
                       </div>
-                      <span className="text-[11px] text-gray-400 font-bold tracking-tight">
+                      <span className="text-[11px] text-gray-400 font-semibold tracking-tight">
                         {producto.variantes?.length || 0} Variantes
                       </span>
                     </div>
                     {(producto.variantes?.reduce((acc, v) => acc + v.cantidadStock, 0) || 0) <= 5 && (
-                      <span className="flex items-center gap-1 text-[9px] font-bold text-amber-600 uppercase">
+                      <span className="flex items-center gap-1 text-[11px] font-semibold text-amber-600 uppercase">
                         <FiAlertCircle className="h-2.5 w-2.5" /> Stock Bajo
                       </span>
                     )}
@@ -180,20 +180,20 @@ const SelectorVariantes = ({ alAgregar }) => {
                                 className="h-3 w-3 rounded-full border border-gray-200 dark:border-gray-600" 
                                 style={{ backgroundColor: variante.color?.codigoHex || '#cbd5e1' }}
                               />
-                              <span className="text-[11px] font-bold text-gray-700 dark:text-gray-200">
+                              <span className="text-[11px] font-semibold text-gray-700 dark:text-gray-200">
                                 {variante.color?.nombreColor || 'S/C'}
                               </span>
                               <div className="h-1 w-1 rounded-full bg-gray-300 mx-1" />
-                              <span className="text-[10px] font-bold px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-500 rounded-md uppercase">
+                              <span className="text-[11px] font-semibold px-1.5 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-500 rounded-md uppercase">
                                 {variante.talla?.nombreTalla || 'T/U'}
                               </span>
                             </div>
                             
                             <div className="flex items-center gap-3 mt-1.5">
-                              <span className="text-sm font-bold text-indigo-600">
+                              <span className="text-sm font-semibold text-indigo-600">
                                 ${variante.precioVenta?.toLocaleString() || '0'}
                               </span>
-                              <span className={`text-[10px] font-bold uppercase tracking-tight ${
+                              <span className={`text-[11px] font-semibold uppercase tracking-tight ${
                                 variante.cantidadStock > 5 
                                   ? 'text-gray-400' 
                                   : variante.cantidadStock > 0 
@@ -224,7 +224,7 @@ const SelectorVariantes = ({ alAgregar }) => {
                     ) : (
                       <div className="col-span-2 py-8 text-center bg-gray-50/50 dark:bg-gray-900/30 rounded-2xl border-2 border-dashed border-gray-100 dark:border-gray-700">
                         <FiInfo className="h-8 w-8 text-gray-200 mx-auto mb-2" />
-                        <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">Sin variantes disponibles</p>
+                        <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">Sin variantes disponibles</p>
                       </div>
                     )}
                   </div>

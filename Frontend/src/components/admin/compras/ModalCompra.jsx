@@ -340,7 +340,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                   <FiShoppingCart className="h-7 w-7 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Nueva Orden de Compra</h3>
+                  <h3 className="text-2xl font-semibold text-white">Nueva Orden de Compra</h3>
                   <p className="text-sm text-indigo-100 mt-1">Paso {paso} de 3 - {
                     paso === 1 ? 'Seleccionar Proveedor' :
                     paso === 2 ? 'Agregar Productos' :
@@ -434,7 +434,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                       >
                         {/* Avatar */}
                         <div className="flex items-start space-x-4">
-                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md ${
+                          <div className={`w-14 h-14 rounded-xl flex items-center justify-center text-white font-semibold text-lg shadow-md ${
                             proveedorSeleccionado?.idProveedor === proveedor.idProveedor
                               ? 'bg-gradient-to-br from-indigo-600 to-purple-600'
                               : 'bg-gradient-to-br from-gray-600 to-gray-700'
@@ -447,7 +447,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                           </div>
                           
                           <div className="flex-1 min-w-0">
-                            <h4 className="font-bold text-gray-900 dark:text-white truncate">{proveedor.nombreProveedor}</h4>
+                            <h4 className="font-semibold text-gray-900 dark:text-white truncate">{proveedor.nombreProveedor}</h4>
                             <p className="text-sm text-gray-500 dark:text-gray-400">NIT: {proveedor.nitCC}</p>
                           </div>
 
@@ -543,7 +543,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                               </div>
 
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-bold text-gray-900 dark:text-white truncate">{producto.nombreProducto}</h4>
+                                <h4 className="font-semibold text-gray-900 dark:text-white truncate">{producto.nombreProducto}</h4>
                                 <div className="flex items-center space-x-3 mt-1">
                                   <span className="text-xs text-gray-500 dark:text-gray-400">Ref: {producto.codigoReferencia}</span>
                                   {producto.categoria && (
@@ -632,7 +632,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                                           {/* Precio */}
                                           <div>
                                             <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Precio Costo</p>
-                                            <span className="text-sm font-bold text-gray-900 dark:text-white">
+                                            <span className="text-sm font-semibold text-gray-900 dark:text-white">
                                               ${formatearPrecioColombia(variante.precioCosto || 0)}
                                             </span>
                                           </div>
@@ -681,9 +681,9 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                           <FiShoppingCart className="h-5 w-5 text-white" />
-                          <h4 className="font-bold text-white">Carrito</h4>
+                          <h4 className="font-semibold text-white">Carrito</h4>
                         </div>
-                        <span className="px-2.5 py-1 bg-white/20 backdrop-blur-lg text-white text-sm font-bold rounded-lg">
+                        <span className="px-2.5 py-1 bg-white/20 backdrop-blur-lg text-white text-sm font-semibold rounded-lg">
                           {carrito.length}
                         </span>
                       </div>
@@ -790,7 +790,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                             <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
                               <div className="flex justify-between items-center">
                                 <span className="text-xs text-gray-600 dark:text-gray-400">Subtotal:</span>
-                                <span className="text-sm font-bold text-gray-900 dark:text-white">
+                                <span className="text-sm font-semibold text-gray-900 dark:text-white">
                                   ${formatearPrecioColombia((item.cantidad * item.precioUnitario) - (item.descuento.montoDescuento || 0))}
                                 </span>
                               </div>
@@ -833,8 +833,8 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                           )}
                         </div>
                         <div className="flex justify-between text-lg pt-2 border-t border-gray-200 dark:border-gray-700">
-                          <span className="font-bold text-gray-900 dark:text-white">Total:</span>
-                          <span className="font-bold text-indigo-600 dark:text-indigo-400">${formatearPrecioColombia(totales.total)}</span>
+                          <span className="font-semibold text-gray-900 dark:text-white">Total:</span>
+                          <span className="font-semibold text-indigo-600 dark:text-indigo-400">${formatearPrecioColombia(totales.total)}</span>
                         </div>
                       </div>
                     )}
@@ -848,7 +848,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
               <div className="space-y-6">
                 {/* Info de la compra */}
                 <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-indigo-200 dark:border-indigo-800">
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
                     <FiUser className="h-5 w-5 text-indigo-600" />
                     <span>Información de la Compra</span>
                   </h4>
@@ -901,7 +901,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
 
                 {/* Detalle de productos */}
                 <div>
-                  <h4 className="font-bold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
                     <FiPackage className="h-5 w-5 text-indigo-600" />
                     <span>Detalle de Productos</span>
                   </h4>
@@ -941,7 +941,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                               <td className="px-4 py-3 text-sm text-right text-green-600 dark:text-green-400">
                                 {item.descuento.montoDescuento > 0 ? `-$${formatearPrecioColombia(item.descuento.montoDescuento)}` : '-'}
                               </td>
-                              <td className="px-4 py-3 text-sm text-right font-bold text-gray-900 dark:text-white">
+                              <td className="px-4 py-3 text-sm text-right font-semibold text-gray-900 dark:text-white">
                                 ${formatearPrecioColombia((item.cantidad * item.precioUnitario) - (item.descuento.montoDescuento || 0))}
                               </td>
                             </tr>
@@ -973,8 +973,8 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                     )}
                     <div className="pt-3 border-t-2 border-gray-300 dark:border-gray-600">
                       <div className="flex justify-between items-center">
-                        <span className="text-2xl font-bold text-gray-900 dark:text-white">Total:</span>
-                        <span className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        <span className="text-2xl font-semibold text-gray-900 dark:text-white">Total:</span>
+                        <span className="text-3xl font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                           ${formatearPrecioColombia(totales.total)}
                         </span>
                       </div>

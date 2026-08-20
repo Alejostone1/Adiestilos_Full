@@ -73,7 +73,7 @@ const VariantDetailModal = ({
                 <ArrowLeft className="w-5 h-5" />
               </button>
               <div>
-                <h2 className="text-2xl font-bold">Detalles de Variante</h2>
+                <h2 className="text-2xl font-semibold">Detalles de Variante</h2>
                 <p className="text-purple-100 mt-1">{variante.codigoSku}</p>
               </div>
             </div>
@@ -271,7 +271,7 @@ const VariantDetailModal = ({
               <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">
+                    <h3 className="text-xl font-semibold text-gray-900">
                       {variante.codigoSku}
                     </h3>
                     <StatusBadge
@@ -281,7 +281,7 @@ const VariantDetailModal = ({
                     />
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-bold text-purple-600">
+                    <div className="text-2xl font-semibold text-purple-600">
                       <PrecioFormateado precio={variante.precioVenta} />
                     </div>
                     <div className="text-sm text-gray-600">
@@ -316,13 +316,13 @@ const VariantDetailModal = ({
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-900/50">
                     <div className="text-sm text-green-600 dark:text-green-400 mb-1">Precio Venta</div>
-                    <div className="text-xl font-bold text-green-700 dark:text-green-300">
+                    <div className="text-xl font-semibold text-green-700 dark:text-green-300">
                       ${formatPrice(variante.precioVenta)}
                     </div>
                   </div>
                   <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 border border-orange-200 dark:border-orange-900/50">
                     <div className="text-sm text-orange-600 dark:text-orange-400 mb-1">Precio Costo</div>
-                    <div className="text-xl font-bold text-orange-700 dark:text-orange-300">
+                    <div className="text-xl font-semibold text-orange-700 dark:text-orange-300">
                       ${formatPrice(variante.precioCosto)}
                     </div>
                   </div>
@@ -331,7 +331,7 @@ const VariantDetailModal = ({
                   <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-900/50">
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-blue-600 dark:text-blue-400">Margen de Ganancia:</span>
-                      <span className="text-lg font-bold text-blue-700 dark:text-blue-300">
+                      <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
                         {((variante.precioVenta - variante.precioCosto) / variante.precioCosto * 100).toFixed(1)}%
                       </span>
                     </div>

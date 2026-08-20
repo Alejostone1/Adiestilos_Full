@@ -205,11 +205,11 @@ export default function RolesPage() {
       {/* Premium Header */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
         <div className="space-y-4">
-           <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-xs font-black uppercase tracking-widest">
+           <div className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[11px] font-semibold uppercase tracking-wide">
               <Lock size={14} />
               Gobernanza de Datos
            </div>
-           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
+           <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 dark:text-white tracking-tight">
               Roles y Seguridad
            </h1>
            <p className="text-gray-500 dark:text-gray-400 text-lg max-w-2xl">
@@ -226,7 +226,7 @@ export default function RolesPage() {
            </button>
            <button 
              onClick={() => handleOpenDrawer()}
-             className="px-8 py-4 bg-indigo-600 text-white rounded-[2rem] font-bold text-lg shadow-2xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-3"
+             className="px-8 py-4 bg-indigo-600 text-white rounded-[2rem] font-semibold text-lg shadow-2xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-3"
            >
              <Plus size={24} />
              Crear Nuevo Perfil
@@ -249,7 +249,7 @@ export default function RolesPage() {
               <div className="absolute top-8 right-8">
                  <button 
                     onClick={() => toggleStatus(role)}
-                    className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all ${role.activo ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30'}`}
+                    className={`px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide transition-all ${role.activo ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30'}`}
                  >
                     {role.activo ? 'Activo' : 'Suspendido'}
                  </button>
@@ -261,8 +261,8 @@ export default function RolesPage() {
                   <Shield size={28} />
                 </div>
                 <div>
-                   <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-tight">{role.nombreRol}</h3>
-                   <div className="flex items-center gap-2 text-gray-400 font-bold text-xs mt-1">
+                   <h3 className="text-xl font-semibold text-gray-900 dark:text-white leading-tight">{role.nombreRol}</h3>
+                   <div className="flex items-center gap-2 text-gray-400 font-semibold text-xs mt-1">
                       <Users size={14} />
                       {role._count?.usuarios || 0} Usuarios asignados
                    </div>
@@ -276,8 +276,8 @@ export default function RolesPage() {
               {/* Progress Summary */}
               <div className="space-y-4 mb-10">
                  <div className="flex justify-between items-end">
-                    <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-widest">Cobertura de Privilegios</span>
-                    <span className="text-xl font-bold text-gray-900 dark:text-white">
+                    <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-wide">Cobertura de Privilegios</span>
+                    <span className="text-xl font-semibold text-gray-900 dark:text-white">
                         {Object.values(role.permisos || {}).filter(v => v !== false && v !== 'none').length} / {availablePermissions.length}
                     </span>
                  </div>
@@ -294,21 +294,24 @@ export default function RolesPage() {
               <div className="flex items-center gap-3">
                  <button 
                   onClick={() => { setViewingRole(role); setIsViewDrawerOpen(true); }}
-                  className="card-3d flex-1 py-3 bg-gray-50 dark:bg-slate-700/40 text-gray-600 dark:text-gray-300 rounded-2xl font-bold hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center gap-2"
+                  className="flex-1 py-3 px-4 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white rounded-2xl font-semibold hover:shadow-md hover:shadow-indigo-500/20 transition-all flex items-center justify-center gap-2 border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 active:scale-[0.98]"
+                  title="Ver atribuciones del perfil"
                  >
                     <Eye size={18} />
                     Ver
                  </button>
                  <button 
                   onClick={() => handleOpenDrawer(role)}
-                  className="card-3d p-3 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 rounded-2xl hover:bg-indigo-100 dark:hover:bg-indigo-800 transition-all"
+                  className="w-12 h-12 flex items-center justify-center rounded-2xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                  title="Ajustar matriz de seguridad"
                  >
                     <Edit2 size={20} />
                  </button>
                  {role.nombreRol !== 'Administrador' && (
                     <button 
                         onClick={() => handleDelete(role)}
-                        className="card-3d p-3 bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 rounded-2xl hover:bg-rose-100 dark:hover:bg-rose-800 transition-all"
+                        className="w-12 h-12 flex items-center justify-center rounded-2xl bg-rose-50 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white border border-rose-100 dark:border-rose-800/60 hover:border-rose-600 shadow-sm hover:shadow-md hover:shadow-rose-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                        title="Eliminar perfil"
                     >
                         <Trash2 size={20} />
                     </button>
@@ -333,7 +336,7 @@ export default function RolesPage() {
               {/* Header */}
               <div className="p-10 card-3d bg-white dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-700/50 flex items-center justify-between sticky top-0 z-10">
                  <div>
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-4">
+                    <h2 className="text-2xl font-semibold text-gray-900 dark:text-white flex items-center gap-4">
                        <div className="p-3 bg-indigo-600 text-white rounded-2xl">
                           <Settings size={24} className="animate-[spin_30s_linear_infinite]" />
                        </div>
@@ -351,16 +354,16 @@ export default function RolesPage() {
                 
                 {/* Basic Info */}
                 <div className="card-3d bg-white dark:bg-slate-800/60 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700/50 space-y-8">
-                   <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-indigo-500 flex items-center gap-2">
+                   <h4 className="text-xs font-semibold uppercase tracking-[0.1em] text-indigo-500 flex items-center gap-2">
                        <Info size={14} /> Identidad del Perfil
                    </h4>
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="space-y-2">
-                         <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Nombre Descriptivo</label>
+                         <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">Nombre Descriptivo</label>
                          <input 
                             required
                             disabled={editingRole?.nombreRol === 'Administrador'}
-                            className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all font-bold disabled:opacity-50"
+                            className="w-full px-6 py-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all font-semibold disabled:opacity-50"
                             placeholder="Ej: Operador de Punto de Venta"
                             value={formData.nombreRol}
                             onChange={(e) => setFormData({...formData, nombreRol: e.target.value})}
@@ -376,14 +379,14 @@ export default function RolesPage() {
                                 onChange={(e) => setFormData({...formData, activo: e.target.checked})}
                             />
                             <div>
-                                <span className="block font-bold text-indigo-700 dark:text-indigo-400">Perfil Habilitado</span>
-                                <span className="text-[10px] text-indigo-400 font-bold uppercase tracking-tight">Estado de uso</span>
+                                <span className="block font-semibold text-indigo-700 dark:text-indigo-400">Perfil Habilitado</span>
+                                <span className="text-[11px] text-indigo-400 font-semibold uppercase tracking-tight">Estado de uso</span>
                             </div>
                          </label>
                       </div>
                    </div>
                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Descripción de Responsabilidades</label>
+                      <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">Descripción de Responsabilidades</label>
                       <textarea 
                         rows="2"
                         className="card-3d w-full px-6 py-4 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all font-medium resize-none shadow-inner"
@@ -397,7 +400,7 @@ export default function RolesPage() {
                 {/* Matrix Header */}
                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                    <div>
-                      <h4 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                      <h4 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-3">
                          <Lock className="text-indigo-500" /> Matriz de Privilegios
                       </h4>
                       <p className="text-gray-500 dark:text-gray-400 font-medium">Configura el acceso granular módulo por módulo.</p>
@@ -405,7 +408,7 @@ export default function RolesPage() {
                    <button 
                     type="button"
                     onClick={grantFullAccess}
-                    className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-900 border-2 border-dashed border-indigo-300 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-2xl font-bold hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-all hover:border-solid hover:border-indigo-500"
+                    className="flex items-center gap-2 px-6 py-3 bg-white dark:bg-gray-900 border-2 border-dashed border-indigo-300 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-2xl font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-all hover:border-solid hover:border-indigo-500"
                    >
                      <Unlock size={20} /> Entregar Acceso Total
                    </button>
@@ -425,7 +428,7 @@ export default function RolesPage() {
                            <div className="p-2.5 bg-white dark:bg-gray-800 rounded-xl text-indigo-500 shadow-sm">
                               {ICONOS_CATEGORIAS[cat]}
                            </div>
-                           <h5 className="font-bold text-gray-900 dark:text-white tracking-tight uppercase text-sm">{cat}</h5>
+                           <h5 className="font-semibold text-gray-900 dark:text-white tracking-tight uppercase text-sm">{cat}</h5>
                         </div>
 
                         <div className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -433,7 +436,7 @@ export default function RolesPage() {
                              <div key={p.clave} className="p-6 hover:bg-gray-50/50 dark:hover:bg-gray-800/50 transition-colors">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                                    <div className="flex-1">
-                                      <div className="text-base font-bold text-gray-800 dark:text-white">{p.modulo}</div>
+                                      <div className="text-base font-semibold text-gray-800 dark:text-white">{p.modulo}</div>
                                       <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mt-1">{p.descripcion || p.label}</p>
                                    </div>
                                    
@@ -443,12 +446,12 @@ export default function RolesPage() {
                                             <button 
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, permisos: { ...formData.permisos, [p.clave]: true } })}
-                                                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${formData.permisos[p.clave] === true ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+                                                className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${formData.permisos[p.clave] === true ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
                                             >SÍ</button>
                                             <button 
                                                 type="button"
                                                 onClick={() => setFormData({ ...formData, permisos: { ...formData.permisos, [p.clave]: false } })}
-                                                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${!formData.permisos[p.clave] ? 'bg-white dark:bg-gray-700 text-gray-700 dark:text-white shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+                                                className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${!formData.permisos[p.clave] ? 'bg-white dark:bg-gray-700 text-gray-700 dark:text-white shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
                                             >NO</button>
                                          </label>
                                       ) : (
@@ -460,7 +463,7 @@ export default function RolesPage() {
                                                         key={opt.value}
                                                         type="button"
                                                         onClick={() => setFormData({ ...formData, permisos: { ...formData.permisos, [p.clave]: opt.value } })}
-                                                        className={`px-4 py-2 rounded-xl text-[10px] font-bold uppercase tracking-tight transition-all ${isActive ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+                                                        className={`px-4 py-2 rounded-xl text-[11px] font-semibold uppercase tracking-tight transition-all ${isActive ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
                                                     >
                                                         {opt.label}
                                                     </button>
@@ -483,13 +486,13 @@ export default function RolesPage() {
                  <button 
                     type="button"
                     onClick={() => setIsDrawerOpen(false)}
-                    className="card-3d flex-1 py-5 bg-gray-100 dark:bg-slate-700/40 text-gray-600 dark:text-gray-300 rounded-[1.5rem] font-bold text-lg hover:bg-gray-200 dark:hover:bg-slate-600/60 transition-all"
+                    className="card-3d flex-1 py-5 bg-gray-100 dark:bg-slate-700/40 text-gray-600 dark:text-gray-300 rounded-[1.5rem] font-semibold text-lg hover:bg-gray-200 dark:hover:bg-slate-600/60 transition-all"
                  > Descartar </button>
                  <button 
                     type="submit"
                     onClick={handleSave}
                     disabled={submitting}
-                    className="card-3d card-elevated flex-[2] py-5 bg-indigo-600 text-white rounded-[1.5rem] font-bold text-xl shadow-2xl shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 dark:hover:bg-indigo-700 hover:scale-[1.01] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="card-3d card-elevated flex-[2] py-5 bg-indigo-600 text-white rounded-[1.5rem] font-semibold text-xl shadow-2xl shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 dark:hover:bg-indigo-700 hover:scale-[1.01] transition-all flex items-center justify-center gap-3 disabled:opacity-50"
                  >
                     {submitting ? 'Procesando...' : (editingRole ? 'Guardar Cambios' : 'Finalizar Creación')}
                  </button>
@@ -515,8 +518,8 @@ export default function RolesPage() {
                          <UserCheck size={28} />
                       </div>
                       <div>
-                         <h3 className="text-xl font-bold text-gray-900 dark:text-white uppercase tracking-tight">{viewingRole.nombreRol}</h3>
-                         <p className="text-gray-400 font-bold text-xs uppercase tracking-widest">Resumen de Atribuciones</p>
+                         <h3 className="text-xl font-semibold text-gray-900 dark:text-white uppercase tracking-tight">{viewingRole.nombreRol}</h3>
+                         <p className="text-gray-400 font-semibold text-xs uppercase tracking-wide">Resumen de Atribuciones</p>
                       </div>
                    </div>
                    <button onClick={() => setIsViewDrawerOpen(false)} className="p-2 text-gray-400 hover:text-gray-900 rounded-full transition-all">
@@ -529,7 +532,7 @@ export default function RolesPage() {
                      <div key={cat} className="space-y-3">
                         <div className="flex items-center gap-2 text-indigo-500 mb-2">
                            {ICONOS_CATEGORIAS[cat]}
-                           <span className="text-[10px] font-bold uppercase tracking-widest">{cat}</span>
+                           <span className="text-[11px] font-semibold uppercase tracking-wide">{cat}</span>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                            {permisos.map(p => {
@@ -538,8 +541,8 @@ export default function RolesPage() {
                              return (
                                <div key={p.clave} className={`p-4 rounded-2xl border flex items-center justify-between group transition-all ${active ? 'bg-indigo-50/50 dark:bg-indigo-900/10 border-indigo-100 dark:border-indigo-800' : 'bg-gray-50/30 dark:bg-gray-800/20 border-gray-100 dark:border-gray-800 opacity-50'}`}>
                                   <div>
-                                     <div className={`text-xs font-bold ${active ? 'text-indigo-700 dark:text-indigo-400' : 'text-gray-400'}`}>{p.modulo}</div>
-                                     <div className="text-[10px] font-bold text-gray-400 dark:text-gray-500">{optLabel(p, valor)}</div>
+                                     <div className={`text-xs font-semibold ${active ? 'text-indigo-700 dark:text-indigo-400' : 'text-gray-400'}`}>{p.modulo}</div>
+                                     <div className="text-[11px] font-semibold text-gray-400 dark:text-gray-500">{optLabel(p, valor)}</div>
                                   </div>
                                   {active ? (
                                     <div className="bg-indigo-500 text-white p-1 rounded-lg">
@@ -561,7 +564,7 @@ export default function RolesPage() {
                 <div className="p-8 card-3d bg-slate-700/30 dark:bg-slate-700/30 border-t border-gray-100 dark:border-slate-700/50">
                    <button 
                     onClick={() => { setIsViewDrawerOpen(false); handleOpenDrawer(viewingRole); }}
-                    className="card-3d card-elevated w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold shadow-xl shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2"
+                    className="card-3d card-elevated w-full py-4 bg-indigo-600 text-white rounded-2xl font-semibold shadow-xl shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2"
                    >
                       <Edit2 size={18} />
                       Modificar Privilegios

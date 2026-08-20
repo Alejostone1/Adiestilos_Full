@@ -41,7 +41,7 @@ const ImageManagerModal = ({
         <div className="p-6 border-b border-gray-100 dark:border-slate-700 bg-white dark:bg-slate-800">
           <div className="flex justify-between items-start">
             <div className="flex-1 min-w-0">
-               <h2 className="text-2xl font-bold text-gray-900 dark:text-white truncate pr-4">{title}</h2>
+               <h2 className="text-2xl font-semibold text-gray-900 dark:text-white truncate pr-4">{title}</h2>
                {subtitle && <div className="flex items-center gap-2 mt-1 text-sm text-gray-500 dark:text-gray-400">
                   <TagIcon className="w-3.5 h-3.5" />
                   <span className="font-mono">{subtitle}</span>
@@ -66,7 +66,7 @@ const ImageManagerModal = ({
               <div className="flex items-center gap-2">
                 <ImageIcon className="w-4 h-4" />
                 Imágenes de Galería
-                <span className="bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md text-[10px]">{images.length}</span>
+                <span className="bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md text-[11px]">{images.length}</span>
               </div>
               {activeTab === 'images' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 rounded-full" />}
             </button>
@@ -81,7 +81,7 @@ const ImageManagerModal = ({
                 <div className="flex items-center gap-2">
                   <Layers className="w-4 h-4" />
                   Variantes Asignadas
-                  <span className="bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md text-[10px]">{variants.length}</span>
+                  <span className="bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md text-[11px]">{variants.length}</span>
                 </div>
                 {activeTab === 'variants' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 rounded-full" />}
               </button>
@@ -119,7 +119,7 @@ const ImageManagerModal = ({
                   {isUploading ? (
                     <div className="flex flex-col items-center">
                       <Loader2 className="w-12 h-12 text-purple-600 animate-spin mb-4" />
-                      <p className="text-gray-700 dark:text-gray-300 font-bold text-lg">Subiendo fotografías...</p>
+                      <p className="text-gray-700 dark:text-gray-300 font-semibold text-lg">Subiendo fotografías...</p>
                       <p className="text-gray-500 text-sm mt-1">{uploadProgress}% completado</p>
                       <div className="w-full max-w-xs h-2 bg-gray-200 rounded-full mt-4 overflow-hidden shadow-inner">
                         <div 
@@ -133,7 +133,7 @@ const ImageManagerModal = ({
                       <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm">
                         <Upload className="w-8 h-8" />
                       </div>
-                      <p className="text-gray-900 dark:text-white font-bold text-xl">
+                      <p className="text-gray-900 dark:text-white font-semibold text-xl">
                         Añadir nuevas imágenes
                       </p>
                       <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 max-w-xs mx-auto">
@@ -167,7 +167,7 @@ const ImageManagerModal = ({
 
                       {/* Main Badge */}
                       {img.esPrincipal && (
-                        <div className="absolute top-3 left-3 bg-purple-600 text-white text-[10px] px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md font-bold z-10 uppercase tracking-widest">
+                        <div className="absolute top-3 left-3 bg-purple-600 text-white text-[11px] px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md font-semibold z-10 uppercase tracking-wide">
                           <Star className="w-3 h-3 fill-current" />
                           Principal
                         </div>
@@ -227,20 +227,20 @@ const ImageManagerModal = ({
                    </div>
                    <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
-                        <p className="font-bold text-gray-900 dark:text-white truncate">{v.codigoSku}</p>
-                        <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 rounded text-[10px] font-mono text-gray-500">
+                        <p className="font-semibold text-gray-900 dark:text-white truncate">{v.codigoSku}</p>
+                        <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 rounded text-[11px] font-mono text-gray-500">
                            Stock: {v.cantidadStock}
                         </span>
                       </div>
                       <div className="flex gap-2 mt-1.5 flex-wrap">
                          {v.color && (
-                           <span className="flex items-center gap-1 text-[10px] font-semibold text-purple-600 dark:text-purple-400 uppercase bg-purple-50 dark:bg-purple-900/20 px-2 py-0.5 rounded-full">
+                           <span className="flex items-center gap-1 text-[11px] font-semibold text-purple-600 dark:text-purple-400 uppercase bg-purple-50 dark:bg-purple-900/20 px-2 py-0.5 rounded-full">
                               <Palette className="w-3 h-3" />
                               {v.color.nombreColor}
                            </span>
                          )}
                          {v.talla && (
-                           <span className="flex items-center gap-1 text-[10px] font-semibold text-blue-600 dark:text-blue-400 uppercase bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full">
+                           <span className="flex items-center gap-1 text-[11px] font-semibold text-blue-600 dark:text-blue-400 uppercase bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full">
                               <Ruler className="w-3 h-3" />
                               {v.talla.nombreTalla}
                            </span>

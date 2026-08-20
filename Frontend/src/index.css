@@ -13,11 +13,16 @@
     @apply bg-gray-50 text-gray-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 dark:text-gray-100 antialiased transition-colors duration-300;
     font-family: var(--font-primary);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight text-gray-900 dark:text-white;
     font-family: var(--font-primary);
+    letter-spacing: -0.01em;
   }
 
   /* Ajustes finos de tipografía para profesionalismo */
@@ -40,18 +45,18 @@
     @apply relative rounded-2xl border border-gray-200 dark:border-slate-600/40 overflow-hidden;
     box-shadow: 
       0 1px 0 rgba(255, 255, 255, 0.8),
-      0 2px 3px rgba(0, 0, 0, 0.1),
-      0 4px 8px rgba(0, 0, 0, 0.15),
-      0 8px 16px rgba(0, 0, 0, 0.2),
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 2px 4px rgba(0, 0, 0, 0.06),
+      0 8px 16px rgba(0, 0, 0, 0.05),
       inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
   .dark .card-3d {
     box-shadow: 
-      0 1px 0 rgba(255, 255, 255, 0.1),
-      0 2px 3px rgba(0, 0, 0, 0.3),
-      0 4px 8px rgba(0, 0, 0, 0.4),
-      0 8px 16px rgba(0, 0, 0, 0.5),
+      0 1px 0 rgba(255, 255, 255, 0.05),
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      0 2px 4px rgba(0, 0, 0, 0.25),
+      0 8px 16px rgba(0, 0, 0, 0.2),
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
@@ -77,20 +82,18 @@
   .card-elevated {
     @apply rounded-2xl shadow-none border;
     box-shadow: 
-      0 0px 0px rgba(0, 0, 0, 0.05),
-      0 1px 2px rgba(0, 0, 0, 0.05),
-      0 4px 8px rgba(0, 0, 0, 0.08),
-      0 8px 16px rgba(0, 0, 0, 0.12),
-      0 16px 32px rgba(0, 0, 0, 0.15);
+      0 0px 0px rgba(0, 0, 0, 0.04),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      0 2px 4px rgba(0, 0, 0, 0.05),
+      0 8px 20px rgba(0, 0, 0, 0.06);
   }
 
   .dark .card-elevated {
     box-shadow: 
       0 0px 0px rgba(0, 0, 0, 0.2),
-      0 1px 2px rgba(0, 0, 0, 0.3),
-      0 4px 8px rgba(0, 0, 0, 0.4),
-      0 8px 16px rgba(0, 0, 0, 0.5),
-      0 16px 32px rgba(0, 0, 0, 0.6);
+      0 1px 2px rgba(0, 0, 0, 0.2),
+      0 2px 4px rgba(0, 0, 0, 0.25),
+      0 8px 20px rgba(0, 0, 0, 0.3);
   }
 
   /* Borde doble efecto */

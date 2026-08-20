@@ -82,19 +82,19 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
       {/* Resumen de Márgenes */}
       <div className="grid grid-cols-3 gap-4">
         <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 rounded-lg p-4 border border-orange-200 dark:border-orange-800">
-          <p className="text-xs font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-widest mb-1">
+          <p className="text-xs font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-wide mb-1">
             Costo
           </p>
-          <p className="text-2xl font-bold text-orange-700 dark:text-orange-300">
+          <p className="text-2xl font-semibold text-orange-700 dark:text-orange-300">
             ${precioCompra.toFixed(2)}
           </p>
         </div>
 
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-          <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-1">
+          <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-1">
             Margen
           </p>
-          <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">
+          <p className="text-2xl font-semibold text-blue-700 dark:text-blue-300">
             ${margenActual.toFixed(2)}
           </p>
           <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
@@ -103,10 +103,10 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
         </div>
 
         <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
-          <p className="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-widest mb-1">
+          <p className="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide mb-1">
             Precio Venta
           </p>
-          <p className="text-2xl font-bold text-green-700 dark:text-green-300">
+          <p className="text-2xl font-semibold text-green-700 dark:text-green-300">
             ${precioVenta.toFixed(2)}
           </p>
         </div>
@@ -119,7 +119,7 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
             Porcentaje de Ganancia
           </p>
           <span className={`
-            px-3 py-1 rounded-full text-sm font-bold
+            px-3 py-1 rounded-full text-sm font-semibold
             ${porcentajeGanancia >= 30
               ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
               : porcentajeGanancia >= 15

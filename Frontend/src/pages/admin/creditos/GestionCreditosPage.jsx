@@ -42,12 +42,12 @@ const GestionCreditosPage = () => {
         <div className="bg-indigo-600 rounded-[2.5rem] p-8 text-white shadow-xl shadow-indigo-500/30 relative overflow-hidden">
            <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
               <div>
-                 <h1 className="text-3xl font-black tracking-tight">Gestión de Cobranza</h1>
+                 <h1 className="text-3xl font-semibold tracking-tight">Gestión de Cobranza</h1>
                  <p className="text-indigo-200 font-medium">Panel de control de créditos activos</p>
               </div>
               <div className="text-center md:text-right">
-                 <p className="text-xs font-bold uppercase tracking-widest text-indigo-200 mb-1">Total por Cobrar</p>
-                 <p className="text-4xl font-black">{formatearPrecio(totalPorCobrar)}</p>
+                 <p className="text-xs font-semibold uppercase tracking-wide text-indigo-200 mb-1">Total por Cobrar</p>
+                 <p className="text-4xl font-semibold">{formatearPrecio(totalPorCobrar)}</p>
               </div>
            </div>
            
@@ -65,7 +65,7 @@ const GestionCreditosPage = () => {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
                    <FiCheckCircle className="text-2xl" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">¡Todo al día!</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white">¡Todo al día!</h3>
                 <p className="text-gray-500">No hay créditos activos pendientes de cobro.</p>
              </div>
            ) : (
@@ -76,10 +76,10 @@ const GestionCreditosPage = () => {
                >
                   <div className="flex justify-between items-start mb-4">
                      <div>
-                        <h4 className="font-bold text-gray-900 dark:text-white">{credito.usuarioCliente?.nombres}</h4>
+                        <h4 className="font-semibold text-gray-900 dark:text-white">{credito.usuarioCliente?.nombres}</h4>
                         <p className="text-xs text-gray-400 font-medium">{credito.usuarioCliente?.apellidos}</p>
                      </div>
-                     <span className="px-3 py-1 bg-amber-50 text-amber-600 text-[10px] font-black uppercase rounded-lg border border-amber-100">
+                     <span className="px-3 py-1 bg-amber-50 text-amber-600 text-[11px] font-semibold uppercase rounded-lg border border-amber-100">
                         Por Cobrar
                      </span>
                   </div>
@@ -87,9 +87,9 @@ const GestionCreditosPage = () => {
                   <div className="space-y-4">
                      <div className="flex justify-between text-sm">
                         <span className="text-gray-400">Deuda Original</span>
-                        <span className="font-bold text-gray-600 dark:text-gray-300">{formatearPrecio(credito.montoTotal)}</span>
+                        <span className="font-semibold text-gray-600 dark:text-gray-300">{formatearPrecio(credito.montoTotal)}</span>
                      </div>
-                     <div className="flex justify-between text-lg font-black text-indigo-600 border-t border-gray-100 dark:border-gray-800 pt-4">
+                     <div className="flex justify-between text-lg font-semibold text-indigo-600 border-t border-gray-100 dark:border-gray-800 pt-4">
                         <span>Saldo</span>
                         <span>{formatearPrecio(credito.saldoPendiente)}</span>
                      </div>
@@ -100,7 +100,7 @@ const GestionCreditosPage = () => {
                            style={{ width: `${Math.round(((credito.montoTotal - credito.saldoPendiente) / credito.montoTotal) * 100)}%` }} 
                         />
                      </div>
-                     <p className="text-[10px] text-gray-400 text-center uppercase font-bold">
+                     <p className="text-[11px] text-gray-400 text-center uppercase font-semibold">
                         {Math.round(((credito.montoTotal - credito.saldoPendiente) / credito.montoTotal) * 100)}% Pagado
                      </p>
                   </div>

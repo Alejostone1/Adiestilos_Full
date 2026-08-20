@@ -307,7 +307,7 @@ const ProductosWizard = ({ isOpen, onClose, producto = null, onSuccess }) => {
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-900 dark:to-blue-800 px-8 py-6 relative">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-white">
+                <h2 className="text-2xl font-semibold text-white">
                   {producto ? 'Editar Producto' : 'Crear Nuevo Producto'}
                 </h2>
                 <p className="text-blue-100 text-sm mt-1">Paso {pasoActual} de 5</p>
@@ -333,7 +333,7 @@ const ProductosWizard = ({ isOpen, onClose, producto = null, onSuccess }) => {
                   <div key={paso.id} className="flex items-center flex-1">
                     <div
                       className={`
-                        flex items-center justify-center w-10 h-10 rounded-lg font-bold text-sm
+                        flex items-center justify-center w-10 h-10 rounded-lg font-semibold text-sm
                         transition-all duration-300
                         ${esActivo
                           ? 'bg-blue-600 text-white ring-2 ring-blue-300 dark:ring-blue-400'

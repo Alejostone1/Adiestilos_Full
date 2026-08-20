@@ -183,11 +183,11 @@ const VentasPage = () => {
           ======================================== */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-gray-800 dark:text-white flex items-center gap-3">
+          <h1 className="text-3xl font-semibold text-gray-800 dark:text-white flex items-center gap-3">
             <FiDollarSign className="text-indigo-600" />
             Ventas & Facturación
           </h1>
-          <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mt-1">
+          <p className="text-sm font-semibold text-gray-400 uppercase tracking-wide mt-1">
             Gestión Centralizada de Salidas
           </p>
         </div>
@@ -196,7 +196,7 @@ const VentasPage = () => {
           {/* Botón para ver análisis detallado */}
           <button
             onClick={() => navigate('/admin/ventas/detalles')}
-            className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-bold rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 transition-all"
+            className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-semibold rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 transition-all"
           >
             <FiActivity className="text-indigo-500" />
             <span>Ver Análisis Detallado</span>
@@ -205,7 +205,7 @@ const VentasPage = () => {
           {/* Botón para crear nueva venta */}
           <button
             onClick={() => setModalVentaOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-black rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
           >
             <FiPlus className="h-5 w-5" />
             <span>Nueva Venta</span>
@@ -257,16 +257,16 @@ const VentasPage = () => {
             </div>
 
             {/* Etiqueta del KPI */}
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">
               {kpi.label}
             </p>
 
             {/* Valor y tendencia */}
             <div className="flex items-end justify-between mt-1">
-              <h3 className="text-xl font-black text-gray-800 dark:text-white">
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
                 {kpi.value}
               </h3>
-              <span className="text-[10px] font-bold text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">
+              <span className="text-[11px] font-semibold text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-full">
                 {kpi.trend}
               </span>
             </div>
@@ -297,10 +297,10 @@ const VentasPage = () => {
 
           {/* Botones de filtros */}
           <div className="flex items-center gap-3 w-full md:w-auto">
-            <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 font-bold rounded-2xl border border-gray-100 dark:border-gray-700 hover:bg-gray-100 transition-all">
+            <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 font-semibold rounded-2xl border border-gray-100 dark:border-gray-700 hover:bg-gray-100 transition-all">
               <FiFilter /> Filtros
             </button>
-            <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 font-bold rounded-2xl border border-gray-100 dark:border-gray-700 hover:bg-gray-100 transition-all">
+            <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 dark:bg-gray-900 text-gray-600 dark:text-gray-300 font-semibold rounded-2xl border border-gray-100 dark:border-gray-700 hover:bg-gray-100 transition-all">
               <FiCalendar /> Fecha
             </button>
           </div>
@@ -312,7 +312,7 @@ const VentasPage = () => {
         <div className="overflow-x-auto custom-scrollbar">
           <table className="w-full text-left">
             {/* Encabezados de la tabla */}
-            <thead className="bg-gray-50 dark:bg-gray-900/50 text-gray-400 text-[10px] font-black uppercase tracking-widest">
+            <thead className="bg-gray-50 dark:bg-gray-900/50 text-gray-400 text-[11px] font-semibold uppercase tracking-wide">
               <tr>
                 <th className="py-4 px-8">Nº Factura</th>
                 <th className="py-4 px-4">Cliente</th>
@@ -329,14 +329,14 @@ const VentasPage = () => {
               {cargando ? (
                 // Estado de carga
                 <tr>
-                  <td colSpan="7" className="py-20 text-center text-gray-400 font-bold">
+                  <td colSpan="7" className="py-20 text-center text-gray-400 font-semibold">
                     Cargando transacciones...
                   </td>
                 </tr>
               ) : ventas.length === 0 ? (
                 // Sin resultados
                 <tr>
-                  <td colSpan="7" className="py-20 text-center text-gray-400 font-bold">
+                  <td colSpan="7" className="py-20 text-center text-gray-400 font-semibold">
                     No se encontraron ventas registradas.
                   </td>
                 </tr>
@@ -349,7 +349,7 @@ const VentasPage = () => {
                   >
                     {/* Número de factura */}
                     <td className="py-5 px-8">
-                      <span className="text-xs font-black text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
+                      <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
                         {venta.numeroFactura}
                       </span>
                     </td>
@@ -357,23 +357,23 @@ const VentasPage = () => {
                     {/* Información del cliente */}
                     <td className="py-5 px-4">
                       <div className="flex flex-col">
-                        <span className="text-sm font-black text-gray-800 dark:text-gray-100">
+                        <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
                           {venta.usuarioCliente?.nombres} {venta.usuarioCliente?.apellidos}
                         </span>
-                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">
+                        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter">
                           {venta.usuarioCliente?.usuario || 'Consumidor Final'}
                         </span>
                       </div>
                     </td>
 
                     {/* Fecha de creación */}
-                    <td className="py-5 px-4 text-xs font-bold text-gray-500">
+                    <td className="py-5 px-4 text-xs font-semibold text-gray-500">
                       {new Date(venta.creadoEn).toLocaleDateString()}
                     </td>
 
                     {/* Total de la venta */}
                     <td className="py-5 px-4 text-right">
-                      <span className="text-sm font-black text-gray-800 dark:text-white">
+                      <span className="text-sm font-semibold text-gray-800 dark:text-white">
                         {formatearPrecio(venta.total)}
                       </span>
                     </td>
@@ -382,7 +382,7 @@ const VentasPage = () => {
                     <td className="py-5 px-4 text-center">
                       <button
                         onClick={() => abrirModalEstado(venta)}
-                        className={`px-4 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 hover:shadow-lg ${getStatusColor(venta.estadoPedido?.color)}`}
+                        className={`px-4 py-1.5 rounded-2xl text-[11px] font-semibold uppercase tracking-wide transition-all hover:scale-105 hover:shadow-lg ${getStatusColor(venta.estadoPedido?.color)}`}
                         style={{ backgroundColor: venta.estadoPedido?.color || '#6B7280' }}
                         title="Click para cambiar estado"
                       >
@@ -393,32 +393,35 @@ const VentasPage = () => {
                     {/* Estado de pago */}
                     <td className="py-5 px-4 text-center">
                       <span className={`h-2.5 w-2.5 rounded-full inline-block mr-2 ${getPagoColor(venta.estadoPago)}`}></span>
-                      <span className="text-[10px] font-black uppercase text-gray-500 dark:text-gray-400">
+                      <span className="text-[11px] font-semibold uppercase text-gray-500 dark:text-gray-400">
                         {venta.estadoPago}
                       </span>
                     </td>
 
                     {/* Acciones - Botones de acción que aparecen al hover */}
                     <td className="py-5 px-8 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-end gap-2">
                         {/* Ver detalles */}
                         <button
                           onClick={() => navigate(`/admin/ventas/detalles/${venta.idVenta}`)}
-                          className="p-2 bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-indigo-600 rounded-xl transition-all"
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                           title="Ver detalles"
                         >
                           <FiEye className="h-4 w-4" />
                         </button>
 
                         {/* Descargar factura */}
-                        <button className="p-2 bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-indigo-600 rounded-xl transition-all">
+                        <button
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-900 hover:text-white border border-slate-200 dark:border-slate-600/60 hover:border-slate-900 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-95 transition-all"
+                          title="Descargar factura"
+                        >
                           <FiDownload className="h-4 w-4" />
                         </button>
 
                         {/* Cambiar estado */}
                         <button
                           onClick={() => abrirModalEstado(venta)}
-                          className="p-2 bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-indigo-600 rounded-xl transition-all"
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white border border-emerald-100 dark:border-emerald-800/60 hover:border-emerald-600 shadow-sm hover:shadow-md hover:shadow-emerald-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                           title="Cambiar estado"
                         >
                           <FiEdit3 className="h-4 w-4" />
@@ -437,7 +440,7 @@ const VentasPage = () => {
             ======================================== */}
         <div className="p-6 bg-gray-50 dark:bg-gray-900/50 flex items-center justify-between border-t border-gray-100 dark:border-gray-700">
           {/* Contador de registros */}
-          <p className="text-xs font-bold text-gray-400">
+          <p className="text-xs font-semibold text-gray-400">
             Mostrando {ventas.length} de {paginacion.totalRegistros || 0} ventas
           </p>
 
@@ -446,14 +449,14 @@ const VentasPage = () => {
             <button
               disabled={paginacion.paginaActual === 1}
               onClick={() => setFiltros({ ...filtros, pagina: filtros.pagina - 1 })}
-              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-xs font-black hover:bg-gray-50 transition-all disabled:opacity-50"
+              className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-xs font-semibold hover:bg-gray-50 transition-all disabled:opacity-50"
             >
               Anterior
             </button>
             <button
               disabled={paginacion.paginaActual === paginacion.totalPaginas}
               onClick={() => setFiltros({ ...filtros, pagina: filtros.pagina + 1 })}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-black shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all disabled:opacity-50"
+              className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all disabled:opacity-50"
             >
               Siguiente
             </button>
@@ -484,7 +487,7 @@ const VentasPage = () => {
             <div className="p-8 border-b border-gray-200 dark:border-gray-700">
               {/* Título y botón de cerrar */}
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-black text-gray-800 dark:text-white flex items-center gap-3">
+                <h2 className="text-2xl font-semibold text-gray-800 dark:text-white flex items-center gap-3">
                   <FiEdit3 className="text-indigo-600" />
                   Cambiar Estado del Pedido
                 </h2>
@@ -503,25 +506,25 @@ const VentasPage = () => {
               <div className="flex items-center gap-4 text-sm">
                 {/* Número de factura */}
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-400 font-bold">Factura:</span>
-                  <span className="text-indigo-600 dark:text-indigo-400 font-black bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
+                  <span className="text-gray-400 font-semibold">Factura:</span>
+                  <span className="text-indigo-600 dark:text-indigo-400 font-semibold bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
                     {ventaSeleccionada.numeroFactura}
                   </span>
                 </div>
 
                 {/* Cliente */}
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-400 font-bold">Cliente:</span>
-                  <span className="text-gray-800 dark:text-gray-200 font-bold">
+                  <span className="text-gray-400 font-semibold">Cliente:</span>
+                  <span className="text-gray-800 dark:text-gray-200 font-semibold">
                     {ventaSeleccionada.usuarioCliente?.nombres} {ventaSeleccionada.usuarioCliente?.apellidos}
                   </span>
                 </div>
 
                 {/* Estado actual */}
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-400 font-bold">Estado actual:</span>
+                  <span className="text-gray-400 font-semibold">Estado actual:</span>
                   <span
-                    className={`px-3 py-1 rounded-xl text-xs font-black ${getStatusColor(ventaSeleccionada.estadoPedido?.color)}`}
+                    className={`px-3 py-1 rounded-xl text-xs font-semibold ${getStatusColor(ventaSeleccionada.estadoPedido?.color)}`}
                     style={{ backgroundColor: ventaSeleccionada.estadoPedido?.color }}
                   >
                     {ventaSeleccionada.estadoPedido?.nombreEstado}
@@ -556,7 +559,7 @@ const VentasPage = () => {
                     >
                       {/* Indicador de estado actual */}
                       {isActual && (
-                        <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[8px] font-black px-2 py-1 rounded-full shadow-lg">
+                        <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[8px] font-semibold px-2 py-1 rounded-full shadow-lg">
                           ACTUAL
                         </div>
                       )}
@@ -564,13 +567,13 @@ const VentasPage = () => {
                       {/* Color Badge con número de orden */}
                       <div className="flex items-center gap-3 mb-3">
                         <div
-                          className="h-10 w-10 rounded-xl shadow-sm flex items-center justify-center font-black text-white text-xs"
+                          className="h-10 w-10 rounded-xl shadow-sm flex items-center justify-center font-semibold text-white text-xs"
                           style={{ backgroundColor: colorHex }}
                         >
                           {estado.orden}
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-black text-sm text-gray-800 dark:text-white line-clamp-2">
+                          <h3 className="font-semibold text-sm text-gray-800 dark:text-white line-clamp-2">
                             {estado.nombreEstado}
                           </h3>
                         </div>
@@ -601,7 +604,7 @@ const VentasPage = () => {
                 FOOTER DEL MODAL
                 ======================================== */}
             <div className="p-6 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
-              <p className="text-xs text-gray-400 font-bold">
+              <p className="text-xs text-gray-400 font-semibold">
                 Selecciona un estado para actualizar el pedido
               </p>
               <button
@@ -609,7 +612,7 @@ const VentasPage = () => {
                   setModalEstadoOpen(false);
                   setVentaSeleccionada(null);
                 }}
-                className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-black rounded-2xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+                className="px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-2xl hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
               >
                 Cerrar
               </button>

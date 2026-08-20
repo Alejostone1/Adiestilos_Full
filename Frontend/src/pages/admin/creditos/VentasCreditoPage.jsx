@@ -50,19 +50,19 @@ const VentasCreditoPage = () => {
       title: 'Registrar Abono',
       html: `
         <div class="text-left space-y-4 p-2">
-          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest">Saldo Pendiente: ${formatearPrecio(credito.saldoPendiente)}</p>
+          <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide">Saldo Pendiente: ${formatearPrecio(credito.saldoPendiente)}</p>
           <div>
-            <label class="block text-[10px] font-black uppercase mb-1">Monto del Abono</label>
+            <label class="block text-[11px] font-semibold uppercase mb-1">Monto del Abono</label>
             <input id="swal-monto" type="number" class="w-full p-3 border rounded-xl" placeholder="0.00">
           </div>
           <div>
-            <label class="block text-[10px] font-black uppercase mb-1">Método de Pago</label>
+            <label class="block text-[11px] font-semibold uppercase mb-1">Método de Pago</label>
             <select id="swal-metodo" class="w-full p-3 border rounded-xl">
               ${metodosPago.map(m => `<option value="${m.idMetodoPago}">${m.nombreMetodo}</option>`).join('')}
             </select>
           </div>
           <div>
-            <label class="block text-[10px] font-black uppercase mb-1">Notas</label>
+            <label class="block text-[11px] font-semibold uppercase mb-1">Notas</label>
             <textarea id="swal-notas" class="w-full p-3 border rounded-xl" rows="2"></textarea>
           </div>
         </div>
@@ -101,16 +101,16 @@ const VentasCreditoPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-gray-800 dark:text-white flex items-center gap-3">
+          <h1 className="text-3xl font-semibold text-gray-800 dark:text-white flex items-center gap-3">
             <FiCreditCard className="text-rose-500" />
             Ventas a Crédito
           </h1>
-          <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mt-1">Gestión de Saldos y Cobranzas</p>
+          <p className="text-sm font-semibold text-gray-400 uppercase tracking-wide mt-1">Gestión de Saldos y Cobranzas</p>
         </div>
         <div className="flex items-center gap-3">
            <div className="bg-rose-50 dark:bg-rose-900/20 px-6 py-3 rounded-2xl border border-rose-100 dark:border-rose-800">
-              <p className="text-[9px] font-black text-rose-500 uppercase tracking-widest leading-none mb-1">Total en Cartera</p>
-              <p className="text-xl font-black text-rose-600 dark:text-rose-400">{formatearPrecio(totalEnMora)}</p>
+              <p className="text-[11px] font-semibold text-rose-500 uppercase tracking-wide leading-none mb-1">Total en Cartera</p>
+              <p className="text-xl font-semibold text-rose-600 dark:text-rose-400">{formatearPrecio(totalEnMora)}</p>
            </div>
         </div>
       </div>
@@ -127,8 +127,8 @@ const VentasCreditoPage = () => {
             <div className={`h-12 w-12 rounded-2xl bg-${kpi.color}-50 dark:bg-${kpi.color}-900/20 text-${kpi.color}-600 dark:text-${kpi.color}-400 flex items-center justify-center text-2xl mb-4`}>
               {kpi.icon}
             </div>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{kpi.label}</p>
-            <h3 className="text-xl font-black text-gray-800 dark:text-white mt-1">{kpi.value}</h3>
+            <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">{kpi.label}</p>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-white mt-1">{kpi.value}</h3>
           </div>
         ))}
       </div>
@@ -146,7 +146,7 @@ const VentasCreditoPage = () => {
           </div>
           <div className="flex items-center gap-3">
             <select
-              className="bg-gray-50 dark:bg-gray-900 border-none rounded-2xl py-3 px-6 text-sm font-bold text-gray-500"
+              className="bg-gray-50 dark:bg-gray-900 border-none rounded-2xl py-3 px-6 text-sm font-semibold text-gray-500"
               value={filtros.estado}
               onChange={(e) => setFiltros({...filtros, estado: e.target.value})}
             >
@@ -160,7 +160,7 @@ const VentasCreditoPage = () => {
 
         <div className="overflow-x-auto custom-scrollbar">
           <table className="w-full text-left">
-            <thead className="bg-gray-50 dark:bg-gray-900/50 text-gray-400 text-[10px] font-black uppercase tracking-widest">
+            <thead className="bg-gray-50 dark:bg-gray-900/50 text-gray-400 text-[11px] font-semibold uppercase tracking-wide">
               <tr>
                 <th className="py-4 px-8">Cliente / Factura</th>
                 <th className="py-4 px-4">Fecha Inicio</th>
@@ -172,35 +172,35 @@ const VentasCreditoPage = () => {
             </thead>
             <tbody className="divide-y divide-gray-50 dark:divide-gray-700">
               {cargando ? (
-                <tr><td colSpan="6" className="py-10 text-center text-gray-400 font-bold uppercase tracking-widest">Cargando cartera...</td></tr>
+                <tr><td colSpan="6" className="py-10 text-center text-gray-400 font-semibold uppercase tracking-wide">Cargando cartera...</td></tr>
               ) : creditos.length === 0 ? (
-                <tr><td colSpan="6" className="py-10 text-center text-gray-400 font-bold uppercase tracking-widest">No hay créditos registrados</td></tr>
+                <tr><td colSpan="6" className="py-10 text-center text-gray-400 font-semibold uppercase tracking-wide">No hay créditos registrados</td></tr>
               ) : (
                 creditos.map((credito) => (
                   <tr key={credito.idCredito} className="hover:bg-gray-50/50 dark:hover:bg-gray-700/30 transition-colors group">
                     <td className="py-5 px-8">
                        <div className="flex flex-col">
-                          <span className="text-sm font-black text-gray-800 dark:text-gray-100">
+                          <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
                             {credito.usuarioCliente?.nombres} {credito.usuarioCliente?.apellidos}
                           </span>
-                          <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-tighter">
+                          <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-tighter">
                             Factura: {credito.venta?.numeroFactura}
                           </span>
                        </div>
                     </td>
-                    <td className="py-5 px-4 text-xs font-bold text-gray-500">
+                    <td className="py-5 px-4 text-xs font-semibold text-gray-500">
                       {new Date(credito.fechaInicio).toLocaleDateString()}
                     </td>
-                    <td className="py-5 px-4 text-right text-sm font-bold text-gray-600 dark:text-gray-300">
+                    <td className="py-5 px-4 text-right text-sm font-semibold text-gray-600 dark:text-gray-300">
                       {formatearPrecio(credito.montoTotal)}
                     </td>
                     <td className="py-5 px-4 text-right">
-                      <span className="text-sm font-black text-rose-500">
+                      <span className="text-sm font-semibold text-rose-500">
                         {formatearPrecio(credito.saldoPendiente)}
                       </span>
                     </td>
                     <td className="py-5 px-4 text-center">
-                      <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                      <span className={`px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wide ${
                         credito.estado === 'activo' ? 'bg-amber-100 text-amber-600' : 'bg-emerald-100 text-emerald-600'
                       }`}>
                         {credito.estado}
@@ -211,7 +211,7 @@ const VentasCreditoPage = () => {
                         <button
                           onClick={() => handleAbonar(credito)}
                           disabled={credito.estado === 'pagado'}
-                          className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white text-[10px] font-black uppercase rounded-xl hover:bg-emerald-600 transition-all disabled:opacity-30"
+                          className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-white text-[11px] font-semibold uppercase rounded-xl hover:bg-emerald-600 transition-all disabled:opacity-30"
                         >
                           <FiPlus /> Abonar
                         </button>

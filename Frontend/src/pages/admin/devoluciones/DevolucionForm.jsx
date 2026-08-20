@@ -358,7 +358,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
                   </div>
                 </div>
                 <div className="text-right ml-4">
-                  <p className="font-bold text-lg text-gray-900">{formatearMoneda(venta.total)}</p>
+                  <p className="font-semibold text-lg text-gray-900">{formatearMoneda(venta.total)}</p>
                   <p className="text-xs text-green-600 font-medium">
                     {venta.estadoPago === 'pagado' ? 'Pagada' : 'Pendiente'}
                   </p>
@@ -405,7 +405,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <div>
                 <span className="text-sm text-gray-600">Número Factura:</span>
-                <p className="font-bold text-gray-900 text-lg">{ventaSeleccionada.numeroFactura}</p>
+                <p className="font-semibold text-gray-900 text-lg">{ventaSeleccionada.numeroFactura}</p>
               </div>
               <div>
                 <span className="text-sm text-gray-600">Fecha Venta:</span>
@@ -429,7 +429,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
               </div>
               <div>
                 <span className="text-sm text-gray-600">Total Venta:</span>
-                <p className="font-bold text-lg text-green-600">{formatearMoneda(ventaSeleccionada.total)}</p>
+                <p className="font-semibold text-lg text-green-600">{formatearMoneda(ventaSeleccionada.total)}</p>
               </div>
             </div>
           </div>
@@ -529,7 +529,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
             <div className="flex justify-between items-center">
               <span className="text-gray-700 font-medium">Total Productos en esta Factura:</span>
               <div className="text-right">
-                <span className="text-2xl font-bold text-gray-900">{productosSeleccionados.length}</span>
+                <span className="text-2xl font-semibold text-gray-900">{productosSeleccionados.length}</span>
                 <span className="text-gray-600 ml-2">productos diferentes</span>
               </div>
             </div>
@@ -677,7 +677,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
               <div className="mt-3 pt-3 border-t border-green-200">
                 <div className="flex justify-between items-center">
                   <span className="text-sm font-medium text-green-700">Subtotal devolución:</span>
-                  <span className="font-bold text-green-600">{formatearMoneda(producto.subtotal)}</span>
+                  <span className="font-semibold text-green-600">{formatearMoneda(producto.subtotal)}</span>
                 </div>
                 <div className="text-xs text-gray-500 mt-1">
                   {producto.cantidadDevuelta} und × {formatearMoneda(producto.precioUnitario)}
@@ -721,7 +721,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-gray-600">Valor total a devolver:</span>
-                <span className="font-bold text-lg text-green-600">{formatearMoneda(totales.total)}</span>
+                <span className="font-semibold text-lg text-green-600">{formatearMoneda(totales.total)}</span>
               </div>
             </div>
           </div>
@@ -835,7 +835,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
         <div className="border-t border-gray-300 pt-3">
           <div className="flex justify-between items-center">
             <span className="text-lg font-semibold text-gray-900">Total Devolución:</span>
-            <span className="text-lg font-bold text-blue-600">{formatearMoneda(totales.total)}</span>
+            <span className="text-lg font-semibold text-blue-600">{formatearMoneda(totales.total)}</span>
           </div>
         </div>
       </div>
@@ -887,7 +887,7 @@ const DevolucionForm = ({ devolucion, accion, onClose, onSuccess }) => {
         <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4">
           <div className="flex justify-between items-center">
             <div>
-              <h2 className="text-xl font-bold text-gray-900">
+              <h2 className="text-xl font-semibold text-gray-900">
                 {accion === 'crear' ? 'Nueva Devolución' : 'Editar Devolución'}
               </h2>
               <p className="text-sm text-gray-500 mt-1">

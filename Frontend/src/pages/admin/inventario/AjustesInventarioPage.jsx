@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Archive,
@@ -449,8 +449,8 @@ export default function AjustesInventarioPage() {
       <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
         <div>
           <div className="flex items-center gap-3 mb-2">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Ajustes de Inventario</h1>
-            <span className="px-3 py-1 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-full text-[10px] font-bold uppercase tracking-widest border border-indigo-200 dark:border-indigo-800">Control de Stock</span>
+            <h1 className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tight">Ajustes de Inventario</h1>
+            <span className="px-3 py-1 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-full text-[11px] font-semibold uppercase tracking-wide border border-indigo-200 dark:border-indigo-800">Control de Stock</span>
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-base font-medium">Gestiona ajustes de stock con control de versiones borrador/aplicado.</p>
         </div>
@@ -458,7 +458,7 @@ export default function AjustesInventarioPage() {
           whileHover={{ scale: 1.02, y: -2 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleOpenCreateModal}
-          className="bg-indigo-600 text-white px-8 py-4 rounded-[1.5rem] hover:bg-indigo-700 shadow-xl shadow-indigo-200 dark:shadow-none transition-all flex items-center justify-center gap-3 font-bold text-base"
+          className="bg-indigo-600 text-white px-8 py-4 rounded-[1.5rem] hover:bg-indigo-700 shadow-xl shadow-indigo-200 dark:shadow-none transition-all flex items-center justify-center gap-3 font-semibold text-base"
         >
           <Plus className="w-5 h-5" />
           Nuevo Ajuste en Borrador
@@ -486,7 +486,7 @@ export default function AjustesInventarioPage() {
               <Filter className="w-4 h-4" />
             </button>
             {(filters.estado || filters.idTipoMovimiento || filters.buscar) && (
-              <button onClick={clearFilters} className="text-xs text-rose-500 hover:text-rose-600 font-bold uppercase tracking-wider ml-2">
+              <button onClick={clearFilters} className="text-xs text-rose-500 hover:text-rose-600 font-semibold uppercase tracking-wider ml-2">
                 Limpiar
               </button>
             )}
@@ -510,7 +510,7 @@ export default function AjustesInventarioPage() {
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Estado del Ajuste</span>
+                  <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide ml-1">Estado del Ajuste</span>
                   <Select
                     placeholder="Filtrar por estado"
                     value={filters.estado || undefined}
@@ -525,7 +525,7 @@ export default function AjustesInventarioPage() {
                   </Select>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">Tipo de Movimiento</span>
+                  <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide ml-1">Tipo de Movimiento</span>
                   <Select
                     placeholder="Filtrar por movimiento"
                     value={filters.idTipoMovimiento || undefined}
@@ -542,7 +542,7 @@ export default function AjustesInventarioPage() {
                           <span className="font-semibold">{tipo.nombreTipo}</span>
                           <Tag
                             color={tipo.tipo === 'entrada' ? 'green' : 'orange'}
-                            className="text-[10px] font-bold uppercase rounded-md m-0"
+                            className="text-[11px] font-semibold uppercase rounded-md m-0"
                           >
                             {tipo.tipo}
                           </Tag>
@@ -587,8 +587,8 @@ export default function AjustesInventarioPage() {
                       <FileText size={20} />
                     </div>
                     <div>
-                      <div className="font-bold text-sm text-gray-900 dark:text-gray-100">{numero}</div>
-                      <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider flex items-center gap-1.5 mt-0.5">
+                      <div className="font-semibold text-sm text-gray-900 dark:text-gray-100">{numero}</div>
+                      <div className="text-[11px] text-gray-400 font-semibold uppercase tracking-wider flex items-center gap-1.5 mt-0.5">
                         <Package size={10} />
                         {record.detalleAjustes?.length || 0} variante{(record.detalleAjustes?.length || 0) !== 1 ? 's' : ''}
                       </div>
@@ -606,7 +606,7 @@ export default function AjustesInventarioPage() {
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{nombre}</span>
                     <Tag
                       color={record.tipoMovimiento?.tipo === 'entrada' ? 'green' : 'orange'}
-                      className="w-fit text-[9px] font-bold uppercase rounded-md px-1.5 border-none dark:bg-opacity-20"
+                      className="w-fit text-[11px] font-semibold uppercase rounded-md px-1.5 border-none dark:bg-opacity-20"
                       icon={record.tipoMovimiento?.tipo === 'entrada' ? <TrendingUp size={10} className="mb-0.5" /> : <TrendingDown size={10} className="mb-0.5" />}
                     >
                       {record.tipoMovimiento?.tipo}
@@ -629,7 +629,7 @@ export default function AjustesInventarioPage() {
                   const Icon = cfg.icon;
   
                   return (
-                    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border ${cfg.bg} ${cfg.text} ${cfg.border} text-[10px] font-bold uppercase tracking-wider`}>
+                    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border ${cfg.bg} ${cfg.text} ${cfg.border} text-[11px] font-semibold uppercase tracking-wider`}>
                       <Icon size={12} />
                       {cfg.label}
                     </span>
@@ -644,7 +644,7 @@ export default function AjustesInventarioPage() {
                 render: (fecha) => (
                   <div className="flex flex-col">
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{dayjs(fecha).format('DD/MM/YYYY')}</span>
-                    <span className="text-[10px] text-gray-400 font-bold">{dayjs(fecha).format('HH:mm A')}</span>
+                    <span className="text-[11px] text-gray-400 font-semibold">{dayjs(fecha).format('HH:mm A')}</span>
                   </div>
                 ),
                 width: 160
@@ -655,7 +655,7 @@ export default function AjustesInventarioPage() {
                 key: 'usuario',
                 render: (nombres, record) => (
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 font-bold text-xs border border-gray-200 dark:border-gray-700">
+                    <div className="w-8 h-8 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-500 font-semibold text-xs border border-gray-200 dark:border-gray-700">
                       {nombres?.charAt(0)}
                     </div>
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">{nombres} {record.usuarioRegistroRef?.apellidos}</span>
@@ -739,7 +739,7 @@ export default function AjustesInventarioPage() {
             <div className="w-24 h-24 bg-gray-50 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-300 dark:text-gray-600">
                <Archive size={48} />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Sin ajustes registrados</h3>
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">Sin ajustes registrados</h3>
             <p className="text-gray-500 dark:text-gray-400 mt-3 max-w-sm mx-auto font-medium leading-relaxed">
               Los ajustes de inventario te permiten sincronizar el stock real con el sistema de manera auditada.
             </p>
@@ -747,7 +747,7 @@ export default function AjustesInventarioPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleOpenCreateModal}
-              className="mt-8 px-8 py-3.5 bg-indigo-600 text-white rounded-2xl font-bold shadow-xl shadow-indigo-100 dark:shadow-none hover:bg-indigo-700 transition-all inline-flex items-center gap-2"
+              className="mt-8 px-8 py-3.5 bg-indigo-600 text-white rounded-2xl font-semibold shadow-xl shadow-indigo-100 dark:shadow-none hover:bg-indigo-700 transition-all inline-flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
               Crear primer ajuste
@@ -762,7 +762,7 @@ export default function AjustesInventarioPage() {
               <div className="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl">
                  <Eye size={22} />
               </div>
-              <span className="font-bold text-gray-900 dark:text-white">Expediente de Ajuste</span>
+              <span className="font-semibold text-gray-900 dark:text-white">Expediente de Ajuste</span>
             </div>
           }
           open={showEditModal}
@@ -776,11 +776,11 @@ export default function AjustesInventarioPage() {
             <div className="space-y-8 py-4">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 bg-gray-50 dark:bg-gray-800/40 rounded-3xl border border-gray-100 dark:border-gray-800">
                 <div>
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Número de Ajuste</label>
-                  <div className="text-base font-bold text-indigo-600 dark:text-indigo-400">{selectedAjuste.numeroAjuste}</div>
+                  <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1">Número de Ajuste</label>
+                  <div className="text-base font-semibold text-indigo-600 dark:text-indigo-400">{selectedAjuste.numeroAjuste}</div>
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Estado Operativo</label>
+                  <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1">Estado Operativo</label>
                   <div className="mt-1">
                     {(() => {
                         const CONFIG = {
@@ -790,7 +790,7 @@ export default function AjustesInventarioPage() {
                         };
                         const cfg = CONFIG[selectedAjuste.estado] || CONFIG.borrador;
                         return (
-                            <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase ${cfg.bg}`}>
+                            <span className={`px-2 py-0.5 rounded-md text-[11px] font-semibold uppercase ${cfg.bg}`}>
                                 {cfg.label}
                             </span>
                         );
@@ -798,28 +798,28 @@ export default function AjustesInventarioPage() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Tipo de Movimiento</label>
+                  <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1">Tipo de Movimiento</label>
                   <div className="mt-1">
-                    <Tag color={selectedAjuste.tipoMovimiento?.tipo === 'entrada' ? 'green' : 'orange'} className="rounded-md border-none font-bold text-[10px] uppercase m-0">
+                    <Tag color={selectedAjuste.tipoMovimiento?.tipo === 'entrada' ? 'green' : 'orange'} className="rounded-md border-none font-semibold text-[11px] uppercase m-0">
                       {selectedAjuste.tipoMovimiento?.nombreTipo}
                     </Tag>
                   </div>
                 </div>
                 <div>
-                  <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1">Fecha Registro</label>
+                  <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1">Fecha Registro</label>
                   <div className="text-sm font-semibold dark:text-gray-300">{dayjs(selectedAjuste.fechaAjuste).format('DD/MM/YYYY HH:mm')}</div>
                 </div>
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-1 ml-4">Justificación de la Operación</label>
+                <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1 ml-4">Justificación de la Operación</label>
                 <div className="mt-1 p-5 bg-gray-50 dark:bg-gray-800/40 rounded-3xl border border-gray-100 dark:border-gray-800 text-sm font-medium text-gray-600 dark:text-gray-400 italic">
                   "{selectedAjuste.motivo}"
                 </div>
               </div>
 
               <div className="space-y-3">
-                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block ml-4">Matriz de Productos Ajustados</label>
+                <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block ml-4">Matriz de Productos Ajustados</label>
                 <Table
                   dataSource={selectedAjuste.detalleAjustes?.map(detalle => {
                     const tipo = selectedAjuste.tipoMovimiento?.tipo || 'entrada';
@@ -863,8 +863,8 @@ export default function AjustesInventarioPage() {
                              />
                           </div>
                           <div>
-                            <div className="font-bold text-xs text-gray-900 dark:text-white leading-tight">{producto}</div>
-                            <div className="text-[10px] text-gray-400 font-bold">{record.variante}</div>
+                            <div className="font-semibold text-xs text-gray-900 dark:text-white leading-tight">{producto}</div>
+                            <div className="text-[11px] text-gray-400 font-semibold">{record.variante}</div>
                           </div>
                         </div>
                       )
@@ -873,13 +873,13 @@ export default function AjustesInventarioPage() {
                         title: 'SKU', 
                         dataIndex: 'sku', 
                         width: 120,
-                        render: (sku) => <span className="text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/40 px-2 py-0.5 rounded-md">{sku}</span>
+                        render: (sku) => <span className="text-[11px] font-semibold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/40 px-2 py-0.5 rounded-md">{sku}</span>
                     },
                     {
                       title: 'Impacto',
                       dataIndex: 'delta',
                       render: (value) => (
-                        <span className={`text-xs font-bold ${value > 0 ? 'text-emerald-500' : value < 0 ? 'text-rose-500' : 'text-gray-400'}`}>
+                        <span className={`text-xs font-semibold ${value > 0 ? 'text-emerald-500' : value < 0 ? 'text-rose-500' : 'text-gray-400'}`}>
                           {value > 0 ? '+' : ''}{value}
                         </span>
                       ),
@@ -889,7 +889,7 @@ export default function AjustesInventarioPage() {
                         title: 'Ant / Proyectado', 
                         key: 'stocks', 
                         render: (_, record) => (
-                            <div className="flex items-center gap-2 text-[10px] font-bold">
+                            <div className="flex items-center gap-2 text-[11px] font-semibold">
                                 <span className="text-gray-400">{record.stockAnterior}</span>
                                 <ArrowRight size={10} className="text-gray-300" />
                                 <span className={record.stockNuevo < 0 ? 'text-rose-500' : 'text-gray-900 dark:text-white'}>
@@ -903,7 +903,7 @@ export default function AjustesInventarioPage() {
                         title: 'Nota', 
                         dataIndex: 'observaciones', 
                         ellipsis: true,
-                        render: (obs) => obs ? <Tooltip title={obs}><span className="text-[10px] italic text-gray-400">{obs}</span></Tooltip> : <span className="text-[10px] text-gray-300">-</span>
+                        render: (obs) => obs ? <Tooltip title={obs}><span className="text-[11px] italic text-gray-400">{obs}</span></Tooltip> : <span className="text-[11px] text-gray-300">-</span>
                     }
                   ]}
                   pagination={false}
@@ -916,7 +916,7 @@ export default function AjustesInventarioPage() {
                 <div className="flex justify-end gap-3 pt-6 border-t border-gray-100 dark:border-gray-800">
                   <button
                     onClick={() => setShowEditModal(false)}
-                    className="px-6 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-xl font-bold text-sm hover:bg-gray-200"
+                    className="px-6 py-2.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-xl font-semibold text-sm hover:bg-gray-200"
                   >
                     Salir
                   </button>
@@ -925,7 +925,7 @@ export default function AjustesInventarioPage() {
                         handleCancelarAjuste(selectedAjuste.idAjuste);
                         setShowEditModal(false);
                     }}
-                    className="px-6 py-2.5 bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 rounded-xl font-bold text-sm hover:bg-rose-100"
+                    className="px-6 py-2.5 bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 rounded-xl font-semibold text-sm hover:bg-rose-100"
                   >
                     Anular Ajuste
                   </button>
@@ -934,7 +934,7 @@ export default function AjustesInventarioPage() {
                         handleAplicarAjuste(selectedAjuste.idAjuste);
                         setShowEditModal(false);
                     }}
-                    className="px-8 py-2.5 bg-indigo-600 text-white rounded-xl font-bold text-sm hover:bg-indigo-700 shadow-lg shadow-indigo-100 dark:shadow-none"
+                    className="px-8 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold text-sm hover:bg-indigo-700 shadow-lg shadow-indigo-100 dark:shadow-none"
                   >
                     Ejecutar y Sincronizar Stock
                   </button>
@@ -951,7 +951,7 @@ export default function AjustesInventarioPage() {
               <div className="p-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl">
                  <Archive size={22} />
               </div>
-              <span className="font-bold text-gray-900 dark:text-white">Nueva Operación de Stock</span>
+              <span className="font-semibold text-gray-900 dark:text-white">Nueva Operación de Stock</span>
             </div>
           }
           open={showCreateModal}
@@ -1003,13 +1003,13 @@ export default function AjustesInventarioPage() {
                 <div className="p-8 bg-gray-50 dark:bg-gray-800/40 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 space-y-8">
                   <div className="flex items-center gap-3 border-b border-gray-100 dark:border-gray-800 pb-4">
                      <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
-                     <h3 className="font-bold text-lg text-gray-900 dark:text-white tracking-tight">Parámetros de Auditoría</h3>
+                     <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Parámetros de Auditoría</h3>
                   </div>
 
                   <Row gutter={[24, 24]}>
                     <Col span={24} md={14}>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block ml-2">
+                        <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block ml-2">
                           Tipo de Movimiento <span className="text-rose-500">*</span>
                         </label>
                         <Select
@@ -1025,15 +1025,15 @@ export default function AjustesInventarioPage() {
                             <Select.Option key={tipo.idTipoMovimiento} value={tipo.idTipoMovimiento}>
                               <div className="flex flex-col py-1">
                                 <div className="flex items-center justify-between">
-                                  <span className="font-bold text-sm text-gray-800 dark:text-gray-200">{tipo.nombreTipo}</span>
+                                  <span className="font-semibold text-sm text-gray-800 dark:text-gray-200">{tipo.nombreTipo}</span>
                                   <Tag
                                     color={tipo.tipo === 'entrada' ? 'green' : 'orange'}
-                                    className="rounded-md font-bold text-[9px] uppercase border-none"
+                                    className="rounded-md font-semibold text-[11px] uppercase border-none"
                                   >
                                     {tipo.tipo}
                                   </Tag>
                                 </div>
-                                <span className="text-[10px] text-gray-400 font-medium italic mt-0.5 leading-none">
+                                <span className="text-[11px] text-gray-400 font-medium italic mt-0.5 leading-none">
                                   {tipo.descripcion}
                                 </span>
                               </div>
@@ -1044,7 +1044,7 @@ export default function AjustesInventarioPage() {
                     </Col>
                     <Col span={24} md={10}>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block ml-2">
+                        <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block ml-2">
                           Fecha Programada
                         </label>
                         <DatePicker
@@ -1060,7 +1060,7 @@ export default function AjustesInventarioPage() {
                   </Row>
 
                   <div className="space-y-2">
-                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block ml-2">
+                    <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block ml-2">
                       Justificación de la Operación <span className="text-rose-500">*</span>
                     </label>
                     <Input.TextArea
@@ -1073,7 +1073,7 @@ export default function AjustesInventarioPage() {
                   </div>
 
                   <div className="space-y-2 opacity-70">
-                    <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block ml-2">
+                    <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block ml-2">
                       Notas de Seguimiento Interno
                     </label>
                     <Input.TextArea
@@ -1113,18 +1113,18 @@ export default function AjustesInventarioPage() {
                       {selectedProductForAjuste ? (
                         <button 
                           onClick={() => setSelectedProductForAjuste(null)}
-                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-xl border border-gray-200 dark:border-gray-600 text-[10px] font-bold uppercase transition-all hover:bg-gray-50"
+                          className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-xl border border-gray-200 dark:border-gray-600 text-[11px] font-semibold uppercase transition-all hover:bg-gray-50"
                         >
                           <ChevronLeft size={14} /> Volver
                         </button>
                       ) : (
                         <div className="flex items-center gap-2">
                            <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
-                           <h3 className="font-bold text-lg text-gray-900 dark:text-white tracking-tight">Seleccionar Productos</h3>
+                           <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Seleccionar Productos</h3>
                         </div>
                       )}
                       {selectedProductForAjuste && (
-                        <span className="text-indigo-500 dark:text-indigo-400 font-bold text-sm tracking-tight">/ {selectedProductForAjuste.nombreProducto}</span>
+                        <span className="text-indigo-500 dark:text-indigo-400 font-semibold text-sm tracking-tight">/ {selectedProductForAjuste.nombreProducto}</span>
                       )}
                     </div>
                     <div className="relative group">
@@ -1179,16 +1179,16 @@ export default function AjustesInventarioPage() {
                                 />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-bold text-sm text-gray-900 dark:text-gray-100 truncate group-hover:text-indigo-600 transition-colors leading-tight">
+                                <h4 className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate group-hover:text-indigo-600 transition-colors leading-tight">
                                   {prod.nombreProducto}
                                 </h4>
                                 <div className="flex flex-col gap-1.5 mt-2">
-                                  <span className="text-[9px] font-bold text-indigo-500 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg w-fit uppercase border border-indigo-100 dark:border-indigo-800">
+                                  <span className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg w-fit uppercase border border-indigo-100 dark:border-indigo-800">
                                     REF: {prod.codigoReferencia}
                                   </span>
                                   <div className="flex items-center gap-1.5 text-gray-400">
                                      <Layers size={10} />
-                                     <span className="text-[10px] font-bold uppercase tracking-tighter">
+                                     <span className="text-[11px] font-semibold uppercase tracking-tighter">
                                         {variantes.filter(v => v.idProducto === prod.idProducto).length} variantes
                                      </span>
                                   </div>
@@ -1200,7 +1200,7 @@ export default function AjustesInventarioPage() {
                         )) : (
                           <div className="col-span-full py-20 text-center">
                             <Package className="w-16 h-16 mx-auto mb-4 text-gray-200 dark:text-gray-700" />
-                            <p className="font-bold text-gray-400 dark:text-gray-600 uppercase text-xs tracking-widest">No se encontraron productos en el catálogo</p>
+                            <p className="font-semibold text-gray-400 dark:text-gray-600 uppercase text-xs tracking-wide">No se encontraron productos en el catálogo</p>
                           </div>
                         );
                       })()
@@ -1244,17 +1244,17 @@ export default function AjustesInventarioPage() {
                                     />
                                   </div>
                                   <div className="flex-1 min-w-0 pt-1">
-                                    <div className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest mb-1 leading-none">
+                                    <div className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 uppercase tracking-wide mb-1 leading-none">
                                       {variante.codigoSku}
                                     </div>
-                                    <h5 className="font-bold text-gray-900 dark:text-white text-sm truncate leading-tight">
+                                    <h5 className="font-semibold text-gray-900 dark:text-white text-sm truncate leading-tight">
                                        {selectedProductForAjuste.nombreProducto}
                                     </h5>
                                     <div className="mt-2 flex flex-wrap gap-1.5">
-                                      <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 rounded-lg text-[10px] font-bold text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                                      <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 rounded-lg text-[11px] font-semibold text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
                                         Color: {variante.color?.nombreColor}
                                       </span>
-                                      <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 rounded-lg text-[10px] font-bold text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
+                                      <span className="px-2 py-0.5 bg-gray-100 dark:bg-slate-700 rounded-lg text-[11px] font-semibold text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-600">
                                         Talla: {variante.talla?.nombreTalla}
                                       </span>
                                     </div>
@@ -1263,9 +1263,9 @@ export default function AjustesInventarioPage() {
 
                                 <div className="flex items-center justify-between pt-4 border-t border-gray-50 dark:border-gray-700/50">
                                   <div className="flex flex-col">
-                                    <span className="text-[9px] font-bold text-gray-400 uppercase tracking-tighter mb-1">Stock Actual</span>
-                                    <span className={`text-base font-bold ${variante.cantidadStock <= (variante.stockMinimo || 0) ? 'text-rose-500' : 'text-emerald-500'}`}>
-                                      {variante.cantidadStock || 0} <span className="text-[10px] uppercase opacity-60">u.</span>
+                                    <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter mb-1">Stock Actual</span>
+                                    <span className={`text-base font-semibold ${variante.cantidadStock <= (variante.stockMinimo || 0) ? 'text-rose-500' : 'text-emerald-500'}`}>
+                                      {variante.cantidadStock || 0} <span className="text-[11px] uppercase opacity-60">u.</span>
                                     </span>
                                   </div>
                                   {isSelected ? (
@@ -1288,7 +1288,7 @@ export default function AjustesInventarioPage() {
                         }) : (
                           <div className="col-span-full py-20 text-center">
                             <Plus className="w-16 h-16 mx-auto mb-4 text-gray-200 dark:text-gray-700 rotate-45" />
-                            <p className="font-bold text-gray-400 dark:text-gray-600 uppercase text-xs tracking-widest">No se encontraron variantes disponibles</p>
+                            <p className="font-semibold text-gray-400 dark:text-gray-600 uppercase text-xs tracking-wide">No se encontraron variantes disponibles</p>
                           </div>
                         );
                       })()
@@ -1308,15 +1308,15 @@ export default function AjustesInventarioPage() {
                           <Package className="w-6 h-6" />
                         </div>
                         <div>
-                          <p className="text-base font-bold leading-none">{selectedVariantes.length} Variantes en Selección</p>
-                          <p className="text-[10px] opacity-80 font-bold uppercase tracking-widest mt-1.5 flex items-center gap-1.5">
+                          <p className="text-base font-semibold leading-none">{selectedVariantes.length} Variantes en Selección</p>
+                          <p className="text-[11px] opacity-80 font-semibold uppercase tracking-wide mt-1.5 flex items-center gap-1.5">
                              <Check size={10} /> Listas para configuración técnica
                           </p>
                         </div>
                       </div>
                       <button 
                         onClick={nextStep} 
-                        className="px-8 py-3 bg-white text-indigo-600 rounded-2xl font-bold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/10 flex items-center gap-2"
+                        className="px-8 py-3 bg-white text-indigo-600 rounded-2xl font-semibold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/10 flex items-center gap-2"
                       >
                         Continuar <ChevronRight size={18} />
                       </button>
@@ -1327,14 +1327,14 @@ export default function AjustesInventarioPage() {
 
                 {!selectedVariantes.length && (
                   <div className="flex justify-between">
-                    <Button onClick={prevStep} size="large" className="rounded-xl font-bold">
+                    <Button onClick={prevStep} size="large" className="rounded-xl font-semibold">
                       <ChevronLeft className="w-4 h-4 mr-1" /> Anterior
                     </Button>
                     <Button
                       type="primary"
                       disabled
                       size="large"
-                      className="rounded-xl font-bold opacity-50"
+                      className="rounded-xl font-semibold opacity-50"
                     >
                       Selecciona para continuar
                     </Button>
@@ -1354,7 +1354,7 @@ export default function AjustesInventarioPage() {
                 <div className="space-y-6">
                   <div className="flex items-center gap-3 border-b border-gray-100 dark:border-gray-800 pb-4">
                      <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
-                     <h3 className="font-bold text-lg text-gray-900 dark:text-white tracking-tight">Magnitud de los Ajustes Técnicos</h3>
+                     <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Magnitud de los Ajustes Técnicos</h3>
                   </div>
 
                   <div className="space-y-4 max-h-[480px] overflow-y-auto pr-2 premium-scrollbar p-1">
@@ -1384,11 +1384,11 @@ export default function AjustesInventarioPage() {
                                 />
                               </div>
                               <div className="flex-1 xl:text-center min-w-0">
-                                <h4 className="font-bold text-gray-900 dark:text-gray-100 text-sm truncate">{variante.producto?.nombreProducto}</h4>
-                                <div className="text-[10px] font-bold text-indigo-500 dark:text-indigo-400 mt-1 uppercase tracking-widest">{variante.codigoSku}</div>
+                                <h4 className="font-semibold text-gray-900 dark:text-gray-100 text-sm truncate">{variante.producto?.nombreProducto}</h4>
+                                <div className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 mt-1 uppercase tracking-wide">{variante.codigoSku}</div>
                                 <div className="mt-3 flex flex-wrap gap-1.5 justify-start xl:justify-center">
-                                   <span className="px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg text-[9px] font-bold text-gray-400 border border-gray-100 dark:border-gray-700 uppercase">{variante.color?.nombreColor}</span>
-                                   <span className="px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg text-[9px] font-bold text-gray-400 border border-gray-100 dark:border-gray-700 uppercase">T:{variante.talla?.nombreTalla}</span>
+                                   <span className="px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg text-[11px] font-semibold text-gray-400 border border-gray-100 dark:border-gray-700 uppercase">{variante.color?.nombreColor}</span>
+                                   <span className="px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg text-[11px] font-semibold text-gray-400 border border-gray-100 dark:border-gray-700 uppercase">T:{variante.talla?.nombreTalla}</span>
                                 </div>
                               </div>
                             </div>
@@ -1398,19 +1398,19 @@ export default function AjustesInventarioPage() {
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                                 {/* Nodo Stock Actual */}
                                 <div className="flex flex-col items-center justify-center p-4 bg-gray-50 dark:bg-gray-900/30 rounded-3xl border border-gray-100 dark:border-gray-800/50">
-                                  <span className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-2">Stock en Libros</span>
-                                  <span className="text-2xl font-bold text-gray-700 dark:text-gray-300">{Number(cantidadActual).toLocaleString()}</span>
+                                  <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-2">Stock en Libros</span>
+                                  <span className="text-2xl font-semibold text-gray-700 dark:text-gray-300">{Number(cantidadActual).toLocaleString()}</span>
                                 </div>
 
                                 {/* Centro de Acción: Input */}
                                 <div className="space-y-2">
-                                  <span className="text-[9px] font-bold text-indigo-500 uppercase tracking-widest block text-center mb-1">Magnitud del Ajuste</span>
+                                  <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-wide block text-center mb-1">Magnitud del Ajuste</span>
                                   <div className="relative group/input">
                                     <InputNumber
                                       value={cantidadAjuste}
                                       onChange={(value) => actualizarCantidadAjuste(variante.idVariante, value || 0)}
                                       size="large"
-                                      className="w-full premium-input-number border-2 !border-indigo-100 dark:!border-indigo-900/50 focus:!border-indigo-500 !rounded-2xl dark:!bg-gray-800 transition-all font-bold text-center !text-lg"
+                                      className="w-full premium-input-number border-2 !border-indigo-100 dark:!border-indigo-900/50 focus:!border-indigo-500 !rounded-2xl dark:!bg-gray-800 transition-all font-semibold text-center !text-lg"
                                       style={{ height: '56px' }}
                                       placeholder="±0"
                                       controls={{ 
@@ -1419,8 +1419,8 @@ export default function AjustesInventarioPage() {
                                       }}
                                     />
                                     <div className="flex justify-between mt-2 px-1">
-                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) - 1)} className="text-[10px] font-bold text-indigo-400 hover:text-indigo-600">-1</button>
-                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) + 1)} className="text-[10px] font-bold text-indigo-400 hover:text-indigo-600">+1</button>
+                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) - 1)} className="text-[11px] font-semibold text-indigo-400 hover:text-indigo-600">-1</button>
+                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) + 1)} className="text-[11px] font-semibold text-indigo-400 hover:text-indigo-600">+1</button>
                                     </div>
                                   </div>
                                 </div>
@@ -1431,9 +1431,9 @@ export default function AjustesInventarioPage() {
                                   cantidadAjuste !== 0 ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-100 dark:border-emerald-800 text-emerald-600' : 
                                   'bg-gray-50 dark:bg-gray-900/30 border-gray-100 dark:border-gray-800/50 text-gray-400'
                                 }`}>
-                                  <span className="text-[9px] font-bold uppercase tracking-widest mb-2 opacity-70">Proyección Final</span>
-                                  <span className="text-2xl font-bold">{Number(cantidadFinal).toLocaleString()}</span>
-                                  {cantidadFinal < 0 && <span className="text-[8px] font-bold uppercase mt-1 animate-pulse">Inválido</span>}
+                                  <span className="text-[11px] font-semibold uppercase tracking-wide mb-2 opacity-70">Proyección Final</span>
+                                  <span className="text-2xl font-semibold">{Number(cantidadFinal).toLocaleString()}</span>
+                                  {cantidadFinal < 0 && <span className="text-[8px] font-semibold uppercase mt-1 animate-pulse">Inválido</span>}
                                 </div>
                               </div>
 
@@ -1459,9 +1459,9 @@ export default function AjustesInventarioPage() {
                        <AlertTriangle size={20} />
                     </div>
                     <div className="pt-1">
-                      <h4 className="text-sm font-bold text-indigo-900 dark:text-indigo-300">Resumen de Auditoría Crítica</h4>
+                      <h4 className="text-sm font-semibold text-indigo-900 dark:text-indigo-300">Resumen de Auditoría Crítica</h4>
                       <p className="text-xs text-indigo-700/80 dark:text-indigo-400/80 mt-1 font-medium leading-relaxed">
-                        Los valores ingresados sincronizarán el stock real. Un valor <span className="font-bold text-indigo-600 dark:text-indigo-300 underline underline-offset-2">positivo</span> representa entrada de mercancía, un valor <span className="font-bold text-indigo-600 dark:text-indigo-300 underline underline-offset-2">negativo</span> representa salida o merma.
+                        Los valores ingresados sincronizarán el stock real. Un valor <span className="font-semibold text-indigo-600 dark:text-indigo-300 underline underline-offset-2">positivo</span> representa entrada de mercancía, un valor <span className="font-semibold text-indigo-600 dark:text-indigo-300 underline underline-offset-2">negativo</span> representa salida o merma.
                       </p>
                     </div>
                   </div>
@@ -1494,22 +1494,22 @@ export default function AjustesInventarioPage() {
                 <div className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="p-6 bg-gray-50 dark:bg-gray-800/40 rounded-[2rem] border border-gray-100 dark:border-gray-700">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Tipo de Operación</span>
+                      <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-2">Tipo de Operación</span>
                       <div className="flex items-center gap-2">
-                         <Tag color={tiposMovimiento.find(t => t.idTipoMovimiento === ajusteForm.idTipoMovimiento)?.tipo === 'entrada' ? 'green' : 'orange'} className="font-bold text-[10px] uppercase rounded-md border-none m-0">
+                         <Tag color={tiposMovimiento.find(t => t.idTipoMovimiento === ajusteForm.idTipoMovimiento)?.tipo === 'entrada' ? 'green' : 'orange'} className="font-semibold text-[11px] uppercase rounded-md border-none m-0">
                             {tiposMovimiento.find(t => t.idTipoMovimiento === ajusteForm.idTipoMovimiento)?.nombreTipo || 'No definido'}
                          </Tag>
                       </div>
                     </div>
                     <div className="p-6 bg-gray-50 dark:bg-gray-800/40 rounded-[2rem] border border-gray-100 dark:border-gray-700">
-                      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-2">Fecha Programada</span>
-                      <div className="text-sm font-bold text-gray-700 dark:text-gray-200">
+                      <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-2">Fecha Programada</span>
+                      <div className="text-sm font-semibold text-gray-700 dark:text-gray-200">
                          {ajusteForm.fechaAjuste ? ajusteForm.fechaAjuste.format('DD [de] MMMM, YYYY') : 'Hoy'}
                       </div>
                     </div>
                     <div className="p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-[2rem] border border-indigo-100 dark:border-indigo-800/50">
-                      <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest block mb-2">Variantes a Sincronizar</span>
-                      <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                      <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wide block mb-2">Variantes a Sincronizar</span>
+                      <div className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400">
                          {selectedVariantes.length} <span className="text-xs font-medium opacity-70">unidades</span>
                       </div>
                     </div>
@@ -1518,7 +1518,7 @@ export default function AjustesInventarioPage() {
                   <div className="p-8 bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
                     <div className="flex items-center gap-3">
                        <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
-                       <h3 className="font-bold text-lg text-gray-900 dark:text-white tracking-tight">Manifiesto de Ajuste</h3>
+                       <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Manifiesto de Ajuste</h3>
                     </div>
 
                     <div className="dark-table-container">
@@ -1553,8 +1553,8 @@ export default function AjustesInventarioPage() {
                                    <img src={record.imagen} alt="P" className="w-full h-full object-cover" onError={(e) => { e.target.src = '/placeholder.png'; }} />
                                 </div>
                                 <div>
-                                  <div className="font-bold text-xs text-gray-900 dark:text-white leading-tight">{text}</div>
-                                  <div className="text-[10px] text-gray-400 font-bold">{record.variante}</div>
+                                  <div className="font-semibold text-xs text-gray-900 dark:text-white leading-tight">{text}</div>
+                                  <div className="text-[11px] text-gray-400 font-semibold">{record.variante}</div>
                                 </div>
                               </div>
                             )
@@ -1562,20 +1562,20 @@ export default function AjustesInventarioPage() {
                           {
                             title: 'SKU',
                             dataIndex: 'sku',
-                            render: (sku) => <span className="text-[10px] font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-md">{sku}</span>
+                            render: (sku) => <span className="text-[11px] font-semibold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-md">{sku}</span>
                           },
                           {
                             title: 'En Libros',
                             dataIndex: 'stockActual',
                             align: 'center',
-                            render: (val) => <span className="font-bold text-gray-500 text-xs">{val}</span>
+                            render: (val) => <span className="font-semibold text-gray-500 text-xs">{val}</span>
                           },
                           {
                             title: 'Diferencia',
                             dataIndex: 'ajuste',
                             align: 'center',
                             render: (val) => (
-                              <span className={`font-bold text-xs ${val > 0 ? 'text-emerald-500' : val < 0 ? 'text-rose-500' : 'text-gray-300'}`}>
+                              <span className={`font-semibold text-xs ${val > 0 ? 'text-emerald-500' : val < 0 ? 'text-rose-500' : 'text-gray-300'}`}>
                                 {val > 0 ? '+' : ''}{val}
                               </span>
                             )
@@ -1585,7 +1585,7 @@ export default function AjustesInventarioPage() {
                             dataIndex: 'stockFinal',
                             align: 'center',
                             render: (val) => (
-                              <span className={`font-bold text-xs ${val < 0 ? 'text-rose-600 underline' : 'text-gray-900 dark:text-white'}`}>
+                              <span className={`font-semibold text-xs ${val < 0 ? 'text-rose-600 underline' : 'text-gray-900 dark:text-white'}`}>
                                 {val}
                               </span>
                             )
@@ -1603,7 +1603,7 @@ export default function AjustesInventarioPage() {
                            <AlertTriangle size={20} />
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-amber-900 dark:text-amber-400">Declaración de Impacto</h4>
+                          <h4 className="text-sm font-semibold text-amber-900 dark:text-amber-400">Declaración de Impacto</h4>
                           <p className="text-xs text-amber-700/80 dark:text-amber-500/80 mt-1 font-medium leading-relaxed">
                              Esta operación se guardará como <strong>BORRADOR</strong>. No afectará el inventario real hasta que un supervisor autorice y ejecute la aplicación definitiva de la misma.
                           </p>
@@ -1615,7 +1615,7 @@ export default function AjustesInventarioPage() {
                   <div className="flex justify-between items-center px-4">
                     <button
                       onClick={prevStep}
-                      className="px-8 py-3.5 text-gray-400 hover:text-indigo-600 font-bold text-sm transition-all flex items-center gap-2"
+                      className="px-8 py-3.5 text-gray-400 hover:text-indigo-600 font-semibold text-sm transition-all flex items-center gap-2"
                     >
                       <ChevronLeft size={20} /> Retroceder
                     </button>
@@ -1624,7 +1624,7 @@ export default function AjustesInventarioPage() {
                       whileTap={{ scale: 0.98 }}
                       onClick={handleCreate}
                       disabled={loading}
-                      className="px-10 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-base shadow-2xl shadow-indigo-500/20 hover:bg-indigo-700 transition-all flex items-center gap-3"
+                      className="px-10 py-4 bg-indigo-600 text-white rounded-2xl font-semibold text-base shadow-2xl shadow-indigo-500/20 hover:bg-indigo-700 transition-all flex items-center gap-3"
                     >
                       {loading ? 'Procesando...' : (
                         <>

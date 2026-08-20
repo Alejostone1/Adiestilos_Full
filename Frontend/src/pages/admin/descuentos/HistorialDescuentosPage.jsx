@@ -174,7 +174,7 @@ export default function HistorialDescuentosPage() {
       <div className="relative z-10 flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">{title}</p>
-          <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{value}</h3>
+          <h3 className="text-3xl font-semibold text-gray-900 dark:text-white">{value}</h3>
           {secondaryValue && <p className="text-xs text-gray-400 mt-2 font-medium">{secondaryValue}</p>}
         </div>
         <div className={`w-12 h-12 rounded-xl bg-${color}-50 dark:bg-${color}-900/20 flex items-center justify-center text-${color}-600 dark:text-${color}-400`}>
@@ -410,7 +410,7 @@ export default function HistorialDescuentosPage() {
                         </div>
                      </td>
                      <td className="px-6 py-4">
-                        <span className="inline-flex items-center gap-1 text-sm font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-lg">
+                        <span className="inline-flex items-center gap-1 text-sm font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-lg">
                             -<PrecioFormateado precio={item.valorAplicado} />
                         </span>
                      </td>
@@ -467,7 +467,7 @@ export default function HistorialDescuentosPage() {
             className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-gray-100 dark:border-gray-700"
           >
             <div className="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                 <Receipt className="w-5 h-5 text-indigo-500" />
                 Detalle de Transacción
               </h3>
@@ -488,7 +488,7 @@ export default function HistorialDescuentosPage() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 mb-2">
                             <Tag className="w-4 h-4 text-purple-500" />
-                            <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">Promoción</h4>
+                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Promoción</h4>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl border border-gray-100 dark:border-gray-700 space-y-3">
                              <div>
@@ -506,13 +506,13 @@ export default function HistorialDescuentosPage() {
                                             {selectedItem.descuento.aplicaA === 'producto' && selectedItem.descuento.producto && (
                                                 <>
                                                     <span className="text-gray-400 text-sm mx-1">•</span>
-                                                    <span className="text-indigo-600 dark:text-indigo-400 font-bold">{selectedItem.descuento.producto.nombreProducto}</span>
+                                                    <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{selectedItem.descuento.producto.nombreProducto}</span>
                                                 </>
                                             )}
                                             {selectedItem.descuento.aplicaA === 'categoria' && selectedItem.descuento.categoria && (
                                                 <>
                                                     <span className="text-gray-400 text-sm mx-1">•</span>
-                                                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">Cat: {selectedItem.descuento.categoria.nombreCategoria}</span>
+                                                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Cat: {selectedItem.descuento.categoria.nombreCategoria}</span>
                                                 </>
                                             )}
                                         </p>
@@ -525,7 +525,7 @@ export default function HistorialDescuentosPage() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 mb-2">
                             <User className="w-4 h-4 text-blue-500" />
-                            <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">Cliente</h4>
+                            <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Cliente</h4>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl border border-gray-100 dark:border-gray-700 space-y-3">
                              <div>
@@ -545,13 +545,13 @@ export default function HistorialDescuentosPage() {
                 <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-2 mb-4">
                         <CreditCard className="w-4 h-4 text-emerald-500" />
-                        <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wider">Detalles de la Factura</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Detalles de la Factura</h4>
                     </div>
                     {selectedItem.venta ? (
                         <div className="flex flex-col md:flex-row justify-between gap-4 bg-emerald-50 dark:bg-emerald-900/10 p-4 rounded-xl border border-emerald-100 dark:border-emerald-900/30">
                             <div>
                                 <p className="text-xs text-emerald-600 dark:text-emerald-400 mb-1">Nº Factura</p>
-                                <p className="font-mono font-bold text-gray-900 dark:text-white">{selectedItem.venta.numeroFactura}</p>
+                                <p className="font-mono font-semibold text-gray-900 dark:text-white">{selectedItem.venta.numeroFactura}</p>
                             </div>
                             <div>
                                 <p className="text-xs text-emerald-600 dark:text-emerald-400 mb-1">Fecha de Compra</p>
@@ -559,7 +559,7 @@ export default function HistorialDescuentosPage() {
                             </div>
                             <div className="md:text-right">
                                 <p className="text-xs text-emerald-600 dark:text-emerald-400 mb-1">Monto Total</p>
-                                <p className="font-bold text-gray-900 dark:text-white text-lg"><PrecioFormateado precio={selectedItem.venta.total} /></p>
+                                <p className="font-semibold text-gray-900 dark:text-white text-lg"><PrecioFormateado precio={selectedItem.venta.total} /></p>
                             </div>
                         </div>
                     ) : (

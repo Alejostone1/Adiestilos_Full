@@ -36,7 +36,7 @@ const InventarioAlertas = ({ data, loading }) => {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <Title level={4} className="!m-0 !font-black dark:!text-white">Alertas Críticas</Title>
+          <Title level={4} className="!m-0 !font-semibold dark:!text-white">Alertas Críticas</Title>
           <Paragraph className="!text-slate-500 dark:!text-slate-400 !text-sm !m-0">Monitoreo de stock y quiebres</Paragraph>
         </div>
         <div className="relative">
@@ -54,7 +54,7 @@ const InventarioAlertas = ({ data, loading }) => {
           <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-3">
              <BellOutlined className="text-emerald-600 dark:text-emerald-400 text-xl" />
           </div>
-          <Text className="!font-bold !text-emerald-700 dark:!text-emerald-400">Todo en orden</Text>
+          <Text className="!font-semibold !text-emerald-700 dark:!text-emerald-400">Todo en orden</Text>
           <Text className="!text-xs !text-emerald-600/70 dark:!text-emerald-400/70">No hay alertas pendientes</Text>
         </div>
       ) : (
@@ -71,12 +71,12 @@ const InventarioAlertas = ({ data, loading }) => {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex justify-between items-start mb-1">
-                  <Text className="!font-black !text-xs dark:!text-slate-200 uppercase tracking-wider text-gradient" style={{ filter: 'brightness(0.8)' }}>
+                  <Text className="!font-semibold !text-xs dark:!text-slate-200 uppercase tracking-wider text-gradient" style={{ filter: 'brightness(0.8)' }}>
                     {item.titulo}
                   </Text>
-                  <Tag color={item.color} className="!rounded-md !border-0 !text-[10px] !font-black !px-2 !m-0 uppercase">CRÍTICO</Tag>
+                  <Tag color={item.color} className="!rounded-md !border-0 !text-[11px] !font-semibold !px-2 !m-0 uppercase">CRÍTICO</Tag>
                 </div>
-                <Text className="!font-bold block truncate !text-sm dark:!text-slate-200">
+                <Text className="!font-semibold block truncate !text-sm dark:!text-slate-200">
                   {item.descripcion}
                 </Text>
                 <Text className="!text-[11px] !text-slate-500 dark:!text-slate-500 !font-medium">
@@ -89,7 +89,7 @@ const InventarioAlertas = ({ data, loading }) => {
       )}
 
       <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-700/50">
-        <button className="w-full py-2 text-slate-500 dark:text-slate-400 font-bold text-sm hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Ignorar todas</button>
+        <button className="w-full py-2 text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Ignorar todas</button>
       </div>
     </div>
   );

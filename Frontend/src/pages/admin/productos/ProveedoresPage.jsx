@@ -310,19 +310,19 @@ export default function ProveedoresPage() {
           <div className="grid grid-cols-3 gap-3 mb-4">
             <div className="text-center p-2 bg-blue-50 rounded-lg">
               <Package className="h-5 w-5 text-blue-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-gray-900">{productosCount}</div>
+              <div className="text-sm font-semibold text-gray-900">{productosCount}</div>
               <div className="text-xs text-gray-600">Productos</div>
             </div>
 
             <div className="text-center p-2 bg-green-50 rounded-lg">
               <TrendingUp className="h-5 w-5 text-green-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-gray-900">Activo</div>
+              <div className="text-sm font-semibold text-gray-900">Activo</div>
               <div className="text-xs text-gray-600">Estado</div>
             </div>
 
             <div className="text-center p-2 bg-purple-50 rounded-lg">
               <Calendar className="h-5 w-5 text-purple-600 mx-auto mb-1" />
-              <div className="text-sm font-bold text-gray-900">
+              <div className="text-sm font-semibold text-gray-900">
                 {formatearFecha(proveedor.creadoEn, {
   month: 'short',
   day: 'numeric'
@@ -414,7 +414,7 @@ export default function ProveedoresPage() {
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
             <Users className="w-8 h-8 text-blue-600" />
-            <h1 className="text-3xl font-bold text-gray-900">Gestión de Proveedores</h1>
+            <h1 className="text-3xl font-semibold text-gray-900">Gestión de Proveedores</h1>
           </div>
           <p className="text-gray-600">Panel administrativo profesional para gestión completa de proveedores y sus productos</p>
         </div>
@@ -603,7 +603,7 @@ export default function ProveedoresPage() {
           <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">Detalles del Proveedor</h2>
+                <h2 className="text-2xl font-semibold text-gray-900">Detalles del Proveedor</h2>
                 <button
                   onClick={() => {
                     setMostrarDetalles(false);
@@ -721,7 +721,7 @@ export default function ProveedoresPage() {
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">Productos del Proveedor</h2>
+                  <h2 className="text-2xl font-semibold text-gray-900">Productos del Proveedor</h2>
                   <p className="text-gray-600 mt-1">{proveedorSeleccionado.nombreProveedor}</p>
                 </div>
                 <button
@@ -765,7 +765,7 @@ export default function ProveedoresPage() {
           <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-semibold text-gray-900">
                   {proveedorEditando ? 'Editar Proveedor' : 'Nuevo Proveedor'}
                 </h2>
                 <button

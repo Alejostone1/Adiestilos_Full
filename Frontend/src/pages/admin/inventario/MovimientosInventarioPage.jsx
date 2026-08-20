@@ -155,7 +155,7 @@ const MovimientosInventarioPage = () => {
       key: 'producto',
       render: (_, record) => (
         <div>
-          <div className="font-bold text-gray-900 dark:text-white">{record.variante.producto.nombreProducto}</div>
+          <div className="font-semibold text-gray-900 dark:text-white">{record.variante.producto.nombreProducto}</div>
           <div className="text-xs text-gray-600 dark:text-gray-400">
             {record.variante.color?.nombreColor} - {record.variante.talla?.nombreTalla}
           </div>
@@ -223,7 +223,7 @@ const MovimientosInventarioPage = () => {
       render: (_, record) => (
         <div className="text-center">
           <div className="text-xs text-gray-600 dark:text-gray-400">Antes: {record.stockAnterior}</div>
-          <div className="font-bold text-sm text-gray-900 dark:text-white">
+          <div className="font-semibold text-sm text-gray-900 dark:text-white">
             {record.cantidad > 0 ? '+' : ''}{record.cantidad}
           </div>
           <div className="text-xs text-gray-600 dark:text-gray-400">Después: {record.stockNuevo}</div>
@@ -253,7 +253,7 @@ const MovimientosInventarioPage = () => {
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 p-6 transition-colors duration-300">
       <div className="flex justify-between items-start mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Movimientos de Inventario</h1>
+          <h1 className="text-4xl font-semibold text-gray-900 dark:text-white mb-2">Movimientos de Inventario</h1>
           <p className="text-gray-600 dark:text-gray-400">
             Historial completo de movimientos de stock
           </p>

@@ -414,7 +414,7 @@ export default function VariantesProductoPage() {
                     />
                   </div>
                   <div className="absolute top-6 left-6">
-                     <span className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black text-slate-500 uppercase tracking-tighter shadow-sm border border-slate-100 dark:border-slate-700">
+                     <span className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-slate-500 uppercase tracking-tighter shadow-sm border border-slate-100 dark:border-slate-700">
                         Producto Base
                      </span>
                   </div>
@@ -426,16 +426,16 @@ export default function VariantesProductoPage() {
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <Layers className="w-4 h-4 text-purple-600" />
-                        <span className="text-[10px] font-black text-purple-600 dark:text-purple-400 uppercase tracking-[0.2em]">Catalogo Maestro</span>
+                        <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-[0.1em]">Catalogo Maestro</span>
                       </div>
-                      <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                      <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
                         {producto.nombreProducto}
                       </h1>
                       <div className="mt-2 flex flex-wrap gap-2">
-                         <span className="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-lg text-xs font-bold text-slate-500 dark:text-slate-300">
+                         <span className="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-lg text-xs font-semibold text-slate-500 dark:text-slate-300">
                            REF: {producto.codigoReferencia}
                          </span>
-                         <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-lg text-xs font-bold text-blue-600 dark:text-blue-300">
+                         <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-lg text-xs font-semibold text-blue-600 dark:text-blue-300">
                            {producto.categoria?.nombreCategoria || 'General'}
                          </span>
                       </div>
@@ -444,31 +444,31 @@ export default function VariantesProductoPage() {
                     <div className="flex flex-col items-end gap-2 shrink-0">
                        <BadgeEstado estado={producto.estado} />
                        <div className="text-right">
-                         <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Variantes</span>
-                         <span className="text-2xl font-black text-slate-900 dark:text-white leading-none">{variantes.length}</span>
+                         <span className="block text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Total Variantes</span>
+                         <span className="text-2xl font-semibold text-slate-900 dark:text-white leading-none">{variantes.length}</span>
                        </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-slate-100 dark:border-slate-700/50">
                     <div className="space-y-1">
-                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Precio Sugerido</span>
-                       <div className="text-lg font-black text-emerald-600 dark:text-emerald-400">
+                       <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Precio Sugerido</span>
+                       <div className="text-lg font-semibold text-emerald-600 dark:text-emerald-400">
                          <PrecioFormateado precio={producto.precioVentaSugerido} />
                        </div>
                     </div>
                     
                     <div className="space-y-1">
-                       <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Stock Total</span>
-                       <div className="text-lg font-black text-slate-700 dark:text-slate-200">
-                          {variantes.reduce((acc, v) => acc + Number(v.cantidadStock), 0)} <span className="text-[10px] font-bold text-slate-400 lowercase">unds</span>
+                       <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Stock Total</span>
+                       <div className="text-lg font-semibold text-slate-700 dark:text-slate-200">
+                          {variantes.reduce((acc, v) => acc + Number(v.cantidadStock), 0)} <span className="text-[11px] font-semibold text-slate-400 lowercase">unds</span>
                        </div>
                     </div>
 
                     <div className="col-span-2 flex items-center justify-end">
                        <button 
                         onClick={() => navigate(`/admin/productos`)}
-                        className="text-xs font-bold text-slate-400 hover:text-purple-600 underline underline-offset-4 transition-colors"
+                        className="text-xs font-semibold text-slate-400 hover:text-purple-600 underline underline-offset-4 transition-colors"
                        >
                          Ver detalles técnicos completa
                        </button>
@@ -1016,7 +1016,7 @@ export default function VariantesProductoPage() {
               alt="Vista ampliada"
               className="max-w-full max-h-full object-contain"
             />
-            <button onClick={() => setViewingImage(null)} className="absolute top-4 right-4 bg-red-600/80 hover:bg-red-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold text-lg transition">×</button>
+            <button onClick={() => setViewingImage(null)} className="absolute top-4 right-4 bg-red-600/80 hover:bg-red-700 text-white rounded-full w-10 h-10 flex items-center justify-center font-semibold text-lg transition">×</button>
           </div>
         </div>
       )}

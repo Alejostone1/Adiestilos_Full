@@ -417,15 +417,15 @@ export default function ProductosPage() {
           {/* Stock y Variantes */}
           <div className="flex items-center justify-between mb-4 px-3 py-2 bg-slate-50 dark:bg-slate-700/30 rounded-xl border border-slate-100 dark:border-slate-700/50">
             <div className="flex flex-col">
-               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Stock Total</span>
-               <span className={`text-sm font-black ${totalStock > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}`}>
+               <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Stock Total</span>
+               <span className={`text-sm font-semibold ${totalStock > 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}`}>
                   {totalStock} {producto.unidadMedida || 'unidades'}
                </span>
             </div>
             <div className="h-8 w-px bg-slate-200 dark:bg-slate-700" />
             <div className="flex flex-col items-end">
-               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Variantes</span>
-               <span className="text-sm font-black text-slate-700 dark:text-slate-300">
+               <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Variantes</span>
+               <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                   {totalVariantes} {totalVariantes === 1 ? 'Opción' : 'Opciones'}
                </span>
             </div>
@@ -507,7 +507,7 @@ export default function ProductosPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+              <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
                 <Package className="w-6 h-6" />
                 Gestión de Productos
               </h1>
@@ -752,7 +752,7 @@ export default function ProductosPage() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b dark:border-slate-700">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                 Detalles del Producto
               </h2>
               <button
@@ -833,7 +833,7 @@ export default function ProductosPage() {
                     <span className="block text-sm font-medium text-gray-700 mb-1">
                       Precio Venta Sugerido
                     </span>
-                    <p className="text-2xl font-bold text-green-600">
+                    <p className="text-2xl font-semibold text-green-600">
                       <PrecioFormateado
                         precio={productoSeleccionado.precioVentaSugerido}
                       />
@@ -848,14 +848,14 @@ export default function ProductosPage() {
                   {/* Resumen de Inventario en Detalles */}
                   <div className="p-4 rounded-2xl bg-pink-50 dark:bg-pink-900/20 border border-pink-100 dark:border-pink-800/30 flex gap-6">
                     <div className="flex-1 text-center border-r border-pink-200 dark:border-pink-800/50">
-                       <span className="block text-[10px] font-black text-pink-500 uppercase tracking-widest mb-1">Stock Disponible</span>
-                       <span className="text-xl font-black text-pink-900 dark:text-pink-100">
+                       <span className="block text-[11px] font-semibold text-pink-500 uppercase tracking-wide mb-1">Stock Disponible</span>
+                       <span className="text-xl font-semibold text-pink-900 dark:text-pink-100">
                          {productoSeleccionado.variantes?.reduce((acc, v) => acc + (Number(v.cantidadStock) || 0), 0) || 0}
                        </span>
                     </div>
                     <div className="flex-1 text-center">
-                       <span className="block text-[10px] font-black text-pink-500 uppercase tracking-widest mb-1">Variantes Activas</span>
-                       <span className="text-xl font-black text-pink-900 dark:text-pink-100">
+                       <span className="block text-[11px] font-semibold text-pink-500 uppercase tracking-wide mb-1">Variantes Activas</span>
+                       <span className="text-xl font-semibold text-pink-900 dark:text-pink-100">
                          {productoSeleccionado.variantes?.length || 0}
                        </span>
                     </div>
@@ -913,7 +913,7 @@ export default function ProductosPage() {
               {/* Variantes y sus Imágenes */}
               {productoSeleccionado.variantes && productoSeleccionado.variantes.length > 0 && (
                 <div className="mt-10 border-t pt-8">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
                     <Layers className="w-5 h-5 text-purple-600" />
                     Detalle de Variantes y Stock
                   </h3>
@@ -925,13 +925,13 @@ export default function ProductosPage() {
                       >
                         <div className="flex justify-between items-start mb-3">
                           <div>
-                            <span className="text-sm font-black text-slate-700 dark:text-slate-200">
+                            <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">
                               {variante.color?.nombreColor || 'Sin Color'} / {variante.talla?.nombreTalla || 'Sin Talla'}
                             </span>
-                            <span className="block text-[10px] font-mono text-slate-400 mt-0.5">SKU: {variante.codigoSku}</span>
+                            <span className="block text-[11px] font-mono text-slate-400 mt-0.5">SKU: {variante.codigoSku}</span>
                           </div>
                           <div className="text-right">
-                             <span className={`text-xs font-black px-2 py-1 rounded-lg ${Number(variante.cantidadStock) > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+                             <span className={`text-xs font-semibold px-2 py-1 rounded-lg ${Number(variante.cantidadStock) > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
                                Stock: {Number(variante.cantidadStock)}
                              </span>
                           </div>
@@ -988,7 +988,7 @@ export default function ProductosPage() {
           <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] flex flex-col">
             <div className="p-6 border-b">
               <div className="flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-gray-900">Galería de Imágenes</h2>
+                <h2 className="text-2xl font-semibold text-gray-900">Galería de Imágenes</h2>
                 <button
                   onClick={() => setMostrarGaleriaImagenes(false)}
                   className="text-gray-500 hover:text-gray-700"
@@ -1100,7 +1100,7 @@ export default function ProductosPage() {
             {/* Botón cerrar */}
             <button
               onClick={() => setViewingImage(null)}
-              className="absolute -top-4 -right-4 bg-black/70 hover:bg-black text-white rounded-full w-10 h-10 flex items-center justify-center text-2xl font-bold"
+              className="absolute -top-4 -right-4 bg-black/70 hover:bg-black text-white rounded-full w-10 h-10 flex items-center justify-center text-2xl font-semibold"
               aria-label="Cerrar"
             >
               ×

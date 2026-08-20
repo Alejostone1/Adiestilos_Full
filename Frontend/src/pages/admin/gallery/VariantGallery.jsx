@@ -181,14 +181,14 @@ const VariantGallery = () => {
                     </div>
 
                     {/* Badge Count */}
-                    <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[10px] px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-sm text-white text-[11px] px-2 py-0.5 rounded-full flex items-center gap-1">
                         <ImageIcon className="w-3 h-3" />
                         {item.totalImagenes}
                     </div>
 
                     {/* Product Prefix Badge */}
                     <div className="absolute bottom-2 left-2 right-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm px-2 py-1.5 rounded-lg border border-gray-100 dark:border-slate-700 shadow-sm transition-transform duration-300 transform translate-y-12 group-hover:translate-y-0">
-                        <p className="text-[10px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-tighter truncate">PRODUCTO</p>
+                        <p className="text-[11px] font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-tighter truncate">PRODUCTO</p>
                         <p className="text-xs font-semibold text-gray-900 dark:text-white truncate">{item.titulo}</p>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ const VariantGallery = () => {
                 <div className="p-4 flex-1 flex flex-col">
                     <div className="flex items-center gap-1.5 mb-1">
                        <Tag className="w-3.5 h-3.5 text-gray-400" />
-                       <h3 className="font-bold text-gray-900 dark:text-white truncate text-sm" title={item.subtitulo}>
+                       <h3 className="font-semibold text-gray-900 dark:text-white truncate text-sm" title={item.subtitulo}>
                            {item.subtitulo}
                        </h3>
                     </div>
@@ -204,13 +204,13 @@ const VariantGallery = () => {
                     <div className="mt-auto space-y-2">
                         <div className="flex flex-wrap gap-1">
                             {item.atributos.split('/').map((attr, idx) => (
-                                <span key={idx} className="inline-block px-2 py-0.5 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-300 rounded text-[10px] font-medium border border-purple-100 dark:border-purple-800/30">
+                                <span key={idx} className="inline-block px-2 py-0.5 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-300 rounded text-[11px] font-medium border border-purple-100 dark:border-purple-800/30">
                                     {attr.trim()}
                                 </span>
                             ))}
                         </div>
                         
-                        <div className="flex items-center justify-between text-[10px] text-gray-400 pt-2 border-t border-gray-50 dark:border-slate-700/50">
+                        <div className="flex items-center justify-between text-[11px] text-gray-400 pt-2 border-t border-gray-50 dark:border-slate-700/50">
                           <span className="flex items-center gap-1">
                              <RefreshCw className="w-3 h-3" />
                              {new Date(item.updatedAt).toLocaleDateString()}

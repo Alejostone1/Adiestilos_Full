@@ -254,8 +254,8 @@ export default function DescuentosPage() {
         <Icon size={120} />
       </div>
       <div className="relative z-10">
-        <p className="text-xs font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-1">{title}</p>
-        <h3 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">{value}</h3>
+        <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide mb-1">{title}</p>
+        <h3 className="text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">{value}</h3>
       </div>
       <div className={`h-14 w-14 rounded-2xl flex items-center justify-center bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400`}>
         <Icon className="h-7 w-7" />
@@ -273,14 +273,14 @@ export default function DescuentosPage() {
             <Tag className="h-8 w-8 text-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Promociones</h1>
+            <h1 className="text-3xl font-semibold text-slate-900 dark:text-white tracking-tight uppercase">Promociones</h1>
             <p className="text-slate-500 dark:text-slate-400 font-medium">Gestiona incentivos y campañas de fidelización.</p>
           </div>
         </div>
         
         <button 
           onClick={() => { resetForm(); setShowWizard(true); }}
-          className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl flex items-center gap-2 shadow-xl shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-widest text-sm"
+          className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-xl shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-sm"
         >
           <Plus className="h-5 w-5" />
           Crear Promo
@@ -335,9 +335,9 @@ export default function DescuentosPage() {
               className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t border-slate-50 dark:border-slate-800"
             >
               <div className="space-y-1">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Estado</label>
+                <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Estado</label>
                 <select 
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border-none text-xs font-bold dark:text-white cursor-pointer"
+                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border-none text-xs font-semibold dark:text-white cursor-pointer"
                   value={filters.estado}
                   onChange={(e) => handleFilterChange('estado', e.target.value)}
                 >
@@ -348,9 +348,9 @@ export default function DescuentosPage() {
                 </select>
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Tipo</label>
+                <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Tipo</label>
                 <select 
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border-none text-xs font-bold dark:text-white cursor-pointer"
+                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border-none text-xs font-semibold dark:text-white cursor-pointer"
                   value={filters.tipoDescuento}
                   onChange={(e) => handleFilterChange('tipoDescuento', e.target.value)}
                 >
@@ -360,9 +360,9 @@ export default function DescuentosPage() {
                 </select>
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Aplicación</label>
+                <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Aplicación</label>
                 <select 
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border-none text-xs font-bold dark:text-white cursor-pointer"
+                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border-none text-xs font-semibold dark:text-white cursor-pointer"
                   value={filters.aplicaA}
                   onChange={(e) => handleFilterChange('aplicaA', e.target.value)}
                 >
@@ -375,7 +375,7 @@ export default function DescuentosPage() {
               <div className="flex items-end">
                 <button 
                   onClick={clearFilters}
-                  className="w-full py-2.5 bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 text-xs font-black uppercase rounded-xl hover:bg-red-100 transition-all"
+                  className="w-full py-2.5 bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-400 text-xs font-semibold uppercase rounded-xl hover:bg-red-100 transition-all"
                 >
                   Limpiar Filtros
                 </button>
@@ -391,11 +391,11 @@ export default function DescuentosPage() {
           <table className="w-full text-left">
             <thead>
               <tr className="bg-slate-50 dark:bg-slate-800/50">
-                <th className="px-8 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Información</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Beneficio</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Alcance</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Uso</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest text-right">Acciones</th>
+                <th className="px-8 py-5 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Información</th>
+                <th className="px-6 py-5 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Beneficio</th>
+                <th className="px-6 py-5 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Alcance</th>
+                <th className="px-6 py-5 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Uso</th>
+                <th className="px-6 py-5 text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide text-right">Acciones</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
@@ -403,7 +403,7 @@ export default function DescuentosPage() {
                 <tr>
                   <td colSpan="5" className="px-8 py-20 text-center">
                     <Loader2 className="h-8 w-8 text-indigo-500 animate-spin mx-auto mb-4" />
-                    <span className="text-xs font-black text-slate-400 uppercase tracking-widest">Consultando promociones...</span>
+                    <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Consultando promociones...</span>
                   </td>
                 </tr>
               ) : !descuentos.length ? (
@@ -412,7 +412,7 @@ export default function DescuentosPage() {
                     <div className="h-16 w-16 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Tag className="h-8 w-8 text-slate-300" />
                     </div>
-                    <h3 className="text-lg font-black dark:text-white uppercase">No hay promociones</h3>
+                    <h3 className="text-lg font-semibold dark:text-white uppercase">No hay promociones</h3>
                     <p className="text-slate-500 text-sm mt-1">Intenta ajustando los filtros o crea una nueva.</p>
                   </td>
                 </tr>
@@ -426,8 +426,8 @@ export default function DescuentosPage() {
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
-                             <h4 className="text-sm font-black dark:text-white uppercase tracking-tight">{d.nombreDescuento}</h4>
-                             <span className={`px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-tighter ${
+                             <h4 className="text-sm font-semibold dark:text-white uppercase tracking-tight">{d.nombreDescuento}</h4>
+                             <span className={`px-2 py-0.5 rounded-md text-[8px] font-semibold uppercase tracking-tighter ${
                                d.estado === 'activo' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20' : 
                                d.estado === 'vencido' ? 'bg-amber-50 text-amber-600 dark:bg-amber-900/20' :
                                'bg-slate-50 text-slate-400 dark:bg-slate-800'
@@ -436,7 +436,7 @@ export default function DescuentosPage() {
                              </span>
                           </div>
                           {d.codigoDescuento && (
-                            <div className="flex items-center gap-1 mt-1 font-mono text-[10px] font-bold text-indigo-600 dark:text-indigo-400">
+                            <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400">
                                <Tag className="h-3 w-3" />
                                {d.codigoDescuento}
                             </div>
@@ -446,26 +446,26 @@ export default function DescuentosPage() {
                     </td>
                     <td className="px-6 py-6">
                        <div className="flex flex-col">
-                          <span className="text-base font-black dark:text-white">
+                          <span className="text-base font-semibold dark:text-white">
                             {d.tipoDescuento === 'porcentaje' ? `${d.valorDescuento}%` : <PrecioFormateado precio={d.valorDescuento} />}
                           </span>
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                          <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">
                             {d.tipoDescuento === 'porcentaje' ? 'De descuento' : 'Monto Fijo'}
                           </span>
                        </div>
                     </td>
-                    <td className="px-6 py-6 font-bold text-xs">
+                    <td className="px-6 py-6 font-semibold text-xs">
                         <div className="flex flex-col gap-1">
                           <span className="dark:text-slate-300 capitalize">{d.aplicaA.replace('_', ' ')}</span>
-                          {d.categoria && <span className="text-[10px] text-slate-400">Cat: {d.categoria.nombreCategoria}</span>}
-                          {d.producto && <span className="text-[10px] text-slate-400">Prod: {d.producto.nombreProducto}</span>}
+                          {d.categoria && <span className="text-[11px] text-slate-400">Cat: {d.categoria.nombreCategoria}</span>}
+                          {d.producto && <span className="text-[11px] text-slate-400">Prod: {d.producto.nombreProducto}</span>}
                         </div>
                     </td>
                     <td className="px-6 py-6">
                         <div className="flex flex-col">
                            <div className="flex items-center gap-2 mb-1">
-                              <span className="text-xs font-black dark:text-white">{d.usosActuales}</span>
-                              <span className="text-[10px] text-slate-400">usados</span>
+                              <span className="text-xs font-semibold dark:text-white">{d.usosActuales}</span>
+                              <span className="text-[11px] text-slate-400">usados</span>
                            </div>
                            <div className="w-20 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                               <div 
@@ -476,22 +476,29 @@ export default function DescuentosPage() {
                         </div>
                     </td>
                     <td className="px-8 py-6 text-right">
-                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                       <div className="flex items-center justify-end gap-2">
                           <button 
                             onClick={() => handleToggleEstado(d.idDescuento, d.estado)}
-                            className={`p-2 rounded-xl transition-all ${d.estado === 'activo' ? 'text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/10' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                            className={`w-10 h-10 flex items-center justify-center rounded-xl border shadow-sm hover:-translate-y-0.5 active:scale-95 transition-all ${
+                              d.estado === 'activo'
+                                ? 'bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white border-emerald-100 dark:border-emerald-800/60 hover:border-emerald-600 hover:shadow-emerald-500/20'
+                                : 'bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 hover:bg-slate-700 hover:text-white border-slate-200 dark:border-slate-600/60 hover:border-slate-700 hover:shadow-slate-500/20'
+                            }`}
+                            title={d.estado === 'activo' ? 'Desactivar promo' : 'Activar promo'}
                           >
-                            {d.estado === 'activo' ? <ToggleRight className="h-6 w-6" /> : <ToggleLeft className="h-6 w-6" />}
+                            {d.estado === 'activo' ? <ToggleRight className="h-5 w-5" /> : <ToggleLeft className="h-5 w-5" />}
                           </button>
                           <button 
                             onClick={() => openEditWizard(d)}
-                            className="p-2 text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/10 rounded-xl"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                            title="Editar promo"
                           >
                             <Edit className="h-5 w-5" />
                           </button>
                           <button 
                             onClick={() => handleDelete(d.idDescuento)}
-                            className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white border border-rose-100 dark:border-rose-800/60 hover:border-rose-600 shadow-sm hover:shadow-md hover:shadow-rose-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                            title="Eliminar promo"
                           >
                             <Trash2 className="h-5 w-5" />
                           </button>
@@ -530,8 +537,8 @@ export default function DescuentosPage() {
                       <Gift className="h-6 w-6" />
                    </div>
                    <div>
-                      <h2 className="text-2xl font-black dark:text-white uppercase leading-tight">Configurar Promo</h2>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Paso {wizardStep} de 4: {
+                      <h2 className="text-2xl font-semibold dark:text-white uppercase leading-tight">Configurar Promo</h2>
+                      <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Paso {wizardStep} de 4: {
                         wizardStep === 1 ? 'Concepto' : wizardStep === 2 ? 'Beneficio' : wizardStep === 3 ? 'Límites' : 'Vigencia'
                       }</p>
                    </div>
@@ -560,31 +567,31 @@ export default function DescuentosPage() {
                       className="space-y-6"
                     >
                       <div className="space-y-2">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Nombre de la Campaña</label>
+                         <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Nombre de la Campaña</label>
                          <input 
                            type="text"
                            name="nombreDescuento"
                            value={formData.nombreDescuento}
                            onChange={handleInputChange}
-                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-bold placeholder:text-slate-300"
+                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300"
                            placeholder="Ej: Black Friday 2026"
                          />
                       </div>
                       <div className="space-y-2">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Descripción Interna</label>
+                         <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Descripción Interna</label>
                          <textarea 
                            rows="3"
                            name="descripcion"
                            value={formData.descripcion}
                            onChange={handleInputChange}
-                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-bold placeholder:text-slate-300 resize-none"
+                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300 resize-none"
                            placeholder="Notas sobre el objetivo de esta promoción..."
                          />
                       </div>
                       <div className="p-6 bg-indigo-50 dark:bg-indigo-900/10 rounded-3xl border-2 border-dashed border-indigo-200 dark:border-indigo-800/40">
                          <div className="flex items-center gap-3 mb-4">
                             <Tag className="h-5 w-5 text-indigo-600" />
-                            <h4 className="text-sm font-black text-indigo-900 dark:text-indigo-400 uppercase">¿Requiere Código de Cupón?</h4>
+                            <h4 className="text-sm font-semibold text-indigo-900 dark:text-indigo-400 uppercase">¿Requiere Código de Cupón?</h4>
                          </div>
                          <div className="flex items-center gap-6">
                             <label className="flex items-center gap-2 cursor-pointer group">
@@ -597,7 +604,7 @@ export default function DescuentosPage() {
                                <div className={`h-6 w-6 rounded-lg border-2 flex items-center justify-center transition-all ${formData.requiereCodigo ? 'bg-indigo-600 border-indigo-600' : 'border-slate-300'}`}>
                                  {formData.requiereCodigo && <CheckCircle className="h-4 w-4 text-white" />}
                                </div>
-                               <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Sí, crear cupón</span>
+                               <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">Sí, crear cupón</span>
                             </label>
                             {formData.requiereCodigo && (
                               <input 
@@ -605,7 +612,7 @@ export default function DescuentosPage() {
                                 name="codigoDescuento"
                                 value={formData.codigoDescuento}
                                 onChange={handleInputChange}
-                                className="flex-1 px-4 py-2 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-800/50 rounded-xl font-mono text-sm uppercase font-black tracking-widest text-indigo-600 dark:text-indigo-400"
+                                className="flex-1 px-4 py-2 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-800/50 rounded-xl font-mono text-sm uppercase font-semibold tracking-wide text-indigo-600 dark:text-indigo-400"
                                 placeholder="CUPONVIP20"
                               />
                             )}
@@ -628,25 +635,25 @@ export default function DescuentosPage() {
                            className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 ${formData.tipoDescuento === 'porcentaje' ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10 text-indigo-600' : 'border-slate-50 dark:border-slate-800 text-slate-400'}`}
                          >
                            <Percent size={32} />
-                           <span className="text-xs font-black uppercase">Porcentaje</span>
+                           <span className="text-xs font-semibold uppercase">Porcentaje</span>
                          </button>
                          <button 
                            onClick={() => setFormData({...formData, tipoDescuento: 'valor_fijo'})}
                            className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 ${formData.tipoDescuento === 'valor_fijo' ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10 text-indigo-600' : 'border-slate-50 dark:border-slate-800 text-slate-400'}`}
                          >
                            <DollarSign size={32} />
-                           <span className="text-xs font-black uppercase">Monto Fijo</span>
+                           <span className="text-xs font-semibold uppercase">Monto Fijo</span>
                          </button>
                       </div>
 
                       <div className="space-y-4">
-                         <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-2">Magnitud del Descuento</label>
+                         <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-2">Magnitud del Descuento</label>
                          <input 
                            type="number"
                            name="valorDescuento"
                            value={formData.valorDescuento}
                            onChange={handleInputChange}
-                           className="w-full px-8 py-6 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl text-4xl font-black text-center text-indigo-600 focus:ring-0 placeholder:text-slate-200"
+                           className="w-full px-8 py-6 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl text-4xl font-semibold text-center text-indigo-600 focus:ring-0 placeholder:text-slate-200"
                            placeholder={formData.tipoDescuento === 'porcentaje' ? '0%' : '$ 0.00'}
                          />
                       </div>
@@ -654,14 +661,14 @@ export default function DescuentosPage() {
                       <div className="space-y-4 pt-4 border-t border-slate-50 dark:border-slate-800">
                          <div className="flex items-center gap-3 mb-2">
                             <Target size={18} className="text-slate-400" />
-                            <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest">¿A quién se aplica?</h4>
+                            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wide">¿A quién se aplica?</h4>
                          </div>
                          <div className="grid grid-cols-3 gap-3">
                            {['total_venta', 'categoria', 'producto'].map((tipo) => (
                              <button 
                                key={tipo}
                                onClick={() => setFormData({...formData, aplicaA: tipo})}
-                               className={`py-3 px-2 rounded-2xl text-[10px] font-black uppercase tracking-tight transition-all border-2 ${formData.aplicaA === tipo ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-lg' : 'bg-slate-50 dark:bg-slate-800 text-slate-400 border-transparent'}`}
+                               className={`py-3 px-2 rounded-2xl text-[11px] font-semibold uppercase tracking-tight transition-all border-2 ${formData.aplicaA === tipo ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white shadow-lg' : 'bg-slate-50 dark:bg-slate-800 text-slate-400 border-transparent'}`}
                              >
                                {tipo.replace('_', ' ')}
                              </button>
@@ -672,7 +679,7 @@ export default function DescuentosPage() {
                             {formData.aplicaA === 'categoria' && (
                               <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="pt-2">
                                 <select 
-                                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border-none font-bold text-sm dark:text-white"
+                                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border-none font-semibold text-sm dark:text-white"
                                   value={formData.idCategoria}
                                   onChange={(e) => setFormData({...formData, idCategoria: e.target.value})}
                                 >
@@ -684,7 +691,7 @@ export default function DescuentosPage() {
                             {formData.aplicaA === 'producto' && (
                               <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="pt-2">
                                 <select 
-                                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border-none font-bold text-sm dark:text-white"
+                                  className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 rounded-2xl border-none font-semibold text-sm dark:text-white"
                                   value={formData.idProducto}
                                   onChange={(e) => setFormData({...formData, idProducto: e.target.value})}
                                 >
@@ -711,13 +718,13 @@ export default function DescuentosPage() {
                              <ShieldCheck size={28} />
                          </div>
                          <div className="flex-1">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">Monto Mínimo de Compra</label>
+                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block mb-1">Monto Mínimo de Compra</label>
                             <input 
                               type="number"
                               name="montoMinimoCompra"
                               value={formData.montoMinimoCompra}
                               onChange={handleInputChange}
-                              className="w-full bg-transparent border-none p-0 text-xl font-black focus:ring-0 dark:text-white"
+                              className="w-full bg-transparent border-none p-0 text-xl font-semibold focus:ring-0 dark:text-white"
                               placeholder="Sin mínimo ($0)"
                             />
                          </div>
@@ -725,28 +732,28 @@ export default function DescuentosPage() {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                          <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] space-y-3">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Límite Global de Usos</label>
+                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Límite Global de Usos</label>
                             <div className="flex items-center gap-4">
                                <input 
                                  type="number"
                                  name="cantidadMaximaUsos"
                                  value={formData.cantidadMaximaUsos}
                                  onChange={handleInputChange}
-                                 className="flex-1 bg-transparent border-none p-0 text-xl font-black focus:ring-0 dark:text-white"
+                                 className="flex-1 bg-transparent border-none p-0 text-xl font-semibold focus:ring-0 dark:text-white"
                                  placeholder="Ilimitado"
                                />
                                <Users className="text-slate-300" />
                             </div>
                          </div>
                          <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-[2.5rem] space-y-3">
-                            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest block">Máx. Usos por Cliente</label>
+                            <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide block">Máx. Usos por Cliente</label>
                             <div className="flex items-center gap-4">
                                <input 
                                  type="number"
                                  name="usoPorCliente"
                                  value={formData.usoPorCliente}
                                  onChange={handleInputChange}
-                                 className="flex-1 bg-transparent border-none p-0 text-xl font-black focus:ring-0 dark:text-white"
+                                 className="flex-1 bg-transparent border-none p-0 text-xl font-semibold focus:ring-0 dark:text-white"
                                  placeholder="1"
                                />
                                <Settings className="text-slate-300" />
@@ -755,7 +762,7 @@ export default function DescuentosPage() {
                       </div>
                       <div className="p-6 bg-amber-50 dark:bg-amber-900/10 rounded-3xl flex items-start gap-4">
                          <Info className="h-5 w-5 text-amber-500 mt-1 shrink-0" />
-                         <p className="text-xs font-bold text-amber-700 dark:text-amber-500 leading-relaxed">
+                         <p className="text-xs font-semibold text-amber-700 dark:text-amber-500 leading-relaxed">
                             Los límites por cliente requieren que el usuario esté identificado al momento de la venta. Si dejas el campo en blanco para el límite global, la promoción no tendrá restricción de cantidad.
                          </p>
                       </div>
@@ -774,27 +781,27 @@ export default function DescuentosPage() {
                           <div className="space-y-4">
                              <div className="flex items-center gap-3 ml-2">
                                 <Calendar size={18} className="text-indigo-500" />
-                                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Inicia el día</h4>
+                                <h4 className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Inicia el día</h4>
                              </div>
                              <input 
                                type="date"
                                name="fechaInicio"
                                value={formData.fechaInicio}
                                onChange={handleInputChange}
-                               className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl font-black text-indigo-600 dark:text-indigo-400 transition-all focus:ring-2 focus:ring-indigo-500"
+                               className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl font-semibold text-indigo-600 dark:text-indigo-400 transition-all focus:ring-2 focus:ring-indigo-500"
                              />
                           </div>
                           <div className="space-y-4">
                              <div className="flex items-center gap-3 ml-2">
                                 <Clock size={18} className="text-red-500" />
-                                <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Finaliza el día</h4>
+                                <h4 className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Finaliza el día</h4>
                              </div>
                              <input 
                                type="date"
                                name="fechaFin"
                                value={formData.fechaFin}
                                onChange={handleInputChange}
-                               className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl font-black text-red-600 dark:text-red-400 transition-all focus:ring-2 focus:ring-red-500"
+                               className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl font-semibold text-red-600 dark:text-red-400 transition-all focus:ring-2 focus:ring-red-500"
                              />
                           </div>
                        </div>
@@ -802,7 +809,7 @@ export default function DescuentosPage() {
                        <div className="bg-slate-900 text-white p-10 rounded-[3.5rem] flex flex-col items-center text-center gap-4 relative overflow-hidden group">
                           <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 blur-3xl group-hover:bg-indigo-500/40 transition-all" />
                           <Gift size={48} className="text-indigo-400 animate-bounce" />
-                          <h3 className="text-2xl font-black uppercase tracking-tight">¡Todo Listo!</h3>
+                          <h3 className="text-2xl font-semibold uppercase tracking-tight">¡Todo Listo!</h3>
                           <p className="text-slate-400 text-sm font-medium max-w-xs">Verifica que los datos sean correctos antes de activar tu nueva campaña promocional.</p>
                        </div>
                     </motion.div>
@@ -815,7 +822,7 @@ export default function DescuentosPage() {
                  <button 
                   onClick={() => setWizardStep(prev => prev - 1)}
                   disabled={wizardStep === 1}
-                  className="px-6 py-3 text-xs font-black uppercase tracking-widest text-slate-400 hover:text-slate-600 disabled:opacity-0 transition-all flex items-center gap-2"
+                  className="px-6 py-3 text-xs font-semibold uppercase tracking-wide text-slate-400 hover:text-slate-600 disabled:opacity-0 transition-all flex items-center gap-2"
                  >
                    <ChevronLeft size={16} /> Volver
                  </button>
@@ -823,7 +830,7 @@ export default function DescuentosPage() {
                  {wizardStep < 4 ? (
                    <button 
                     onClick={handleNext}
-                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-widest text-xs"
+                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-xs"
                    >
                      Continuar <ChevronRight size={16} />
                    </button>
@@ -831,7 +838,7 @@ export default function DescuentosPage() {
                    <button 
                     onClick={handleSave}
                     disabled={loading}
-                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-black rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-widest text-xs"
+                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-xs"
                    >
                      {loading ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle size={16} />} 
                      {isEditing ? 'Guardar Cambios' : 'Lanzar Promoción'}

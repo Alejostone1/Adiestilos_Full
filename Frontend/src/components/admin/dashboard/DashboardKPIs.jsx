@@ -78,7 +78,7 @@ const DashboardKPIs = ({ data, loading, rango }) => {
                 {kpi.icon}
               </div>
               <div className="card-3d bg-slate-100/50 dark:bg-slate-700/50 px-2 py-1 rounded-lg">
-                <Text className="!text-[10px] !font-black !text-slate-500 dark:!text-slate-400 uppercase tracking-tighter">
+                <Text className="!text-[11px] !font-semibold !text-slate-500 dark:!text-slate-400 uppercase tracking-wide">
                   {rango}
                 </Text>
               </div>
@@ -86,10 +86,10 @@ const DashboardKPIs = ({ data, loading, rango }) => {
             
             <div className="flex-1">
               <Statistic
-                title={<Text className="!text-slate-500 dark:!text-slate-400 !text-xs !font-bold !tracking-widest !uppercase !mb-1">{kpi.title}</Text>}
+                title={<Text className="!text-slate-500 dark:!text-slate-400 !text-xs !font-semibold !tracking-wide !uppercase !mb-1">{kpi.title}</Text>}
                 value={kpi.value}
                 formatter={kpi.formatter}
-                styles={{ content: { fontSize: '24px', fontWeight: 900, color: 'var(--text-main)', letterSpacing: '-1px' } }}
+                styles={{ content: { fontSize: '22px', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '-0.5px' } }}
               />
             </div>
             

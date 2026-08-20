@@ -349,7 +349,7 @@ export default function VariantesPage() {
           <div className="flex items-center gap-3 mb-2">
             <Layers className="w-8 h-8 text-purple-600" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Gestión de Variantes</h1>
+              <h1 className="text-3xl font-semibold text-gray-900 dark:text-white">Gestión de Variantes</h1>
               <p className="text-gray-600 dark:text-gray-400">Panel administrativo para gestión completa de variantes de productos</p>
             </div>
           </div>
@@ -360,7 +360,7 @@ export default function VariantesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">Total Variantes</span>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{variantes.length}</p>
+                  <p className="text-2xl font-semibold text-gray-900 dark:text-white">{variantes.length}</p>
                 </div>
                 <Layers className="w-8 h-8 text-purple-600 opacity-20" />
               </div>
@@ -369,7 +369,7 @@ export default function VariantesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">Activas</span>
-                  <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+                  <p className="text-2xl font-semibold text-green-600 dark:text-green-400">
                     {variantes.filter(v => v.estado === 'activo').length}
                   </p>
                 </div>
@@ -380,7 +380,7 @@ export default function VariantesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">Inactivas</span>
-                  <p className="text-2xl font-bold text-gray-600 dark:text-gray-300">
+                  <p className="text-2xl font-semibold text-gray-600 dark:text-gray-300">
                     {variantes.filter(v => v.estado === 'inactivo').length}
                   </p>
                 </div>
@@ -391,7 +391,7 @@ export default function VariantesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">Productos con Variantes</span>
-                  <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                  <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
                     {[...new Set(variantes.map(v => v.idProducto))].length}
                   </p>
                 </div>
@@ -662,7 +662,7 @@ export default function VariantesPage() {
                                 <div className="flex flex-col gap-1">
                                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-xl max-w-fit group/prod cursor-help">
                                     <Package className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                                    <span className="text-sm font-black text-blue-900 dark:text-blue-100 tracking-tight">
+                                    <span className="text-sm font-semibold text-blue-900 dark:text-blue-100 tracking-tight">
                                       {productoInfo?.nombreProducto || 'Producto no encontrado'}
                                     </span>
                                     <button
@@ -676,7 +676,7 @@ export default function VariantesPage() {
                                       <ArrowRight className="w-3 h-3" />
                                     </button>
                                   </div>
-                                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">
+                                  <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide ml-1">
                                     REF: {productoInfo?.codigoReferencia || 'N/A'}
                                   </span>
                                 </div>
@@ -737,17 +737,17 @@ export default function VariantesPage() {
                                 />
                               </td>
                               <td className="px-6 py-4">
-                                <div className="flex items-center justify-end gap-1">
+                                <div className="flex items-center justify-end gap-2">
                                   <button
                                     onClick={() => openDetailModal(variante)}
-                                    className="p-1.5 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition"
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 hover:bg-purple-600 hover:text-white border border-purple-100 dark:border-purple-800/60 hover:border-purple-600 shadow-sm hover:shadow-md hover:shadow-purple-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                                     title="Ver detalles completos"
                                   >
                                     <Eye className="w-4 h-4" />
                                   </button>
                                   <button
                                     onClick={() => navigate(`/admin/productos/${variante.idProducto}/variantes`)}
-                                    className="p-1.5 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition"
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                                     title="Gestionar variantes del producto"
                                   >
                                     <Layers className="w-4 h-4" />
@@ -759,7 +759,11 @@ export default function VariantesPage() {
                                         cambiarEstadoVariante(variante.idVariante, nuevoEstado);
                                       }
                                     }}
-                                    className="p-1.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                    className={`w-10 h-10 flex items-center justify-center rounded-xl border shadow-sm hover:-translate-y-0.5 active:scale-95 transition-all ${
+                                      variante.estado === 'activo'
+                                        ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 hover:bg-blue-600 hover:text-white border-blue-100 dark:border-blue-800/60 hover:border-blue-600 hover:shadow-blue-500/20'
+                                        : 'bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white border-emerald-100 dark:border-emerald-800/60 hover:border-emerald-600 hover:shadow-emerald-500/20'
+                                    }`}
                                     title={variante.estado === 'activo' ? 'Desactivar' : 'Activar'}
                                   >
                                     {variante.estado === 'activo' ? (
@@ -770,7 +774,7 @@ export default function VariantesPage() {
                                   </button>
                                   <button
                                     onClick={() => eliminarVariante(variante.idVariante)}
-                                    className="p-1.5 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-rose-50 dark:bg-rose-900/40 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white border border-rose-100 dark:border-rose-800/60 hover:border-rose-600 shadow-sm hover:shadow-md hover:shadow-rose-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                                     title="Eliminar variante"
                                   >
                                     <Trash2 className="w-4 h-4" />
@@ -802,12 +806,12 @@ export default function VariantesPage() {
                                 </h4>
                                 <div className="mt-2 inline-flex items-center gap-1.5 px-2 py-1 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-100 dark:border-slate-700">
                                    <Package className="w-3 h-3 text-slate-400" />
-                                   <p className="text-[11px] font-black text-slate-700 dark:text-slate-200 truncate max-w-[120px]">
+                                   <p className="text-[11px] font-semibold text-slate-700 dark:text-slate-200 truncate max-w-[120px]">
                                      {productoInfo?.nombreProducto || 'Producto no encontrado'}
                                    </p>
                                 </div>
                                 <div className="mt-1">
-                                   <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                                   <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">
                                      REF: {productoInfo?.codigoReferencia || 'N/A'}
                                    </span>
                                 </div>
@@ -819,27 +823,27 @@ export default function VariantesPage() {
                                   />
                                 </div>
                               </div>
-                              <div className="flex gap-1">
+                              <div className="flex gap-1.5">
                                 <button
                                   onClick={() => openDetailModal(variante)}
-                                  className="p-1 text-gray-400 dark:text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition"
+                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-purple-600 dark:text-purple-400 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition"
                                   title="Ver detalles"
                                 >
-                                  <Eye className="w-3 h-3" />
+                                  <Eye className="w-3.5 h-3.5" />
                                 </button>
                                 <button
                                   onClick={() => navigate(`/admin/productos/${variante.idProducto}/variantes`)}
-                                  className="p-1 text-gray-400 dark:text-gray-500 hover:text-purple-600 dark:hover:text-purple-400 transition"
+                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition"
                                   title="Ver producto"
                                 >
-                                  <Package className="w-3 h-3" />
+                                  <Package className="w-3.5 h-3.5" />
                                 </button>
                                 <button
                                   onClick={() => eliminarVariante(variante.idVariante)}
-                                  className="p-1 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 transition"
+                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-rose-600 dark:text-rose-400 hover:bg-rose-600 hover:text-white hover:border-rose-600 transition"
                                   title="Eliminar"
                                 >
-                                  <Trash2 className="w-3 h-3" />
+                                  <Trash2 className="w-3.5 h-3.5" />
                                 </button>
                               </div>
                             </div>

@@ -124,9 +124,10 @@
 
 .ant-statistic-content {
   color: var(--text-main) !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
   font-size: 1.5rem !important;
-  letter-spacing: -0.025em !important;
+  letter-spacing: -0.02em !important;
+  font-variant-numeric: tabular-nums;
 }
 
 .ant-typography {

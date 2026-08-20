@@ -87,7 +87,7 @@ const WizardStep5 = ({ formData, producto }) => {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
               Nombre
             </p>
             <p className="text-sm font-medium text-gray-900 dark:text-white mt-1">
@@ -96,7 +96,7 @@ const WizardStep5 = ({ formData, producto }) => {
           </div>
 
           <div>
-            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
               Código
             </p>
             <p className="text-sm font-medium text-gray-900 dark:text-white mt-1 font-mono">
@@ -106,7 +106,7 @@ const WizardStep5 = ({ formData, producto }) => {
         </div>
 
         <div>
-          <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+          <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
             Descripción
           </p>
           <p className="text-sm text-gray-900 dark:text-white mt-1">
@@ -116,7 +116,7 @@ const WizardStep5 = ({ formData, producto }) => {
 
         <div className="grid grid-cols-2 gap-4 pt-2 border-t border-gray-200 dark:border-gray-700">
           <div>
-            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
               Categoría
             </p>
             <p className="text-sm font-medium text-gray-900 dark:text-white mt-1">
@@ -125,7 +125,7 @@ const WizardStep5 = ({ formData, producto }) => {
           </div>
 
           <div>
-            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
               Unidad
             </p>
             <p className="text-sm font-medium text-gray-900 dark:text-white mt-1">
@@ -136,7 +136,7 @@ const WizardStep5 = ({ formData, producto }) => {
 
         {formData.idProveedor && (
           <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
               Proveedor
             </p>
             <p className="text-sm font-medium text-gray-900 dark:text-white mt-1">
@@ -155,19 +155,19 @@ const WizardStep5 = ({ formData, producto }) => {
 
         <div className="grid grid-cols-3 gap-4">
           <div className="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-3 border border-orange-200 dark:border-orange-800">
-            <p className="text-xs font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-orange-600 dark:text-orange-400 uppercase tracking-wide">
               Costo
             </p>
-            <p className="text-lg font-bold text-orange-700 dark:text-orange-300 mt-1">
+            <p className="text-lg font-semibold text-orange-700 dark:text-orange-300 mt-1">
               ${parseFloat(formData.precioCompra).toFixed(2)}
             </p>
           </div>
 
           <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
-            <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
               Margen
             </p>
-            <p className="text-lg font-bold text-blue-700 dark:text-blue-300 mt-1">
+            <p className="text-lg font-semibold text-blue-700 dark:text-blue-300 mt-1">
               ${margenActual.toFixed(2)}
             </p>
             <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
@@ -176,10 +176,10 @@ const WizardStep5 = ({ formData, producto }) => {
           </div>
 
           <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 border border-green-200 dark:border-green-800">
-            <p className="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-widest">
+            <p className="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide">
               Venta
             </p>
-            <p className="text-lg font-bold text-green-700 dark:text-green-300 mt-1">
+            <p className="text-lg font-semibold text-green-700 dark:text-green-300 mt-1">
               ${parseFloat(formData.precioVenta).toFixed(2)}
             </p>
           </div>
@@ -191,7 +191,7 @@ const WizardStep5 = ({ formData, producto }) => {
               Ganancia por unidad
             </p>
             <span className={`
-              px-3 py-1 rounded-full text-sm font-bold
+              px-3 py-1 rounded-full text-sm font-semibold
               ${porcentajeGanancia >= 30
                 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
                 : porcentajeGanancia >= 15
