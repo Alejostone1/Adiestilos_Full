@@ -12,6 +12,7 @@
     "dev:frontend": "npm --prefix Frontend run dev",
     "install:all": "npm install && npm --prefix Backend install && npm --prefix Frontend install",
     "build": "node scripts/build-frontend.js",
+    "check:imports": "node scripts/check-imports-case.js",
     "build:frontend": "npm --prefix Frontend run build",
     "start": "npm --prefix Backend run start",
     "lint": "npm --prefix Frontend run lint",

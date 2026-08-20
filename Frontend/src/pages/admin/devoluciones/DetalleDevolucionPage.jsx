@@ -4,7 +4,7 @@ import {
   FiArrowLeft, FiUser, FiPackage, FiFileText, FiClock, FiCheckCircle, 
   FiDollarSign, FiCalendar, FiSearch, FiArrowRight, FiEye, FiEdit, FiTrash2
 } from 'react-icons/fi';
-import { devolucionesApi } from '../../../API/devolucionesApi';
+import { devolucionesApi } from '../../../api/devolucionesApi';
 import DevolucionForm from './DevolucionForm';
 import Swal from 'sweetalert2';
 

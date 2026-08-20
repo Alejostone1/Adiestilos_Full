@@ -44,5 +44,7 @@ jobs:
           cache-dependency-path: Frontend/package-lock.json
       - name: Instalar dependencias
         run: npm ci
+      - name: Verificar imports (case-sensitive en rutas)
+        run: node ../scripts/check-imports-case.js
       - name: Compilar producción
         run: npm run build

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Search, Filter, Plus, Eye, RefreshCw, Trash2, Calendar, DollarSign, Package } from 'lucide-react';
-import { devolucionesApi } from '../../../API/devolucionesApi';
+import { devolucionesApi } from '../../../api/devolucionesApi';
 import DevolucionEstadosBadge from './DevolucionEstadosBadge';
 import DevolucionDetalleModal from './DevolucionDetalleModal';
 import DevolucionForm from './DevolucionForm';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Search, Package, AlertCircle, Plus, Minus, ShoppingCart, ArrowRight, ArrowLeft, CheckCircle } from 'lucide-react';
-import { devolucionesApi } from '../../../API/devolucionesApi';
-import { ventasApi } from '../../../API/ventasApi';
+import { devolucionesApi } from '../../../api/devolucionesApi';
+import { ventasApi } from '../../../api/ventasApi';
 
 /**
  * Formulario Wizard para crear devoluciones paso a paso

@@ -1,0 +1,10 @@
+node_modules
+node_modules_bak
+database
+uploads
+.env
+.env.*
+!*.example
+Backend/prisma/migrations
+*.md
+.git
