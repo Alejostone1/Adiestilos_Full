@@ -8,14 +8,21 @@ El frontend es una SPA de React (Vite) que se compila a estáticos en **Vercel**
 
 1. Entra a **vercel.com** → **Add New…** → **Project**.
 2. Selecciona el repositorio `Adiestilos_Full` (rama `main`).
-3. Configuración del proyecto cuando Vercel te la pida:
 
-| Campo | Valor |
-|---|---|
-| **Root Directory** | `Frontend` |
-| **Build Command** | `npm run build` |
-| **Output Directory** | `dist` |
-| **Install Command** | `npm install` |
+> ⚙️ **Importante:** el repositorio incluye un `vercel.json` en la raíz que ya
+> configura **instalación, build y directorio de salida automáticamente**:
+>
+> ```json
+> {
+>   "installCommand": "npm install --prefix Frontend",
+>   "buildCommand": "npm --prefix Frontend run build",
+>   "outputDirectory": "Frontend/dist"
+> }
+> ```
+>
+> Por eso puedes importar el repo directamente (sin cambiar Root Directory).
+> **Opción alternativa:** en **Settings → Root Directory** selecciona `Frontend`
+> y deja el build por defecto (`npm run build`, salida `dist`).
 
 ## 2. Variables de entorno
 

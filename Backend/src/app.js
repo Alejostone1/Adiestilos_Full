@@ -63,6 +63,15 @@ app.get('/', (req, res) => {
   });
 });
 
+// Endpoint de salud para health checks (Railway/Vercel)
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    estado: 'ok',
+    entorno: configuracionServidor.entorno,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Montar todas las rutas de la API bajo el prefijo configurado (ej: /api)
 app.use(configuracionServidor.api.rutaBase, todasLasRutas);
 
