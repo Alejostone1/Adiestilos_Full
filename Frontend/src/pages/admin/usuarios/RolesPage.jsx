@@ -196,6 +196,9 @@ export default function RolesPage() {
     });
   };
 
+  // El rol Administrador es privilegiado: su matriz no se puede modificar.
+  const esAdministradorEditando = editingRole?.nombreRol === 'Administrador';
+
   return (
     <div className="min-h-screen bg-gray-50/50 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 p-4 md:p-6 space-y-6 transition-colors duration-300">
 
@@ -245,13 +248,19 @@ export default function RolesPage() {
             >
               {/* Status Badge */}
               <div className="absolute top-4 right-4">
-                <button
-                  onClick={() => toggleStatus(role)}
-                  className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide transition-all ${role.activo ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30'}`}
-                  title={role.activo ? 'Suspender perfil' : 'Activar perfil'}
-                >
-                  {role.activo ? 'Activo' : 'Suspendido'}
-                </button>
+                {role.nombreRol === 'Administrador' ? (
+                  <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide cursor-default ${role.activo ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30'}`}>
+                    {role.activo ? 'Activo' : 'Suspendido'}
+                  </span>
+                ) : (
+                  <button
+                    onClick={() => toggleStatus(role)}
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold uppercase tracking-wide transition-all ${role.activo ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30' : 'bg-rose-100 text-rose-600 dark:bg-rose-900/30'}`}
+                    title={role.activo ? 'Suspender perfil' : 'Activar perfil'}
+                  >
+                    {role.activo ? 'Activo' : 'Suspendido'}
+                  </button>
+                )}
               </div>
 
               {/* Icon & Title */}
@@ -402,12 +411,17 @@ export default function RolesPage() {
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <Lock className="text-indigo-500" size={18} /> Matriz de Privilegios
                     </h4>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">Configura el acceso granular módulo por módulo.</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {esAdministradorEditando
+                        ? 'El rol Administrador posee acceso total e inmutable sobre todos los módulos.'
+                        : 'Configura el acceso granular módulo por módulo.'}
+                    </p>
                   </div>
                   <button
                     type="button"
                     onClick={grantFullAccess}
-                    className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-900 border-2 border-dashed border-indigo-300 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-lg text-sm font-semibold hover:bg-indigo-50 dark:hover:bg-indigo-900/20 transition-all hover:border-solid hover:border-indigo-500"
+                    disabled={esAdministradorEditando}
+                    className={`flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-900 border-2 border-dashed border-indigo-300 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-lg text-sm font-semibold transition-all ${esAdministradorEditando ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:border-solid hover:border-indigo-500'}`}
                   >
                     <Unlock size={16} /> Entregar Acceso Total
                   </button>
@@ -441,7 +455,7 @@ export default function RolesPage() {
 
                               <div className="flex gap-2">
                                 {p.tipo === 'boolean' ? (
-                                  <label className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg cursor-pointer">
+                                  <label className={`flex items-center gap-1.5 bg-gray-100 dark:bg-gray-800 p-1 rounded-lg cursor-pointer ${esAdministradorEditando ? 'opacity-70 pointer-events-none' : ''}`}>
                                     <button
                                       type="button"
                                       onClick={() => setFormData({ ...formData, permisos: { ...formData.permisos, [p.clave]: true } })}
@@ -454,7 +468,7 @@ export default function RolesPage() {
                                     >NO</button>
                                   </label>
                                 ) : (
-                                  <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-lg gap-1">
+                                  <div className={`flex bg-gray-100 dark:bg-gray-800 p-1 rounded-lg gap-1 ${esAdministradorEditando ? 'opacity-70 pointer-events-none' : ''}`}>
                                     {p.opciones.map(opt => {
                                       const isActive = formData.permisos[p.clave] === opt.value;
                                       return (

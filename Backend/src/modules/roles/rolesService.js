@@ -10,6 +10,18 @@
 
 const { prisma } = require('../../config/databaseConfig');
 const { ErrorConflicto } = require('../../utils/errorHelper');
+const { permisosAccesoTotal } = require('./rolesConstants');
+
+// El rol 'Administrador' es inmutable: siempre con acceso total.
+const ES_ADMINISTRADOR = (rol) => rol.nombreRol === 'Administrador';
+
+const normalizarAdministrador = (rol) => {
+  if (!rol) return rol;
+  if (ES_ADMINISTRADOR(rol)) {
+    return { ...rol, permisos: permisosAccesoTotal() };
+  }
+  return rol;
+};
 
 /**
  * @function obtenerTodosLosRoles
@@ -19,7 +31,7 @@ const { ErrorConflicto } = require('../../utils/errorHelper');
  * cuántos usuarios están asignados a él. Se ordena por nombre de rol.
  */
 const obtenerTodosLosRoles = async () => {
-  return prisma.rol.findMany({
+  const roles = await prisma.rol.findMany({
     include: {
       _count: {
         select: { usuarios: true },
@@ -29,6 +41,7 @@ const obtenerTodosLosRoles = async () => {
       nombreRol: 'asc',
     },
   });
+  return roles.map(normalizarAdministrador);
 };
 
 /**
@@ -40,7 +53,7 @@ const obtenerTodosLosRoles = async () => {
  * también el conteo de usuarios asociados.
  */
 const obtenerRolPorId = async (id) => {
-  return prisma.rol.findUnique({
+  const rol = await prisma.rol.findUnique({
     where: { idRol: id },
     include: {
       _count: {
@@ -48,6 +61,7 @@ const obtenerRolPorId = async (id) => {
       },
     },
   });
+  return normalizarAdministrador(rol);
 };
 
 /**
@@ -63,6 +77,9 @@ const crearRol = async (datosRol) => {
   // Asegurarse de que los permisos se guarden como JSON si se proporcionan
   if (datosRol.permisos && typeof datosRol.permisos === 'string') {
     datosRol.permisos = JSON.parse(datosRol.permisos);
+  }
+  if (datosRol.nombreRol === 'Administrador') {
+    throw new ErrorConflicto('El rol Administrador es reservado del sistema.');
   }
   return prisma.rol.create({
     data: datosRol,
@@ -83,6 +100,30 @@ const actualizarRol = async (id, datosActualizacion) => {
   if (datosActualizacion.permisos && typeof datosActualizacion.permisos === 'string') {
     datosActualizacion.permisos = JSON.parse(datosActualizacion.permisos);
   }
+
+  const rolExistente = await prisma.rol.findUnique({ where: { idRol: id } });
+  if (!rolExistente) {
+    return prisma.rol.update({
+      where: { idRol: id },
+      data: datosActualizacion,
+    });
+  }
+
+  // Protección del rol Administrador: no se renombra ni se le quitan privilegios.
+  if (ES_ADMINISTRADOR(rolExistente)) {
+    if (datosActualizacion.nombreRol && datosActualizacion.nombreRol !== 'Administrador') {
+      throw new ErrorConflicto('El rol Administrador no puede ser renombrado.');
+    }
+    if (datosActualizacion.activo === false) {
+      throw new ErrorConflicto('El rol Administrador no puede ser suspendido.');
+    }
+    datosActualizacion = {
+      ...datosActualizacion,
+      nombreRol: 'Administrador',
+      permisos: permisosAccesoTotal(),
+    };
+  }
+
   return prisma.rol.update({
     where: { idRol: id },
     data: datosActualizacion,

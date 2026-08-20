@@ -1,26 +1,35 @@
 module.exports = async function seedRoles(prisma) {
+  const permisosAdministrador = {
+    dashboard: 'full',
+    usuarios: 'full',
+    roles: 'full',
+    productos: 'full',
+    categorias: 'full',
+    proveedores: 'full',
+    galeria: 'full',
+    ventas: 'full',
+    creditos: 'full',
+    descuentos: 'full',
+    devoluciones: 'full',
+    compras: 'full',
+    inventario: 'full',
+    reportes: 'full',
+    ver_catalogo: true,
+    realizar_compras: true,
+    ver_historial: true
+  };
+
   await prisma.rol.upsert({
     where: { nombreRol: 'Administrador' },
     update: {
       descripcion: 'Acceso total al sistema',
-      permisos: {
-        ventas: true,
-        compras: true,
-        inventario: true,
-        usuarios: true,
-        reportes: true
-      }
+      activo: true,
+      permisos: permisosAdministrador
     },
     create: {
       nombreRol: 'Administrador',
       descripcion: 'Acceso total al sistema',
-      permisos: {
-        ventas: true,
-        compras: true,
-        inventario: true,
-        usuarios: true,
-        reportes: true
-      }
+      permisos: permisosAdministrador
     }
   });
 

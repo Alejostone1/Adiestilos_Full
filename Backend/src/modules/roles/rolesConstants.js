@@ -193,6 +193,22 @@ const LISTA_PERMISOS = [
   }
 ];
 
+/**
+ * @function permisosAccesoTotal
+ * @brief Devuelve un mapa de permisos con todos los módulos desbloqueados.
+ * @description Usado para garantizar que el rol 'Administrador' tenga siempre
+ * acceso total, sin importar el estado previo de los datos.
+ * @returns {Object} Mapa clave -> valor con permisos máximos.
+ */
+const permisosAccesoTotal = () => {
+  const total = {};
+  LISTA_PERMISOS.forEach((p) => {
+    total[p.clave] = p.tipo === 'boolean' ? true : 'full';
+  });
+  return total;
+};
+
 module.exports = {
-  LISTA_PERMISOS
+  LISTA_PERMISOS,
+  permisosAccesoTotal
 };
