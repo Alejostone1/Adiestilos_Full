@@ -5,53 +5,70 @@ despliega en **Railway** y la base de datos usa el **PostgreSQL gestionado** de 
 
 ---
 
-## 1. Crear el proyecto
+## Estado actual (ya preparado, en ejecución)
 
-1. Entra a **railway.app** → **New Project** → **Empty Project** (o usa un template).
-2. **Add a service** → **Provisión de base de datos** → **PostgreSQL**.
-   - Railway te dará una **Connection String** del tipo `postgresql://postgres:...@.../railway`.
+- **Proyecto**: `desirable-perfection` (workspace `alejostone1's Projects`)
+- **Servicio API**: `api` → dominio público `https://api-production-cdcd.up.railway.app`
+- **Base de datos**: Postgres gestionado (creado), volumen `postgres-volume-W_SM`
+- **Variables del servicio `api`** ya definidas:
+  | Variable | Valor |
+  |---|---|
+  | `DATABASE_URL` | Cadena interna de Railway (`postgresql://postgres:...@postgres.railway.internal:5432/railway`) |
+  | `JWT_SECRET` | Secreto aleatorio de 64 hex (solo en Railway, nunca en Git) |
+  | `CORS_ORIGIN` | `https://adiestilos-full.vercel.app` |
+  | `NODE_ENV` | `production` |
+  | `CLOUDINARY_*` | **Pendiente** — añádelas cuando tengas las keys (ver `docs/CLOUDINARY.md`) |
+- **`Backend/railway.json`**: builder Nixpacks, start `npx prisma migrate deploy && node src/server.js`, healthcheck `GET /health`, restart ON_FAILURE.
 
-## 2. Desplegar el backend
+## Desplegar / re-desplegar (CLI)
 
-1. **Add service** → **GitHub Repo** → selecciona tu repositorio y rama `main`.
-2. Railway detecta la raíz: como el backend está en `Backend/`, define en el servicio:
-   - **Root Directory**: `Backend`
-   - **Start Command**: `npm run db:deploy && npm run start`
-     (aplica migraciones de Prisma y luego arranca la API).
-   - **Build Command**: (vacío) — Railway ya instala dependencias con `npm install`.
+```bash
+railway link -p d72cdec3-5365-4ca1-9ea9-5df7e44d64b9 -e 76bbc320-5f89-4bb6-ab9b-7b41e6960e14 -s 542d3605-1011-450a-9ceb-a0b6b24397f3
+cd Backend
+railway up
+```
 
-## 3. Variables de entorno del servicio Backend
+> ⚠️ **Plan gratuito (Hobby):** Railway solo despliega a `us-west2` y lo bloquea en
+> **horas pico (08:00–20:00 hora de Los Ángeles)**. Si te sale ese mensaje, reintenta
+> después de las 20:00 LA. La única alternativa es subir de plan.
 
-En **Variables** del servicio agrega:
+## 1. Crear el proyecto (si se hiciera desde cero)
+
+1. `railway login`
+2. `railway init --name <proyecto>`
+3. `railway add --database postgres` → copia el `DATABASE_URL` interno del servicio Postgres:
+   `railway variable list --json --service <id-postgres>`
+4. `railway add --service api`
+5. `railway variable set --service <id-api> "DATABASE_URL=..." "JWT_SECRET=..." "NODE_ENV=production" "CORS_ORIGIN=TU-FRONTEND.vercel.app"`
+
+## Variables del servicio Backend (tabla de referencia)
 
 | Variable | Valor |
 |---|---|
-| `DATABASE_URL` | La Connection String de tu PostgreSQL de Railway |
-| `JWT_SECRET` | Secreto largo (mínimo 32 caracteres) — usa el generador de Railway |
+| `DATABASE_URL` | La Connection String interna del PostgreSQL de Railway |
+| `JWT_SECRET` | Secreto largo (mínimo 32 caracteres) — genera uno aleatorio |
 | `NODE_ENV` | `production` |
-| `CORS_ORIGIN` | `https://TU-FRONTEND.vercel.app` (el dominio de Vercel) |
+| `CORS_ORIGIN` | `https://TU-FRONTEND.vercel.app` |
 | `CLOUDINARY_CLOUD_NAME` | Tu Cloudinary cloud name |
 | `CLOUDINARY_API_KEY` | Tu Cloudinary API Key |
 | `CLOUDINARY_API_SECRET` | Tu Cloudinary API Secret |
 | `CLOUDINARY_FOLDER` | `adi-estilos` |
-| `PORT` | `3000` |
 
-## 4. Migraciones y datos
+## Migraciones y datos
 
-- Con el comando de arranque `npm run db:deploy && npm run start` las migraciones
-  de `prisma/migrations/` se aplican automáticamente en cada deploy.
-- Para sembrar datos **una sola vez** en producción, ejecuta en la consola de Railway (o local contra esa BD):
+- Las migraciones de `prisma/migrations/` se aplican automáticamente en cada
+  arranque (`npx prisma migrate deploy` antes de `node src/server.js`).
+- Para sembrar datos **una sola vez** contra la BD de producción:
 
   ```bash
-  DATABASE_URL="postgresql://..." npm start
-  npx prisma db seed
+  railway run --service <id-api> npx prisma db seed
   ```
-
----
 
 ## Notas
 
 - **El sistema de archivos de Railway es efímero**: **no** sirvas imágenes desde
   `/uploads` en producción. Por eso se usa **Cloudinary**: cada subida queda en la
-  nube y la URL se guarda en la base de datos.
-- El despliegue ignora variables locales: todo se define en el panel de Railway.
+  nube y la URL se guarda en la base de datos. Sin Cloudinary, las subidas se
+  pierden al reiniciar el servicio.
+- El despliegue ignora variables locales: todo se define con `railway variable set`
+  o en el panel de Railway.
