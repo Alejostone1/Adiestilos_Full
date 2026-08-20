@@ -26,6 +26,9 @@ import {
 import { useAuth } from '../../../context/AuthContext';
 import { usuariosApi } from '../../../api/usuariosApi';
 import Swal from 'sweetalert2';
+import ClienteSection from '../../../components/cliente/ui/ClienteSection';
+import ClienteCard from '../../../components/cliente/ui/ClienteCard';
+import ClienteButton from '../../../components/cliente/ui/ClienteButton';
 
 const { Title, Text } = Typography;
 
