@@ -33,19 +33,19 @@ const NotFoundPage = () => <div className="text-center mt-5"><h2>404 - Página N
 const AuthRedirect = () => {
   const { estaAutenticado, usuario } = useAuth();
 
-
   if (estaAutenticado) {
-    const userRole = usuario?.idRol;
+    const nombreRol = usuario?.rol?.nombreRol || '';
+    const idRol = usuario?.idRol;
 
-    if (userRole === 1) {
+    if (nombreRol === 'Administrador' || idRol === 1) {
       return <Navigate to="/admin/dashboard" replace />;
     }
 
-    if (userRole === 2) {
-      return <Navigate to="/cliente/dashboard" replace />;
+    if (nombreRol === 'Vendedor' || idRol === 2) {
+      return <Navigate to="/admin/dashboard" replace />;
     }
 
-    return <Navigate to="/" replace />;
+    return <Navigate to="/cliente/dashboard" replace />;
   }
 
   return <Outlet />;

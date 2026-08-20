@@ -57,20 +57,32 @@ module.exports = async function seedRoles(prisma) {
   await prisma.rol.upsert({
     where: { nombreRol: 'Vendedor' },
     update: {
-      descripcion: 'Gestión de ventas y clientes',
+      descripcion: 'Gestión de ventas, créditos y devoluciones',
       permisos: {
-        ventas: true,
-        clientes: true,
-        productos: 'solo_lectura'
+        dashboard: 'read',
+        ventas: 'full',
+        creditos: 'full',
+        devoluciones: 'full',
+        descuentos: 'read',
+        productos: 'read',
+        ver_catalogo: true,
+        realizar_compras: true,
+        ver_historial: true
       }
     },
     create: {
       nombreRol: 'Vendedor',
-      descripcion: 'Gestión de ventas y clientes',
+      descripcion: 'Gestión de ventas, créditos y devoluciones',
       permisos: {
-        ventas: true,
-        clientes: true,
-        productos: 'solo_lectura'
+        dashboard: 'read',
+        ventas: 'full',
+        creditos: 'full',
+        devoluciones: 'full',
+        descuentos: 'read',
+        productos: 'read',
+        ver_catalogo: true,
+        realizar_compras: true,
+        ver_historial: true
       }
     }
   });

@@ -17,18 +17,50 @@ const {
   obtenerHistorialVentasUsuario,
   obtenerHistorialCreditosUsuario
 } = require('./usuariosController');
-const { verificarTokenMiddleware, verificarRol } = require('../../middleware/authMiddleware');
+const { verificarTokenMiddleware, verificarRol, verificarPropiedad } = require('../../middleware/authMiddleware');
 
 // Crear una instancia del enrutador
 const router = Router();
 
-// --- MIDDLEWARE DE AUTENTICACIÓN Y AUTORIZACIÓN ---
-// Aplicar a todas las rutas de este módulo, ya que la gestión de usuarios
-// es una tarea administrativa.
+// --- MIDDLEWARE DE AUTENTICACIÓN ---
+// Aplicar a todas las rutas de este módulo.
 router.use(verificarTokenMiddleware);
-router.use(verificarRol('Administrador')); // Solo los administradores pueden gestionar usuarios
 
-// --- DEFINICIÓN DE RUTAS ---
+// --- CONSULTAS PROPIAS (Cliente, Vendedor y Administrador) ---
+// Estas rutas deben registrarse ANTES del guard de Administrador para permitir
+// que cada usuario consulte SUS propios datos (el Cliente) o, en el caso del
+// Vendedor/Administrador, los datos de cualquier cliente.
+
+/**
+ * @route   GET /api/usuarios/con-credito
+ * @desc    Obtener clientes con crédito activo.
+ * @access  Administrador, Vendedor
+ */
+router.get('/con-credito', verificarRol(['Administrador', 'Vendedor']), obtenerUsuariosConCredito);
+
+/**
+ * @route   GET /api/usuarios/:id/metricas
+ * @desc    Obtener métricas de un usuario (propias, o de cualquier cliente para Vendedor/Admin).
+ * @access  Propietario, Administrador, Vendedor
+ */
+router.get('/:id/metricas', verificarPropiedad('id', ['Administrador', 'Vendedor']), obtenerMetricasUsuario);
+
+/**
+ * @route   GET /api/usuarios/:id/ventas
+ * @desc    Obtener historial de ventas de un usuario (propias, o de cualquier cliente para Vendedor/Admin).
+ * @access  Propietario, Administrador, Vendedor
+ */
+router.get('/:id/ventas', verificarPropiedad('id', ['Administrador', 'Vendedor']), obtenerHistorialVentasUsuario);
+
+/**
+ * @route   GET /api/usuarios/:id/creditos
+ * @desc    Obtener historial de créditos de un usuario (propias, o de cualquier cliente para Vendedor/Admin).
+ * @access  Propietario, Administrador, Vendedor
+ */
+router.get('/:id/creditos', verificarPropiedad('id', ['Administrador', 'Vendedor']), obtenerHistorialCreditosUsuario);
+
+// --- ADMINISTRACIÓN (solo Administrador) ---
+router.use(verificarRol('Administrador'));
 
 /**
  * @route   GET /api/usuarios
@@ -43,15 +75,6 @@ router.get('/', obtenerTodosLosUsuarios);
  * @access  Administrador
  */
 router.post('/', crearUsuario);
-
-/**
- * @route   GET /api/usuarios/con-credito
- * @desc    Obtener clientes con crédito activo.
- * @access  Administrador, Vendedor
- */
-// Se define antes de '/:id' para evitar que 'con-credito' sea interpretado como un ID.
-// Se le asigna un middleware específico porque los Vendedores también pueden necesitar esta info.
-router.get('/con-credito', verificarRol(['Administrador', 'Vendedor']), obtenerUsuariosConCredito);
 
 /**
  * @route   GET /api/usuarios/:id
@@ -80,27 +103,6 @@ router.delete('/:id', eliminarUsuario);
  * @access  Administrador
  */
 router.patch('/:id/estado', cambiarEstadoUsuario);
-
-/**
- * @route   GET /api/usuarios/:id/metricas
- * @desc    Obtener métricas de un usuario.
- * @access  Administrador
- */
-router.get('/:id/metricas', obtenerMetricasUsuario);
-
-/**
- * @route   GET /api/usuarios/:id/ventas
- * @desc    Obtener historial de ventas de un usuario.
- * @access  Administrador
- */
-router.get('/:id/ventas', obtenerHistorialVentasUsuario);
-
-/**
- * @route   GET /api/usuarios/:id/creditos
- * @desc    Obtener historial de créditos de un usuario.
- * @access  Administrador
- */
-router.get('/:id/creditos', obtenerHistorialCreditosUsuario);
 
 
 // --- EXPORTACIÓN ---

@@ -57,22 +57,21 @@ const ClienteDashboard = () => {
 
         const [metricasResponse, historial] = await Promise.all([
           usuariosApi.getMetricasUsuario(usuario.idUsuario).catch(() => null),
-          usuariosApi.getHistorialVentasUsuario(usuario.idUsuario).catch(() => []),
+          usuariosApi.getHistorialVentasUsuario(usuario.idUsuario).catch(() => null),
         ]);
 
-        const ventas = Array.isArray(historial)
-          ? historial
-          : Array.isArray(historial?.datos)
-            ? historial.datos
-            : [];
+        const metricas = metricasResponse?.datos || {};
+        const ventas = Array.isArray(historial?.datos?.datos)
+          ? historial.datos.datos
+          : [];
 
-        const totalPedidos = Number(metricasResponse?.cantidadPedidos ?? ventas.length ?? 0);
+        const totalPedidos = Number(metricas?.ventas?.comoClienteCount ?? ventas.length ?? 0);
         const totalGastado =
-          Number(metricasResponse?.totalGastado) ||
+          Number(metricas?.ventas?.comoClienteTotal) ||
           ventas.reduce((acc, venta) => acc + (Number(venta.total) || 0), 0);
         const ultimaCompra =
-          metricasResponse?.ultimaCompra ||
-          ventas.sort((a, b) => new Date(b.creadoEn) - new Date(a.creadoEn))[0]?.creadoEn ||
+          metricas?.ultimaCompra ||
+          ventas[0]?.creadoEn ||
           null;
 
         setMetricas({

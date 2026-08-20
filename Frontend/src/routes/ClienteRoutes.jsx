@@ -13,8 +13,9 @@ import CarritoPage from '../pages/cliente/carrito';
 
 const ProtectedCliente = ({ children }) => {
   const { usuario } = useAuth();
-  // Si no es cliente (idRol === 2) redirigir al home
-  if (!usuario || usuario.idRol !== 2) return <Navigate to="/" replace />;
+  // Solo el rol Cliente (idRol === 3) accede al área de cliente.
+  const esCliente = usuario?.rol?.nombreRol === 'Cliente' || usuario?.idRol === 3;
+  if (!usuario || !esCliente) return <Navigate to="/" replace />;
   return children;
 };
 

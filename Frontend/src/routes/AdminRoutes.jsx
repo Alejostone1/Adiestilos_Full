@@ -1,9 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import AdminLayout from "../components/layout/AdminLayout";
 
 // Dashboard
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
+import VendedorDashboardPage from "../pages/admin/VendedorDashboardPage";
 
 // Gestión principal
 import UsuariosPage from "../pages/admin/usuarios/UsuariosPage";
@@ -54,13 +56,20 @@ import ReportesCreditosPage from "../pages/admin/reportes/ReportesCreditosPage";
 import ReportesComprasPage from "../pages/admin/reportes/ReportesComprasPage";
 import ReportesPagosPage from "../pages/admin/reportes/ReportesPagosPage";
 
+// El Vendedor ve su panel de ventas; el resto, el panel de administración.
+const DashboardPage = () => {
+  const { usuario } = useAuth();
+  const esVendedor = usuario?.rol?.nombreRol === 'Vendedor' || usuario?.idRol === 2;
+  return esVendedor ? <VendedorDashboardPage /> : <AdminDashboardPage />;
+};
+
 const AdminRoutes = () => {
   return (
     <Routes>
       <Route path="" element={<AdminLayout />}>
         {/* Dashboard */}
-        <Route index element={<AdminDashboardPage />} />
-        <Route path="dashboard" element={<AdminDashboardPage />} />
+        <Route index element={<DashboardPage />} />
+        <Route path="dashboard" element={<DashboardPage />} />
 
         {/* Gestión principal */}
         <Route path="usuarios" element={<UsuariosPage />} />
