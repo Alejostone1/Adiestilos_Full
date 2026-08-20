@@ -1,0 +1,92 @@
+version: '3.8'
+
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: adi_estilos_postgres
+    environment:
+      POSTGRES_DB: adi_estilos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Nota: la carpeta ./database contiene un dump SQL ANTIGUO de MySQL.
+      # NO debe montarse aquí: rompería el arranque de PostgreSQL 15.
+      # Usa Prisma para crear el esquema: make db-migrate && make db-seed.
+    networks:
+      - adi_estilos_network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: adi_estilos_backend
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres123@postgres:5432/adi_estilos
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      NODE_ENV: development
+      PORT: 3000
+      # Cloudinary (opcional en desarrollo; obligatorio en producción)
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME:-}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY:-}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET:-}
+      CLOUDINARY_FOLDER: ${CLOUDINARY_FOLDER:-adi-estilos}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - ./backend/uploads:/app/uploads
+    depends_on:
+      - postgres
+    networks:
+      - adi_estilos_network
+    command: npm run dev
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: adi_estilos_frontend
+    environment:
+      VITE_API_URL: http://localhost:3000/api
+      VITE_FILES_URL: http://localhost:3000
+      VITE_APP_NAME: Adi Estilos
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - adi_estilos_network
+    command: npm run dev
+
+  # Nginx (Proxy Reverso para Producción)
+  nginx:
+    image: nginx:alpine
+    container_name: adi_estilos_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/adi-estilos.conf:/etc/nginx/conf.d/default.conf
+      - ./frontend/dist:/usr/share/nginx/html
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - adi_estilos_network
+
+volumes:
+  postgres_data:
+
+networks:
+  adi_estilos_network:
+    driver: bridge

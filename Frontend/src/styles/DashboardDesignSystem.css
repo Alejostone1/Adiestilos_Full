@@ -1,0 +1,156 @@
+:root {
+  /* Design Tokens - Light Mode (Adi Estilos Pink Palette) */
+  --dashboard-bg: #fdf2f8;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(251, 207, 232, 0.5);
+  --text-main: #500e33;
+  --text-muted: #9d174d;
+  --accent-primary: #ec4899;
+  --accent-secondary: #db2777;
+  --accent-brand: #be185d;
+  --accent-success: #10b981;
+  --accent-warning: #f59e0b;
+  --accent-danger: #ef4444;
+  --glass-blur: 16px;
+  --card-shadow: 0 10px 25px -5px rgba(236, 72, 153, 0.05), 0 8px 10px -6px rgba(236, 72, 153, 0.05);
+}
+
+.dark {
+  /* Design Tokens - Dark Mode (Premium Night Rose) */
+  --dashboard-bg: #1a0614;
+  --card-bg: rgba(50, 10, 35, 0.4);
+  --card-border: rgba(190, 24, 93, 0.2);
+  --text-main: #fce7f3;
+  --text-muted: #f9a8d4;
+  --accent-primary: #f472b6;
+  --accent-secondary: #ec4899;
+  --accent-brand: #db2777;
+  --card-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.4), 0 10px 15px -5px rgba(236, 72, 153, 0.1);
+}
+
+/* Base Dashboard Styles */
+.dashboard-container {
+  background-color: var(--dashboard-bg);
+  min-height: 100vh;
+  transition: background-color 0.3s ease;
+}
+
+/* Glass Card Component */
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* KPI Card Variations */
+.kpi-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  font-size: 24px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.kpi-icon-container::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  background: inherit;
+  opacity: 0.15;
+  filter: blur(8px);
+}
+
+/* Animated Backgrounds */
+.bg-mesh {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.mesh-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: float 20s infinite alternate;
+}
+
+@keyframes float {
+  from { transform: translate(0, 0); }
+  to { transform: translate(100px, 100px); }
+}
+
+/* Typography Enhancements */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ant Design Overrides */
+.ant-card {
+  background: transparent !important;
+  border: none !important;
+}
+
+.ant-statistic-title {
+  color: var(--text-muted) !important;
+  font-weight: 600 !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.025em !important;
+}
+
+.ant-statistic-content {
+  color: var(--text-main) !important;
+  font-weight: 800 !important;
+  font-size: 1.5rem !important;
+  letter-spacing: -0.025em !important;
+}
+
+.ant-typography {
+  color: var(--text-main) !important;
+}
+
+.ant-typography-secondary {
+  color: var(--text-muted) !important;
+}
+
+/* Custom Scrollbar for Dashboard */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--card-border);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

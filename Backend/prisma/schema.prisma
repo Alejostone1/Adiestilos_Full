@@ -1,0 +1,1007 @@
+// ============================================================================
+// SISTEMA DE GESTIÓN COMERCIAL - PRISMA SCHEMA OPTIMIZADO
+// ============================================================================
+// Descripción: Esquema de base de datos para sistema de ventas, inventario,
+//              compras, créditos y devoluciones.
+// Versión: 2.1 (Optimizada - PostgreSQL)
+// Base de datos: PostgreSQL
+// ============================================================================
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "binary"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================================================
+// MÓDULO: AUTENTICACIÓN Y USUARIOS
+// ============================================================================
+
+/// Tabla de roles del sistema - Define los permisos y niveles de acceso
+/// Relación: Un rol puede tener múltiples usuarios
+model Rol {
+  idRol       Int      @id @default(autoincrement()) @map("id_rol")
+  nombreRol   String   @unique @map("nombre_rol") @db.VarChar(50)
+  descripcion String?  @map("descripcion") @db.Text
+  permisos    Json?    @map("permisos") // JSON con estructura de permisos granulares
+  activo      Boolean  @default(true) @map("activo")
+  creadoEn    DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones
+  usuarios Usuario[] @relation("UsuarioRol")
+
+  @@index([nombreRol])
+  @@index([activo])
+  @@map("roles")
+}
+
+/// Tabla de usuarios del sistema - Almacena clientes, vendedores y administradores
+/// Relaciones múltiples: ventas, compras, créditos, ajustes, etc.
+model Usuario {
+  idUsuario         Int           @id @default(autoincrement()) @map("id_usuario")
+  nombres           String        @map("nombres") @db.VarChar(100)
+  apellidos         String        @map("apellidos") @db.VarChar(100)
+  usuario           String        @unique @map("usuario") @db.VarChar(100)
+  correoElectronico String        @unique @map("correo_electronico") @db.VarChar(100)
+  contrasena        String        @map("contrasena") @db.VarChar(255)
+  telefono          String?       @map("telefono") @db.VarChar(20)
+  direccion         String?       @map("direccion") @db.Text
+  idRol             Int           @default(2) @map("id_rol") // 2 = Cliente por defecto
+  estado            EstadoUsuario @default(activo) @map("estado")
+  ultimaConexion    DateTime?     @map("ultima_conexion") @db.Timestamp(0)
+  creadoEn          DateTime      @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn     DateTime      @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relación principal con rol
+  rol Rol @relation("UsuarioRol", fields: [idRol], references: [idRol], onUpdate: Cascade)
+
+  // Relaciones como OPERADOR/REGISTRADOR (quien realiza la acción)
+  ajustesRegistrados      AjusteInventario[]     @relation("AjusteUsuarioRegistro")
+  comprasRegistradas      Compra[]               @relation("CompraUsuarioRegistro")
+  creditosRegistrados     Credito[]              @relation("CreditoUsuarioRegistro")
+  devolucionesRegistradas Devolucion[]           @relation("DevolucionUsuarioRegistro")
+  movimientosRegistrados  MovimientoInventario[] @relation("MovimientoUsuarioRegistro")
+  pagosRegistrados        Pago[]                 @relation("PagoUsuarioRegistro")
+  descuentosCreados       Descuento[]            @relation("DescuentoUsuarioCreacion")
+  ventasComoVendedor      Venta[]                @relation("VentaUsuarioVendedor")
+
+  // Relaciones como CLIENTE (sobre quien recae la acción)
+  ventasComoCliente       Venta[]                 @relation("VentaUsuarioCliente")
+  creditosComoCliente     Credito[]               @relation("CreditoUsuarioCliente")
+  devolucionesComoCliente Devolucion[]            @relation("DevolucionUsuarioCliente")
+  resumenCredito          ClientesCreditoResumen?
+  descuentosAsignados     DescuentosCliente[]
+  historialDescuentos     HistorialDescuento[]
+
+  @@index([usuario])
+  @@index([correoElectronico])
+  @@index([idRol])
+  @@index([estado])
+  @@map("usuarios")
+}
+
+// ============================================================================
+// MÓDULO: CATÁLOGOS BASE
+// ============================================================================
+
+/// Tabla de categorías de productos - Soporta categorías jerárquicas (padre/hijo)
+/// Relación recursiva: Una categoría puede tener subcategorías
+model Categoria {
+  idCategoria     Int            @id @default(autoincrement()) @map("id_categoria")
+  nombreCategoria String         @unique @map("nombre_categoria") @db.VarChar(100)
+  descripcion     String?        @map("descripcion") @db.Text
+  imagenCategoria String?        @map("imagen_categoria") @db.VarChar(255)
+  categoriaPadre  Int?           @map("categoria_padre")
+  estado          EstadoCatalogo @default(activo) @map("estado")
+  creadoEn        DateTime       @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn   DateTime       @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relación recursiva para jerarquía de categorías
+  categoriaPadreRef Categoria?  @relation("CategoriaJerarquia", fields: [categoriaPadre], references: [idCategoria], onDelete: SetNull, onUpdate: Cascade)
+  subcategorias     Categoria[] @relation("CategoriaJerarquia")
+
+  // Relaciones con otros módulos
+  productos  Producto[]
+  descuentos Descuento[]
+
+  @@index([estado])
+  @@index([categoriaPadre])
+  @@index([nombreCategoria])
+  @@map("categorias")
+}
+
+/// Tabla de proveedores - Gestiona información de proveedores de productos
+model Proveedor {
+  idProveedor       Int            @id @default(autoincrement()) @map("id_proveedor")
+  nombreProveedor   String         @map("nombre_proveedor") @db.VarChar(100)
+  nitCC             String         @unique @map("nit_cc") @db.VarChar(20) // NIT o Cédula
+  contacto          String?        @map("contacto") @db.VarChar(100)
+  telefono          String?        @map("telefono") @db.VarChar(20)
+  correoElectronico String?        @map("correo_electronico") @db.VarChar(100)
+  direccion         String?        @map("direccion") @db.Text
+  imagenProveedor   String?        @map("imagen_proveedor") @db.VarChar(255)
+  notas             String?        @map("notas") @db.Text
+  estado            EstadoCatalogo @default(activo) @map("estado")
+  creadoEn          DateTime       @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn     DateTime       @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones
+  productos Producto[]
+  compras   Compra[]
+
+  @@index([nitCC])
+  @@index([estado])
+  @@index([nombreProveedor])
+  @@map("proveedores")
+}
+
+/// Tabla de colores - Catálogo de colores disponibles para variantes de producto
+model Color {
+  idColor     Int            @id @default(autoincrement()) @map("id_color")
+  nombreColor String         @unique @map("nombre_color") @db.VarChar(50)
+  codigoHex   String?        @map("codigo_hex") @db.VarChar(7) // Formato: #FFFFFF
+  estado      EstadoCatalogo @default(activo) @map("estado")
+  creadoEn    DateTime       @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones
+  variantesProducto VarianteProducto[]
+
+  @@index([estado])
+  @@index([nombreColor])
+  @@map("colores")
+}
+
+/// Tabla de tallas - Catálogo de tallas con diferentes tipos (numérica, alfabética, etc.)
+model Talla {
+  idTalla     Int            @id @default(autoincrement()) @map("id_talla")
+  nombreTalla String         @unique @map("nombre_talla") @db.VarChar(80)
+  tipoTalla   TipoTalla      @default(alfabetica) @map("tipo_talla")
+  estado      EstadoCatalogo @default(activo) @map("estado")
+  creadoEn    DateTime       @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones
+  variantesProducto VarianteProducto[]
+
+  @@index([tipoTalla])
+  @@index([estado])
+  @@index([nombreTalla])
+  @@map("tallas")
+}
+
+// ============================================================================
+// MÓDULO: PRODUCTOS E INVENTARIO
+// ============================================================================
+
+/// Tabla de productos - Productos base que pueden tener múltiples variantes
+/// ARQUITECTURA DE PRECIOS:
+///   - precioVentaSugerido: Solo referencia a nivel producto
+///   - Precios REALES en VARIANTES: precioCosto (compra) y precioVenta (venta)
+///   - Cada variante puede tener diferentes precios según color/talla
+/// Relaciones: categoría, proveedor, variantes, imágenes, descuentos
+model Producto {
+  idProducto          Int            @id @default(autoincrement()) @map("id_producto")
+  codigoReferencia    String         @unique @map("codigo_referencia") @db.VarChar(100)
+  nombreProducto      String         @map("nombre_producto") @db.VarChar(150)
+  descripcion         String?        @map("descripcion") @db.Text
+  precioVentaSugerido Int            @map("precio_venta_sugerido") // Precio referencia (precios reales en variantes)
+  unidadMedida        String         @default("unidad") @map("unidad_medida") @db.VarChar(20)
+  tieneColores        Boolean        @default(false) @map("tiene_colores")
+  tieneTallas         Boolean        @default(false) @map("tiene_tallas")
+  datosTecnicos       Json?          @map("datos_tecnicos") // Especificaciones técnicas adicionales
+  idCategoria         Int            @map("id_categoria")
+  idProveedor         Int?           @map("id_proveedor")
+  estado              EstadoProducto @default(activo) @map("estado")
+  creadoEn            DateTime       @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn       DateTime       @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  categoria Categoria  @relation(fields: [idCategoria], references: [idCategoria], onUpdate: Cascade)
+  proveedor Proveedor? @relation(fields: [idProveedor], references: [idProveedor], onDelete: SetNull, onUpdate: Cascade)
+
+  // Relaciones subordinadas
+  variantes  VarianteProducto[]
+  imagenes   ImagenProducto[]
+  descuentos Descuento[]
+
+  @@index([codigoReferencia])
+  @@index([idCategoria])
+  @@index([idProveedor])
+  @@index([estado])
+  @@index([nombreProducto])
+  @@map("productos")
+}
+
+/// Tabla de imágenes de productos - Múltiples imágenes por producto
+model ImagenProducto {
+  idImagen    Int      @id @default(autoincrement()) @map("id_imagen")
+  idProducto  Int      @map("id_producto")
+  rutaImagen  String   @map("ruta_imagen") @db.VarChar(255)
+  descripcion String?  @map("descripcion") @db.VarChar(255)
+  orden       Int      @default(0) @map("orden")
+  esPrincipal Boolean  @default(false) @map("es_principal")
+  creadoEn    DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relación con producto (eliminación en cascada)
+  producto Producto @relation(fields: [idProducto], references: [idProducto], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([idProducto])
+  @@index([esPrincipal])
+  @@map("imagenes_productos")
+}
+
+/// Tabla de variantes de producto - Combinaciones de color/talla con precios y stock PROPIOS
+/// TABLA CRÍTICA: Centro de control de precios, costos e inventario
+///
+/// CAMPOS OBLIGATORIOS DE PRECIO:
+///   - precioCosto: Costo de compra al proveedor (ingresado desde compras o manualmente)
+///   - precioVenta: Precio de venta al cliente (PVP final)
+///   - Margen automático = precioVenta - precioCosto
+///
+/// CADA VARIANTE PUEDE TENER PRECIOS DIFERENTES:
+///   Ej: Camisa M Rojo: costo $5.000 → venta $15.000 (margen: $10.000)
+///       Camisa M Azul: costo $4.500 → venta $14.000 (margen: $9.500)
+///       Camisa L Rojo: costo $6.000 → venta $16.000 (margen: $10.000)
+///
+/// CAMPOS DE INVENTARIO:
+///   - cantidadStock: Stock actual (actualizado por compras/ventas/ajustes)
+///   - stockMinimo/Maximo: Para alertas y control de exceso
+model VarianteProducto {
+  idVariante    Int            @id @default(autoincrement()) @map("id_variante")
+  idProducto    Int            @map("id_producto")
+  idColor       Int?           @map("id_color")
+  idTalla       Int?           @map("id_talla")
+  codigoSku     String         @unique @map("codigo_sku") @db.VarChar(100) // Identificador único
+  precioVenta   Decimal        @map("precio_venta") @db.Decimal(10, 2) // PVP (precio venta cliente)
+  precioCosto   Decimal        @default(0.00) @map("precio_costo") @db.Decimal(10, 2) // Costo de compra
+  cantidadStock Decimal        @default(0.00) @map("cantidad_stock") @db.Decimal(10, 2)
+  stockMinimo   Decimal        @default(0.00) @map("stock_minimo") @db.Decimal(10, 2)
+  stockMaximo   Decimal        @default(0.00) @map("stock_maximo") @db.Decimal(10, 2)
+  estado        EstadoCatalogo @default(activo) @map("estado")
+  creadoEn      DateTime       @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn DateTime       @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  producto Producto @relation(fields: [idProducto], references: [idProducto], onDelete: Cascade, onUpdate: Cascade)
+  color    Color?   @relation(fields: [idColor], references: [idColor], onDelete: SetNull, onUpdate: Cascade)
+  talla    Talla?   @relation(fields: [idTalla], references: [idTalla], onDelete: SetNull, onUpdate: Cascade)
+
+  // Relaciones de transacciones
+  detalleCompras      DetalleCompra[]
+  detalleVentas       DetalleVenta[]
+  detalleAjustes      DetalleAjusteInventario[]
+  detalleDevoluciones DetalleDevolucion[]
+  movimientos         MovimientoInventario[]
+  imagenesVariantes   ImagenVariante[]
+
+  // Restricción única: no puede haber dos variantes iguales del mismo producto
+  @@unique([idProducto, idColor, idTalla], name: "variante_unica")
+  @@index([codigoSku])
+  @@index([idProducto])
+  @@index([idColor])
+  @@index([idTalla])
+  @@index([cantidadStock])
+  @@index([estado])
+  @@map("variantes_producto")
+}
+
+/// Tabla de imágenes de variantes - Imágenes específicas por variante (ej: color específico)
+model ImagenVariante {
+  idImagenVariante Int      @id @default(autoincrement()) @map("id_imagen_variante")
+  idVariante       Int      @map("id_variante")
+  rutaImagen       String   @map("ruta_imagen") @db.VarChar(255)
+  descripcion      String?  @map("descripcion") @db.VarChar(255)
+  orden            Int      @default(0) @map("orden")
+  esPrincipal      Boolean  @default(false) @map("es_principal")
+  creadoEn         DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relación con variante (eliminación en cascada)
+  variante VarianteProducto @relation(fields: [idVariante], references: [idVariante], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([idVariante])
+  @@index([esPrincipal])
+  @@map("imagenes_variantes")
+}
+
+// ============================================================================
+// MÓDULO: DESCUENTOS Y PROMOCIONES
+// ============================================================================
+
+/// Tabla de descuentos - Descuentos que pueden aplicarse a ventas, productos o categorías
+model Descuento {
+  idDescuento        Int             @id @default(autoincrement()) @map("id_descuento")
+  nombreDescuento    String          @map("nombre_descuento") @db.VarChar(100)
+  descripcion        String?         @map("descripcion") @db.Text
+  codigoDescuento    String?         @unique @map("codigo_descuento") @db.VarChar(50) // Código promocional
+  tipoDescuento      TipoDescuento   @map("tipo_descuento") // Porcentaje o valor fijo
+  valorDescuento     Decimal         @map("valor_descuento") @db.Decimal(10, 2)
+  aplicaA            AplicaDescuento @default(total_venta) @map("aplica_a")
+  idCategoria        Int?            @map("id_categoria") // Si aplica a categoría
+  idProducto         Int?            @map("id_producto") // Si aplica a producto
+  montoMinimoCompra  Decimal         @default(0.00) @map("monto_minimo_compra") @db.Decimal(10, 2)
+  fechaInicio        DateTime?       @map("fecha_inicio") @db.Date
+  fechaFin           DateTime?       @map("fecha_fin") @db.Date
+  requiereCodigo     Boolean         @default(false) @map("requiere_codigo")
+  cantidadMaximaUsos Int?            @map("cantidad_maxima_usos") // Límite global de usos
+  usosActuales       Int             @default(0) @map("usos_actuales")
+  usoPorCliente      Int             @default(1) @map("uso_por_cliente") // Límite por cliente
+  usuarioCreacion    Int             @map("usuario_creacion")
+  estado             EstadoDescuento @default(activo) @map("estado")
+  creadoEn           DateTime        @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn      DateTime        @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones opcionales (según a qué aplica)
+  categoria          Categoria? @relation(fields: [idCategoria], references: [idCategoria], onDelete: SetNull, onUpdate: Cascade)
+  producto           Producto?  @relation(fields: [idProducto], references: [idProducto], onDelete: SetNull, onUpdate: Cascade)
+  usuarioCreacionRef Usuario    @relation("DescuentoUsuarioCreacion", fields: [usuarioCreacion], references: [idUsuario], onUpdate: Cascade)
+
+  // Relaciones de uso
+  descuentosClientes  DescuentosCliente[]
+  historialDescuentos HistorialDescuento[]
+  ventas              Venta[]
+
+  @@index([codigoDescuento])
+  @@index([tipoDescuento])
+  @@index([estado])
+  @@index([fechaInicio, fechaFin])
+  @@index([aplicaA])
+  @@index([idCategoria])
+  @@index([idProducto])
+  @@index([usuarioCreacion])
+  @@map("descuentos")
+}
+
+/// Tabla pivote: Asignación de descuentos específicos a clientes
+model DescuentosCliente {
+  idDescuentoCliente Int      @id @default(autoincrement()) @map("id_descuento_cliente")
+  idDescuento        Int      @map("id_descuento")
+  idUsuario          Int      @map("id_usuario")
+  usosRealizados     Int      @default(0) @map("usos_realizados")
+  fechaAsignacion    DateTime @default(now()) @map("fecha_asignacion") @db.Timestamp(0)
+
+  // Relaciones (eliminación en cascada)
+  descuento Descuento @relation(fields: [idDescuento], references: [idDescuento], onDelete: Cascade, onUpdate: Cascade)
+  usuario   Usuario   @relation(fields: [idUsuario], references: [idUsuario], onDelete: Cascade, onUpdate: Cascade)
+
+  @@unique([idDescuento, idUsuario], name: "descuento_cliente_unico")
+  @@index([idDescuento])
+  @@index([idUsuario])
+  @@map("descuentos_clientes")
+}
+
+/// Tabla de historial de descuentos aplicados - Auditoría de uso de descuentos
+model HistorialDescuento {
+  idHistorialDescuento Int      @id @default(autoincrement()) @map("id_historial_descuento")
+  idDescuento          Int      @map("id_descuento")
+  idUsuario            Int      @map("id_usuario")
+  idVenta              Int      @map("id_venta")
+  valorAplicado        Decimal  @map("valor_aplicado") @db.Decimal(10, 2)
+  fechaUso             DateTime @default(now()) @map("fecha_uso") @db.Timestamp(0)
+
+  // Relaciones
+  descuento Descuento @relation(fields: [idDescuento], references: [idDescuento], onUpdate: Cascade)
+  usuario   Usuario   @relation(fields: [idUsuario], references: [idUsuario], onUpdate: Cascade)
+  venta     Venta     @relation(fields: [idVenta], references: [idVenta], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([idDescuento])
+  @@index([idVenta])
+  @@index([idUsuario])
+  @@index([fechaUso])
+  @@map("historial_descuentos")
+}
+
+// ============================================================================
+// MÓDULO: COMPRAS A PROVEEDORES
+// ============================================================================
+
+/// Tabla de compras - Registro de compras realizadas a proveedores
+model Compra {
+  idCompra          Int          @id @default(autoincrement()) @map("id_compra")
+  numeroCompra      String       @unique @map("numero_compra") @db.VarChar(50)
+  idProveedor       Int          @map("id_proveedor")
+  idUsuarioRegistro Int          @map("id_usuario_registro")
+  idEstadoPedido    Int          @default(8) @map("id_estado_pedido") // Estado inicial
+  fechaCompra       DateTime     @map("fecha_compra") @db.Date
+  fechaEntrega      DateTime?    @map("fecha_entrega") @db.Date
+  subtotal          Decimal      @map("subtotal") @db.Decimal(12, 2)
+  impuestos         Decimal      @default(0.00) @map("impuestos") @db.Decimal(12, 2)
+  descuento         Decimal      @default(0.00) @map("descuento") @db.Decimal(12, 2)
+  total             Decimal      @map("total") @db.Decimal(12, 2)
+  notas             String?      @map("notas") @db.Text
+  estado            EstadoCompra @default(pendiente) @map("estado")
+  creadoEn          DateTime     @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn     DateTime     @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  proveedor       Proveedor    @relation(fields: [idProveedor], references: [idProveedor], onUpdate: Cascade)
+  usuarioRegistro Usuario      @relation("CompraUsuarioRegistro", fields: [idUsuarioRegistro], references: [idUsuario], onUpdate: Cascade)
+  estadoPedido    EstadoPedido @relation(fields: [idEstadoPedido], references: [idEstadoPedido], onUpdate: Cascade)
+
+  // Relaciones subordinadas
+  detalleCompras DetalleCompra[]
+  movimientos    MovimientoInventario[]
+
+  @@index([estado])
+  @@index([numeroCompra])
+  @@index([idProveedor])
+  @@index([idUsuarioRegistro])
+  @@index([fechaCompra])
+  @@index([idEstadoPedido])
+  @@map("compras")
+}
+
+/// Tabla de detalle de compras - Líneas de productos en cada compra
+model DetalleCompra {
+  idDetalleCompra  Int      @id @default(autoincrement()) @map("id_detalle_compra")
+  idCompra         Int      @map("id_compra")
+  idVariante       Int      @map("id_variante")
+  cantidad         Decimal  @map("cantidad") @db.Decimal(10, 2)
+  cantidadRecibida Decimal  @default(0.00) @map("cantidad_recibida") @db.Decimal(10, 2)
+  precioUnitario   Decimal  @map("precio_unitario") @db.Decimal(10, 2)
+  descuentoLinea   Decimal  @default(0.00) @map("descuento_linea") @db.Decimal(12, 2)
+  subtotal         Decimal  @map("subtotal") @db.Decimal(12, 2)
+  totalLinea       Decimal  @map("total_linea") @db.Decimal(12, 2)
+  creadoEn         DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones (compra elimina en cascada)
+  compra   Compra           @relation(fields: [idCompra], references: [idCompra], onDelete: Cascade, onUpdate: Cascade)
+  variante VarianteProducto @relation(fields: [idVariante], references: [idVariante], onUpdate: Cascade)
+
+  @@index([idCompra])
+  @@index([idVariante])
+  @@map("detalle_compras")
+}
+
+// ============================================================================
+// MÓDULO: GESTIÓN DE INVENTARIO
+// ============================================================================
+
+/// Tabla de tipos de movimiento - Catálogo de tipos de movimiento de inventario
+model TipoMovimiento {
+  idTipoMovimiento Int                @id @default(autoincrement()) @map("id_tipo_movimiento")
+  nombreTipo       String             @unique @map("nombre_tipo") @db.VarChar(50)
+  tipo             TipoMovimientoEnum @map("tipo") // entrada, salida, ajuste
+  descripcion      String?            @map("descripcion") @db.Text
+  afectaCosto      Boolean            @default(false) @map("afecta_costo")
+  activo           Boolean            @default(true) @map("activo")
+  creadoEn         DateTime           @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones
+  ajustesInventario AjusteInventario[]
+  movimientos       MovimientoInventario[]
+
+  @@index([tipo])
+  @@index([activo])
+  @@map("tipos_movimiento")
+}
+
+/// Tabla de ajustes de inventario - Ajustes manuales al stock (mermas, robos, correcciones)
+model AjusteInventario {
+  idAjuste         Int          @id @default(autoincrement()) @map("id_ajuste")
+  numeroAjuste     String       @unique @map("numero_ajuste") @db.VarChar(50)
+  idTipoMovimiento Int          @map("id_tipo_movimiento")
+  usuarioRegistro  Int          @map("usuario_registro")
+  fechaAjuste      DateTime     @map("fecha_ajuste") @db.Date
+  motivo           String       @map("motivo") @db.Text
+  observaciones    String?      @map("observaciones") @db.Text
+  estado           EstadoAjuste @default(borrador) @map("estado")
+  creadoEn         DateTime     @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn    DateTime     @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  tipoMovimiento     TipoMovimiento @relation(fields: [idTipoMovimiento], references: [idTipoMovimiento], onUpdate: Cascade)
+  usuarioRegistroRef Usuario        @relation("AjusteUsuarioRegistro", fields: [usuarioRegistro], references: [idUsuario], onUpdate: Cascade)
+
+  // Relaciones subordinadas
+  detalleAjustes DetalleAjusteInventario[]
+  movimientos    MovimientoInventario[]
+
+  @@index([numeroAjuste])
+  @@index([fechaAjuste])
+  @@index([estado])
+  @@index([idTipoMovimiento])
+  @@index([usuarioRegistro])
+  @@map("ajustes_inventario")
+}
+
+/// Tabla de detalle de ajustes - Líneas de variantes ajustadas
+model DetalleAjusteInventario {
+  idDetalleAjuste Int      @id @default(autoincrement()) @map("id_detalle_ajuste")
+  idAjuste        Int      @map("id_ajuste")
+  idVariante      Int      @map("id_variante")
+  cantidadAjuste  Decimal  @map("cantidad_ajuste") @db.Decimal(10, 2) // +/- según el tipo
+  stockAnterior   Decimal  @map("stock_anterior") @db.Decimal(10, 2)
+  stockNuevo      Decimal  @map("stock_nuevo") @db.Decimal(10, 2)
+  costoUnitario   Decimal? @map("costo_unitario") @db.Decimal(10, 2)
+  observaciones   String?  @map("observaciones") @db.Text
+  creadoEn        DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones (ajuste elimina en cascada)
+  ajuste   AjusteInventario @relation(fields: [idAjuste], references: [idAjuste], onDelete: Cascade, onUpdate: Cascade)
+  variante VarianteProducto @relation(fields: [idVariante], references: [idVariante], onUpdate: Cascade)
+
+  @@index([idAjuste])
+  @@index([idVariante])
+  @@map("detalle_ajustes_inventario")
+}
+
+/// Tabla de movimientos de inventario - Registro histórico de todos los movimientos de stock
+/// Esta tabla es de AUDITORÍA: no se elimina, solo se agrega
+model MovimientoInventario {
+  idMovimiento     Int      @id @default(autoincrement()) @map("id_movimiento")
+  idVariante       Int      @map("id_variante")
+  idTipoMovimiento Int      @map("id_tipo_movimiento")
+  usuarioRegistro  Int      @map("usuario_registro")
+  cantidad         Decimal  @map("cantidad") @db.Decimal(10, 2)
+  stockAnterior    Decimal  @map("stock_anterior") @db.Decimal(10, 2)
+  stockNuevo       Decimal  @map("stock_nuevo") @db.Decimal(10, 2)
+  costoUnitario    Decimal? @map("costo_unitario") @db.Decimal(10, 2)
+  valorTotal       Decimal? @map("valor_total") @db.Decimal(12, 2)
+  motivo           String?  @map("motivo") @db.Text
+  fechaMovimiento  DateTime @default(now()) @map("fecha_movimiento") @db.Timestamp(0)
+  // Referencias opcionales al documento origen
+  idCompra         Int?     @map("id_compra")
+  idVenta          Int?     @map("id_venta")
+  idAjuste         Int?     @map("id_ajuste")
+
+  // Relaciones principales
+  variante           VarianteProducto @relation(fields: [idVariante], references: [idVariante], onUpdate: Cascade)
+  tipoMovimiento     TipoMovimiento   @relation(fields: [idTipoMovimiento], references: [idTipoMovimiento], onUpdate: Cascade)
+  usuarioRegistroRef Usuario          @relation("MovimientoUsuarioRegistro", fields: [usuarioRegistro], references: [idUsuario], onUpdate: Cascade)
+
+  // Relaciones opcionales con documentos origen
+  compra Compra?           @relation(fields: [idCompra], references: [idCompra], onDelete: SetNull, onUpdate: Cascade)
+  venta  Venta?            @relation(fields: [idVenta], references: [idVenta], onDelete: SetNull, onUpdate: Cascade)
+  ajuste AjusteInventario? @relation(fields: [idAjuste], references: [idAjuste], onDelete: SetNull, onUpdate: Cascade)
+
+  @@index([idVariante])
+  @@index([idTipoMovimiento])
+  @@index([fechaMovimiento])
+  @@index([idCompra])
+  @@index([idVenta])
+  @@index([idAjuste])
+  @@index([usuarioRegistro])
+  @@map("movimientos_inventario")
+}
+
+// ============================================================================
+// MÓDULO: MÉTODOS DE PAGO
+// ============================================================================
+
+/// Tabla de tipos de método de pago - Categorización de métodos (efectivo, electrónico, etc.)
+model TipoMetodoPago {
+  idTipoMetodo  Int      @id @default(autoincrement()) @map("id_tipo_metodo")
+  codigo        String   @unique @map("codigo") @db.VarChar(50)
+  nombre        String   @map("nombre") @db.VarChar(100)
+  descripcion   String?  @map("descripcion") @db.Text
+  activo        Boolean  @default(true) @map("activo")
+  creadoEn      DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones
+  metodosPago MetodoPago[]
+
+  @@index([codigo])
+  @@index([activo])
+  @@map("tipos_metodo_pago")
+}
+
+/// Tabla de métodos de pago - Métodos específicos (Efectivo, Visa, Mastercard, Nequi, etc.)
+model MetodoPago {
+  idMetodoPago       Int      @id @default(autoincrement()) @map("id_metodo_pago")
+  nombreMetodo       String   @unique @map("nombre_metodo") @db.VarChar(100)
+  descripcion        String?  @map("descripcion") @db.Text
+  idTipoMetodo       Int      @map("id_tipo_metodo")
+  requiereReferencia Boolean  @default(false) @map("requiere_referencia")
+  activo             Boolean  @default(true) @map("activo")
+  creadoEn           DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn      DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relación con tipo
+  tipoMetodo TipoMetodoPago @relation(fields: [idTipoMetodo], references: [idTipoMetodo], onUpdate: Cascade)
+
+  // Relaciones de uso
+  pagos        Pago[]
+  pagosDetalle PagoDetalle[]
+
+  @@index([idTipoMetodo])
+  @@index([activo])
+  @@map("metodos_pago")
+}
+
+// ============================================================================
+// MÓDULO: ESTADOS DE PEDIDO
+// ============================================================================
+
+/// Tabla de estados de pedido - Estados configurables para ventas y compras
+model EstadoPedido {
+  idEstadoPedido Int      @id @default(autoincrement()) @map("id_estado_pedido")
+  nombreEstado   String   @unique @map("nombre_estado") @db.VarChar(50)
+  descripcion    String?  @map("descripcion") @db.Text
+  color          String?  @map("color") @db.VarChar(20) // Color para UI (hex o nombre)
+  orden          Int      @default(0) @map("orden") // Orden de flujo
+  activo         Boolean  @default(true) @map("activo")
+  creadoEn       DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn  DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones
+  ventas  Venta[]
+  compras Compra[]
+
+  @@index([activo])
+  @@index([orden])
+  @@map("estados_pedido")
+}
+
+// ============================================================================
+// MÓDULO: VENTAS
+// ============================================================================
+
+/// Tabla de ventas - Registro principal de ventas realizadas
+model Venta {
+  idVenta              Int        @id @default(autoincrement()) @map("id_venta")
+  numeroFactura        String     @unique @map("numero_factura") @db.VarChar(50)
+  idUsuario            Int        @map("id_usuario") // Cliente
+  idUsuarioVendedor    Int?       @map("id_usuario_vendedor") // Vendedor (opcional)
+  idEstadoPedido       Int        @map("id_estado_pedido")
+  idDescuento          Int?       @map("id_descuento")
+  codigoDescuentoUsado String?    @map("codigo_descuento_usado") @db.VarChar(50)
+  direccionEntrega     String?    @map("direccion_entrega") @db.Text
+  tipoVenta            TipoVenta  @default(contado) @map("tipo_venta")
+  subtotal             Decimal    @map("subtotal") @db.Decimal(12, 2)
+  descuentoTotal       Decimal    @default(0.00) @map("descuento_total") @db.Decimal(12, 2)
+  impuestos            Decimal    @default(0.00) @map("impuestos") @db.Decimal(12, 2)
+  total                Decimal    @map("total") @db.Decimal(12, 2)
+  totalPagado          Decimal    @default(0.00) @map("total_pagado") @db.Decimal(12, 2)
+  saldoPendiente       Decimal    @map("saldo_pendiente") @db.Decimal(12, 2)
+  estadoPago           EstadoPago @default(pendiente) @map("estado_pago")
+  notas                String?    @map("notas") @db.Text
+  creadoEn             DateTime   @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn        DateTime   @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  usuarioCliente  Usuario      @relation("VentaUsuarioCliente", fields: [idUsuario], references: [idUsuario], onUpdate: Cascade)
+  usuarioVendedor Usuario?     @relation("VentaUsuarioVendedor", fields: [idUsuarioVendedor], references: [idUsuario], onUpdate: Cascade)
+  estadoPedido    EstadoPedido @relation(fields: [idEstadoPedido], references: [idEstadoPedido], onUpdate: Cascade)
+  descuento       Descuento?   @relation(fields: [idDescuento], references: [idDescuento], onDelete: SetNull, onUpdate: Cascade)
+
+  // Relaciones subordinadas
+  detalleVentas       DetalleVenta[]
+  pagos               Pago[]
+  credito             Credito?
+  devoluciones        Devolucion[]
+  historialDescuentos HistorialDescuento[]
+  movimientos         MovimientoInventario[]
+
+  @@index([numeroFactura])
+  @@index([idUsuario])
+  @@index([idUsuarioVendedor])
+  @@index([idDescuento])
+  @@index([creadoEn])
+  @@index([tipoVenta])
+  @@index([estadoPago])
+  @@index([idEstadoPedido])
+  @@map("ventas")
+}
+
+/// Tabla de detalle de ventas - Líneas de productos vendidos
+model DetalleVenta {
+  idDetalleVenta Int      @id @default(autoincrement()) @map("id_detalle_venta")
+  idVenta        Int      @map("id_venta")
+  idVariante     Int      @map("id_variante")
+  cantidad       Decimal  @map("cantidad") @db.Decimal(10, 2)
+  precioUnitario Decimal  @map("precio_unitario") @db.Decimal(10, 2)
+  descuentoLinea Decimal  @default(0.00) @map("descuento_linea") @db.Decimal(12, 2)
+  subtotal       Decimal  @map("subtotal") @db.Decimal(12, 2)
+  totalLinea     Decimal  @map("total_linea") @db.Decimal(12, 2)
+  creadoEn       DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones (venta elimina en cascada)
+  venta               Venta               @relation(fields: [idVenta], references: [idVenta], onDelete: Cascade, onUpdate: Cascade)
+  variante            VarianteProducto    @relation(fields: [idVariante], references: [idVariante], onUpdate: Cascade)
+  detalleDevoluciones DetalleDevolucion[]
+
+  @@index([idVenta])
+  @@index([idVariante])
+  @@map("detalle_ventas")
+}
+
+// ============================================================================
+// MÓDULO: PAGOS
+// ============================================================================
+
+/// Tabla de pagos - Registro de pagos realizados por ventas
+model Pago {
+  idPago          Int      @id @default(autoincrement()) @map("id_pago")
+  idVenta         Int      @map("id_venta")
+  idMetodoPago    Int      @map("id_metodo_pago") // Método principal
+  usuarioRegistro Int      @map("usuario_registro")
+  tipoPago        TipoPago @default(inicial) @map("tipo_pago")
+  monto           Decimal  @map("monto") @db.Decimal(12, 2)
+  saldoAnterior   Decimal  @map("saldo_anterior") @db.Decimal(12, 2)
+  saldoNuevo      Decimal  @map("saldo_nuevo") @db.Decimal(12, 2)
+  referencia      String?  @map("referencia") @db.VarChar(100)
+  notas           String?  @map("notas") @db.Text
+  fechaPago       DateTime @default(now()) @map("fecha_pago") @db.Timestamp(0)
+
+  // Relaciones principales
+  venta              Venta      @relation(fields: [idVenta], references: [idVenta], onDelete: Cascade, onUpdate: Cascade)
+  metodoPago         MetodoPago @relation(fields: [idMetodoPago], references: [idMetodoPago], onUpdate: Cascade)
+  usuarioRegistroRef Usuario    @relation("PagoUsuarioRegistro", fields: [usuarioRegistro], references: [idUsuario], onUpdate: Cascade)
+
+  // Detalles solo si el método es MIXTO
+  detalles PagoDetalle[]
+
+  @@index([idVenta])
+  @@index([tipoPago])
+  @@index([fechaPago])
+  @@index([idMetodoPago])
+  @@index([usuarioRegistro])
+  @@map("pagos")
+}
+
+/// Tabla de detalle de pago - Para pagos mixtos con múltiples métodos
+model PagoDetalle {
+  idPagoDetalle Int     @id @default(autoincrement()) @map("id_pago_detalle")
+  idPago        Int     @map("id_pago")
+  idMetodoPago  Int     @map("id_metodo_pago")
+  monto         Decimal @map("monto") @db.Decimal(12, 2)
+  referencia    String? @map("referencia") @db.VarChar(150)
+
+  // Relaciones (pago elimina en cascada)
+  pago       Pago       @relation(fields: [idPago], references: [idPago], onDelete: Cascade, onUpdate: Cascade)
+  metodoPago MetodoPago @relation(fields: [idMetodoPago], references: [idMetodoPago], onUpdate: Cascade)
+
+  @@index([idPago])
+  @@index([idMetodoPago])
+  @@map("pagos_detalle")
+}
+
+// ============================================================================
+// MÓDULO: CRÉDITOS
+// ============================================================================
+
+/// Tabla de créditos - Créditos otorgados a clientes por ventas a crédito
+model Credito {
+  idCredito        Int           @id @default(autoincrement()) @map("id_credito")
+  idVenta          Int           @unique @map("id_venta") // Un crédito por venta
+  idUsuario        Int           @map("id_usuario") // Cliente
+  usuarioRegistro  Int           @map("usuario_registro")
+  montoInicial     Decimal       @default(0.00) @map("monto_inicial") @db.Decimal(12, 2) // Abono inicial
+  montoCredito     Decimal       @map("monto_credito") @db.Decimal(12, 2) // Monto financiado
+  montoTotal       Decimal       @map("monto_total") @db.Decimal(12, 2)
+  totalAbonado     Decimal       @default(0.00) @map("total_abonado") @db.Decimal(12, 2)
+  saldoPendiente   Decimal       @map("saldo_pendiente") @db.Decimal(12, 2)
+  fechaInicio      DateTime      @map("fecha_inicio") @db.Date
+  fechaVencimiento DateTime?     @map("fecha_vencimiento") @db.Date
+  fechaUltimoPago  DateTime?     @map("fecha_ultimo_pago") @db.Date
+  diasMora         Int           @default(0) @map("dias_mora")
+  observaciones    String?       @map("observaciones") @db.Text
+  estado           EstadoCredito @default(activo) @map("estado")
+  creadoEn         DateTime      @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn    DateTime      @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  venta              Venta   @relation(fields: [idVenta], references: [idVenta], onDelete: Cascade, onUpdate: Cascade)
+  usuarioCliente     Usuario @relation("CreditoUsuarioCliente", fields: [idUsuario], references: [idUsuario], onUpdate: Cascade)
+  usuarioRegistroRef Usuario @relation("CreditoUsuarioRegistro", fields: [usuarioRegistro], references: [idUsuario], onUpdate: Cascade)
+
+  @@index([idVenta])
+  @@index([idUsuario])
+  @@index([estado])
+  @@index([fechaVencimiento])
+  @@index([saldoPendiente])
+  @@index([usuarioRegistro])
+  @@map("creditos")
+}
+
+/// Tabla resumen de créditos por cliente - Vista materializada para consultas rápidas
+model ClientesCreditoResumen {
+  idUsuario                Int       @id @map("id_usuario")
+  limiteCredito            Decimal   @default(0.00) @map("limite_credito") @db.Decimal(12, 2)
+  creditoTotal             Decimal   @default(0.00) @map("credito_total") @db.Decimal(12, 2)
+  saldoTotal               Decimal   @default(0.00) @map("saldo_total") @db.Decimal(12, 2)
+  totalAbonado             Decimal   @default(0.00) @map("total_abonado") @db.Decimal(12, 2)
+  cantidadCreditosActivos  Int       @default(0) @map("cantidad_creditos_activos")
+  cantidadCreditosPagados  Int       @default(0) @map("cantidad_creditos_pagados")
+  cantidadCreditosVencidos Int       @default(0) @map("cantidad_creditos_vencidos")
+  fechaUltimoCredito       DateTime? @map("fecha_ultimo_credito") @db.Date
+  fechaUltimoPago          DateTime? @map("fecha_ultimo_pago") @db.Date
+  fechaActualizacion       DateTime  @default(now()) @updatedAt @map("fecha_actualizacion") @db.Timestamp(0)
+
+  // Relación con usuario (eliminación en cascada)
+  usuario Usuario @relation(fields: [idUsuario], references: [idUsuario], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([saldoTotal])
+  @@index([limiteCredito])
+  @@map("clientes_credito_resumen")
+}
+
+// ============================================================================
+// MÓDULO: DEVOLUCIONES
+// ============================================================================
+
+/// Tabla de devoluciones - Registro de devoluciones de ventas
+model Devolucion {
+  idDevolucion        Int              @id @default(autoincrement()) @map("id_devolucion")
+  numeroDevolucion    String           @unique @map("numero_devolucion") @db.VarChar(50)
+  idVenta             Int              @map("id_venta")
+  idUsuario           Int              @map("id_usuario") // Cliente
+  usuarioRegistro     Int              @map("usuario_registro")
+  tipoDevolucion      TipoDevolucion   @map("tipo_devolucion")
+  motivo              String           @map("motivo") @db.Text
+  subtotalDevolucion  Decimal          @map("subtotal_devolucion") @db.Decimal(12, 2)
+  impuestosDevolucion Decimal          @default(0.00) @map("impuestos_devolucion") @db.Decimal(12, 2)
+  totalDevolucion     Decimal          @map("total_devolucion") @db.Decimal(12, 2)
+  fechaDevolucion     DateTime         @map("fecha_devolucion") @db.Date
+  observaciones       String?          @map("observaciones") @db.Text
+  estado              EstadoDevolucion @default(pendiente) @map("estado")
+  creadoEn            DateTime         @default(now()) @map("creado_en") @db.Timestamp(0)
+  actualizadoEn       DateTime         @default(now()) @updatedAt @map("actualizado_en") @db.Timestamp(0)
+
+  // Relaciones principales
+  venta              Venta   @relation(fields: [idVenta], references: [idVenta], onUpdate: Cascade)
+  usuarioCliente     Usuario @relation("DevolucionUsuarioCliente", fields: [idUsuario], references: [idUsuario], onUpdate: Cascade)
+  usuarioRegistroRef Usuario @relation("DevolucionUsuarioRegistro", fields: [usuarioRegistro], references: [idUsuario], onUpdate: Cascade)
+
+  // Relaciones subordinadas
+  detalleDevoluciones DetalleDevolucion[]
+
+  @@index([numeroDevolucion])
+  @@index([idVenta])
+  @@index([idUsuario])
+  @@index([estado])
+  @@index([fechaDevolucion])
+  @@index([usuarioRegistro])
+  @@map("devoluciones")
+}
+
+/// Tabla de detalle de devoluciones - Líneas de productos devueltos
+model DetalleDevolucion {
+  idDetalleDevolucion Int      @id @default(autoincrement()) @map("id_detalle_devolucion")
+  idDevolucion        Int      @map("id_devolucion")
+  idDetalleVenta      Int      @map("id_detalle_venta") // Referencia a línea original
+  idVariante          Int      @map("id_variante")
+  cantidadDevuelta    Decimal  @map("cantidad_devuelta") @db.Decimal(10, 2)
+  precioUnitario      Decimal  @map("precio_unitario") @db.Decimal(10, 2)
+  subtotal            Decimal  @map("subtotal") @db.Decimal(12, 2)
+  motivoLinea         String?  @map("motivo_linea") @db.Text
+  creadoEn            DateTime @default(now()) @map("creado_en") @db.Timestamp(0)
+
+  // Relaciones (devolución elimina en cascada)
+  devolucion   Devolucion       @relation(fields: [idDevolucion], references: [idDevolucion], onDelete: Cascade, onUpdate: Cascade)
+  detalleVenta DetalleVenta     @relation(fields: [idDetalleVenta], references: [idDetalleVenta], onUpdate: Cascade)
+  variante     VarianteProducto @relation(fields: [idVariante], references: [idVariante], onUpdate: Cascade)
+
+  @@index([idDevolucion])
+  @@index([idDetalleVenta])
+  @@index([idVariante])
+  @@map("detalle_devoluciones")
+}
+
+// ============================================================================
+// ENUMERACIONES (ENUMS)
+// ============================================================================
+
+/// Estados posibles para un usuario
+enum EstadoUsuario {
+  activo // Usuario puede operar normalmente
+  inactivo // Usuario deshabilitado temporalmente
+  bloqueado // Usuario bloqueado por seguridad
+}
+
+/// Estados para catálogos generales (categorías, proveedores, colores, tallas)
+enum EstadoCatalogo {
+  activo // Visible y disponible
+  inactivo // Oculto pero no eliminado
+}
+
+/// Estados específicos para productos
+enum EstadoProducto {
+  activo // Producto disponible para venta
+  inactivo // Producto temporalmente no disponible
+  descontinuado // Producto eliminado del catálogo
+}
+
+/// Tipos de talla según el contexto de uso
+enum TipoTalla {
+  numerica // Ej: 6, 8, 10, 12
+  alfabetica // Ej: XS, S, M, L, XL
+  otra // Personalizada
+  bebe // Tallas de bebé (0-3m, 3-6m, etc.)
+  nino // Tallas de niño
+  mujer // Tallas específicas mujer
+  hombre // Tallas específicas hombre
+  adulto // Tallas genéricas adulto
+  calzado // Tallas de calzado (35, 36, 37...)
+  especial // Tallas especiales (Plus, Petite, etc.)
+}
+
+/// Tipos de descuento
+enum TipoDescuento {
+  porcentaje // Descuento porcentual (ej: 10%)
+  valor_fijo // Descuento de valor fijo (ej: $5.000)
+}
+
+/// A qué aplica el descuento
+enum AplicaDescuento {
+  total_venta // Aplica al total de la venta
+  categoria // Aplica a productos de una categoría
+  producto // Aplica a un producto específico
+  cliente // Descuento exclusivo para un cliente
+}
+
+/// Estados de un descuento
+enum EstadoDescuento {
+  activo // Descuento disponible
+  inactivo // Descuento deshabilitado
+  vencido // Descuento expirado por fecha
+}
+
+/// Estados de una compra a proveedor
+enum EstadoCompra {
+  pendiente // Compra registrada, pendiente de recibir
+  recibida // Compra completamente recibida
+  parcial // Compra parcialmente recibida
+  cancelada // Compra cancelada
+}
+
+/// Tipos de movimiento de inventario
+enum TipoMovimientoEnum {
+  entrada // Aumenta el stock
+  salida // Disminuye el stock
+  ajuste // Corrección (puede aumentar o disminuir)
+}
+
+/// Estados de un ajuste de inventario
+enum EstadoAjuste {
+  borrador // Ajuste en edición
+  aplicado // Ajuste aplicado al inventario
+  cancelado // Ajuste cancelado
+}
+
+/// Tipos de venta según forma de pago
+enum TipoVenta {
+  contado // Pago completo al momento
+  mixto // Pago parcial + crédito
+  credito // Todo financiado
+}
+
+/// Estados de pago de una venta
+enum EstadoPago {
+  pendiente // Sin pagos
+  parcial // Pagos parciales
+  pagado // Totalmente pagado
+}
+
+/// Tipos de pago registrado
+enum TipoPago {
+  inicial // Primer pago de la venta
+  abono // Abono a cuenta
+  liquidacion // Pago final que cancela la deuda
+}
+
+/// Estados de un crédito
+enum EstadoCredito {
+  activo // Crédito vigente con saldo
+  pagado // Crédito completamente pagado
+  vencido // Crédito vencido sin pagar
+  cancelado // Crédito anulado
+}
+
+/// Tipos de devolución
+enum TipoDevolucion {
+  total // Devolución completa de la venta
+  parcial // Devolución de algunos productos
+}
+
+/// Estados de una devolución
+enum EstadoDevolucion {
+  pendiente // En espera de revisión
+  aprobada // Aprobada, pendiente de procesar
+  rechazada // Devolución rechazada
+  procesada // Devolución completada
+}

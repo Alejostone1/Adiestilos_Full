@@ -1,0 +1,861 @@
+
+
+npx prisma migrate dev --name init
+npx prisma generate
+npx prisma db seed
+npx prisma studio
+
+-- =====================================================
+-- SCRIPT SQL PARA MYSQL - SISTEMA DE INVENTARIO Y VENTAS
+-- Basado en el modelo Prisma proporcionado
+-- Sintaxis limpia sin backticks
+-- =====================================================
+
+CREATE DATABASE adiweb
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_spanish_ci;
+
+USE adiweb;
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- =====================================================
+-- ELIMINACION DE TABLAS EXISTENTES (orden inverso)
+-- =====================================================
+DROP TABLE IF EXISTS detalle_devoluciones;
+DROP TABLE IF EXISTS devoluciones;
+DROP TABLE IF EXISTS clientes_credito_resumen;
+DROP TABLE IF EXISTS creditos;
+DROP TABLE IF EXISTS detalle_ventas;
+DROP TABLE IF EXISTS pagos_detalle;
+DROP TABLE IF EXISTS pagos;
+DROP TABLE IF EXISTS ventas;
+DROP TABLE IF EXISTS estados_pedido;
+DROP TABLE IF EXISTS metodos_pago;
+DROP TABLE IF EXISTS tipos_metodo_pago;
+DROP TABLE IF EXISTS movimientos_inventario;
+DROP TABLE IF EXISTS detalle_ajustes_inventario;
+DROP TABLE IF EXISTS ajustes_inventario;
+DROP TABLE IF EXISTS tipos_movimiento;
+DROP TABLE IF EXISTS detalle_compras;
+DROP TABLE IF EXISTS compras;
+DROP TABLE IF EXISTS historial_descuentos;
+DROP TABLE IF EXISTS descuentos_clientes;
+DROP TABLE IF EXISTS descuentos;
+DROP TABLE IF EXISTS imagenes_variantes;
+DROP TABLE IF EXISTS variantes_producto;
+DROP TABLE IF EXISTS imagenes_productos;
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS tallas;
+DROP TABLE IF EXISTS colores;
+DROP TABLE IF EXISTS proveedores;
+DROP TABLE IF EXISTS categorias;
+DROP TABLE IF EXISTS usuarios;
+DROP TABLE IF EXISTS roles;
+
+SET FOREIGN_KEY_CHECKS = 1;
+
+-- =====================================================
+-- TABLA: roles
+-- =====================================================
+CREATE TABLE roles (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_rol VARCHAR(50) NOT NULL UNIQUE,
+    descripcion TEXT NULL,
+    permisos JSON NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_nombre_rol (nombre_rol)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: usuarios
+-- =====================================================
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombres VARCHAR(100) NOT NULL,
+    apellidos VARCHAR(100) NOT NULL,
+    usuario VARCHAR(100) NOT NULL UNIQUE,
+    correo_electronico VARCHAR(100) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    telefono VARCHAR(20) NULL,
+    direccion TEXT NULL,
+    id_rol INT NOT NULL DEFAULT 2,
+    estado ENUM('activo', 'inactivo', 'bloqueado') DEFAULT 'activo',
+    ultima_conexion DATETIME NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_usuario (usuario),
+    INDEX idx_correo_electronico (correo_electronico),
+    INDEX idx_id_rol (id_rol),
+    INDEX idx_estado (estado),
+    
+    CONSTRAINT fk_usuarios_rol FOREIGN KEY (id_rol) 
+        REFERENCES roles(id_rol) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: categorias
+-- =====================================================
+CREATE TABLE categorias (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_categoria VARCHAR(100) NOT NULL UNIQUE,
+    descripcion TEXT NULL,
+    imagen_categoria VARCHAR(255) NULL,
+    categoria_padre INT NULL,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_estado (estado),
+    INDEX idx_categoria_padre (categoria_padre),
+    
+    CONSTRAINT fk_categorias_padre FOREIGN KEY (categoria_padre) 
+        REFERENCES categorias(id_categoria) ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: proveedores
+-- =====================================================
+CREATE TABLE proveedores (
+    id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_proveedor VARCHAR(100) NOT NULL,
+    nit_cc VARCHAR(20) NOT NULL UNIQUE,
+    contacto VARCHAR(100) NULL,
+    telefono VARCHAR(20) NULL,
+    correo_electronico VARCHAR(100) NULL,
+    direccion TEXT NULL,
+    imagen_proveedor VARCHAR(255) NULL,
+    notas TEXT NULL,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_nit_cc (nit_cc),
+    INDEX idx_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: colores
+-- =====================================================
+CREATE TABLE colores (
+    id_color INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_color VARCHAR(50) NOT NULL UNIQUE,
+    codigo_hex VARCHAR(7) NULL,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: tallas
+-- =====================================================
+CREATE TABLE tallas (
+    id_talla INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_talla VARCHAR(80) NOT NULL UNIQUE,
+    tipo_talla ENUM('numerica', 'alfabetica', 'otra', 'bebe', 'nino', 'mujer', 'hombre', 'adulto', 'calzado', 'especial') DEFAULT 'alfabetica',
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_tipo_talla (tipo_talla),
+    INDEX idx_estado (estado)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: productos
+-- =====================================================
+CREATE TABLE productos (
+    id_producto INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_referencia VARCHAR(100) NOT NULL UNIQUE,
+    nombre_producto VARCHAR(150) NOT NULL,
+    descripcion TEXT NULL,
+    precio_venta_sugerido DECIMAL(10,2) NOT NULL,
+    unidad_medida VARCHAR(20) DEFAULT 'unidad',
+    tiene_colores BOOLEAN DEFAULT FALSE,
+    tiene_tallas BOOLEAN DEFAULT FALSE,
+    datos_tecnicos JSON NULL,
+    id_categoria INT NOT NULL,
+    id_proveedor INT NULL,
+    estado ENUM('activo', 'inactivo', 'descontinuado') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_codigo_referencia (codigo_referencia),
+    INDEX idx_id_categoria (id_categoria),
+    INDEX idx_id_proveedor (id_proveedor),
+    INDEX idx_estado (estado),
+    INDEX idx_nombre_producto (nombre_producto),
+    
+    CONSTRAINT fk_productos_categoria FOREIGN KEY (id_categoria) 
+        REFERENCES categorias(id_categoria) ON UPDATE CASCADE,
+    CONSTRAINT fk_productos_proveedor FOREIGN KEY (id_proveedor) 
+        REFERENCES proveedores(id_proveedor) ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: imagenes_productos
+-- =====================================================
+CREATE TABLE imagenes_productos (
+    id_imagen INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT NOT NULL,
+    ruta_imagen VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255) NULL,
+    es_principal BOOLEAN DEFAULT FALSE,
+    orden INT DEFAULT 0,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_producto (id_producto),
+    INDEX idx_es_principal (es_principal),
+    
+    CONSTRAINT fk_imagenes_producto FOREIGN KEY (id_producto) 
+        REFERENCES productos(id_producto) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: variantes_producto
+-- =====================================================
+CREATE TABLE variantes_producto (
+    id_variante INT AUTO_INCREMENT PRIMARY KEY,
+    id_producto INT NOT NULL,
+    id_color INT NULL,
+    id_talla INT NULL,
+    codigo_sku VARCHAR(100) NOT NULL UNIQUE,
+    precio_costo DECIMAL(10,2) DEFAULT 0.00,
+    precio_venta DECIMAL(10,2) NOT NULL,
+    cantidad_stock DECIMAL(10,2) DEFAULT 0.00,
+    stock_minimo DECIMAL(10,2) DEFAULT 0.00,
+    stock_maximo DECIMAL(10,2) DEFAULT 0.00,
+    estado ENUM('activo', 'inactivo') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_codigo_sku (codigo_sku),
+    INDEX idx_id_producto (id_producto),
+    INDEX idx_cantidad_stock (cantidad_stock),
+    INDEX idx_estado (estado),
+    INDEX variantes_producto_idColor_fkey (id_color),
+    INDEX variantes_producto_idTalla_fkey (id_talla),
+    
+    UNIQUE KEY variante_unica (id_producto, id_color, id_talla),
+    
+    CONSTRAINT fk_variantes_producto FOREIGN KEY (id_producto) 
+        REFERENCES productos(id_producto) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_variantes_color FOREIGN KEY (id_color) 
+        REFERENCES colores(id_color) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_variantes_talla FOREIGN KEY (id_talla) 
+        REFERENCES tallas(id_talla) ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: imagenes_variantes
+-- =====================================================
+CREATE TABLE imagenes_variantes (
+    id_imagen_variante INT AUTO_INCREMENT PRIMARY KEY,
+    id_variante INT NOT NULL,
+    ruta_imagen VARCHAR(255) NOT NULL,
+    descripcion VARCHAR(255) NULL,
+    es_principal BOOLEAN DEFAULT FALSE,
+    orden INT DEFAULT 0,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_variante (id_variante),
+    INDEX idx_es_principal (es_principal),
+    
+    CONSTRAINT fk_imagenes_variante FOREIGN KEY (id_variante) 
+        REFERENCES variantes_producto(id_variante) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: descuentos
+-- =====================================================
+CREATE TABLE descuentos (
+    id_descuento INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_descuento VARCHAR(100) NOT NULL,
+    descripcion TEXT NULL,
+    tipo_descuento ENUM('porcentaje', 'valor_fijo') NOT NULL,
+    valor_descuento DECIMAL(10,2) NOT NULL,
+    aplica_a ENUM('total_venta', 'categoria', 'producto', 'cliente') DEFAULT 'total_venta',
+    id_categoria INT NULL,
+    id_producto INT NULL,
+    codigo_descuento VARCHAR(50) NULL UNIQUE,
+    requiere_codigo BOOLEAN DEFAULT FALSE,
+    fecha_inicio DATE NULL,
+    fecha_fin DATE NULL,
+    monto_minimo_compra DECIMAL(10,2) DEFAULT 0.00,
+    cantidad_maxima_usos INT NULL,
+    usos_actuales INT DEFAULT 0,
+    uso_por_cliente INT DEFAULT 1,
+    usuario_creacion INT NOT NULL,
+    estado ENUM('activo', 'inactivo', 'vencido') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_codigo_descuento (codigo_descuento),
+    INDEX idx_tipo_descuento (tipo_descuento),
+    INDEX idx_estado (estado),
+    INDEX idx_fechas (fecha_inicio, fecha_fin),
+    INDEX idx_aplica_a (aplica_a),
+    INDEX descuentos_idCategoria_fkey (id_categoria),
+    INDEX descuentos_idProducto_fkey (id_producto),
+    INDEX descuentos_usuarioCreacion_fkey (usuario_creacion),
+    
+    CONSTRAINT fk_descuentos_categoria FOREIGN KEY (id_categoria) 
+        REFERENCES categorias(id_categoria) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_descuentos_producto FOREIGN KEY (id_producto) 
+        REFERENCES productos(id_producto) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_descuentos_usuario FOREIGN KEY (usuario_creacion) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: descuentos_clientes
+-- =====================================================
+CREATE TABLE descuentos_clientes (
+    id_descuento_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    id_descuento INT NOT NULL,
+    id_usuario INT NOT NULL,
+    usos_realizados INT DEFAULT 0,
+    fecha_asignacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    UNIQUE KEY descuento_cliente_unico (id_descuento, id_usuario),
+    INDEX idx_id_descuento (id_descuento),
+    INDEX idx_id_usuario (id_usuario),
+    
+    CONSTRAINT fk_descuentos_clientes_descuento FOREIGN KEY (id_descuento) 
+        REFERENCES descuentos(id_descuento) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_descuentos_clientes_usuario FOREIGN KEY (id_usuario) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: tipos_movimiento
+-- =====================================================
+CREATE TABLE tipos_movimiento (
+    id_tipo_movimiento INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_tipo VARCHAR(50) NOT NULL UNIQUE,
+    tipo ENUM('entrada', 'salida', 'ajuste') NOT NULL,
+    descripcion TEXT NULL,
+    afecta_costo BOOLEAN DEFAULT FALSE,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: tipos_metodo_pago
+-- =====================================================
+CREATE TABLE tipos_metodo_pago (
+    id_tipo_metodo INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) NOT NULL UNIQUE,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT NULL,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_codigo (codigo),
+    INDEX idx_activo (activo)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: metodos_pago
+-- =====================================================
+CREATE TABLE metodos_pago (
+    id_metodo_pago INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_metodo VARCHAR(100) NOT NULL UNIQUE,
+    descripcion TEXT NULL,
+    id_tipo_metodo INT NOT NULL,
+    requiere_referencia BOOLEAN DEFAULT FALSE,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_tipo_metodo (id_tipo_metodo),
+    INDEX idx_activo (activo),
+    
+    CONSTRAINT fk_metodos_pago_tipo FOREIGN KEY (id_tipo_metodo) 
+        REFERENCES tipos_metodo_pago(id_tipo_metodo) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: estados_pedido
+-- =====================================================
+CREATE TABLE estados_pedido (
+    id_estado_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_estado VARCHAR(50) NOT NULL UNIQUE,
+    descripcion TEXT NULL,
+    color VARCHAR(20) NULL,
+    orden INT DEFAULT 0,
+    activo BOOLEAN DEFAULT TRUE,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_activo (activo),
+    INDEX idx_orden (orden)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: compras
+-- =====================================================
+CREATE TABLE compras (
+    id_compra INT AUTO_INCREMENT PRIMARY KEY,
+    numero_compra VARCHAR(50) NOT NULL UNIQUE,
+    id_proveedor INT NOT NULL,
+    id_usuario_registro INT NOT NULL,
+    id_estado_pedido INT DEFAULT 8,
+    fecha_compra DATE NOT NULL,
+    fecha_entrega DATE NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    impuestos DECIMAL(12,2) DEFAULT 0.00,
+    descuento DECIMAL(12,2) DEFAULT 0.00,
+    total DECIMAL(12,2) NOT NULL,
+    estado ENUM('pendiente', 'recibida', 'parcial', 'cancelada') DEFAULT 'pendiente',
+    notas TEXT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_estado (estado),
+    INDEX idx_numero_compra (numero_compra),
+    INDEX idx_id_proveedor (id_proveedor),
+    INDEX idx_fecha_compra (fecha_compra),
+    INDEX idx_id_estado_pedido (id_estado_pedido),
+    INDEX compras_idUsuarioRegistro_fkey (id_usuario_registro),
+    
+    CONSTRAINT fk_compras_proveedor FOREIGN KEY (id_proveedor) 
+        REFERENCES proveedores(id_proveedor) ON UPDATE CASCADE,
+    CONSTRAINT fk_compras_usuario FOREIGN KEY (id_usuario_registro) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE,
+    CONSTRAINT fk_compras_estado_pedido FOREIGN KEY (id_estado_pedido) 
+        REFERENCES estados_pedido(id_estado_pedido) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: detalle_compras
+-- =====================================================
+CREATE TABLE detalle_compras (
+    id_detalle_compra INT AUTO_INCREMENT PRIMARY KEY,
+    id_compra INT NOT NULL,
+    id_variante INT NOT NULL,
+    cantidad DECIMAL(10,2) NOT NULL,
+    cantidad_recibida DECIMAL(10,2) DEFAULT 0.00,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    descuento_linea DECIMAL(12,2) DEFAULT 0.00,
+    subtotal DECIMAL(12,2) NOT NULL,
+    total_linea DECIMAL(12,2) NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_compra (id_compra),
+    INDEX idx_id_variante (id_variante),
+    
+    CONSTRAINT fk_detalle_compras_compra FOREIGN KEY (id_compra) 
+        REFERENCES compras(id_compra) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_detalle_compras_variante FOREIGN KEY (id_variante) 
+        REFERENCES variantes_producto(id_variante) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: ajustes_inventario
+-- =====================================================
+CREATE TABLE ajustes_inventario (
+    id_ajuste INT AUTO_INCREMENT PRIMARY KEY,
+    numero_ajuste VARCHAR(50) NOT NULL UNIQUE,
+    id_tipo_movimiento INT NOT NULL,
+    usuario_registro INT NOT NULL,
+    fecha_ajuste DATE NOT NULL,
+    motivo TEXT NOT NULL,
+    observaciones TEXT NULL,
+    estado ENUM('borrador', 'aplicado', 'cancelado') DEFAULT 'borrador',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_numero_ajuste (numero_ajuste),
+    INDEX idx_fecha_ajuste (fecha_ajuste),
+    INDEX idx_estado (estado),
+    INDEX idx_id_tipo_movimiento (id_tipo_movimiento),
+    INDEX ajustes_inventario_usuarioRegistro_fkey (usuario_registro),
+    
+    CONSTRAINT fk_ajustes_tipo_movimiento FOREIGN KEY (id_tipo_movimiento) 
+        REFERENCES tipos_movimiento(id_tipo_movimiento) ON UPDATE CASCADE,
+    CONSTRAINT fk_ajustes_usuario FOREIGN KEY (usuario_registro) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: detalle_ajustes_inventario
+-- =====================================================
+CREATE TABLE detalle_ajustes_inventario (
+    id_detalle_ajuste INT AUTO_INCREMENT PRIMARY KEY,
+    id_ajuste INT NOT NULL,
+    id_variante INT NOT NULL,
+    cantidad_ajuste DECIMAL(10,2) NOT NULL,
+    stock_anterior DECIMAL(10,2) NOT NULL,
+    stock_nuevo DECIMAL(10,2) NOT NULL,
+    costo_unitario DECIMAL(10,2) NULL,
+    observaciones TEXT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_ajuste (id_ajuste),
+    INDEX idx_id_variante (id_variante),
+    
+    CONSTRAINT fk_detalle_ajustes_ajuste FOREIGN KEY (id_ajuste) 
+        REFERENCES ajustes_inventario(id_ajuste) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_detalle_ajustes_variante FOREIGN KEY (id_variante) 
+        REFERENCES variantes_producto(id_variante) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: ventas
+-- =====================================================
+CREATE TABLE ventas (
+    id_venta INT AUTO_INCREMENT PRIMARY KEY,
+    numero_factura VARCHAR(50) NOT NULL UNIQUE,
+    id_usuario INT NOT NULL,
+    id_usuario_vendedor INT NULL,
+    id_estado_pedido INT NOT NULL,
+    id_descuento INT NULL,
+    tipo_venta ENUM('contado', 'mixto', 'credito') DEFAULT 'contado',
+    subtotal DECIMAL(12,2) NOT NULL,
+    descuento_total DECIMAL(12,2) DEFAULT 0.00,
+    impuestos DECIMAL(12,2) DEFAULT 0.00,
+    total DECIMAL(12,2) NOT NULL,
+    total_pagado DECIMAL(12,2) DEFAULT 0.00,
+    saldo_pendiente DECIMAL(12,2) NOT NULL,
+    estado_pago ENUM('pendiente', 'parcial', 'pagado') DEFAULT 'pendiente',
+    codigo_descuento_usado VARCHAR(50) NULL,
+    direccion_entrega TEXT NULL,
+    notas TEXT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_numero_factura (numero_factura),
+    INDEX idx_id_usuario (id_usuario),
+    INDEX idx_id_usuario_vendedor (id_usuario_vendedor),
+    INDEX idx_id_descuento (id_descuento),
+    INDEX idx_creado_en (creado_en),
+    INDEX idx_tipo_venta (tipo_venta),
+    INDEX idx_estado_pago (estado_pago),
+    INDEX idx_id_estado_pedido (id_estado_pedido),
+    
+    CONSTRAINT fk_ventas_usuario FOREIGN KEY (id_usuario) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE,
+    CONSTRAINT fk_ventas_vendedor FOREIGN KEY (id_usuario_vendedor) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_ventas_estado_pedido FOREIGN KEY (id_estado_pedido) 
+        REFERENCES estados_pedido(id_estado_pedido) ON UPDATE CASCADE,
+    CONSTRAINT fk_ventas_descuento FOREIGN KEY (id_descuento) 
+        REFERENCES descuentos(id_descuento) ON UPDATE CASCADE ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: detalle_ventas
+-- =====================================================
+CREATE TABLE detalle_ventas (
+    id_detalle_venta INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT NOT NULL,
+    id_variante INT NOT NULL,
+    cantidad DECIMAL(10,2) NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    descuento_linea DECIMAL(12,2) DEFAULT 0.00,
+    subtotal DECIMAL(12,2) NOT NULL,
+    total_linea DECIMAL(12,2) NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_venta (id_venta),
+    INDEX idx_id_variante (id_variante),
+    
+    CONSTRAINT fk_detalle_ventas_venta FOREIGN KEY (id_venta) 
+        REFERENCES ventas(id_venta) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_detalle_ventas_variante FOREIGN KEY (id_variante) 
+        REFERENCES variantes_producto(id_variante) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: historial_descuentos
+-- =====================================================
+CREATE TABLE historial_descuentos (
+    id_historial_descuento INT AUTO_INCREMENT PRIMARY KEY,
+    id_descuento INT NOT NULL,
+    id_usuario INT NOT NULL,
+    id_venta INT NOT NULL,
+    valor_aplicado DECIMAL(10,2) NOT NULL,
+    fecha_uso TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_descuento (id_descuento),
+    INDEX idx_id_venta (id_venta),
+    INDEX idx_id_usuario (id_usuario),
+    INDEX idx_fecha_uso (fecha_uso),
+    
+    CONSTRAINT fk_historial_descuento FOREIGN KEY (id_descuento) 
+        REFERENCES descuentos(id_descuento) ON UPDATE CASCADE,
+    CONSTRAINT fk_historial_usuario FOREIGN KEY (id_usuario) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE,
+    CONSTRAINT fk_historial_venta FOREIGN KEY (id_venta) 
+        REFERENCES ventas(id_venta) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: pagos
+-- =====================================================
+CREATE TABLE pagos (
+    id_pago INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT NOT NULL,
+    id_metodo_pago INT NOT NULL,
+    tipo_pago ENUM('inicial', 'abono', 'liquidacion') DEFAULT 'inicial',
+    monto DECIMAL(12,2) NOT NULL,
+    saldo_anterior DECIMAL(12,2) NOT NULL,
+    saldo_nuevo DECIMAL(12,2) NOT NULL,
+    referencia VARCHAR(100) NULL,
+    notas TEXT NULL,
+    usuario_registro INT NOT NULL,
+    fecha_pago TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_venta (id_venta),
+    INDEX idx_tipo_pago (tipo_pago),
+    INDEX idx_fecha_pago (fecha_pago),
+    INDEX idx_id_metodo_pago (id_metodo_pago),
+    INDEX pagos_usuarioRegistro_fkey (usuario_registro),
+    
+    CONSTRAINT fk_pagos_venta FOREIGN KEY (id_venta) 
+        REFERENCES ventas(id_venta) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_pagos_metodo FOREIGN KEY (id_metodo_pago) 
+        REFERENCES metodos_pago(id_metodo_pago) ON UPDATE CASCADE,
+    CONSTRAINT fk_pagos_usuario FOREIGN KEY (usuario_registro) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: pagos_detalle
+-- =====================================================
+CREATE TABLE pagos_detalle (
+    id_pago_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    id_pago INT NOT NULL,
+    id_metodo_pago INT NOT NULL,
+    monto DECIMAL(12,2) NOT NULL,
+    referencia VARCHAR(150) NULL,
+    
+    INDEX idx_id_pago (id_pago),
+    INDEX idx_id_metodo_pago (id_metodo_pago),
+    
+    CONSTRAINT fk_pagos_detalle_pago FOREIGN KEY (id_pago) 
+        REFERENCES pagos(id_pago) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_pagos_detalle_metodo FOREIGN KEY (id_metodo_pago) 
+        REFERENCES metodos_pago(id_metodo_pago) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: movimientos_inventario
+-- =====================================================
+CREATE TABLE movimientos_inventario (
+    id_movimiento INT AUTO_INCREMENT PRIMARY KEY,
+    id_variante INT NOT NULL,
+    id_tipo_movimiento INT NOT NULL,
+    id_compra INT NULL,
+    id_venta INT NULL,
+    id_ajuste INT NULL,
+    cantidad DECIMAL(10,2) NOT NULL,
+    stock_anterior DECIMAL(10,2) NOT NULL,
+    stock_nuevo DECIMAL(10,2) NOT NULL,
+    costo_unitario DECIMAL(10,2) NULL,
+    valor_total DECIMAL(12,2) NULL,
+    motivo TEXT NULL,
+    usuario_registro INT NOT NULL,
+    fecha_movimiento TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_variante (id_variante),
+    INDEX idx_id_tipo_movimiento (id_tipo_movimiento),
+    INDEX idx_fecha_movimiento (fecha_movimiento),
+    INDEX idx_id_compra (id_compra),
+    INDEX idx_id_venta (id_venta),
+    INDEX idx_id_ajuste (id_ajuste),
+    INDEX movimientos_inventario_usuarioRegistro_fkey (usuario_registro),
+    
+    CONSTRAINT fk_movimientos_variante FOREIGN KEY (id_variante) 
+        REFERENCES variantes_producto(id_variante) ON UPDATE CASCADE,
+    CONSTRAINT fk_movimientos_tipo FOREIGN KEY (id_tipo_movimiento) 
+        REFERENCES tipos_movimiento(id_tipo_movimiento) ON UPDATE CASCADE,
+    CONSTRAINT fk_movimientos_compra FOREIGN KEY (id_compra) 
+        REFERENCES compras(id_compra) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_movimientos_venta FOREIGN KEY (id_venta) 
+        REFERENCES ventas(id_venta) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_movimientos_ajuste FOREIGN KEY (id_ajuste) 
+        REFERENCES ajustes_inventario(id_ajuste) ON UPDATE CASCADE ON DELETE SET NULL,
+    CONSTRAINT fk_movimientos_usuario FOREIGN KEY (usuario_registro) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: creditos
+-- =====================================================
+CREATE TABLE creditos (
+    id_credito INT AUTO_INCREMENT PRIMARY KEY,
+    id_venta INT NOT NULL UNIQUE,
+    id_usuario INT NOT NULL,
+    usuario_registro INT NOT NULL,
+    monto_total DECIMAL(12,2) NOT NULL,
+    monto_inicial DECIMAL(12,2) DEFAULT 0.00,
+    monto_credito DECIMAL(12,2) NOT NULL,
+    total_abonado DECIMAL(12,2) DEFAULT 0.00,
+    saldo_pendiente DECIMAL(12,2) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_vencimiento DATE NULL,
+    fecha_ultimo_pago DATE NULL,
+    dias_mora INT DEFAULT 0,
+    observaciones TEXT NULL,
+    estado ENUM('activo', 'pagado', 'vencido', 'cancelado') DEFAULT 'activo',
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_venta (id_venta),
+    INDEX idx_id_usuario (id_usuario),
+    INDEX idx_estado (estado),
+    INDEX idx_fecha_vencimiento (fecha_vencimiento),
+    INDEX idx_saldo_pendiente (saldo_pendiente),
+    INDEX creditos_usuarioRegistro_fkey (usuario_registro),
+    
+    CONSTRAINT fk_creditos_venta FOREIGN KEY (id_venta) 
+        REFERENCES ventas(id_venta) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_creditos_usuario FOREIGN KEY (id_usuario) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE,
+    CONSTRAINT fk_creditos_usuario_registro FOREIGN KEY (usuario_registro) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: clientes_credito_resumen
+-- =====================================================
+CREATE TABLE clientes_credito_resumen (
+    id_usuario INT PRIMARY KEY,
+    limite_credito DECIMAL(12,2) DEFAULT 0.00,
+    credito_total DECIMAL(12,2) DEFAULT 0.00,
+    saldo_total DECIMAL(12,2) DEFAULT 0.00,
+    total_abonado DECIMAL(12,2) DEFAULT 0.00,
+    cantidad_creditos_activos INT DEFAULT 0,
+    cantidad_creditos_pagados INT DEFAULT 0,
+    cantidad_creditos_vencidos INT DEFAULT 0,
+    fecha_ultimo_credito DATE NULL,
+    fecha_ultimo_pago DATE NULL,
+    fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_saldo_total (saldo_total),
+    INDEX idx_limite_credito (limite_credito),
+    
+    CONSTRAINT fk_resumen_usuario FOREIGN KEY (id_usuario) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: devoluciones
+-- =====================================================
+CREATE TABLE devoluciones (
+    id_devolucion INT AUTO_INCREMENT PRIMARY KEY,
+    numero_devolucion VARCHAR(50) NOT NULL UNIQUE,
+    id_venta INT NOT NULL,
+    id_usuario INT NOT NULL,
+    usuario_registro INT NOT NULL,
+    tipo_devolucion ENUM('total', 'parcial') NOT NULL,
+    motivo TEXT NOT NULL,
+    subtotal_devolucion DECIMAL(12,2) NOT NULL,
+    impuestos_devolucion DECIMAL(12,2) DEFAULT 0.00,
+    total_devolucion DECIMAL(12,2) NOT NULL,
+    observaciones TEXT NULL,
+    estado ENUM('pendiente', 'aprobada', 'rechazada', 'procesada') DEFAULT 'pendiente',
+    fecha_devolucion DATE NOT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    actualizado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    
+    INDEX idx_numero_devolucion (numero_devolucion),
+    INDEX idx_id_venta (id_venta),
+    INDEX idx_id_usuario (id_usuario),
+    INDEX idx_estado (estado),
+    INDEX idx_fecha_devolucion (fecha_devolucion),
+    INDEX devoluciones_usuarioRegistro_fkey (usuario_registro),
+    
+    CONSTRAINT fk_devoluciones_venta FOREIGN KEY (id_venta) 
+        REFERENCES ventas(id_venta) ON UPDATE CASCADE,
+    CONSTRAINT fk_devoluciones_usuario FOREIGN KEY (id_usuario) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE,
+    CONSTRAINT fk_devoluciones_usuario_registro FOREIGN KEY (usuario_registro) 
+        REFERENCES usuarios(id_usuario) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- TABLA: detalle_devoluciones
+-- =====================================================
+CREATE TABLE detalle_devoluciones (
+    id_detalle_devolucion INT AUTO_INCREMENT PRIMARY KEY,
+    id_devolucion INT NOT NULL,
+    id_detalle_venta INT NOT NULL,
+    id_variante INT NOT NULL,
+    cantidad_devuelta DECIMAL(10,2) NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(12,2) NOT NULL,
+    motivo_linea TEXT NULL,
+    creado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    INDEX idx_id_devolucion (id_devolucion),
+    INDEX idx_id_detalle_venta (id_detalle_venta),
+    INDEX idx_id_variante (id_variante),
+    
+    CONSTRAINT fk_detalle_devoluciones_devolucion FOREIGN KEY (id_devolucion) 
+        REFERENCES devoluciones(id_devolucion) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_detalle_devoluciones_detalle_venta FOREIGN KEY (id_detalle_venta) 
+        REFERENCES detalle_ventas(id_detalle_venta) ON UPDATE CASCADE,
+    CONSTRAINT fk_detalle_devoluciones_variante FOREIGN KEY (id_variante) 
+        REFERENCES variantes_producto(id_variante) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- =====================================================
+-- DATOS INICIALES (SEEDS)
+-- =====================================================
+
+-- Roles del sistema
+INSERT INTO roles (nombre_rol, descripcion, permisos) VALUES
+('administrador', 'Administrador del sistema con acceso completo', '{"all": true}'),
+('cliente', 'Cliente registrado en el sistema', '{"ventas": ["ver_propias"], "productos": ["ver"]}'),
+('vendedor', 'Vendedor con acceso a ventas e inventario', '{"ventas": ["crear", "ver", "editar"], "inventario": ["ver"], "clientes": ["ver", "crear"]}'),
+('almacenista', 'Encargado del inventario', '{"inventario": ["ver", "crear", "editar"], "compras": ["ver", "crear"]}');
+
+-- Tipos de metodo de pago
+INSERT INTO tipos_metodo_pago (codigo, nombre, descripcion) VALUES
+('EFECTIVO', 'Efectivo', 'Pagos en efectivo'),
+('ELECTRONICO', 'Electronico', 'Pagos electronicos (transferencias, PSE, etc.)'),
+('TARJETA', 'Tarjeta', 'Pagos con tarjeta de credito o debito'),
+('MIXTO', 'Mixto', 'Combinacion de multiples metodos de pago');
+
+-- Metodos de pago
+INSERT INTO metodos_pago (nombre_metodo, descripcion, id_tipo_metodo, requiere_referencia) VALUES
+('Efectivo', 'Pago en efectivo', 1, FALSE),
+('Transferencia Bancaria', 'Transferencia desde cuenta bancaria', 2, TRUE),
+('PSE', 'Pago por PSE', 2, TRUE),
+('Nequi', 'Pago por Nequi', 2, TRUE),
+('Daviplata', 'Pago por Daviplata', 2, TRUE),
+('Tarjeta Debito', 'Pago con tarjeta debito', 3, TRUE),
+('Tarjeta Credito', 'Pago con tarjeta de credito', 3, TRUE),
+('Mixto', 'Pago con multiples metodos', 4, FALSE);
+
+-- Tipos de movimiento de inventario
+INSERT INTO tipos_movimiento (nombre_tipo, tipo, descripcion, afecta_costo) VALUES
+('Compra', 'entrada', 'Entrada de mercancia por compra a proveedor', TRUE),
+('Venta', 'salida', 'Salida de mercancia por venta a cliente', FALSE),
+('Devolucion Cliente', 'entrada', 'Entrada por devolucion de cliente', FALSE),
+('Devolucion Proveedor', 'salida', 'Salida por devolucion a proveedor', TRUE),
+('Ajuste Positivo', 'ajuste', 'Ajuste que incrementa el inventario', FALSE),
+('Ajuste Negativo', 'ajuste', 'Ajuste que disminuye el inventario', FALSE),
+('Traslado Entrada', 'entrada', 'Entrada por traslado entre bodegas', FALSE),
+('Traslado Salida', 'salida', 'Salida por traslado entre bodegas', FALSE);
+
+-- Estados de pedido
+INSERT INTO estados_pedido (nombre_estado, descripcion, color, orden) VALUES
+('Pendiente', 'Pedido creado, pendiente de procesar', '#FFA500', 1),
+('Confirmado', 'Pedido confirmado por el vendedor', '#3498DB', 2),
+('En Preparacion', 'Pedido en proceso de preparacion', '#9B59B6', 3),
+('Listo para Envio', 'Pedido preparado y listo para enviar', '#1ABC9C', 4),
+('Enviado', 'Pedido enviado al cliente', '#2980B9', 5),
+('Entregado', 'Pedido entregado al cliente', '#27AE60', 6),
+('Cancelado', 'Pedido cancelado', '#E74C3C', 7),
+('Recibido', 'Compra recibida del proveedor', '#27AE60', 8);
+
+-- =====================================================
+-- FIN DEL SCRIPT
+-- =====================================================

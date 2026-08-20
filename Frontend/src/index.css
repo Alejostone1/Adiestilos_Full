@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 dark:text-gray-100 antialiased transition-colors duration-300;
+    font-family: var(--font-primary);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-gray-900 dark:text-white;
+    font-family: var(--font-primary);
+  }
+
+  /* Ajustes finos de tipografía para profesionalismo */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .premium-card {
+    @apply bg-white dark:bg-gradient-to-br dark:from-slate-800 dark:to-slate-900 border border-gray-100 dark:border-slate-700/50 shadow-sm rounded-3xl overflow-hidden transition-all;
+  }
+  
+  .glass-card {
+    @apply bg-white dark:bg-gradient-to-br dark:from-slate-800/50 dark:to-slate-900/50 border border-gray-200 dark:border-slate-600/40 shadow-lg dark:shadow-2xl rounded-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-xl dark:hover:shadow-slate-900/50;
+  }
+
+  /* Efecto 3D mejorado para cards */
+  .card-3d {
+    @apply relative rounded-2xl border border-gray-200 dark:border-slate-600/40 overflow-hidden;
+    box-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.8),
+      0 2px 3px rgba(0, 0, 0, 0.1),
+      0 4px 8px rgba(0, 0, 0, 0.15),
+      0 8px 16px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .dark .card-3d {
+    box-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.1),
+      0 2px 3px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.4),
+      0 8px 16px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Borde 3D inset */
+  .border-3d-inset {
+    @apply border border-opacity-20 relative;
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .border-3d-inset {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+      0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Efecto de elevación */
+  .card-elevated {
+    @apply rounded-2xl shadow-none border;
+    box-shadow: 
+      0 0px 0px rgba(0, 0, 0, 0.05),
+      0 1px 2px rgba(0, 0, 0, 0.05),
+      0 4px 8px rgba(0, 0, 0, 0.08),
+      0 8px 16px rgba(0, 0, 0, 0.12),
+      0 16px 32px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark .card-elevated {
+    box-shadow: 
+      0 0px 0px rgba(0, 0, 0, 0.2),
+      0 1px 2px rgba(0, 0, 0, 0.3),
+      0 4px 8px rgba(0, 0, 0, 0.4),
+      0 8px 16px rgba(0, 0, 0, 0.5),
+      0 16px 32px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Borde doble efecto */
+  .border-dual {
+    @apply border border-gray-200 dark:border-slate-700;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3), inset 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .border-dual {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .premium-button {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-2xl font-semibold transition-all active:scale-95;
+  }
+
+  /* Estilos para Tablas Premium */
+  .dark-table-container .ant-table {
+    @apply !bg-transparent !text-gray-300;
+  }
+
+  .dark-table-container .ant-table-thead > tr > th {
+    @apply !bg-slate-800/50 !text-gray-400 dark:!text-gray-500 !font-bold !text-[10px] !uppercase !tracking-widest !border-b !border-slate-700/50;
+  }
+
+  .dark-table-container .ant-table-tbody > tr > td {
+    @apply !border-b !border-slate-700/50 !py-4 transition-colors !text-slate-300;
+  }
+
+  .dark-table-container .ant-table-tbody > tr:hover > td {
+    @apply !bg-slate-800/30;
+  }
+
+  /* Ant Design Card para modo oscuro */
+  .dark .ant-card {
+    @apply !bg-slate-800/60 !border-slate-700/50;
+  }
+
+  /* Ant Design Input para modo oscuro */
+  .dark .ant-input,
+  .dark .ant-input-number,
+  .dark .ant-select-selector {
+    @apply !bg-slate-800 !border-slate-700/50 !text-slate-200;
+  }
+
+  .dark .ant-input::placeholder {
+    @apply !text-slate-500;
+  }
+
+  /* Ant Design Popover y Dropdown para modo oscuro */
+  .dark .ant-popover-inner,
+  .dark .ant-dropdown {
+    @apply !bg-slate-800 !border-slate-700/50;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 dark:bg-gray-800 rounded-full;
+  }
+
+  .premium-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-300 dark:bg-gray-700;
+  }
+}

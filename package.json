@@ -1,0 +1,25 @@
+{
+  "name": "adi-estilos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Adi Estilos - Sistema de gestión y tienda en línea (React + Node.js + Express + Prisma + PostgreSQL)",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "dev": "concurrently -n BACKEND,FRONTEND -c blue,magenta \"npm --prefix Backend run dev\" \"npm --prefix Frontend run dev\"",
+    "dev:backend": "npm --prefix Backend run dev",
+    "dev:frontend": "npm --prefix Frontend run dev",
+    "install:all": "npm install && npm --prefix Backend install && npm --prefix Frontend install",
+    "build": "npm --prefix Frontend run build",
+    "start": "npm --prefix Backend run start",
+    "lint": "npm --prefix Frontend run lint",
+    "db:migrate": "npm --prefix Backend run db:migrate",
+    "db:deploy": "npm --prefix Backend run db:deploy",
+    "db:seed": "npm --prefix Backend run db:seed",
+    "db:reset": "npm --prefix Backend run db:reset"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
