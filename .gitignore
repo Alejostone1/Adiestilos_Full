@@ -123,3 +123,4 @@ ecosystem.config.js
 .env.production.local
 .vercel
 .env*
+.railway/
