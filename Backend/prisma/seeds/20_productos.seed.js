@@ -17,12 +17,13 @@ const fs = require('fs');
 
 let cloudinaryCfg = null;
 try {
-  cloudinaryCfg = require('../src/config/cloudinaryConfig');
+  cloudinaryCfg = require('../../src/config/cloudinaryConfig');
 } catch (_) {}
 
 async function subirCloudinary(rutaLocal, subdirectorio) {
-  if (!cloudinaryCfg || !cloudinaryCfg.estaConfigurado()) return null;
-  if (!fs.existsSync(rutaLocal)) return null;
+  if (!cloudinaryCfg) { console.log('[SEED] ℹ Cloudinary config no disponible'); return null; }
+  if (!cloudinaryCfg.estaConfigurado()) { console.log('[SEED] ℹ Cloudinary no configurado (credenciales faltantes)'); return null; }
+  if (!fs.existsSync(rutaLocal)) { console.log(`[SEED] ℹ Archivo local no existe: ${rutaLocal}`); return null; }
   try {
     const carpeta = `${cloudinaryCfg.obtenerCarpetaBase()}/${subdirectorio}`;
     const resultado = await cloudinaryCfg.cloudinary.uploader.upload(rutaLocal, {
