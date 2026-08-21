@@ -48,7 +48,13 @@ function generarSku(codigoReferencia, nombreColor, nombreTalla) {
 }
 
 async function upsertImagenProducto(prisma, idProducto, imagen) {
-  // Buscar si ya existe una imagen para este producto (por ruta local o remota)
+  // Si la imagen en BD ya tiene URL de Cloudinary, no sobrescribir
+  const existenteCloud = await prisma.imagenProducto.findFirst({
+    where: { idProducto, rutaImagen: { startsWith: 'https://' } }
+  });
+  if (existenteCloud) return existenteCloud;
+
+  // Buscar si ya existe una imagen para este producto (por ruta exacta)
   const existente = await prisma.imagenProducto.findFirst({
     where: { idProducto, rutaImagen: imagen.ruta }
   });
@@ -61,17 +67,14 @@ async function upsertImagenProducto(prisma, idProducto, imagen) {
   }
 
   // Si la ruta cambió (local → Cloudinary), actualizar la existente
-  const localPath = imagen.ruta.startsWith('http') ? null : imagen.ruta;
-  if (localPath) {
-    const existenteLocal = await prisma.imagenProducto.findFirst({
-      where: { idProducto }
+  const existenteLocal = await prisma.imagenProducto.findFirst({
+    where: { idProducto }
+  });
+  if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
+    return prisma.imagenProducto.update({
+      where: { idImagen: existenteLocal.idImagen },
+      data: { rutaImagen: imagen.ruta, descripcion: imagen.descripcion, orden: imagen.orden, esPrincipal: imagen.esPrincipal }
     });
-    if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
-      return prisma.imagenProducto.update({
-        where: { idImagen: existenteLocal.idImagen },
-        data: { rutaImagen: imagen.ruta, descripcion: imagen.descripcion, orden: imagen.orden, esPrincipal: imagen.esPrincipal }
-      });
-    }
   }
 
   return prisma.imagenProducto.create({
@@ -86,6 +89,12 @@ async function upsertImagenProducto(prisma, idProducto, imagen) {
 }
 
 async function upsertImagenVariante(prisma, idVariante, ruta, descripcion, orden, esPrincipal) {
+  // Si la imagen en BD ya tiene URL de Cloudinary, no sobrescribir
+  const existenteCloud = await prisma.imagenVariante.findFirst({
+    where: { idVariante, rutaImagen: { startsWith: 'https://' } }
+  });
+  if (existenteCloud) return existenteCloud;
+
   const existente = await prisma.imagenVariante.findFirst({
     where: { idVariante, rutaImagen: ruta }
   });
@@ -98,16 +107,14 @@ async function upsertImagenVariante(prisma, idVariante, ruta, descripcion, orden
   }
 
   // Si la ruta cambió (local → Cloudinary), actualizar la existente
-  if (!ruta.startsWith('http')) {
-    const existenteLocal = await prisma.imagenVariante.findFirst({
-      where: { idVariante }
+  const existenteLocal = await prisma.imagenVariante.findFirst({
+    where: { idVariante }
+  });
+  if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
+    return prisma.imagenVariante.update({
+      where: { idImagenVariante: existenteLocal.idImagenVariante },
+      data: { rutaImagen: ruta, descripcion, orden, esPrincipal }
     });
-    if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
-      return prisma.imagenVariante.update({
-        where: { idImagenVariante: existenteLocal.idImagenVariante },
-        data: { rutaImagen: ruta, descripcion, orden, esPrincipal }
-      });
-    }
   }
 
   return prisma.imagenVariante.create({

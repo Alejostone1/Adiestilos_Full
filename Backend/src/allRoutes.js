@@ -32,6 +32,7 @@ const galeriaRoutes = require('./modules/galeria/galeriaRoutes');
 const estadosPedidoRoutes = require('./modules/estadosPedido/estadosPedidoRoutes');
 const metodosPagoRoutes = require('./modules/metodosPago/metodosPagoRoutes');
 const publicRoutes = require('./modules/public/publicRoutes');
+const migrateImagesRoute = require('./modules/admin/migrateImagesRoute');
 
 // Agrega aquí más importaciones de rutas a medida que se creen nuevos módulos...
 
@@ -76,6 +77,7 @@ router.use('/galeria', galeriaRoutes);
 router.use('/estados-pedido', estadosPedidoRoutes);
 router.use('/metodos-pago', metodosPagoRoutes);
 router.use('/public', publicRoutes);
+router.use('/admin', migrateImagesRoute); // TEMPORAL: eliminar después de migrar imágenes
 // Agrega aquí más registros de rutas...
 
 module.exports = router;
