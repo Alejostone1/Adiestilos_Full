@@ -92,7 +92,9 @@ dist
 
 # Gatsby files
 .cache/
-public
+# Solo la carpeta `public` en la raíz (build de Gatsby); NO cualquier `public` anidado.
+# La regla libre `public` ignoraba src/pages/public, src/components/public y Frontend/public.
+/public
 
 # Storybook build outputs
 .out
