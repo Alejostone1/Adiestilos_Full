@@ -1,5 +1,5 @@
 /**
- * Seed - Productos Demo (3)
+ * Seed - Productos Demo
  * Crea 4 productos de tienda de ropa con sus variantes (color+talla), precios,
  * stock e imágenes. Reutiliza categorías, colores, tallas y proveedores existentes.
  *
@@ -8,15 +8,33 @@
  *  - Variante  → upsert por `codigoSku` (único)
  *  - Imagen    → busca (idProducto|idVariante + rutaImagen) y actualiza o crea
  *
- * Solo se referencian archivos de imagen que EXISTEN físicamente en uploads/.
+ * Si Cloudinary está configurado y el archivo existe localmente, lo sube a Cloudinary
+ * y almacena la URL remota en la BD. Si no, almacena la ruta local.
  */
 
 const path = require('path');
 const fs = require('fs');
 
-function existeImagen(rutaPublica) {
-  const relativa = rutaPublica.replace(/^\//, '');
-  return fs.existsSync(path.resolve(process.cwd(), relativa));
+let cloudinaryCfg = null;
+try {
+  cloudinaryCfg = require('../src/config/cloudinaryConfig');
+} catch (_) {}
+
+async function subirCloudinary(rutaLocal, subdirectorio) {
+  if (!cloudinaryCfg || !cloudinaryCfg.estaConfigurado()) return null;
+  if (!fs.existsSync(rutaLocal)) return null;
+  try {
+    const carpeta = `${cloudinaryCfg.obtenerCarpetaBase()}/${subdirectorio}`;
+    const resultado = await cloudinaryCfg.cloudinary.uploader.upload(rutaLocal, {
+      folder: carpeta,
+      resource_type: 'image',
+      overwrite: true,
+    });
+    return resultado.secure_url;
+  } catch (err) {
+    console.warn(`[SEED] ⚠ Cloudinary falló para ${rutaLocal}: ${err.message}`);
+    return null;
+  }
 }
 
 function codigoColorCorto(nombreColor) {
@@ -29,6 +47,7 @@ function generarSku(codigoReferencia, nombreColor, nombreTalla) {
 }
 
 async function upsertImagenProducto(prisma, idProducto, imagen) {
+  // Buscar si ya existe una imagen para este producto (por ruta local o remota)
   const existente = await prisma.imagenProducto.findFirst({
     where: { idProducto, rutaImagen: imagen.ruta }
   });
@@ -38,6 +57,20 @@ async function upsertImagenProducto(prisma, idProducto, imagen) {
       where: { idImagen: existente.idImagen },
       data: { descripcion: imagen.descripcion, orden: imagen.orden, esPrincipal: imagen.esPrincipal }
     });
+  }
+
+  // Si la ruta cambió (local → Cloudinary), actualizar la existente
+  const localPath = imagen.ruta.startsWith('http') ? null : imagen.ruta;
+  if (localPath) {
+    const existenteLocal = await prisma.imagenProducto.findFirst({
+      where: { idProducto }
+    });
+    if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
+      return prisma.imagenProducto.update({
+        where: { idImagen: existenteLocal.idImagen },
+        data: { rutaImagen: imagen.ruta, descripcion: imagen.descripcion, orden: imagen.orden, esPrincipal: imagen.esPrincipal }
+      });
+    }
   }
 
   return prisma.imagenProducto.create({
@@ -61,6 +94,19 @@ async function upsertImagenVariante(prisma, idVariante, ruta, descripcion, orden
       where: { idImagenVariante: existente.idImagenVariante },
       data: { descripcion, orden, esPrincipal }
     });
+  }
+
+  // Si la ruta cambió (local → Cloudinary), actualizar la existente
+  if (!ruta.startsWith('http')) {
+    const existenteLocal = await prisma.imagenVariante.findFirst({
+      where: { idVariante }
+    });
+    if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
+      return prisma.imagenVariante.update({
+        where: { idImagenVariante: existenteLocal.idImagenVariante },
+        data: { rutaImagen: ruta, descripcion, orden, esPrincipal }
+      });
+    }
   }
 
   return prisma.imagenVariante.create({
@@ -241,7 +287,14 @@ module.exports = async function seedProductos(prisma) {
 
     // 4.1 Imágenes del producto
     for (const imagen of p.imagenes) {
-      await upsertImagenProducto(prisma, producto.idProducto, { ...imagen, orden: 0 });
+      let rutaFinal = imagen.ruta;
+      const rutaLocal = path.resolve(process.cwd(), imagen.ruta.replace(/^\//, ''));
+      const urlCloud = await subirCloudinary(rutaLocal, 'productos');
+      if (urlCloud) {
+        rutaFinal = urlCloud;
+        console.log(`  ☁️  Imagen subida a Cloudinary: ${urlCloud.substring(0, 70)}...`);
+      }
+      await upsertImagenProducto(prisma, producto.idProducto, { ...imagen, ruta: rutaFinal, orden: 0 });
       totalImagenesProducto++;
     }
 
@@ -283,10 +336,17 @@ module.exports = async function seedProductos(prisma) {
         const rutaVariante = imagenesVariantesDisponibles[indiceImagenVariante % imagenesVariantesDisponibles.length];
         indiceImagenVariante++;
 
+        let rutaFinalVariante = rutaVariante;
+        const rutaLocalVar = path.resolve(process.cwd(), rutaVariante.replace(/^\//, ''));
+        const urlCloudVar = await subirCloudinary(rutaLocalVar, 'variantes');
+        if (urlCloudVar) {
+          rutaFinalVariante = urlCloudVar;
+        }
+
         await upsertImagenVariante(
           prisma,
           variante.idVariante,
-          rutaVariante,
+          rutaFinalVariante,
           `Variante ${nombreColor} ${nombreTalla}`,
           0,
           true
