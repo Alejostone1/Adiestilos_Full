@@ -10,6 +10,7 @@ import { obtenerCategoriasPublicas, obtenerProductosDestacados } from '../../api
 import HeroBanner from '../../components/public/HeroBanner';
 import SeccionCategorias from '../../components/public/SeccionCategorias';
 import CarruselProductos from '../../components/public/CarruselProductos';
+import { getImagenURL } from '../../utils/imageUrl';
 
 const esProductoNuevo = (fecha) => {
   if (!fecha) return false;
@@ -38,7 +39,7 @@ const HomePage = () => {
           .map(cat => ({
             id: cat.idCategoria,
             nombre: cat.nombreCategoria,
-            imagen: cat.imagenCategoria || `https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=800&fit=crop`,
+            imagen: getImagenURL(cat.imagenCategoria) || `https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=800&fit=crop`,
             cantidadProductos: cat._count?.productos || 0
           }));
 
@@ -46,7 +47,7 @@ const HomePage = () => {
           id: prod.idProducto,
           nombre: prod.nombreProducto,
           precio: prod.precioVentaSugerido,
-          imagenPrincipal: prod.imagenPrincipal || '/images/placeholder-producto.jpg',
+          imagenPrincipal: getImagenURL(prod.imagenPrincipal) || '/images/placeholder-producto.svg',
           imagenes: prod.imagenesProductos || [],
           coloresDisponibles: prod.coloresDisponibles || [],
           esNuevo: esProductoNuevo(prod.creadoEn)

@@ -8,6 +8,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { obtenerCategoriaPublica, obtenerProductosPorCategoria } from '../../api/publicApi';
 import TarjetaProducto from '../../components/public/TarjetaProducto';
+import { getImagenURL } from '../../utils/imageUrl';
 
 const esProductoNuevo = (fecha) => {
   if (!fecha) return false;
@@ -42,7 +43,7 @@ const CategoriaPage = () => {
           id: prod.idProducto,
           nombre: prod.nombreProducto,
           precio: prod.precioVentaSugerido || prod.precioMinimo,
-          imagenPrincipal: prod.imagenPrincipal || '/images/placeholder-producto.jpg',
+          imagenPrincipal: getImagenURL(prod.imagenPrincipal) || '/images/placeholder-producto.svg',
           coloresDisponibles: prod.coloresDisponibles || [],
           esNuevo: esProductoNuevo(prod.creadoEn)
         }));

@@ -241,10 +241,6 @@ module.exports = async function seedProductos(prisma) {
 
     // 4.1 Imágenes del producto
     for (const imagen of p.imagenes) {
-      if (!existeImagen(imagen.ruta)) {
-        console.warn(`[SEED] ⚠ Imagen de producto no encontrada, se omite: ${imagen.ruta}`);
-        continue;
-      }
       await upsertImagenProducto(prisma, producto.idProducto, { ...imagen, orden: 0 });
       totalImagenesProducto++;
     }
@@ -283,23 +279,19 @@ module.exports = async function seedProductos(prisma) {
 
         totalVariantes++;
 
-        // 4.3 Imagen de variante (reutilizando archivos existentes en uploads/variantes)
+        // 4.3 Imagen de variante
         const rutaVariante = imagenesVariantesDisponibles[indiceImagenVariante % imagenesVariantesDisponibles.length];
         indiceImagenVariante++;
 
-        if (existeImagen(rutaVariante)) {
-          await upsertImagenVariante(
-            prisma,
-            variante.idVariante,
-            rutaVariante,
-            `Variante ${nombreColor} ${nombreTalla}`,
-            0,
-            true
-          );
-          totalImagenesVariante++;
-        } else {
-          console.warn(`[SEED] ⚠ Imagen de variante no encontrada, se omite: ${rutaVariante}`);
-        }
+        await upsertImagenVariante(
+          prisma,
+          variante.idVariante,
+          rutaVariante,
+          `Variante ${nombreColor} ${nombreTalla}`,
+          0,
+          true
+        );
+        totalImagenesVariante++;
       }
     }
   }
