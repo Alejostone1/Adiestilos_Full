@@ -44,13 +44,16 @@ const PedidosPage = () => {
     try {
       setLoading(true);
       const respuesta = await usuariosApi.getHistorialVentasUsuario(usuario.idUsuario);
-      setPedidos(respuesta || []);
+      const datos = Array.isArray(respuesta?.datos) ? respuesta.datos
+        : Array.isArray(respuesta?.datos?.datos) ? respuesta.datos.datos
+        : Array.isArray(respuesta) ? respuesta : [];
+      setPedidos(datos);
 
       // Calcular estadísticas
       const stats = {
-        totalPedidos: respuesta?.length || 0,
-        totalGastado: respuesta?.reduce((sum, p) => sum + (parseFloat(p.total) || 0), 0) || 0,
-        pendientes: respuesta?.filter(p => p.estadoPago === 'pendiente').length || 0
+        totalPedidos: datos.length,
+        totalGastado: datos.reduce((sum, p) => sum + (parseFloat(p.total) || 0), 0) || 0,
+        pendientes: datos.filter(p => p.estadoPago === 'pendiente').length || 0
       };
       setEstadisticas(stats);
     } catch (error) {
