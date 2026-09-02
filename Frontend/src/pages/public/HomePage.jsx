@@ -33,15 +33,27 @@ const HomePage = () => {
           obtenerProductosDestacados(8)
         ]);
 
-        const catsFormateadas = (catsRes.datos || [])
-          .filter(cat => !cat.categoriaPadre)
-          .slice(0, 3)
-          .map(cat => ({
+        const categoriasRaw = catsRes.datos || [];
+        const catsAplanadas = [];
+        categoriasRaw.forEach(cat => {
+          catsAplanadas.push({
             id: cat.idCategoria,
             nombre: cat.nombreCategoria,
+            descripcion: cat.descripcion,
             imagen: getImagenURL(cat.imagenCategoria) || `https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=800&fit=crop`,
             cantidadProductos: cat._count?.productos || 0
-          }));
+          });
+          (cat.subcategorias || []).forEach(sub => {
+            catsAplanadas.push({
+              id: sub.idCategoria,
+              nombre: sub.nombreCategoria,
+              descripcion: sub.descripcion,
+              imagen: getImagenURL(sub.imagenCategoria) || getImagenURL(cat.imagenCategoria) || `https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=800&fit=crop`,
+              cantidadProductos: 0
+            });
+          });
+        });
+        setCategorias(catsAplanadas);
 
         const prodsFormateados = (prodsRes.datos || []).map(prod => ({
           id: prod.idProducto,
@@ -53,7 +65,7 @@ const HomePage = () => {
           esNuevo: esProductoNuevo(prod.creadoEn)
         }));
 
-        setCategorias(catsFormateadas);
+        setCategorias(catsAplanadas);
         setProductosDestacados(prodsFormateados);
       } catch (error) {
         console.error('Error cargando datos del home:', error);

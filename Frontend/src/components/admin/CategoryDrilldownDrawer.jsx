@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { productosApi } from '../../api/productosApi';
 import { variantesApi } from '../../api/variantesApi';
+import { getImagenURL } from '../../utils/imageUrl';
 import PrecioFormateado from '../common/PrecioFormateado';
 import StatusBadge from './StatusBadge';
 import StockIndicator from './StockIndicator';
