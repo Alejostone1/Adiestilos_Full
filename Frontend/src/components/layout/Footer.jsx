@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../common/Logo';
 
 const Footer = () => {
   const anioActual = new Date().getFullYear();
@@ -55,9 +56,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto mb-16">
           {/* Brand */}
           <div className="col-span-1">
-            <span className="font-display-lg text-display-lg text-primary block mb-6">
-              Adi Estilos
-            </span>
+            <Logo size="xl" className="mb-6" />
             <p className="font-body-sm text-body-sm text-on-surface-variant mb-6 max-w-xs">
               Elevando la moda con elegancia sutil y diseño consciente para la mujer moderna.
             </p>
@@ -139,7 +138,7 @@ const Footer = () => {
 
       {/* Mobile Footer */}
       <div className="md:hidden rounded-t-xl bg-surface-container-low flex flex-col items-center py-12 px-margin-mobile space-y-8">
-        <span className="font-display-lg text-headline-sm text-primary">ADI ESTILOS</span>
+        <Logo size="lg" />
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-4">
           <Link className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline" to="/tienda">
             Tienda

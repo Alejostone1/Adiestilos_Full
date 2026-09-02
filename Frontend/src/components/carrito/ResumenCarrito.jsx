@@ -29,15 +29,15 @@ const ResumenCarrito = ({ onClose }) => {
       <div className="space-y-2">
         <div className="flex justify-between font-body-sm text-body-sm text-text-main">
           <span>Productos ({cantidadTotal})</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span className="tabular-nums font-medium">{formatPrice(subtotal)}</span>
         </div>
         <div className="flex justify-between font-body-sm text-body-sm text-text-main">
           <span>Envío</span>
           <span className="text-tertiary font-medium">Por definir</span>
         </div>
-        <div className="border-t border-outline-variant/30 pt-2 flex justify-between">
-          <span className="font-headline-sm text-headline-sm text-on-surface">Total</span>
-          <span className="font-headline-sm text-headline-sm text-on-surface font-semibold">{formatPrice(subtotal)}</span>
+        <div className="border-t border-outline-variant/30 pt-2 mt-1 flex justify-between items-baseline">
+          <span className="font-body-md text-body-md text-on-surface font-semibold uppercase tracking-wide">Total</span>
+          <span className="text-lg md:text-xl text-primary font-semibold tabular-nums tracking-tight">{formatPrice(subtotal)}</span>
         </div>
       </div>
 

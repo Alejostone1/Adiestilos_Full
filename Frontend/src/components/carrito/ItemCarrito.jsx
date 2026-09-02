@@ -70,10 +70,14 @@ const ItemCarrito = ({ item }) => {
             </button>
           </div>
 
-          <div className="text-right">
-            <p className="font-body-sm text-body-sm text-on-surface font-semibold">{formatPrice(subtotal)}</p>
+          <div className="text-right shrink-0">
+            <p className="text-[13px] md:text-sm text-on-surface font-semibold tabular-nums tracking-tight whitespace-nowrap">
+              {formatPrice(subtotal)}
+            </p>
             {item.cantidad > 1 && (
-              <p className="text-xs text-outline">{formatPrice(item.precio)} c/u</p>
+              <p className="text-[11px] text-outline tabular-nums whitespace-nowrap">
+                {formatPrice(item.precio)} c/u
+              </p>
             )}
           </div>
         </div>

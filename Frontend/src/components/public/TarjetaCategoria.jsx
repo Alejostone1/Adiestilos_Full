@@ -34,13 +34,19 @@ const TarjetaCategoria = ({
         duration: 0.8, 
         ease: [0.25, 0.1, 0.25, 1] 
       }}
-      className="group relative w-full max-w-[320px] mx-auto cursor-pointer"
+      className={`group relative w-full max-w-[320px] mx-auto cursor-pointer transition-all duration-300 ${
+        isHovered ? '-translate-y-1' : ''
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link 
         to={`/categoria/${id}`} 
-        className="block relative overflow-hidden rounded-sm bg-neutral-900"
+        className={`block relative overflow-hidden rounded-sm transition-all duration-300 ${
+          isHovered
+            ? 'border border-primary/60 shadow-card-hover'
+            : 'border border-outline-variant shadow-card'
+        } bg-neutral-900`}
       >
         {/* Container con aspect ratio y profundidad */}
         <div className="relative aspect-[4/5] overflow-hidden">
