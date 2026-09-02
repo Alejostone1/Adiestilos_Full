@@ -18,7 +18,8 @@ import {
   PlusOutlined,
   AppstoreOutlined,
   TeamOutlined,
-  DollarCircleOutlined
+  DollarCircleOutlined,
+  InboxOutlined
 } from '@ant-design/icons';
 import {
   obtenerResumenDashboard,
@@ -230,77 +231,86 @@ const AdminDashboardPage = () => {
               </Col>
             </Row>
 
-            {/* 3. Secondary Metrics Grid: Balanced 3 Columns */}
+            {/* 3. Best Sellers + Alertas: 2 balanced columns */}
             <Row gutter={[32, 32]}>
-              {/* Best Sellers Column */}
-              <Col xs={24} lg={8}>
-                <div className="card-3d h-full p-8 bg-white dark:bg-slate-800/60">
+              <Col xs={24} lg={12}>
+                <div className="card-3d h-full p-6 md:p-7 bg-white dark:bg-slate-800/60">
                   <TopProductos data={dashboardData} loading={loading} />
                 </div>
               </Col>
-              
-              {/* Status Alertas Column */}
-              <Col xs={24} lg={8}>
-                <div className="card-3d h-full p-8 bg-white dark:bg-slate-800/60">
+              <Col xs={24} lg={12}>
+                <div className="card-3d h-full p-6 md:p-7 bg-white dark:bg-slate-800/60">
                   <InventarioAlertas data={inventarioData} loading={loading} />
                 </div>
               </Col>
+            </Row>
 
-              {/* Business Health Snapshot Column */}
-              <Col xs={24} lg={8}>
-                <div className="flex flex-col gap-6 h-full">
-                   {/* Compact Inventory Status */}
-                    <div className="card-3d relative overflow-hidden group flex-1 bg-white dark:bg-slate-800/60 p-6 md:p-7">
-                      <div className="absolute -top-20 -right-20 w-44 h-44 bg-pink-500/10 blur-[70px] group-hover:bg-pink-500/20 transition-all duration-700" />
-                      <div className="relative z-10 flex flex-col h-full">
-                        <Text className="!text-slate-400 dark:!text-slate-500 !font-semibold !text-[11px] tracking-[0.14em] uppercase block mb-1">Módulo Logístico</Text>
-                        <Title level={4} className="!m-0 !font-semibold !mb-6 dark:!text-white">Inventario Global</Title>
-                        
-                        <div className="grid grid-cols-2 gap-5 mb-6">
-                            <div className="p-4 rounded-2xl bg-pink-50/70 dark:bg-pink-900/20 border border-pink-100 dark:border-pink-800/40">
-                              <Text className="!text-pink-500/90 dark:!text-pink-300 !text-[11px] font-semibold uppercase block mb-1">SKUs</Text>
-                              <Text className="!text-2xl !font-bold !text-slate-900 dark:!text-white">{dashboardData?.resumenInventario?.totalProductos || 0}</Text>
-                            </div>
-                            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-700/30 border border-slate-100 dark:border-slate-700">
-                              <Text className="!text-slate-400 dark:!text-slate-500 !text-[11px] font-semibold uppercase block mb-1">Valor</Text>
-                              <Text className="!text-lg !font-bold !text-slate-900 dark:!text-white">${Number(dashboardData?.resumenInventario?.valorTotalInventario || 0).toLocaleString('es-CO')}</Text>
-                            </div>
-                        </div>
-                        
-                        <button 
-                          onClick={() => navigate('/admin/inventario')}
-                          className="mt-auto w-full py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white rounded-xl font-semibold text-xs flex items-center justify-center gap-2 shadow-lg shadow-pink-500/25 transition-all"
-                        >
-                          Kardex Completo <ArrowRightOutlined className="text-[11px]" />
-                        </button>
+            {/* 4. Inventario Global + Cartera Activa: 2 horizontal cards */}
+            <Row gutter={[32, 32]}>
+              {/* Compact Inventory Status */}
+              <Col xs={24} lg={12}>
+                <div className="card-3d relative overflow-hidden group h-full bg-white dark:bg-slate-800/60 p-6 md:p-7">
+                  <div className="absolute -top-20 -right-20 w-44 h-44 bg-pink-500/10 blur-[70px] group-hover:bg-pink-500/20 transition-all duration-700" />
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="w-10 h-10 bg-pink-100 dark:bg-pink-900/30 rounded-xl flex items-center justify-center">
+                        <InboxOutlined className="text-pink-600 dark:text-pink-400 text-lg" />
+                      </div>
+                      <div>
+                        <Text className="!text-slate-400 dark:!text-slate-500 !font-semibold !text-[11px] tracking-[0.14em] uppercase block">Módulo Logístico</Text>
+                        <Title level={4} className="!m-0 !font-semibold dark:!text-white">Inventario Global</Title>
                       </div>
                     </div>
-
-                    {/* Compact Financial Overview */}
-                    <div className="card-3d group flex-1 bg-white dark:bg-slate-800/60 p-6 md:p-7">
-                       <div className="relative z-10 flex flex-col h-full">
-                          <div className="flex items-center gap-3 mb-5">
-                            <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center">
-                              <DollarCircleOutlined className="text-amber-600 dark:text-amber-400 text-lg" />
-                            </div>
-                            <Title level={4} className="m-0 !font-semibold dark:!text-white">Cartera Activa</Title>
-                          </div>
-                          
-                          <div className="mb-5">
-                            <Text className="!text-3xl !font-bold !text-slate-900 dark:!text-white block">${Number(dashboardData?.resumenCreditos?.saldoPendienteTotal || 0).toLocaleString('es-CO')}</Text>
-                            <Text className="!text-slate-400 dark:!text-slate-500 !text-sm !font-medium block mt-1">
-                                <span className="text-amber-600 dark:text-amber-400 font-semibold">{dashboardData?.resumenCreditos?.creditosActivos || 0} créditos</span> pendientes.
-                            </Text>
-                          </div>
-                            
-                          <button 
-                            onClick={() => navigate('/admin/ventas-credito')}
-                            className="mt-auto w-full py-3 border border-pink-200 dark:border-pink-800/50 hover:bg-pink-50 dark:hover:bg-pink-900/20 text-pink-600 dark:text-pink-400 rounded-xl font-semibold text-xs transition-all"
-                          >
-                            Gestionar Cobros
-                          </button>
-                       </div>
+                    
+                    <div className="grid grid-cols-2 gap-5 mb-6">
+                        <div className="p-4 rounded-2xl bg-pink-50/70 dark:bg-pink-900/20 border border-pink-100 dark:border-pink-800/40">
+                          <Text className="!text-pink-500/90 dark:!text-pink-300 !text-[11px] font-semibold uppercase block mb-1">SKUs</Text>
+                          <Text className="!text-2xl !font-bold !text-slate-900 dark:!text-white">{dashboardData?.resumenInventario?.totalProductos || 0}</Text>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-700/30 border border-slate-100 dark:border-slate-700">
+                          <Text className="!text-slate-400 dark:!text-slate-500 !text-[11px] font-semibold uppercase block mb-1">Valor</Text>
+                          <Text className="!text-lg !font-bold !text-slate-900 dark:!text-white">${Number(dashboardData?.resumenInventario?.valorTotalInventario || 0).toLocaleString('es-CO')}</Text>
+                        </div>
                     </div>
+                    
+                    <button 
+                      onClick={() => navigate('/admin/inventario')}
+                      className="mt-auto w-full py-3 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white rounded-xl font-semibold text-xs flex items-center justify-center gap-2 shadow-lg shadow-pink-500/25 transition-all"
+                    >
+                      Kardex Completo <ArrowRightOutlined className="text-[11px]" />
+                    </button>
+                  </div>
+                </div>
+              </Col>
+
+              {/* Compact Financial Overview */}
+              <Col xs={24} lg={12}>
+                <div className="card-3d group h-full bg-white dark:bg-slate-800/60 p-6 md:p-7">
+                   <div className="relative z-10 flex flex-col h-full">
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-xl flex items-center justify-center">
+                          <DollarCircleOutlined className="text-amber-600 dark:text-amber-400 text-lg" />
+                        </div>
+                        <div>
+                          <Text className="!text-slate-400 dark:!text-slate-500 !font-semibold !text-[11px] tracking-[0.14em] uppercase block">Módulo Financiero</Text>
+                          <Title level={4} className="m-0 !font-semibold dark:!text-white">Cartera Activa</Title>
+                        </div>
+                      </div>
+                      
+                      <div className="mb-6">
+                        <Text className="!text-3xl !font-bold !text-slate-900 dark:!text-white block">${Number(dashboardData?.resumenCreditos?.saldoPendienteTotal || 0).toLocaleString('es-CO')}</Text>
+                        <Text className="!text-slate-400 dark:!text-slate-500 !text-sm !font-medium block mt-1">
+                            <span className="text-amber-600 dark:text-amber-400 font-semibold">{dashboardData?.resumenCreditos?.creditosActivos || 0} créditos</span> pendientes.
+                        </Text>
+                      </div>
+                        
+                      <button 
+                        onClick={() => navigate('/admin/ventas-credito')}
+                        className="mt-auto w-full py-3 border border-pink-200 dark:border-pink-800/50 hover:bg-pink-50 dark:hover:bg-pink-900/20 text-pink-600 dark:text-pink-400 rounded-xl font-semibold text-xs transition-all"
+                      >
+                        Gestionar Cobros
+                      </button>
+                   </div>
                 </div>
               </Col>
             </Row>
