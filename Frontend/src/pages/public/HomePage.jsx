@@ -41,7 +41,7 @@ const HomePage = () => {
             nombre: cat.nombreCategoria,
             descripcion: cat.descripcion,
             imagen: getImagenURL(cat.imagenCategoria) || `https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=800&fit=crop`,
-            cantidadProductos: cat._count?.productos || 0
+            cantidadProductos: cat.cantidadProductos || 0
           });
           (cat.subcategorias || []).forEach(sub => {
             catsAplanadas.push({
@@ -49,7 +49,7 @@ const HomePage = () => {
               nombre: sub.nombreCategoria,
               descripcion: sub.descripcion,
               imagen: getImagenURL(sub.imagenCategoria) || getImagenURL(cat.imagenCategoria) || `https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=800&fit=crop`,
-              cantidadProductos: 0
+              cantidadProductos: sub.cantidadProductos || 0
             });
           });
         });

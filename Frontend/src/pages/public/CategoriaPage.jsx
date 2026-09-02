@@ -116,7 +116,19 @@ const CategoriaPage = () => {
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 to-transparent" />
-        
+
+        {/* Botón volver */}
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-semibold uppercase tracking-wider hover:bg-white/20 hover:border-white/40 transition-all active:scale-95"
+          aria-label="Volver atrás"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Volver
+        </button>
+
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
           {/* Breadcrumb */}
           <nav className="mb-6">

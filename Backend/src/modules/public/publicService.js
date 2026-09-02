@@ -31,13 +31,15 @@ async function obtenerCategoriasActivas() {
       nombreCategoria: true,
       descripcion: true,
       imagenCategoria: true,
+      _count: { select: { productos: true } },
       subcategorias: {
         where: { estado: 'activo' },
         select: {
           idCategoria: true,
           nombreCategoria: true,
           descripcion: true,
-          imagenCategoria: true
+          imagenCategoria: true,
+          _count: { select: { productos: true } }
         },
         orderBy: { nombreCategoria: 'asc' }
       }
@@ -45,14 +47,23 @@ async function obtenerCategoriasActivas() {
     orderBy: { nombreCategoria: 'asc' }
   });
 
-  return categorias.map(cat => ({
-    ...cat,
-    slug: generarSlug(cat.nombreCategoria),
-    subcategorias: cat.subcategorias.map(sub => ({
+  return categorias.map(cat => {
+    const subcategorias = cat.subcategorias.map(sub => ({
       ...sub,
+      cantidadProductos: sub._count.productos,
       slug: generarSlug(sub.nombreCategoria)
-    }))
-  }));
+    }));
+    const totalProductos = cat._count.productos + subcategorias.reduce((s, sub) => s + sub.cantidadProductos, 0);
+    return {
+      idCategoria: cat.idCategoria,
+      nombreCategoria: cat.nombreCategoria,
+      descripcion: cat.descripcion,
+      imagenCategoria: cat.imagenCategoria,
+      cantidadProductos: totalProductos,
+      slug: generarSlug(cat.nombreCategoria),
+      subcategorias
+    };
+  });
 }
 
 /**

@@ -69,8 +69,9 @@ const HeroBanner = ({
           <div className="w-full h-full bg-surface-soft" />
         )}
 
-        {/* Overlays para legibilidad y estética */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-primary/10 to-background/40" />
+      {/* Overlays para legibilidad y estética */}
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-primary/10 to-background/40" />
+      <div className="absolute inset-0 bg-on-surface/25" />
       </motion.div>
 
       {/* Indicators / controles del carrusel */}
@@ -91,53 +92,55 @@ const HeroBanner = ({
 
       {/* Content */}
       <motion.div
-        className="relative z-10 text-center px-6 max-w-4xl mx-auto flex flex-col items-center"
+        className="relative z-10 text-center px-4 py-12 max-w-4xl mx-auto flex flex-col items-center"
         style={{ opacity }}
       >
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 uppercase"
-        >
-          Nueva Colección
-        </motion.span>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="font-display-lg text-on-surface mb-6 drop-shadow-sm"
-        >
-          <span className="hidden md:block text-display-lg">{titulo}</span>
-          <span className="md:hidden text-display-lg-mobile">{titulo}</span>
-        </motion.h1>
-
-        {subtitulo && (
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="font-body-lg text-body-lg text-text-main mb-10 max-w-2xl"
-          >
-            {subtitulo}
-          </motion.p>
-        )}
-
-        {ctaTexto && ctaLink && (
-          <motion.div
+        <div className="w-full bg-surface/45 backdrop-blur-md border border-white/40 rounded-3xl px-6 py-10 md:px-16 md:py-14 shadow-elevated">
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="font-label-caps text-label-caps text-primary tracking-[0.2em] mb-4 uppercase block"
           >
-            <Link
-              to={ctaLink}
-              className="inline-flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps text-label-caps px-10 py-4 rounded-lg hover:bg-primary hover:text-white transition-all duration-300 shadow-button hover:shadow-button-hover hover:-translate-y-1"
+            Nueva Colección
+          </motion.span>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="font-display-lg text-on-surface mb-6 drop-shadow-sm"
+          >
+            <span className="hidden md:block text-display-lg">{titulo}</span>
+            <span className="md:hidden text-display-lg-mobile">{titulo}</span>
+          </motion.h1>
+
+          {subtitulo && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 0.6 }}
+              className="font-body-lg text-body-lg text-text-main mb-10 max-w-2xl mx-auto"
             >
-              {ctaTexto.toUpperCase()}
-            </Link>
-          </motion.div>
-        )}
+              {subtitulo}
+            </motion.p>
+          )}
+
+          {ctaTexto && ctaLink && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.9 }}
+            >
+              <Link
+                to={ctaLink}
+                className="inline-flex items-center justify-center bg-primary-container text-on-primary-container font-label-caps text-label-caps px-10 py-4 rounded-lg hover:bg-primary hover:text-white transition-all duration-300 shadow-button hover:shadow-button-hover hover:-translate-y-1"
+              >
+                {ctaTexto.toUpperCase()}
+              </Link>
+            </motion.div>
+          )}
+        </div>
       </motion.div>
 
       {/* Flechas del carrusel (escritorio) */}
