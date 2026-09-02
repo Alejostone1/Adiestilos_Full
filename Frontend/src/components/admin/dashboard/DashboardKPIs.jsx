@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Statistic, Row, Col, Skeleton, Typography, Tag } from 'antd';
+import { Row, Col, Skeleton, Typography } from 'antd';
 import {
   DollarOutlined,
   ShoppingCartOutlined,
@@ -12,12 +12,12 @@ const { Text } = Typography;
 const DashboardKPIs = ({ data, loading, rango }) => {
   if (loading) {
     return (
-      <Row gutter={[24, 24]} style={{ marginBottom: '12px' }}>
+      <Row gutter={[20, 20]}>
         {[1, 2, 3, 4].map(i => (
           <Col key={i} xs={24} sm={12} lg={6}>
-            <Card variant="borderless" style={{ borderRadius: '16px' }}>
+            <div className="card-3d h-full p-6">
               <Skeleton active paragraph={{ rows: 1 }} title={false} />
-            </Card>
+            </div>
           </Col>
         ))}
       </Row>
@@ -27,28 +27,33 @@ const DashboardKPIs = ({ data, loading, rango }) => {
   const formatCurrency = (value) => `$${Number(value).toLocaleString('es-CO')}`;
   const formatNumber = (value) => Number(value).toLocaleString('es-CO');
 
+  const rangeLabel = rango === 'dia' ? 'Hoy' : rango === 'semana' ? 'Semana' : 'Mes';
+
   const kpis = [
     {
       title: 'Ingresos Totales',
       value: data?.resumenVentas?.totalVentas || 0,
       icon: <DollarOutlined />,
-      color: '#3b82f6',
+      color: '#ec4899',
+      bg: '#fdf2f8',
       formatter: formatCurrency,
-      subtext: `Ventas del ${rango}`
+      subtext: `Ventas del ${rangeLabel}`
     },
     {
       title: 'Pedidos Realizados',
       value: data?.resumenVentas?.numeroVentas || 0,
       icon: <ShoppingCartOutlined />,
-      color: '#8b5cf6',
+      color: '#db2777',
+      bg: '#fdf2f8',
       formatter: formatNumber,
-      subtext: `Volumen en el ${rango}`
+      subtext: `Volumen en el ${rangeLabel}`
     },
     {
       title: 'Créditos en curso',
       value: data?.resumenCreditos?.creditosActivos || 0,
       icon: <CreditCardOutlined />,
       color: '#f59e0b',
+      bg: '#fffbeb',
       formatter: formatNumber,
       subtext: 'Cuentas por cobrar'
     },
@@ -57,44 +62,38 @@ const DashboardKPIs = ({ data, loading, rango }) => {
       value: data?.nuevosClientes || 0,
       icon: <UserOutlined />,
       color: '#10b981',
+      bg: '#ecfdf5',
       formatter: formatNumber,
       subtext: 'Registros recientes'
     }
   ];
 
   return (
-    <Row gutter={[24, 24]}>
+    <Row gutter={[20, 20]}>
       {kpis.map((kpi, index) => (
         <Col key={index} xs={24} sm={12} lg={6}>
-          <div className="card-3d card-elevated p-6 h-full flex flex-col group bg-white dark:bg-slate-800/60">
-            <div className="flex justify-between items-start mb-6">
+          <div className="card-3d h-full p-5 flex flex-col group hover:-translate-y-1">
+            <div className="flex justify-between items-start mb-5">
               <div 
-                className="kpi-icon-container" 
-                style={{ 
-                  background: `${kpi.color}15`, 
-                  color: kpi.color,
-                }}
+                className="w-11 h-11 rounded-xl flex items-center justify-center text-lg"
+                style={{ backgroundColor: kpi.bg, color: kpi.color }}
               >
                 {kpi.icon}
               </div>
-              <div className="card-3d bg-slate-100/50 dark:bg-slate-700/50 px-2 py-1 rounded-lg">
-                <Text className="!text-[11px] !font-semibold !text-slate-500 dark:!text-slate-400 uppercase tracking-wide">
-                  {rango}
-                </Text>
-              </div>
+              <span className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-700/50 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                {rangeLabel}
+              </span>
             </div>
             
-            <div className="flex-1">
-              <Statistic
-                title={<Text className="!text-slate-500 dark:!text-slate-400 !text-xs !font-semibold !tracking-wide !uppercase !mb-1">{kpi.title}</Text>}
-                value={kpi.value}
-                formatter={kpi.formatter}
-                styles={{ content: { fontSize: '22px', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '-0.5px' } }}
-              />
-            </div>
+            <Text className="!text-slate-400 dark:!text-slate-500 !text-xs !font-semibold !uppercase !tracking-wide block mb-1">
+              {kpi.title}
+            </Text>
+            <Text className="!text-2xl md:!text-[26px] !font-bold !text-slate-900 dark:!text-white !tracking-tight block" style={{ fontVariantNumeric: 'tabular-nums' }}>
+              {kpi.formatter(kpi.value)}
+            </Text>
             
-            <div className="mt-4 flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: kpi.color }} />
+            <div className="mt-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: kpi.color }} />
               <Text className="!text-slate-400 dark:!text-slate-500 !text-xs !font-medium">
                 {kpi.subtext}
               </Text>
@@ -107,3 +106,4 @@ const DashboardKPIs = ({ data, loading, rango }) => {
 };
 
 export default DashboardKPIs;
+
