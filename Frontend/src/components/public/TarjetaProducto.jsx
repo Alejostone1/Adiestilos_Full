@@ -20,17 +20,20 @@ const TarjetaProducto = ({
 
   const isFavorito = estaEnFavoritos(id);
 
-  const formatearPrecio = (valor) => {
+  const formatearCantidad = (valor) => {
     return new Intl.NumberFormat('es-CO', {
-      style: 'currency',
-      currency: 'COP',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(valor);
   };
 
+  const formatearPrecio = (valor) => {
+    return formatearCantidad(valor);
+  };
+
   const handleImageError = (e) => {
-    e.target.src = 'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&h=600&fit=crop';
+    e.target.src =
+      'https://images.unsplash.com/photo-1558171813-4c088753af8f?w=400&h=600&fit=crop';
   };
 
   const linkDestino = slug ? `/producto/${slug}` : `/producto/${id}`;
@@ -59,7 +62,7 @@ const TarjetaProducto = ({
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, margin: '-50px' }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       className={`group relative flex flex-col bg-pure-white rounded-lg overflow-hidden border transition-all duration-300 ${
         isHovered
@@ -71,14 +74,16 @@ const TarjetaProducto = ({
     >
       <Link to={linkDestino} className="block relative">
         {/* Image container */}
-        <div className="relative m-2 aspect-[3/4] bg-surface-container-low overflow-hidden rounded-md ring-1 ring-outline-variant/20">
+        <div className="relative m-2 aspect-[3/4] bg-surface-container-low overflow-hidden rounded-md">
           {/* Primary image */}
           <img
             src={imagenPrimaria}
             alt={nombre}
             onError={handleImageError}
             className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
-              isHovered && imagenSecundaria ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+              isHovered && imagenSecundaria
+                ? 'opacity-0 scale-105'
+                : 'opacity-100 scale-100'
             }`}
             loading="lazy"
           />
@@ -144,24 +149,31 @@ const TarjetaProducto = ({
         </div>
 
         {/* Product info */}
-        <div className="p-4 flex flex-col items-center text-center">
-          <h4 className="font-body-md text-body-md text-text-main mb-1 line-clamp-2">
+        <div className="px-5 pb-5 pt-4">
+          {/* Name */}
+          <h4 className="font-body-md text-body-md text-on-surface mb-2.5 line-clamp-2 text-center font-medium">
             {nombre}
           </h4>
+
+          {/* Divider */}
+          <div className="w-8 h-px bg-primary/25 mx-auto mb-2.5" />
+
+          {/* Price */}
           <div className="flex items-baseline justify-center gap-2">
-            <p className="font-headline-sm text-[18px] text-primary font-semibold tracking-tight">
+            <p className="font-body-md text-[15px] text-primary font-semibold tabular-nums tracking-tight">
+              <span className="text-[11px] font-medium mr-px">$</span>
               {formatearPrecio(precio)}
             </p>
             {descuento && (
-              <p className="text-[13px] text-outline line-through font-medium">
-                {formatearPrecio(precio * (1 + descuento / 100))}
+              <p className="text-[12px] text-outline line-through font-medium tabular-nums">
+                ${formatearPrecio(precio * (1 + descuento / 100))}
               </p>
             )}
           </div>
 
           {/* Color swatches */}
           {coloresDisponibles.length > 0 && (
-            <div className="flex items-center justify-center gap-1.5 mt-2">
+            <div className="flex items-center justify-center gap-1.5 mt-3">
               {coloresDisponibles.slice(0, 5).map((color) => (
                 <span
                   key={color.idColor}
@@ -192,19 +204,19 @@ TarjetaProducto.propTypes = {
     PropTypes.shape({
       idImagen: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       rutaImagen: PropTypes.string,
-      esPrincipal: PropTypes.bool
+      esPrincipal: PropTypes.bool,
     })
   ),
   coloresDisponibles: PropTypes.arrayOf(
     PropTypes.shape({
       idColor: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       nombreColor: PropTypes.string,
-      codigoHex: PropTypes.string
+      codigoHex: PropTypes.string,
     })
   ),
   esNuevo: PropTypes.bool,
   descuento: PropTypes.number,
-  slug: PropTypes.string
+  slug: PropTypes.string,
 };
 
 export default TarjetaProducto;

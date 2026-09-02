@@ -1,5 +1,6 @@
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 const HeroBanner = ({
@@ -7,27 +8,86 @@ const HeroBanner = ({
   subtitulo,
   ctaTexto,
   ctaLink,
-  imagenFondo
+  imagenesFondo = [],
+  intervalo = 6000
 }) => {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
+  const [indice, setIndice] = useState(0);
+  const [pausado, setPausado] = useState(false);
+  const timerRef = useRef(null);
+
+  const total = imagenesFondo.length;
+
+  const siguiente = () => {
+    setIndice((prev) => (prev + 1) % total);
+  };
+  const anterior = () => {
+    setIndice((prev) => (prev - 1 + total) % total);
+  };
+
+  useEffect(() => {
+    if (total <= 1 || pausado) {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
+    }
+    timerRef.current = setInterval(siguiente, intervalo);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total, pausado, intervalo]);
+
+  const hayImagenes = total > 0;
+
   return (
-    <section className="relative h-screen min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden hero-clip">
-      {/* Background */}
+    <section
+      className="relative h-screen min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden hero-clip"
+      onMouseEnter={() => setPausado(true)}
+      onMouseLeave={() => setPausado(false)}
+    >
+      {/* Fondo: carrusel con crossfade */}
       <motion.div className="absolute inset-0 z-0" style={{ y }}>
-        {imagenFondo ? (
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${imagenFondo})` }}
-          />
+        {hayImagenes ? (
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={indice}
+              initial={{ opacity: 0, scale: 1.08 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.4, ease: 'easeInOut' }}
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url(${imagenesFondo[indice]})` }}
+            />
+          </AnimatePresence>
         ) : (
           <div className="w-full h-full bg-surface-soft" />
         )}
-        <div className="absolute inset-0 bg-surface/20 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80" />
+
+        {/* Overlays para legibilidad y estética */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-primary/10 to-background/40" />
       </motion.div>
+
+      {/* Indicators / controles del carrusel */}
+      {hayImagenes && total > 1 && (
+        <div className="absolute z-10 bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-3">
+          {imagenesFondo.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndice(i)}
+              aria-label={`Ir a imagen ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === indice ? 'w-6 bg-primary' : 'w-1.5 bg-on-surface/40 hover:bg-on-surface/70'
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Content */}
       <motion.div
@@ -80,6 +140,26 @@ const HeroBanner = ({
         )}
       </motion.div>
 
+      {/* Flechas del carrusel (escritorio) */}
+      {hayImagenes && total > 1 && (
+        <div className="absolute z-10 inset-x-6 top-1/2 -translate-y-1/2 hidden md:flex justify-between pointer-events-none">
+          <button
+            onClick={anterior}
+            aria-label="Imagen anterior"
+            className="pointer-events-auto w-11 h-11 flex items-center justify-center rounded-full border border-on-surface/30 text-on-surface hover:bg-on-surface hover:text-background transition-colors backdrop-blur-sm"
+          >
+            <span className="material-symbols-outlined text-[22px]">chevron_left</span>
+          </button>
+          <button
+            onClick={siguiente}
+            aria-label="Imagen siguiente"
+            className="pointer-events-auto w-11 h-11 flex items-center justify-center rounded-full border border-on-surface/30 text-on-surface hover:bg-on-surface hover:text-background transition-colors backdrop-blur-sm"
+          >
+            <span className="material-symbols-outlined text-[22px]">chevron_right</span>
+          </button>
+        </div>
+      )}
+
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -102,7 +182,8 @@ HeroBanner.propTypes = {
   subtitulo: PropTypes.string,
   ctaTexto: PropTypes.string,
   ctaLink: PropTypes.string,
-  imagenFondo: PropTypes.string
+  imagenesFondo: PropTypes.arrayOf(PropTypes.string),
+  intervalo: PropTypes.number
 };
 
 export default HeroBanner;

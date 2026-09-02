@@ -79,6 +79,13 @@ const HomePage = () => {
         subtitulo="Descubre prendas diseñadas para realzar tu belleza natural y brindarte comodidad con un toque de elegancia suprema."
         ctaTexto="Comprar ahora"
         ctaLink="/tienda"
+        imagenesFondo={[
+          'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&h=1080&fit=crop',
+          'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1920&h=1080&fit=crop',
+          'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1920&h=1080&fit=crop',
+          'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=1920&h=1080&fit=crop'
+        ]}
+        intervalo={6000}
       />
 
       {/* Categorías */}
