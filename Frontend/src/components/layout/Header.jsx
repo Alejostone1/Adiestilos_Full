@@ -8,14 +8,18 @@ import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { useCarrito } from '../../context/CarritoContext';
+import { useFavoritos } from '../../context/FavoritosContext';
+import Logo from '../common/Logo';
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { usuario, logout } = useAuth();
   const { toggleCarrito, obtenerCantidadTotal } = useCarrito();
+  const { toggleFavoritos, favoritos } = useFavoritos();
 
   const cantidadCarrito = obtenerCantidadTotal();
+  const cantidadFavoritos = favoritos.length;
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -82,9 +86,7 @@ const Header = () => {
       >
         <div className="flex justify-between items-center px-margin-desktop py-5 max-w-container-max mx-auto">
           {/* Logo - Left */}
-          <Link to="/" className="font-display-lg text-display-lg text-primary tracking-tight shrink-0">
-            ADI ESTILOS
-          </Link>
+          <Logo size="lg" />
 
           {/* Navigation - Center */}
           <nav className="hidden lg:flex items-center gap-8">
@@ -114,6 +116,19 @@ const Header = () => {
               aria-label="Buscar"
             >
               <span className="material-symbols-outlined">search</span>
+            </button>
+
+            <button
+              onClick={toggleFavoritos}
+              className="relative hover:text-primary-container transition-all duration-300 hover:scale-95"
+              aria-label="Favoritos"
+            >
+              <span className="material-symbols-outlined">favorite</span>
+              {cantidadFavoritos > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 bg-primary text-on-primary text-[10px] font-bold rounded-full flex items-center justify-center">
+                  {cantidadFavoritos > 99 ? '99+' : cantidadFavoritos}
+                </span>
+              )}
             </button>
 
             {usuario ? (
@@ -197,24 +212,36 @@ const Header = () => {
             <span className="material-symbols-outlined">menu</span>
           </button>
 
-          <Link to="/" className="flex-1 flex justify-center">
-            <span className="font-display-lg-mobile text-display-lg-mobile tracking-tighter text-primary">
-              ADI ESTILOS
-            </span>
-          </Link>
+          <div className="flex-1 flex justify-center">
+            <Logo size="sm" />
+          </div>
 
-          <button
-            onClick={toggleCarrito}
-            className="relative text-primary hover:text-primary-container active:scale-95 transition-transform"
-            aria-label="Carrito"
-          >
-            <span className="material-symbols-outlined">shopping_bag</span>
-            {cantidadCarrito > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 bg-primary text-on-primary text-[9px] font-bold rounded-full flex items-center justify-center">
-                {cantidadCarrito > 99 ? '99+' : cantidadCarrito}
-              </span>
-            )}
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleFavoritos}
+              className="relative text-primary hover:text-primary-container active:scale-95 transition-transform"
+              aria-label="Favoritos"
+            >
+              <span className="material-symbols-outlined">favorite</span>
+              {cantidadFavoritos > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 bg-primary text-on-primary text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {cantidadFavoritos > 99 ? '99+' : cantidadFavoritos}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={toggleCarrito}
+              className="relative text-primary hover:text-primary-container active:scale-95 transition-transform"
+              aria-label="Carrito"
+            >
+              <span className="material-symbols-outlined">shopping_bag</span>
+              {cantidadCarrito > 0 && (
+                <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 bg-primary text-on-primary text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {cantidadCarrito > 99 ? '99+' : cantidadCarrito}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -242,7 +269,7 @@ const Header = () => {
             >
               <div className="flex flex-col p-margin-mobile h-full">
                 <div className="flex justify-between items-center mb-8">
-                  <span className="font-display-lg text-display-lg text-primary">ADI ESTILOS</span>
+                  <Logo size="md" onClick={() => setIsMobileMenuOpen(false)} />
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="text-primary hover:text-primary-container"

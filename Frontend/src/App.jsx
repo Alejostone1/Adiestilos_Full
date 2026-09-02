@@ -8,7 +8,9 @@ import { ConfigProvider } from 'antd';
 import AppRoutes from './routes/AppRoutes';
 import { ThemeProvider } from './context/ThemeContext';
 import { CarritoProvider } from './context/CarritoContext';
+import { FavoritosProvider } from './context/FavoritosContext';
 import { CarritoDrawer } from './components/carrito';
+import { FavoritosDrawer } from './components/favoritos';
 
 const FONT_FAMILY =
   "'Montserrat', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif";
@@ -28,10 +30,13 @@ function App() {
       }}
     >
       <ThemeProvider>
-        <CarritoProvider>
-          <AppRoutes />
-          <CarritoDrawer />
-        </CarritoProvider>
+        <FavoritosProvider>
+          <CarritoProvider>
+            <AppRoutes />
+            <CarritoDrawer />
+            <FavoritosDrawer />
+          </CarritoProvider>
+        </FavoritosProvider>
       </ThemeProvider>
     </ConfigProvider>
   );

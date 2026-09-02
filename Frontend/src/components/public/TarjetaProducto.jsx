@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { useFavoritos } from '../../context/FavoritosContext';
 
 const TarjetaProducto = ({
   id,
@@ -15,6 +16,9 @@ const TarjetaProducto = ({
   slug
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { estaEnFavoritos, toggleFavorito } = useFavoritos();
+
+  const isFavorito = estaEnFavoritos(id);
 
   const formatearPrecio = (valor) => {
     return new Intl.NumberFormat('es-CO', {
@@ -36,19 +40,38 @@ const TarjetaProducto = ({
     ? (imagenes.find(img => !img.esPrincipal)?.rutaImagen || imagenes[0]?.rutaImagen)
     : null;
 
+  const handleToggleFavorito = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleFavorito({
+      idProducto: id,
+      nombreProducto: nombre,
+      precioVentaSugerido: precio,
+      imagenPrincipal,
+      coloresDisponibles,
+      esNuevo,
+      descuento,
+      slug,
+    });
+  };
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-      className="group relative flex flex-col bg-pure-white rounded-lg overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300"
+      className={`group relative flex flex-col bg-pure-white rounded-lg overflow-hidden border transition-all duration-300 ${
+        isHovered
+          ? 'border-primary/60 shadow-card-hover -translate-y-1'
+          : 'border-outline-variant hover:border-primary/40 shadow-card'
+      }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link to={linkDestino} className="block relative">
         {/* Image container */}
-        <div className="relative aspect-[3/4] bg-surface-container-low overflow-hidden rounded-lg">
+        <div className="relative m-2 aspect-[3/4] bg-surface-container-low overflow-hidden rounded-md ring-1 ring-outline-variant/20">
           {/* Primary image */}
           <img
             src={imagenPrimaria}
@@ -93,11 +116,20 @@ const TarjetaProducto = ({
 
           {/* Favorite button */}
           <button
-            className="absolute top-2 right-2 text-text-main hover:text-primary transition-colors bg-pure-white/80 p-1.5 rounded-full backdrop-blur-sm z-10"
-            onClick={(e) => { e.preventDefault(); }}
-            aria-label="Agregar a favoritos"
+            onClick={handleToggleFavorito}
+            aria-label={isFavorito ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+            className={`absolute top-2 right-2 transition-all duration-300 p-1.5 rounded-full backdrop-blur-sm z-20 ${
+              isFavorito
+                ? 'bg-primary/10 text-primary'
+                : 'bg-pure-white/80 text-text-main hover:text-primary'
+            }`}
           >
-            <span className="material-symbols-outlined text-[20px]">favorite_border</span>
+            <span
+              className="material-symbols-outlined text-[20px]"
+              style={isFavorito ? { fontVariationSettings: "'FILL' 1, 'wght' 400" } : undefined}
+            >
+              {isFavorito ? 'favorite' : 'favorite_border'}
+            </span>
           </button>
 
           {/* Hover Add to Cart */}
@@ -116,12 +148,12 @@ const TarjetaProducto = ({
           <h4 className="font-body-md text-body-md text-text-main mb-1 line-clamp-2">
             {nombre}
           </h4>
-          <div className="flex items-baseline gap-2">
-            <p className="font-headline-sm text-[18px] text-primary font-semibold">
+          <div className="flex items-baseline justify-center gap-2">
+            <p className="font-headline-sm text-[18px] text-primary font-semibold tracking-tight">
               {formatearPrecio(precio)}
             </p>
             {descuento && (
-              <p className="text-sm text-outline line-through font-medium">
+              <p className="text-[13px] text-outline line-through font-medium">
                 {formatearPrecio(precio * (1 + descuento / 100))}
               </p>
             )}

@@ -8,6 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { obtenerProductoDetalle } from '../../api/publicApi';
 import { useCarrito } from '../../context/CarritoContext';
+import { useFavoritos } from '../../context/FavoritosContext';
 import { getImagenURL } from '../../utils/imageUrl';
 import GaleriaImagenes from '../../components/producto/GaleriaImagenes';
 import SelectorColores from '../../components/producto/SelectorColores';
@@ -17,6 +18,7 @@ const ProductoDetallePage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { agregarAlCarrito, estaEnCarrito, obtenerCantidadItem } = useCarrito();
+  const { estaEnFavoritos, toggleFavorito } = useFavoritos();
 
   const [producto, setProducto] = useState(null);
   const [variantes, setVariantes] = useState([]);
@@ -311,22 +313,50 @@ const ProductoDetallePage = () => {
             </div>
 
             {/* Add to cart */}
-            <button
-              onClick={handleAgregarAlCarrito}
-              disabled={!canAddToCart}
-              className={`w-full py-4 px-6 rounded-lg font-label-caps text-label-caps flex items-center justify-center gap-2 transition-all duration-300 ${
-                canAddToCart
-                  ? variantInCart
-                    ? 'bg-tertiary text-on-tertiary hover:opacity-90'
-                    : 'bg-primary text-on-primary hover:bg-tertiary hover:text-on-tertiary'
-                  : 'bg-surface-container-low text-outline cursor-not-allowed'
-              }`}
-            >
-              <span className="material-symbols-outlined text-[20px]">
-                {variantInCart ? 'check_circle' : 'shopping_bag'}
-              </span>
-              {getButtonText()}
-            </button>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={handleAgregarAlCarrito}
+                disabled={!canAddToCart}
+                className={`flex-1 py-4 px-6 rounded-lg font-label-caps text-label-caps flex items-center justify-center gap-2 transition-all duration-300 ${
+                  canAddToCart
+                    ? variantInCart
+                      ? 'bg-tertiary text-on-tertiary hover:opacity-90'
+                      : 'bg-primary text-on-primary hover:bg-tertiary hover:text-on-tertiary'
+                    : 'bg-surface-container-low text-outline cursor-not-allowed'
+                }`}
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  {variantInCart ? 'check_circle' : 'shopping_bag'}
+                </span>
+                {getButtonText()}
+              </button>
+
+              <button
+                onClick={() => {
+                  if (!producto) return;
+                  toggleFavorito({
+                    idProducto: producto.idProducto,
+                    nombreProducto: producto.nombreProducto,
+                    precioVentaSugerido: producto.precioVentaSugerido,
+                    imagenPrincipal: producto.imagenPrincipal,
+                    coloresDisponibles: producto.coloresDisponibles || [],
+                  });
+                }}
+                aria-label={producto && estaEnFavoritos(producto.idProducto) ? 'Quitar de favoritos' : 'Agregar a favoritos'}
+                className={`shrink-0 w-[56px] h-[56px] rounded-lg border flex items-center justify-center transition-all duration-300 ${
+                  producto && estaEnFavoritos(producto.idProducto)
+                    ? 'border-primary bg-primary/5 text-primary'
+                    : 'border-outline-variant text-text-main hover:border-primary hover:text-primary'
+                }`}
+              >
+                <span
+                  className="material-symbols-outlined text-[24px]"
+                  style={producto && estaEnFavoritos(producto.idProducto) ? { fontVariationSettings: "'FILL' 1, 'wght' 400" } : undefined}
+                >
+                  {producto && estaEnFavoritos(producto.idProducto) ? 'favorite' : 'favorite_border'}
+                </span>
+              </button>
+            </div>
 
             {/* Technical details */}
             {producto.datosTecnicos && Object.keys(producto.datosTecnicos).length > 0 && (
