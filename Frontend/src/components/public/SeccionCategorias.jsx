@@ -9,24 +9,22 @@ const SeccionCategorias = ({
   if (!categorias.length) return null;
 
   return (
-    <section className="py-20 md:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header de sección */}
+    <section className="py-16 md:py-20 bg-surface-bright">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-10"
         >
-          <div className="w-12 h-px bg-neutral-300 mx-auto mb-6" />
-          <h2 className="text-xl md:text-2xl font-light text-neutral-900 tracking-[0.2em] uppercase">
+          <h2 className="font-headline-md text-headline-md text-primary text-center">
             {titulo}
           </h2>
         </motion.div>
 
-        {/* Grid de categorías */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        {/* Mobile: horizontal scroll */}
+        <div className="flex overflow-x-auto hide-scrollbar md:grid md:grid-cols-3 gap-4 md:gap-6 pb-4 md:pb-0">
           {categorias.map((categoria, index) => (
             <motion.div
               key={categoria.id}
@@ -34,6 +32,7 @@ const SeccionCategorias = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="flex-none w-64 md:w-auto"
             >
               <TarjetaCategoria {...categoria} />
             </motion.div>

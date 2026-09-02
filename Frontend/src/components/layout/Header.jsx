@@ -1,6 +1,6 @@
 /**
  * @file Header.jsx
- * @brief Header premium minimalista para e-commerce de moda
+ * @brief Header editorial premium para ADI ESTILOS - Glassmorphism, femenino, responsive
  */
 
 import React, { useState, useEffect } from 'react';
@@ -14,15 +14,14 @@ const Header = () => {
   const location = useLocation();
   const { usuario, logout } = useAuth();
   const { toggleCarrito, obtenerCantidadTotal } = useCarrito();
-  
+
   const cantidadCarrito = obtenerCantidadTotal();
-  
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Detectar scroll para cambiar estilo del header
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -31,11 +30,19 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cerrar menú móvil al cambiar de ruta
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsSearchOpen(false);
   }, [location]);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isMobileMenuOpen]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -46,18 +53,6 @@ const Header = () => {
     }
   };
 
-  // Determinar si estamos en el home para header transparente
-  const isHome = location.pathname === '/';
-  const headerBg = isHome && !isScrolled && !isMobileMenuOpen
-    ? 'bg-transparent'
-    : 'bg-white border-b border-neutral-200';
-  const textColor = isHome && !isScrolled && !isMobileMenuOpen
-    ? 'text-white'
-    : 'text-neutral-900';
-  const textColorMuted = isHome && !isScrolled && !isMobileMenuOpen
-    ? 'text-white/70'
-    : 'text-neutral-600';
-
   const navLinks = [
     { to: '/', label: 'Inicio' },
     { to: '/tienda', label: 'Tienda' },
@@ -65,118 +60,96 @@ const Header = () => {
     { to: '/contacto', label: 'Contacto' },
   ];
 
-  // Determinar si el usuario es administrador
   const esAdministrador = usuario?.rol?.nombreRol === 'Administrador';
-
-  // Determinar la ruta del perfil según el rol
   const rutaPerfil = esAdministrador ? '/admin' : '/perfil';
 
   return (
     <>
-      <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${headerBg}`}
+      {/* Announcement Bar - Mobile */}
+      <div className="bg-primary-container text-on-primary-container text-center py-2 px-5 md:hidden">
+        <span className="font-label-caps text-label-caps">
+          Envíos a todo el país en compras superiores a $50.000
+        </span>
+      </div>
+
+      {/* Desktop Header */}
+      <header
+        className={`hidden md:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'glass-nav shadow-soft-primary'
+            : 'bg-surface/80 backdrop-blur-md shadow-soft-primary'
+        }`}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-20">
-            
-            {/* Logo */}
-            <Link 
-              to="/" 
-              className={`text-xl font-light tracking-[0.15em] uppercase transition-colors ${textColor}`}
+        <div className="flex justify-between items-center px-margin-desktop py-5 max-w-container-max mx-auto">
+          {/* Logo - Left */}
+          <Link to="/" className="font-display-lg text-display-lg text-primary tracking-tight shrink-0">
+            ADI ESTILOS
+          </Link>
+
+          {/* Navigation - Center */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  `font-body-md text-body-md transition-colors duration-300 ${
+                    isActive
+                      ? 'text-primary border-b-2 border-primary pb-1'
+                      : 'text-text-main hover:text-primary'
+                  }`
+                }
+                end={link.to === '/'}
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          {/* Actions - Right */}
+          <div className="flex items-center gap-5 text-primary">
+            <button
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+              className="hover:text-primary-container transition-all duration-300 hover:scale-95"
+              aria-label="Buscar"
             >
-              Adi Estilos
-            </Link>
+              <span className="material-symbols-outlined">search</span>
+            </button>
 
-            {/* Navegación Desktop */}
-            <nav className="hidden lg:flex items-center gap-10">
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  className={({ isActive }) => `
-                    text-xs uppercase tracking-[0.1em] transition-all duration-300
-                    ${isActive 
-                      ? textColor 
-                      : `${textColorMuted} hover:${textColor}`
-                    }
-                  `}
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
-
-            {/* Acciones */}
-            <div className="flex items-center gap-4">
-              {/* Búsqueda */}
-              <button
-                onClick={() => setIsSearchOpen(!isSearchOpen)}
-                className={`p-2 transition-colors ${textColorMuted} hover:${textColor}`}
-                aria-label="Buscar"
+            {usuario ? (
+              <Link
+                to={rutaPerfil}
+                className="hover:text-primary-container transition-all duration-300 hover:scale-95"
+                aria-label="Mi cuenta"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              </button>
+                <span className="material-symbols-outlined">person</span>
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                className="hover:text-primary-container transition-all duration-300 hover:scale-95"
+                aria-label="Iniciar sesión"
+              >
+                <span className="material-symbols-outlined">person</span>
+              </Link>
+            )}
 
-              {/* Usuario */}
-              {usuario ? (
-                <div className="hidden sm:flex items-center gap-3">
-                  <Link
-                    to={rutaPerfil}
-                    className={`text-xs uppercase tracking-wider transition-colors ${textColorMuted} hover:${textColor}`}
-                  >
-                    {usuario.nombres}
-                  </Link>
-                  <button
-                    onClick={logout}
-                    className={`text-xs uppercase tracking-wider transition-colors ${textColorMuted} hover:${textColor}`}
-                  >
-                    Salir
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  to="/login"
-                  className={`hidden sm:block text-xs uppercase tracking-[0.15em] transition-colors ${textColorMuted} hover:${textColor}`}
-                >
-                  Ingresar
-                </Link>
+            <button
+              onClick={toggleCarrito}
+              className="relative hover:text-primary-container transition-all duration-300 hover:scale-95"
+              aria-label="Carrito"
+            >
+              <span className="material-symbols-outlined">shopping_bag</span>
+              {cantidadCarrito > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 bg-primary text-on-primary text-[10px] font-bold rounded-full flex items-center justify-center">
+                  {cantidadCarrito > 99 ? '99+' : cantidadCarrito}
+                </span>
               )}
-
-              {/* Carrito */}
-              <button
-                onClick={toggleCarrito}
-                className={`p-2 relative transition-colors ${textColorMuted} hover:${textColor}`}
-                aria-label="Carrito"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
-                {cantidadCarrito > 0 && (
-                  <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-orange-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center animate-pulse">
-                    {cantidadCarrito > 99 ? '99+' : cantidadCarrito}
-                  </span>
-                )}
-              </button>
-
-              {/* Menú Móvil Toggle */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`lg:hidden p-2 transition-colors ${textColor}`}
-                aria-label="Menú"
-              >
-                <div className="w-5 h-4 flex flex-col justify-between">
-                  <span className={`block h-px bg-current transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-                  <span className={`block h-px bg-current transition-opacity duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-                  <span className={`block h-px bg-current transition-transform duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`} />
-                </div>
-              </button>
-            </div>
+            </button>
           </div>
         </div>
 
-        {/* Barra de búsqueda */}
+        {/* Search Bar */}
         <AnimatePresence>
           {isSearchOpen && (
             <motion.div
@@ -184,26 +157,21 @@ const Header = () => {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="border-t border-neutral-200 bg-white overflow-hidden"
+              className="border-t border-outline-variant/30 overflow-hidden"
             >
               <form onSubmit={handleSearch} className="max-w-2xl mx-auto px-6 py-4">
                 <div className="relative">
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">
+                    search
+                  </span>
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Buscar productos..."
-                    className="w-full px-4 py-3 bg-neutral-100 border-0 text-sm focus:outline-none focus:ring-2 focus:ring-neutral-900"
+                    className="w-full bg-surface-bright border border-secondary-fixed-dim rounded-full py-3 pl-12 pr-4 font-body-sm text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all"
                     autoFocus
                   />
-                  <button
-                    type="submit"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-900"
-                  >
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </button>
                 </div>
               </form>
             </motion.div>
@@ -211,87 +179,150 @@ const Header = () => {
         </AnimatePresence>
       </header>
 
-      {/* Menú Móvil */}
+      {/* Mobile Header */}
+      <header
+        className={`md:hidden fixed w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'glass-nav shadow-nav'
+            : 'bg-surface/80 backdrop-blur-md shadow-nav'
+        }`}
+        style={{ top: '32px' }}
+      >
+        <div className="flex justify-between items-center px-margin-mobile h-16">
+          <button
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="text-primary hover:text-primary-container active:scale-95 transition-transform"
+            aria-label="Menú"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
+
+          <Link to="/" className="flex-1 flex justify-center">
+            <span className="font-display-lg-mobile text-display-lg-mobile tracking-tighter text-primary">
+              ADI ESTILOS
+            </span>
+          </Link>
+
+          <button
+            onClick={toggleCarrito}
+            className="relative text-primary hover:text-primary-container active:scale-95 transition-transform"
+            aria-label="Carrito"
+          >
+            <span className="material-symbols-outlined">shopping_bag</span>
+            {cantidadCarrito > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-[16px] h-[16px] px-1 bg-primary text-on-primary text-[9px] font-bold rounded-full flex items-center justify-center">
+                {cantidadCarrito > 99 ? '99+' : cantidadCarrito}
+              </span>
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 lg:hidden"
-          >
+          <>
             {/* Overlay */}
-            <div 
-              className="absolute inset-0 bg-black/50"
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[55] bg-inverse-surface/40 md:hidden"
               onClick={() => setIsMobileMenuOpen(false)}
             />
-            
-            {/* Panel */}
+
+            {/* Drawer */}
             <motion.div
-              initial={{ x: '100%' }}
+              initial={{ x: '-100%' }}
               animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-              className="absolute right-0 top-0 bottom-0 w-80 max-w-full bg-white"
+              exit={{ x: '-100%' }}
+              transition={{ type: 'tween', duration: 0.4, ease: 'easeInOut' }}
+              className="fixed inset-0 z-[60] w-64 h-full bg-background md:hidden flex flex-col"
             >
-              <div className="p-6 pt-24">
-                <nav className="space-y-1">
+              <div className="flex flex-col p-margin-mobile h-full">
+                <div className="flex justify-between items-center mb-8">
+                  <span className="font-display-lg text-display-lg text-primary">ADI ESTILOS</span>
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-primary hover:text-primary-container"
+                    aria-label="Cerrar menú"
+                  >
+                    <span className="material-symbols-outlined">close</span>
+                  </button>
+                </div>
+
+                <nav className="flex flex-col space-y-2">
                   {navLinks.map((link) => (
                     <NavLink
                       key={link.to}
                       to={link.to}
-                      className={({ isActive }) => `
-                        block py-4 text-sm uppercase tracking-[0.1em] border-b border-neutral-100 transition-colors
-                        ${isActive ? 'text-neutral-900' : 'text-neutral-500 hover:text-neutral-900'}
-                      `}
+                      className={({ isActive }) =>
+                        `flex items-center gap-4 py-3 font-body-lg text-body-lg transition-all duration-300 hover:pl-4 ${
+                          isActive
+                            ? 'text-primary font-bold border-b border-primary-container'
+                            : 'text-text-main hover:text-primary-container'
+                        }`
+                      }
+                      end={link.to === '/'}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
+                      <span className="material-symbols-outlined">
+                        {link.to === '/' ? 'home' : link.to === '/tienda' ? 'storefront' : link.to === '/nosotros' ? 'auto_awesome' : 'mail'}
+                      </span>
                       {link.label}
                     </NavLink>
                   ))}
                 </nav>
 
-                <div className="mt-8 pt-8 border-t border-neutral-200">
+                <div className="mt-auto pt-8 border-t border-outline-variant/30">
                   {usuario ? (
                     <div className="space-y-4">
                       <Link
                         to={rutaPerfil}
-                        className="block text-sm text-neutral-600 hover:text-neutral-900"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-4 text-text-main hover:text-primary font-body-md text-body-md"
                       >
+                        <span className="material-symbols-outlined">person</span>
                         {esAdministrador ? 'Panel Admin' : 'Mi cuenta'}
                       </Link>
                       <button
-                        onClick={logout}
-                        className="text-sm text-neutral-600 hover:text-neutral-900"
+                        onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                        className="flex items-center gap-4 text-text-main hover:text-primary font-body-md text-body-md"
                       >
+                        <span className="material-symbols-outlined">logout</span>
                         Cerrar sesión
                       </button>
                     </div>
                   ) : (
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <Link
                         to="/login"
-                        className="block w-full py-3 text-center border border-neutral-900 text-sm uppercase tracking-wider hover:bg-neutral-900 hover:text-white transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block w-full py-3 text-center border border-primary text-primary font-body-sm text-body-sm rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
                       >
-                        Ingresar
+                        Iniciar Sesión
                       </Link>
                       <Link
                         to="/registro"
-                        className="block w-full py-3 text-center bg-neutral-900 text-white text-sm uppercase tracking-wider hover:bg-neutral-800 transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block w-full py-3 text-center bg-primary-container text-on-primary-container font-body-sm text-body-sm rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
                       >
-                        Crear cuenta
+                        Crear Cuenta
                       </Link>
                     </div>
                   )}
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          </>
         )}
       </AnimatePresence>
 
-      {/* Spacer para contenido cuando header es fijo */}
-      {!isHome && <div className="h-20" />}
+      {/* Spacer for fixed header - Desktop */}
+      <div className="hidden md:block h-20" />
+      {/* Spacer for fixed header + announcement bar - Mobile */}
+      <div className="md:hidden h-[112px]" />
     </>
   );
 };

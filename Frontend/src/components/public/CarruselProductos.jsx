@@ -34,11 +34,9 @@ const CarruselProductos = ({
 
   useEffect(() => {
     if (!emblaApi) return;
-    
     onSelect();
     emblaApi.on('select', onSelect);
     emblaApi.on('reInit', onSelect);
-
     return () => {
       emblaApi.off('select', onSelect);
       emblaApi.off('reInit', onSelect);
@@ -47,7 +45,6 @@ const CarruselProductos = ({
 
   useEffect(() => {
     if (!emblaApi || !autoScroll) return;
-
     const interval = setInterval(() => {
       if (emblaApi.canScrollNext()) {
         emblaApi.scrollNext();
@@ -55,16 +52,14 @@ const CarruselProductos = ({
         emblaApi.scrollTo(0);
       }
     }, autoScrollDelay);
-
     return () => clearInterval(interval);
   }, [emblaApi, autoScroll, autoScrollDelay]);
 
   if (!productos.length) return null;
 
   return (
-    <section className="py-20 md:py-28 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
+    <section className="py-20 md:py-28 bg-surface">
+      <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,55 +68,45 @@ const CarruselProductos = ({
           className="flex items-end justify-between mb-12"
         >
           <div>
-            <div className="w-12 h-px bg-neutral-300 mb-6" />
-            <h2 className="text-xl md:text-2xl font-light text-neutral-900 tracking-[0.2em] uppercase">
+            <h2 className="font-headline-md text-headline-md text-primary">
               {titulo}
             </h2>
           </div>
-          
+
           <div className="flex items-center gap-6">
             {verTodosLink && (
               <Link
                 to={verTodosLink}
-                className="hidden sm:inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-600 hover:text-neutral-900 transition-colors group"
+                className="hidden sm:inline-flex items-center gap-2 font-label-caps text-label-caps text-primary hover:text-tertiary transition-colors group"
               >
                 Ver todos
-                <svg 
-                  className="w-4 h-4 transition-transform group-hover:translate-x-1" 
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">
+                  arrow_forward
+                </span>
               </Link>
             )}
-            
-            {/* Controles */}
+
             <div className="flex items-center gap-2">
               <button
                 onClick={scrollPrev}
                 disabled={!canScrollPrev}
-                className="w-10 h-10 flex items-center justify-center border border-neutral-300 text-neutral-600 hover:border-neutral-900 hover:text-neutral-900 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="w-10 h-10 flex items-center justify-center border border-outline-variant text-text-main hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors rounded-lg"
                 aria-label="Anterior"
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
-                </svg>
+                <span className="material-symbols-outlined text-[20px]">chevron_left</span>
               </button>
               <button
                 onClick={scrollNext}
                 disabled={!canScrollNext}
-                className="w-10 h-10 flex items-center justify-center border border-neutral-300 text-neutral-600 hover:border-neutral-900 hover:text-neutral-900 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="w-10 h-10 flex items-center justify-center border border-outline-variant text-text-main hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors rounded-lg"
                 aria-label="Siguiente"
               >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
-                </svg>
+                <span className="material-symbols-outlined text-[20px]">chevron_right</span>
               </button>
             </div>
           </div>
         </motion.div>
 
-        {/* Carrusel */}
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-4 md:gap-6">
             {productos.map((producto) => (
@@ -135,12 +120,11 @@ const CarruselProductos = ({
           </div>
         </div>
 
-        {/* Link móvil */}
         {verTodosLink && (
           <div className="mt-10 text-center sm:hidden">
             <Link
               to={verTodosLink}
-              className="inline-flex items-center gap-2 px-6 py-3 border border-neutral-900 text-xs uppercase tracking-widest text-neutral-900 hover:bg-neutral-900 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary-container text-on-primary-container font-label-caps text-label-caps rounded-lg hover:bg-primary hover:text-on-primary transition-colors"
             >
               Ver todos los productos
             </Link>

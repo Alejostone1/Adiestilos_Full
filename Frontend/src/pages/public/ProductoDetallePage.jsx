@@ -1,9 +1,14 @@
+/**
+ * @file ProductoDetallePage.jsx
+ * @brief Detalle de producto ADI Estilos — editorial, responsive, sin romper lógica.
+ */
+
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { obtenerProductoDetalle } from '../../api/publicApi';
 import { useCarrito } from '../../context/CarritoContext';
-import { getFileUrl } from '../../utils/fileUtils';
-
+import { getImagenURL } from '../../utils/imageUrl';
 import GaleriaImagenes from '../../components/producto/GaleriaImagenes';
 import SelectorColores from '../../components/producto/SelectorColores';
 import SelectorTallas from '../../components/producto/SelectorTallas';
@@ -24,17 +29,14 @@ const ProductoDetallePage = () => {
   const [activeImage, setActiveImage] = useState('');
   const [currentStock, setCurrentStock] = useState(0);
 
-  // Filtrar colores que existen en variantes (independientemente del stock)
   const availableColors = useMemo(() => colores.filter(color =>
     variantes.some(v => v.color?.idColor === color.id)
   ), [colores, variantes]);
 
-  // Filtrar tallas que existen para el color seleccionado (independientemente del stock)
   const availableTallas = useMemo(() => tallas.filter(talla =>
     variantes.some(v =>
       v.talla?.idTalla === talla.id &&
-      (!selectedColor || v.color?.idColor === selectedColor.id) &&
-      true // Mostrar talla aunque no haya stock, para que el usuario vea "Agotado"
+      (!selectedColor || v.color?.idColor === selectedColor.id)
     )
   ), [tallas, variantes, selectedColor]);
 
@@ -42,68 +44,39 @@ const ProductoDetallePage = () => {
     const collectVariantImages = (variantsToScan) => {
       const collected = [];
       (variantsToScan || []).forEach(v => {
-        // Imagen principal de la variante
         if (v.imagenVariante) {
-          const url = getFileUrl(v.imagenVariante);
+          const url = getImagenURL(v.imagenVariante);
           if (url && !collected.find(i => i.url === url)) {
-            collected.push({
-              id: `var-main-${v.idVariante}`,
-              url,
-              esPrincipal: false,
-              tipo: 'variante',
-              color: v.color?.nombreColor,
-              talla: v.talla?.nombreTalla
-            });
+            collected.push({ id: `var-main-${v.idVariante}`, url, esPrincipal: false, tipo: 'variante', color: v.color?.nombreColor, talla: v.talla?.nombreTalla });
           }
         }
-        // Imágenes adicionales de la variante
         (v.imagenesVariantes || []).forEach(img => {
-          const url = getFileUrl(img.rutaImagen);
+          const url = getImagenURL(img.rutaImagen);
           if (url && !collected.find(i => i.url === url)) {
-            collected.push({
-              id: `var-img-${img.idImagenVariante}`,
-              url,
-              esPrincipal: img.esPrincipal,
-              tipo: 'variante',
-              color: v.color?.nombreColor,
-              talla: v.talla?.nombreTalla
-            });
+            collected.push({ id: `var-img-${img.idImagenVariante}`, url, esPrincipal: img.esPrincipal, tipo: 'variante', color: v.color?.nombreColor, talla: v.talla?.nombreTalla });
           }
         });
       });
       return collected;
     };
 
-    // Si hay un color seleccionado, mostrar solo las imágenes de esa variante
     if (selectedColor) {
       const variantsForColor = variantes.filter(v => v.color?.idColor === selectedColor.id);
       const variantImages = collectVariantImages(variantsForColor);
-      
-      // Si la variante tiene imágenes, las muestra. Si no, la galería quedará vacía
-      // y la imagen principal (activeImage) ya habrá vuelto a la del producto.
-      if (variantImages.length > 0) {
-        return variantImages;
-      }
+      if (variantImages.length > 0) return variantImages;
     }
 
-    // Caso por defecto: no hay color seleccionado O la variante seleccionada no tiene imágenes.
-    // Mostrar una galería completa con las imágenes del producto y de todas las variantes.
     const productImages = (producto?.imagenesProductos || []).map(img => ({
       id: `prod-${img.idImagen}`,
-      url: getFileUrl(img.rutaImagen),
+      url: getImagenURL(img.rutaImagen),
       esPrincipal: img.esPrincipal,
       tipo: 'producto'
     }));
-    
     const allVariantImages = collectVariantImages(variantes);
-    
     const combined = [...productImages, ...allVariantImages];
-    // Eliminar duplicados por URL antes de retornar
     return combined.filter((v, i, a) => a.findIndex(t => t.url === v.url) === i);
-    
   }, [selectedColor, variantes, producto]);
 
-  // Resetear talla seleccionada si ya no está disponible para el color seleccionado
   useEffect(() => {
     if (selectedTalla && !availableTallas.some(t => t.id === selectedTalla.id)) {
       setSelectedTalla(null);
@@ -115,37 +88,16 @@ const ProductoDetallePage = () => {
       setLoading(true);
       try {
         const productoData = await obtenerProductoDetalle(id);
-
         setProducto(productoData);
         setVariantes(productoData.variantes || []);
+        setColores((productoData.coloresDisponibles || []).map(c => ({ id: c.idColor, nombre: c.nombreColor, hex: c.codigoHex })));
+        setTallas((productoData.tallasDisponibles || []).map(t => ({ id: t.idTalla, nombre: t.nombreTalla })));
+        setActiveImage(getImagenURL(productoData.imagenPrincipal));
 
-        // Mapear colores disponibles al formato esperado por SelectorColores
-        const coloresMapeados = (productoData.coloresDisponibles || []).map(c => ({
-          id: c.idColor,
-          nombre: c.nombreColor,
-          hex: c.codigoHex
-        }));
-        setColores(coloresMapeados);
-
-        // Mapear tallas disponibles al formato esperado por SelectorTallas
-        const tallasMapeadas = (productoData.tallasDisponibles || []).map(t => ({
-          id: t.idTalla,
-          nombre: t.nombreTalla
-        }));
-        setTallas(tallasMapeadas);
-
-        setActiveImage(getFileUrl(productoData.imagenPrincipal));
-
-        // Seleccionar color inicial si el producto tiene colores
         if (productoData.tieneColores && productoData.variantes?.length > 0) {
           const firstVariantWithColor = productoData.variantes.find(v => v.color);
-          if (firstVariantWithColor && firstVariantWithColor.color) {
-            const initialColor = {
-              id: firstVariantWithColor.color.idColor,
-              nombre: firstVariantWithColor.color.nombreColor,
-              hex: firstVariantWithColor.color.codigoHex
-            };
-            setSelectedColor(initialColor);
+          if (firstVariantWithColor?.color) {
+            setSelectedColor({ id: firstVariantWithColor.color.idColor, nombre: firstVariantWithColor.color.nombreColor, hex: firstVariantWithColor.color.codigoHex });
           }
         }
       } catch (error) {
@@ -158,65 +110,46 @@ const ProductoDetallePage = () => {
   }, [id]);
 
   useEffect(() => {
-    // Si no hay producto, no hacer nada
     if (!producto) return;
-
     const variant = variantes.find(v => v.color?.idColor === selectedColor?.id);
-    
-    // Si la variante seleccionada tiene imagen, usarla
-    if (variant && variant.imagenVariante) {
-      setActiveImage(getFileUrl(variant.imagenVariante));
-    } else {
-      // Si no, volver a la imagen principal del producto
-      setActiveImage(getFileUrl(producto.imagenPrincipal));
-    }
+    setActiveImage(variant?.imagenVariante ? getImagenURL(variant.imagenVariante) : getImagenURL(producto.imagenPrincipal));
   }, [selectedColor, variantes, producto]);
 
   useEffect(() => {
     let stock = 0;
     if (selectedColor && selectedTalla) {
-      const variant = variantes.find(
-        v => v.color?.idColor === selectedColor.id && v.talla?.idTalla === selectedTalla.id
-      );
+      const variant = variantes.find(v => v.color?.idColor === selectedColor.id && v.talla?.idTalla === selectedTalla.id);
       stock = variant ? variant.cantidadStock : 0;
     } else if (selectedColor) {
-      stock = variantes
-        .filter(v => v.color?.idColor === selectedColor.id)
-        .reduce((acc, v) => acc + v.cantidadStock, 0);
+      stock = variantes.filter(v => v.color?.idColor === selectedColor.id).reduce((acc, v) => acc + v.cantidadStock, 0);
     } else if (selectedTalla) {
-      stock = variantes
-        .filter(v => v.talla?.idTalla === selectedTalla.id)
-        .reduce((acc, v) => acc + v.cantidadStock, 0);
+      stock = variantes.filter(v => v.talla?.idTalla === selectedTalla.id).reduce((acc, v) => acc + v.cantidadStock, 0);
     } else if (!producto?.tieneColores && !producto?.tieneTallas) {
       stock = variantes[0]?.cantidadStock || 0;
     }
     setCurrentStock(stock);
   }, [selectedColor, selectedTalla, variantes, producto]);
 
-  // ================== RENDER ==================
-
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-12 max-w-6xl">
-        <div className="mb-8">
-          <div className="h-5 w-24 bg-gray-200 rounded animate-pulse"></div>
-        </div>
-        <div className="grid md:grid-cols-2 gap-10">
-          <div>
-            <div className="bg-gray-200 animate-pulse h-[500px] rounded-2xl"></div>
-            <div className="flex gap-3 mt-5">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="bg-gray-200 animate-pulse h-20 w-20 rounded-xl"></div>
-              ))}
+      <div className="min-h-screen bg-background">
+        <div className="max-w-[1280px] mx-auto px-5 md:px-16 py-12">
+          <div className="grid md:grid-cols-2 gap-10">
+            <div>
+              <div className="bg-surface-container-low animate-pulse h-[500px] rounded-lg" />
+              <div className="flex gap-3 mt-5">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="bg-surface-container-low animate-pulse h-20 w-20 rounded-lg" />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="space-y-6">
-            <div className="h-6 bg-gray-200 animate-pulse rounded w-1/3"></div>
-            <div className="h-9 bg-gray-200 animate-pulse rounded w-2/3"></div>
-            <div className="h-7 bg-gray-200 animate-pulse rounded w-1/4"></div>
-            <div className="h-24 bg-gray-200 animate-pulse rounded-xl"></div>
-            <div className="h-12 bg-gray-200 animate-pulse rounded-lg"></div>
-            <div className="h-32 bg-gray-200 animate-pulse rounded-xl"></div>
+            <div className="space-y-6">
+              <div className="h-5 bg-surface-container-low animate-pulse rounded w-1/3" />
+              <div className="h-9 bg-surface-container-low animate-pulse rounded w-2/3" />
+              <div className="h-7 bg-surface-container-low animate-pulse rounded w-1/4" />
+              <div className="h-24 bg-surface-container-low animate-pulse rounded-lg" />
+              <div className="h-12 bg-surface-container-low animate-pulse rounded-lg" />
+            </div>
           </div>
         </div>
       </div>
@@ -225,33 +158,26 @@ const ProductoDetallePage = () => {
 
   if (!producto) {
     return (
-      <div className="container mx-auto text-center py-24 px-4">
-        <h2 className="text-2xl font-semibold text-gray-800">Producto no encontrado</h2>
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4">
+        <span className="material-symbols-outlined text-[64px] text-outline-variant mb-4">inventory_2</span>
+        <h2 className="font-headline-sm text-headline-sm text-on-surface mb-4">Producto no encontrado</h2>
         <button
           onClick={() => navigate(-1)}
-          className="mt-6 inline-flex items-center gap-2 px-6 py-3 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition shadow-sm"
+          className="inline-flex items-center gap-2 px-6 py-3 border border-outline-variant text-text-main font-label-caps text-label-caps rounded-lg hover:border-primary hover:text-primary transition-colors"
         >
-          ← Volver
+          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          Volver
         </button>
       </div>
     );
   }
 
-  const stockInfoForTallas = variantes
-    .filter(v => !selectedColor || v.color?.idColor === selectedColor.id)
-    .map(v => ({
-      id_talla: v.talla?.idTalla,
-      stock: v.cantidadStock
-    }));
-
+  const stockInfoForTallas = variantes.filter(v => !selectedColor || v.color?.idColor === selectedColor.id).map(v => ({ id_talla: v.talla?.idTalla, stock: v.cantidadStock }));
   const isInStock = currentStock > 0;
 
-  // Obtener precio a mostrar (precio de variante seleccionada o precio sugerido)
   const getPrecioMostrar = () => {
     if (selectedColor && selectedTalla) {
-      const variant = variantes.find(
-        v => v.color?.idColor === selectedColor.id && v.talla?.idTalla === selectedTalla.id
-      );
+      const variant = variantes.find(v => v.color?.idColor === selectedColor.id && v.talla?.idTalla === selectedTalla.id);
       if (variant) return variant.precioVenta;
     } else if (selectedColor) {
       const variant = variantes.find(v => v.color?.idColor === selectedColor.id);
@@ -260,28 +186,18 @@ const ProductoDetallePage = () => {
     return producto.precioVentaSugerido;
   };
 
-  const accentColor = '#c77833';
-
   const getSelectedVariant = () => {
-    if (selectedColor && selectedTalla) {
-      return variantes.find(
-        v => v.color?.idColor === selectedColor.id && v.talla?.idTalla === selectedTalla.id
-      );
-    } else if (selectedColor && !producto?.tieneTallas) {
-      return variantes.find(v => v.color?.idColor === selectedColor.id);
-    } else if (selectedTalla && !producto?.tieneColores) {
-      return variantes.find(v => v.talla?.idTalla === selectedTalla.id);
-    } else if (!producto?.tieneColores && !producto?.tieneTallas) {
-      return variantes[0];
-    }
+    if (selectedColor && selectedTalla) return variantes.find(v => v.color?.idColor === selectedColor.id && v.talla?.idTalla === selectedTalla.id);
+    if (selectedColor && !producto?.tieneTallas) return variantes.find(v => v.color?.idColor === selectedColor.id);
+    if (selectedTalla && !producto?.tieneColores) return variantes.find(v => v.talla?.idTalla === selectedTalla.id);
+    if (!producto?.tieneColores && !producto?.tieneTallas) return variantes[0];
     return null;
   };
 
   const handleAgregarAlCarrito = () => {
     const variant = getSelectedVariant();
     if (!variant) return;
-
-    const itemCarrito = {
+    agregarAlCarrito({
       idVariante: variant.idVariante,
       idProducto: producto.idProducto,
       nombreProducto: producto.nombreProducto,
@@ -289,13 +205,11 @@ const ProductoDetallePage = () => {
       colorHex: variant.color?.codigoHex || null,
       talla: variant.talla?.nombreTalla || null,
       precio: variant.precioVenta,
-      imagen: getFileUrl(variant.imagenVariante || producto.imagenPrincipal),
+      imagen: getImagenURL(variant.imagenVariante || producto.imagenPrincipal),
       cantidad: 1,
       stockDisponible: variant.cantidadStock,
       codigoSku: variant.codigoSku
-    };
-
-    agregarAlCarrito(itemCarrito);
+    });
   };
 
   const selectedVariant = getSelectedVariant();
@@ -313,138 +227,122 @@ const ProductoDetallePage = () => {
     return 'Añadir al carrito';
   };
 
+  const formatPrice = (p) => new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(p);
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Botón de volver */}
-      <button
-        onClick={() => navigate(-1)}
-        className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 font-medium mb-8 transition-colors group"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+    <div className="min-h-screen bg-background">
+      <div className="max-w-[1280px] mx-auto px-5 md:px-16 py-8 md:py-12">
+        {/* Breadcrumb */}
+        <button
+          onClick={() => navigate(-1)}
+          className="inline-flex items-center gap-2 text-outline hover:text-primary font-body-sm text-body-sm mb-8 transition-colors group"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-        Volver
-      </button>
+          <span className="material-symbols-outlined text-[18px] group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+          Volver
+        </button>
 
-      <div className="grid md:grid-cols-2 gap-12">
-        {/* Galería de imágenes */}
-        <div className="order-2 md:order-1">
-          <GaleriaImagenes
-            imagenes={imagenesGaleria}
-            imagenPrincipal={activeImage}
-            nombreProducto={producto.nombreProducto}
-          />
-        </div>
-
-        {/* Información del producto */}
-        <div className="order-1 md:order-2 flex flex-col gap-7">
-          <div>
-            <span
-              className="text-sm font-medium text-gray-500 uppercase tracking-wider"
-              style={{ color: accentColor }}
-            >
-              {producto.categoria?.nombreCategoria}
-            </span>
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mt-1 leading-tight">
-              {producto.nombreProducto}
-            </h1>
-            <div className="flex items-baseline mt-3">
-              <span className="text-2xl md:text-3xl font-bold text-gray-900">
-                ${getPrecioMostrar().toFixed(2)}
-              </span>
-            </div>
-          </div>
-
-          <p className="text-gray-600 leading-relaxed text-base">
-            {producto.descripcion}
-          </p>
-
-          {/* Selectores */}
-          <div className="space-y-6">
-            {producto.tieneColores && (
-              <SelectorColores
-                colores={availableColors}
-                onSelectColor={setSelectedColor}
-                selectedColor={selectedColor}
-              />
-            )}
-            {producto.tieneTallas && (
-              <SelectorTallas
-                tallas={availableTallas}
-                onSelectTalla={setSelectedTalla}
-                selectedTalla={selectedTalla}
-                stockInfo={stockInfoForTallas}
-              />
-            )}
-          </div>
-
-          {/* Disponibilidad */}
-          <div className="flex items-center gap-2">
-            {isInStock ? (
-              <>
-                <span className="w-2.5 h-2.5 bg-green-500 rounded-full"></span>
-                <span className="text-green-700 font-medium">
-                  En stock • <span className="font-bold">{currentStock}</span> unidades disponibles
-                </span>
-              </>
-            ) : (
-              <>
-                <span className="w-2.5 h-2.5 bg-red-500 rounded-full"></span>
-                <span className="text-red-600 font-medium">Agotado</span>
-              </>
-            )}
-          </div>
-
-          {/* Botón de acción */}
-          <button
-            onClick={handleAgregarAlCarrito}
-            disabled={!canAddToCart}
-            className={`w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 transform flex items-center justify-center gap-2 ${
-              canAddToCart
-                ? 'hover:bg-opacity-90 active:scale-[0.98] shadow-md hover:shadow-lg'
-                : 'bg-gray-300 cursor-not-allowed'
-            }`}
-            style={{
-              backgroundColor: canAddToCart ? (variantInCart ? '#059669' : accentColor) : undefined,
-              opacity: canAddToCart ? 1 : 0.7
-            }}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {/* Galería */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="order-2 md:order-1"
           >
-            {variantInCart ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-            ) : canAddToCart ? (
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-              </svg>
-            ) : null}
-            {getButtonText()}
-          </button>
+            <GaleriaImagenes
+              imagenes={imagenesGaleria}
+              imagenPrincipal={activeImage}
+              nombreProducto={producto.nombreProducto}
+            />
+          </motion.div>
 
-          {/* Detalles técnicos */}
-          {producto.datosTecnicos && Object.keys(producto.datosTecnicos).length > 0 && (
-            <div className="border-t border-gray-100 pt-6 mt-4">
-              <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wide mb-4">
-                Detalles
-              </h4>
-              <ul className="space-y-2.5 text-sm text-gray-600">
-                {Object.entries(producto.datosTecnicos).map(([key, value]) => (
-                  <li key={key} className="flex justify-between border-b border-gray-50 pb-2 last:border-0 last:pb-0">
-                    <span className="capitalize text-gray-500">
-                      {key.replace(/_/g, ' ')}
-                    </span>
-                    <span className="font-medium text-gray-800">{value}</span>
-                  </li>
-                ))}
-              </ul>
+          {/* Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="order-1 md:order-2 flex flex-col gap-6"
+          >
+            <div>
+              <span className="font-label-caps text-label-caps text-primary tracking-[0.15em] mb-2 block uppercase">
+                {producto.categoria?.nombreCategoria}
+              </span>
+              <h1 className="font-display-lg text-display-lg md:text-primary leading-tight">
+                {producto.nombreProducto}
+              </h1>
+              <div className="mt-4">
+                <span className="font-headline-md text-headline-md text-primary font-semibold">
+                  {formatPrice(getPrecioMostrar())}
+                </span>
+              </div>
             </div>
-          )}
+
+            {producto.descripcion && (
+              <p className="font-body-md text-body-md text-text-main leading-relaxed">
+                {producto.descripcion}
+              </p>
+            )}
+
+            {/* Selectores */}
+            <div className="space-y-6">
+              {producto.tieneColores && (
+                <SelectorColores colores={availableColors} onSelectColor={setSelectedColor} selectedColor={selectedColor} />
+              )}
+              {producto.tieneTallas && (
+                <SelectorTallas tallas={availableTallas} onSelectTalla={setSelectedTalla} selectedTalla={selectedTalla} stockInfo={stockInfoForTallas} />
+              )}
+            </div>
+
+            {/* Stock */}
+            <div className="flex items-center gap-2">
+              {isInStock ? (
+                <>
+                  <span className="w-2.5 h-2.5 bg-tertiary rounded-full" />
+                  <span className="font-body-sm text-body-sm text-text-main">
+                    En stock • <span className="font-semibold">{currentStock}</span> unidades
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="w-2.5 h-2.5 bg-outline-variant rounded-full" />
+                  <span className="font-body-sm text-body-sm text-outline">Agotado</span>
+                </>
+              )}
+            </div>
+
+            {/* Add to cart */}
+            <button
+              onClick={handleAgregarAlCarrito}
+              disabled={!canAddToCart}
+              className={`w-full py-4 px-6 rounded-lg font-label-caps text-label-caps flex items-center justify-center gap-2 transition-all duration-300 ${
+                canAddToCart
+                  ? variantInCart
+                    ? 'bg-tertiary text-on-tertiary hover:opacity-90'
+                    : 'bg-primary text-on-primary hover:bg-tertiary hover:text-on-tertiary'
+                  : 'bg-surface-container-low text-outline cursor-not-allowed'
+              }`}
+            >
+              <span className="material-symbols-outlined text-[20px]">
+                {variantInCart ? 'check_circle' : 'shopping_bag'}
+              </span>
+              {getButtonText()}
+            </button>
+
+            {/* Technical details */}
+            {producto.datosTecnicos && Object.keys(producto.datosTecnicos).length > 0 && (
+              <div className="border-t border-outline-variant/30 pt-6">
+                <h4 className="font-label-caps text-label-caps text-primary tracking-wider mb-4 uppercase">Detalles</h4>
+                <ul className="space-y-2">
+                  {Object.entries(producto.datosTecnicos).map(([key, value]) => (
+                    <li key={key} className="flex justify-between border-b border-outline-variant/20 pb-2 last:border-0 font-body-sm text-body-sm">
+                      <span className="text-outline capitalize">{key.replace(/_/g, ' ')}</span>
+                      <span className="font-medium text-text-main">{value}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </motion.div>
         </div>
       </div>
     </div>
