@@ -24,7 +24,7 @@ const includeRelacionesCompra = {
         include: {
           producto: { 
             include: {
-              imagenesProductos: true
+              imagenes: true
             }
           },
           color: true,

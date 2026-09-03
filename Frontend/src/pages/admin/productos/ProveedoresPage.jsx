@@ -8,19 +8,15 @@ import {
 import { proveedoresApi } from "../../../api/proveedoresApi";
 import { productosApi } from "../../../api/productosApi";
 import { useAuth } from "../../../context/AuthContext";
+import getImagenURL from '../../../utils/imageUrl';
 
 export default function ProveedoresPage() {
   const { token } = useAuth();
 
   // Función para construir URLs completas de imágenes
  const getImagenUrl = (imagenPath) => {
-  if (!imagenPath) return '/placeholder.png';
-
-  if (imagenPath.startsWith('http')) {
-    return imagenPath;
-  }
-
-  return imagenPath;
+   if (!imagenPath) return '/placeholder.png';
+   return getImagenURL(imagenPath) || '/placeholder.png';
 };
 
 

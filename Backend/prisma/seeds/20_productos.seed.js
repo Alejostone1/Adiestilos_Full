@@ -148,6 +148,9 @@ module.exports = async function seedProductos(prisma) {
   ];
 
   // 2. Definición de productos demo
+  //    NOTA: El stock (cantidadStock) NO se asigna aquí. Las variantes se crean con
+  //    stock 0 y el inventario inicial se genera mediante COMPRAS a proveedores
+  //    (ver seed 30_compras), que registan entradas de MovimientoInventario.
   const productos = [
     {
       codigoReferencia: 'CAM-001',
@@ -161,10 +164,9 @@ module.exports = async function seedProductos(prisma) {
       nombreCategoria: 'Camisetas Hombre',
       nombreProveedor: 'Textiles del Valle S.A.S',
       colores: ['Negro', 'Blanco'],
-      tallas: ['S', 'M', 'L', 'XL'],
+      tallas: ['S', 'M'],
       costo: 12000,
       venta: 25000,
-      stock: 30,
       stockMinimo: 5,
       stockMaximo: 60,
       imagenes: [
@@ -183,10 +185,9 @@ module.exports = async function seedProductos(prisma) {
       nombreCategoria: 'Pantalones Hombre',
       nombreProveedor: 'Moda Antioqueña S.A.S',
       colores: ['Azul', 'Negro'],
-      tallas: ['36', '38', '40'],
+      tallas: ['36', '38'],
       costo: 45000,
       venta: 80000,
-      stock: 20,
       stockMinimo: 3,
       stockMaximo: 40,
       imagenes: [
@@ -206,10 +207,9 @@ module.exports = async function seedProductos(prisma) {
       nombreCategoria: 'Vestidos Mujer',
       nombreProveedor: 'Moda Antioqueña S.A.S',
       colores: ['Rosado', 'Blanco'],
-      tallas: ['S', 'M', 'L'],
+      tallas: ['S', 'M'],
       costo: 38000,
       venta: 70000,
-      stock: 15,
       stockMinimo: 3,
       stockMaximo: 30,
       imagenes: [
@@ -227,12 +227,11 @@ module.exports = async function seedProductos(prisma) {
       tieneTallas: true,
       datosTecnicos: { material: 'Poliéster 65%, Algodón 35%', cuidado: 'Planchar a baja temperatura' },
       nombreCategoria: 'Blusas Mujer',
-      nombreProveedor: 'Textiles del Valle S.A.S',
+      nombreProveedor: 'Confecciones del Atlántico S.A.S',
       colores: ['Blanco', 'Rosado'],
-      tallas: ['S', 'M', 'L'],
+      tallas: ['S', 'M'],
       costo: 18000,
       venta: 35000,
-      stock: 25,
       stockMinimo: 5,
       stockMaximo: 50,
       imagenes: [
@@ -319,7 +318,7 @@ module.exports = async function seedProductos(prisma) {
             idTalla: tallaPorNombre[nombreTalla],
             precioVenta: p.venta,
             precioCosto: p.costo,
-            cantidadStock: p.stock,
+            cantidadStock: 0,
             stockMinimo: p.stockMinimo,
             stockMaximo: p.stockMaximo,
             estado: 'activo'
@@ -331,7 +330,7 @@ module.exports = async function seedProductos(prisma) {
             codigoSku,
             precioVenta: p.venta,
             precioCosto: p.costo,
-            cantidadStock: p.stock,
+            cantidadStock: 0,
             stockMinimo: p.stockMinimo,
             stockMaximo: p.stockMaximo,
             estado: 'activo'

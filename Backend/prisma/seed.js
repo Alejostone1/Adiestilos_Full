@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { PrismaClient } = require('@prisma/client');
 
 const seedRoles = require('./seeds/01_roles.seed');
@@ -11,6 +13,7 @@ const seedTiposMetodoPago = require('./seeds/08_tipos_metodo_pago.seed');
 const seedMetodosPago = require('./seeds/09_metodos_pago.seed');
 const seedUsuarios = require('./seeds/10_usuarios.seed');
 const seedProductos = require('./seeds/20_productos.seed');
+const seedCompras = require('./seeds/30_compras.seed');
 
 const prisma = new PrismaClient();
 
@@ -54,6 +57,11 @@ async function main() {
     resumen.variantes = resultadoProductos?.variantes || 0;
     resumen.imagenesProducto = resultadoProductos?.imagenesProducto || 0;
     resumen.imagenesVariantes = resultadoProductos?.imagenesVariantes || 0;
+
+    // ===== FASE D: COMPRAS + STOCK INICIAL (trazable) =====
+    const resultadoCompras = await ejecutarSeed('30_compras.seed.js', seedCompras, 'Compra/Detalle/Movimiento');
+    resumen.compras = resultadoCompras?.compras || 0;
+    resumen.lineasCompra = resultadoCompras?.lineas || 0;
   } catch (error) {
     process.exit(1);
   } finally {
@@ -74,6 +82,8 @@ Colores: ${resumen.colores}
 Tallas: ${resumen.tallas}
 Proveedores: ${resumen.proveedores}
 Estados de pedido: ${resumen.estadosPedido}
+Compras de inventario: ${resumen.compras}
+Líneas de compra: ${resumen.lineasCompra}
 =================================`);
 }
 
