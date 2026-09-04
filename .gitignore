@@ -126,3 +126,6 @@ ecosystem.config.js
 .vercel
 .env*
 .railway/
+
+# Claude Code local settings
+.claude/
