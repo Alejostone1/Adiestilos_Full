@@ -64,7 +64,7 @@ const configuracionServidor = {
 
   // Configuración de CORS
   cors: {
-    origen: CORS_ORIGIN === '*' ? CORS_ORIGIN : CORS_ORIGIN.split(','),
+    origin: CORS_ORIGIN === '*' ? CORS_ORIGIN : CORS_ORIGIN.split(','),
     credenciales: true,
     metodos: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     headersPermitidos: [
