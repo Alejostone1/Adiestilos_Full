@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Users, Edit, Plus, RefreshCcw, Search, Filter, X, Eye, Trash2,
+  Users, Edit, Plus, RefreshCcw, Search, Filter, X, Eye,
   Building2, Phone, Mail, MapPin, Calendar, CheckCircle, AlertCircle,
-  ToggleLeft, ToggleRight, Package, TrendingUp, DollarSign,
-  Star, Clock, FileText, Grid3x3, Upload, Camera
+  ToggleLeft, ToggleRight, Package, TrendingUp,
+  FileText, Upload
 } from 'lucide-react';
 import { proveedoresApi } from "../../../api/proveedoresApi";
 import { productosApi } from "../../../api/productosApi";
-import { useAuth } from "../../../context/AuthContext";
 import getImagenURL from '../../../utils/imageUrl';
 
-export default function ProveedoresPage() {
-  const { token } = useAuth();
+const IMAGEN_PROVEEDOR_FALLBACK = 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop';
 
+export default function ProveedoresPage() {
   // Función para construir URLs completas de imágenes
  const getImagenUrl = (imagenPath) => {
-   if (!imagenPath) return '/placeholder.png';
-   return getImagenURL(imagenPath) || '/placeholder.png';
+   if (!imagenPath) return IMAGEN_PROVEEDOR_FALLBACK;
+   return getImagenURL(imagenPath) || IMAGEN_PROVEEDOR_FALLBACK;
 };
 
 
@@ -25,6 +24,7 @@ export default function ProveedoresPage() {
   const [productosPorProveedor, setProductosPorProveedor] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [cargandoProductos, setCargandoProductos] = useState(false);
 
   // Estados de modales
   const [mostrarDetalles, setMostrarDetalles] = useState(false);
@@ -80,6 +80,7 @@ export default function ProveedoresPage() {
   // Función para obtener productos de un proveedor
   const fetchProductosProveedor = useCallback(async (idProveedor) => {
     try {
+      setCargandoProductos(true);
       const response = await productosApi.obtenerProductos({
         idProveedor: idProveedor,
         estado: 'activo'
@@ -104,6 +105,8 @@ export default function ProveedoresPage() {
         ...prev,
         [idProveedor]: []
       }));
+    } finally {
+      setCargandoProductos(false);
     }
   }, []);
 
@@ -180,21 +183,6 @@ export default function ProveedoresPage() {
     }
   };
 
-  // Función para eliminar proveedor
-  const eliminarProveedor = async (idProveedor) => {
-    if (!window.confirm('¿Estás seguro de que deseas eliminar este proveedor? Esta acción no se puede deshacer.')) {
-      return;
-    }
-
-    try {
-      await proveedoresApi.deleteProveedor(idProveedor);
-      await fetchProveedores();
-    } catch (error) {
-      console.error('Error al eliminar proveedor:', error);
-      const errorMessage = error?.mensaje || error?.message || 'Error al eliminar el proveedor';
-      alert(errorMessage);
-    }
-  };
 
   // Componentes auxiliares
   const BadgeEstado = ({ estado }) => {
@@ -222,11 +210,78 @@ export default function ProveedoresPage() {
     );
   };
 
+  const formatearPrecio = (valor) =>
+    new Intl.NumberFormat('es-CO', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(valor || 0);
+
+  const ProductoModalCard = ({ producto }) => {
+    const [hover, setHover] = useState(false);
+
+    const imagenes = Array.isArray(producto.imagenes) ? producto.imagenes : [];
+    const imagenPrincipal = producto.imagenPrincipal || imagenes.find(img => img.esPrincipal)?.rutaImagen || imagenes[0]?.rutaImagen || null;
+    const imagenSecundaria = imagenes.find(img => img.rutaImagen !== imagenPrincipal)?.rutaImagen || null;
+
+    const stockTotal = Array.isArray(producto.variantes)
+      ? producto.variantes.reduce((acc, v) => acc + (Number(v.cantidadStock) || 0), 0)
+      : null;
+
+    return (
+      <div
+        className="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden">
+          {imagenPrincipal ? (
+            <>
+              <img
+                src={getImagenUrl(imagenPrincipal)}
+                alt={producto.nombreProducto}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                  hover && imagenSecundaria ? 'opacity-0' : 'opacity-100'
+                }`}
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
+              {imagenSecundaria && (
+                <img
+                  src={getImagenUrl(imagenSecundaria)}
+                  alt={`${producto.nombreProducto} - vista alternativa`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                    hover ? 'opacity-100' : 'opacity-0'
+                  }`}
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+              )}
+            </>
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center text-gray-300">
+              <Package className="w-10 h-10" />
+            </div>
+          )}
+          <div className="absolute top-2 right-2">
+            <BadgeEstado estado={producto.estado} />
+          </div>
+        </div>
+
+        <div className="p-3 sm:p-4">
+          <h3 className="font-medium text-gray-900 text-sm sm:text-base mb-1 line-clamp-2">{producto.nombreProducto}</h3>
+          <p className="text-xs text-gray-500 font-mono mb-2">{producto.codigoReferencia}</p>
+          <div className="flex items-center justify-between">
+            <span className="text-sm sm:text-base font-semibold text-blue-600">
+              ${formatearPrecio(producto.precioVentaSugerido)}
+            </span>
+            {stockTotal !== null && (
+              <span className="text-xs text-gray-500">Stock: {stockTotal}</span>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const ProveedorCard = ({ proveedor }) => {
-    const productosCount =
-  Array.isArray(productosPorProveedor?.[proveedor.idProveedor])
-    ? productosPorProveedor[proveedor.idProveedor].length
-    : 0;
+    const productosCount = Array.isArray(productosPorProveedor?.[proveedor.idProveedor])
+      ? productosPorProveedor[proveedor.idProveedor].length
+      : (proveedor._count?.productos ?? 0);
 
 
     return (
@@ -238,9 +293,8 @@ export default function ProveedoresPage() {
             alt={proveedor.nombreProveedor}
             className="w-full h-full object-cover"
             onError={(e) => {
-              // Evitar bucle infinito si ya estamos en el placeholder
-              if (!e.target.src.includes('placeholder.png')) {
-                e.target.src = getImagenUrl('/placeholder.png');
+              if (e.target.src !== IMAGEN_PROVEEDOR_FALLBACK) {
+                e.target.src = IMAGEN_PROVEEDOR_FALLBACK;
               }
             }}
           />
@@ -404,15 +458,15 @@ export default function ProveedoresPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-3 sm:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-8 h-8 text-blue-600" />
-            <h1 className="text-3xl font-semibold text-gray-900">Gestión de Proveedores</h1>
+        <div className="mb-6 sm:mb-8">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+            <h1 className="text-xl sm:text-3xl font-semibold text-gray-900">Gestión de Proveedores</h1>
           </div>
-          <p className="text-gray-600">Panel administrativo profesional para gestión completa de proveedores y sus productos</p>
+          <p className="text-sm sm:text-base text-gray-600">Panel administrativo profesional para gestión completa de proveedores y sus productos</p>
         </div>
 
         <div className="space-y-6">
@@ -448,10 +502,10 @@ export default function ProveedoresPage() {
               </button>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <button
                 onClick={fetchProveedores}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition text-sm sm:text-base"
               >
                 <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                 Actualizar
@@ -459,7 +513,7 @@ export default function ProveedoresPage() {
 
               <button
                 onClick={() => setMostrarFormulario(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition text-sm sm:text-base"
               >
                 <Plus className="w-4 h-4" />
                 Nuevo Proveedor
@@ -595,115 +649,131 @@ export default function ProveedoresPage() {
 
       {/* Modal de detalles del proveedor */}
       {mostrarDetalles && proveedorSeleccionado && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-semibold text-gray-900">Detalles del Proveedor</h2>
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white rounded-xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl">
+            {/* Hero con imagen */}
+            <div className="relative h-40 sm:h-56 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden rounded-t-xl">
+              <img
+                src={getImagenUrl(proveedorSeleccionado.imagenProveedor)}
+                alt={proveedorSeleccionado.nombreProveedor}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  if (e.target.src !== IMAGEN_PROVEEDOR_FALLBACK) {
+                    e.target.src = IMAGEN_PROVEEDOR_FALLBACK;
+                  }
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/30" />
+
+              <button
+                onClick={() => {
+                  setMostrarDetalles(false);
+                  setProveedorSeleccionado(null);
+                }}
+                className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-700 rounded-full p-1.5 sm:p-2 transition-colors"
+              >
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
+              </button>
+
+              <div className="absolute top-3 left-3">
+                <BadgeEstado estado={proveedorSeleccionado.estado} />
+              </div>
+
+              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
+                <h2 className="text-lg sm:text-2xl font-semibold text-white leading-tight break-words">
+                  {proveedorSeleccionado.nombreProveedor}
+                </h2>
+                <p className="text-xs sm:text-sm text-white/90 font-mono mt-0.5">
+                  NIT/CC: {proveedorSeleccionado.nitCC}
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 sm:p-6">
+              {/* Info en tarjetas con icono */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-gray-500">Contacto</p>
+                    <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.contacto || 'No especificado'}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-gray-500">Correo Electrónico</p>
+                    <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.correoElectronico || 'No especificado'}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-gray-500">Teléfono</p>
+                    <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.telefono || 'No especificado'}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-gray-500">Fecha de Registro</p>
+                    <p className="text-sm text-gray-900">
+                      {formatearFecha(proveedorSeleccionado.creadoEn, {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg sm:col-span-2">
+                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <div className="min-w-0">
+                    <p className="text-xs font-medium text-gray-500">Dirección</p>
+                    <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.direccion || 'No especificada'}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Notas */}
+              <div className="mt-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <FileText className="h-4 w-4 text-gray-500" />
+                  <label className="text-xs font-medium text-gray-500">Notas</label>
+                </div>
+                <div className="p-3 bg-gray-50 rounded-lg">
+                  <p className="text-sm text-gray-900 whitespace-pre-wrap">
+                    {proveedorSeleccionado.notas || 'No hay notas registradas'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Acciones */}
+              <div className="flex justify-end gap-2 mt-6 pt-4 border-t border-gray-200">
                 <button
                   onClick={() => {
                     setMostrarDetalles(false);
                     setProveedorSeleccionado(null);
                   }}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-sm"
                 >
-                  <X className="h-6 w-6" />
+                  Cerrar
                 </button>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Imagen del proveedor */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Imagen del Proveedor</label>
-                  <div className="relative h-48 bg-gray-100 rounded-lg overflow-hidden group">
-                    <img
-                      src={getImagenUrl(proveedorSeleccionado.imagenProveedor)}
-                      alt={proveedorSeleccionado.nombreProveedor}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Evitar bucle infinito si ya estamos en el placeholder
-                        if (!e.target.src.includes('placeholder.png')) {
-                          e.target.src = getImagenUrl('/placeholder.png');
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <button
-                        onClick={() => {
-                          window.open(getImagenUrl(proveedorSeleccionado.imagenProveedor), '_blank');
-                        }}
-                        className="bg-white text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition"
-                      >
-                        <Camera className="w-5 h-5 inline mr-2" />
-                        Ver Imagen
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Información básica */}
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Nombre del Proveedor</label>
-                    <p className="text-gray-900 font-medium">{proveedorSeleccionado.nombreProveedor}</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">NIT/CC</label>
-                    <p className="text-gray-900 font-mono">{proveedorSeleccionado.nitCC}</p>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Contacto</label>
-                    <p className="text-gray-900">{proveedorSeleccionado.contacto || 'No especificado'}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Información adicional */}
-              <div className="mt-6 space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                  <p className="text-gray-900">{proveedorSeleccionado.correoElectronico || 'No especificado'}</p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
-                  <p className="text-gray-900">{proveedorSeleccionado.telefono || 'No especificado'}</p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-                  <p className="text-gray-900">{proveedorSeleccionado.direccion || 'No especificada'}</p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Estado</label>
-                  <div className="mt-1">
-                    <BadgeEstado estado={proveedorSeleccionado.estado} />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Registro</label>
-                  <p className="text-gray-900">
-              {formatearFecha(proveedorSeleccionado.creadoEn, {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-})}
-
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Notas</label>
-                  <div className="mt-1 p-3 bg-gray-50 rounded-lg">
-                    <p className="text-gray-900 whitespace-pre-wrap">
-                      {proveedorSeleccionado.notas || 'No hay notas registradas'}
-                    </p>
-                  </div>
-                </div>
+                <button
+                  onClick={() => {
+                    setMostrarDetalles(false);
+                    setProveedorEditando(proveedorSeleccionado);
+                    setMostrarFormulario(true);
+                  }}
+                  className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
+                >
+                  <Edit className="w-4 h-4" />
+                  Editar Proveedor
+                </button>
               </div>
             </div>
           </div>
@@ -712,41 +782,39 @@ export default function ProveedoresPage() {
 
       {/* Modal de productos del proveedor */}
       {mostrarProductos && proveedorSeleccionado && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h2 className="text-2xl font-semibold text-gray-900">Productos del Proveedor</h2>
-                  <p className="text-gray-600 mt-1">{proveedorSeleccionado.nombreProveedor}</p>
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-2 sm:p-4">
+          <div className="bg-white rounded-xl w-full max-w-6xl max-h-[95vh] overflow-y-auto shadow-2xl">
+            <div className="p-4 sm:p-6">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <div className="min-w-0">
+                  <h2 className="text-lg sm:text-2xl font-semibold text-gray-900">Productos del Proveedor</h2>
+                  <p className="text-sm sm:text-base text-gray-600 mt-0.5 truncate">{proveedorSeleccionado.nombreProveedor}</p>
                 </div>
                 <button
                   onClick={() => {
                     setMostrarProductos(false);
                     setProveedorSeleccionado(null);
                   }}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 hover:text-gray-700 shrink-0 ml-2"
                 >
-                  <X className="h-6 w-6" />
+                  <X className="h-5 w-5 sm:h-6 sm:w-6" />
                 </button>
               </div>
 
-              {productosPorProveedor[proveedorSeleccionado.idProveedor]?.length === 0 ? (
+              {cargandoProductos ? (
+                <div className="flex justify-center items-center py-12">
+                  <div className="animate-spin h-8 w-8 border-b-2 border-blue-600 rounded-full" />
+                  <span className="ml-3 text-gray-500">Cargando productos...</span>
+                </div>
+              ) : (productosPorProveedor[proveedorSeleccionado.idProveedor]?.length ?? 0) === 0 ? (
                 <div className="text-center py-12">
                   <Package className="mx-auto h-12 w-12 text-gray-400" />
                   <p className="mt-2 text-gray-500">Este proveedor no tiene productos asociados</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                   {productosPorProveedor[proveedorSeleccionado.idProveedor]?.map((producto) => (
-                    <div key={producto.idProducto} className="bg-gray-50 rounded-lg p-4">
-                      <h3 className="font-medium text-gray-900 mb-2">{producto.nombreProducto}</h3>
-                      <div className="space-y-1 text-sm text-gray-600">
-                        <div>Código: {producto.codigoReferencia}</div>
-                        <div>Precio: ${producto.precioVentaSugerido?.toLocaleString()}</div>
-                        <div>Estado: <BadgeEstado estado={producto.estado} /></div>
-                      </div>
-                    </div>
+                    <ProductoModalCard key={producto.idProducto} producto={producto} />
                   ))}
                 </div>
               )}

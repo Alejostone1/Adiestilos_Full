@@ -8,7 +8,7 @@ module.exports = async function seedProveedores(prisma) {
       telefono: '3001234567',
       direccion: 'Cali, Valle del Cauca',
       notas: 'Proveedor principal de camisetas y blusas de algodón.',
-      imagenProveedor: '/uploads/proveedores/textiles_valle.jpg'
+      imagenProveedor: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop'
     },
     {
       nombreProveedor: 'Moda Antioqueña S.A.S',
@@ -18,7 +18,7 @@ module.exports = async function seedProveedores(prisma) {
       telefono: '3019988776',
       direccion: 'Medellín, Antioquia',
       notas: 'Proveedor de pantalones denim y vestidos de temporada.',
-      imagenProveedor: '/uploads/proveedores/moda_antioquena.jpg'
+      imagenProveedor: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&h=600&fit=crop'
     },
     {
       nombreProveedor: 'Confecciones del Atlántico S.A.S',
@@ -28,7 +28,7 @@ module.exports = async function seedProveedores(prisma) {
       telefono: '3107654321',
       direccion: 'Barranquilla, Atlántico',
       notas: 'Proveedor de blusas y prendas ligeras.',
-      imagenProveedor: '/uploads/proveedores/calzado_nacional.jpg'
+      imagenProveedor: 'https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=600&fit=crop'
     }
   ];
 

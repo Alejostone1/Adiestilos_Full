@@ -27,7 +27,7 @@ const crearProveedor = async (proveedorData) => {
     }
 };
 
-const actualizarProveedor = async (id, proveedorData) => {
+const updateProveedor = async (id, proveedorData) => {
     try {
         const response = await apiClient.put(`/proveedores/${id}`, proveedorData);
         return response.data;
@@ -36,7 +36,7 @@ const actualizarProveedor = async (id, proveedorData) => {
     }
 };
 
-const eliminarProveedor = async (id) => {
+const deleteProveedor = async (id) => {
     try {
         const response = await apiClient.delete(`/proveedores/${id}`);
         return response.data;
@@ -45,7 +45,7 @@ const eliminarProveedor = async (id) => {
     }
 };
 
-const subirImagenProveedor = async (imagenFile) => {
+const uploadImagenProveedor = async (imagenFile) => {
     try {
         const formData = new FormData();
         formData.append('imagen', imagenFile);
@@ -66,7 +66,7 @@ export const proveedoresApi = {
     listarProveedores,
     obtenerProveedorById,
     crearProveedor,
-    actualizarProveedor,
-    eliminarProveedor,
-    subirImagenProveedor,
+    updateProveedor,
+    deleteProveedor,
+    uploadImagenProveedor,
 };

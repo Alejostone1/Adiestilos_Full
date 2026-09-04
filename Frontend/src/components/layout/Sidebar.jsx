@@ -407,7 +407,7 @@ const Sidebar = () => {
       </button>
 
       <aside className={`
-        relative z-50 h-[calc(100vh-2rem)] my-4 ml-4
+        fixed lg:relative top-0 left-0 z-50 h-[calc(100vh-2rem)] my-4 ml-4
         glass-card !rounded-[32px] bg-white dark:bg-gradient-to-b dark:from-slate-800 dark:to-slate-900 dark:border-slate-700/50 border-slate-200/50
         flex flex-col
         transition-all duration-700 cubic-bezier(0.4, 0, 0.2, 1)
