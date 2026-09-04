@@ -32,6 +32,15 @@
     color: #1e1b1d;
   }
 
+  .admin-shell h1,
+  .admin-shell h2,
+  .admin-shell h3,
+  .admin-shell h4,
+  .admin-shell h5,
+  .admin-shell h6 {
+    font-family: var(--font-body);
+  }
+
   ::selection {
     background-color: #ff76a8;
     color: #ffffff;

@@ -197,38 +197,42 @@ export default function UsuariosPage() {
   };
 
   const StatCard = ({ title, value, color, icon: Icon, subtext }) => (
-    <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-2xl p-6 border border-gray-100 dark:border-slate-700/50 flex items-center gap-6 overflow-hidden relative group">
-      <div className={`p-4 rounded-xl ${getColorClasses(color)} relative z-10 transition-transform group-hover:scale-110 duration-300`}>
-        <Icon size={28} />
+    <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-2xl p-4 sm:p-6 border border-gray-100 dark:border-slate-700/50 flex items-center gap-3 sm:gap-6 overflow-hidden relative group min-w-0">
+      <div className={`p-2.5 sm:p-4 rounded-xl shrink-0 ${getColorClasses(color)} relative z-10 transition-transform group-hover:scale-110 duration-300`}>
+        <Icon size={22} className="sm:hidden" />
+        <Icon size={28} className="hidden sm:block" />
       </div>
-      <div className="relative z-10">
-        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</p>
-        <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mt-1">{value}</h3>
-        {subtext && <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{subtext}</p>}
+      <div className="relative z-10 min-w-0">
+        <p className="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 truncate">{title}</p>
+        <h3 className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white mt-0.5 sm:mt-1 truncate">{value}</h3>
+        {subtext && <p className="hidden sm:block text-xs text-gray-400 dark:text-gray-500 mt-1">{subtext}</p>}
       </div>
-      <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity duration-500 text-gray-400 dark:text-gray-600">
+      <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity duration-500 text-gray-400 dark:text-gray-600 hidden sm:block">
         <Icon size={120} />
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50/50 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 p-4 md:p-8 space-y-8 transition-colors duration-300">
-      
+    <div className="min-h-screen bg-gray-50/50 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-800 p-4 sm:p-6 md:p-8 space-y-6 md:space-y-8 transition-colors duration-300">
+
       {/* Header Section */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-        <div>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight flex items-center gap-4">
-            <div className="card-3d p-3 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-200 dark:shadow-none">
-              <Users size={32} />
-            </div>
-            Gestión de Usuarios
-          </h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-2 text-lg">Administra tus colaboradores y clientes desde un solo lugar.</p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6">
+        <div className="flex items-center gap-3 md:gap-4">
+          <div className="card-3d p-2.5 md:p-3 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-200 dark:shadow-none shrink-0">
+            <Users size={26} className="md:hidden" />
+            <Users size={32} className="hidden md:block" />
+          </div>
+          <div>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white tracking-tight">
+              Gestión de Usuarios
+            </h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-0.5 text-sm md:text-base">Administra tus colaboradores y clientes desde un solo lugar.</p>
+          </div>
         </div>
-        
+
         <div className="flex items-center gap-3">
-          <motion.button 
+          <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={cargarDatos}
@@ -236,21 +240,21 @@ export default function UsuariosPage() {
           >
             <RefreshCcw size={20} className={loading ? 'animate-spin' : ''} />
           </motion.button>
-          
-          <motion.button 
+
+          <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleOpenModal()}
-            className="card-3d card-elevated flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all"
+            className="card-3d card-elevated flex flex-1 md:flex-none items-center justify-center gap-2 px-4 md:px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold text-sm md:text-base shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all"
           >
             <Plus size={20} />
-            Nuevo Registro
+            <span>Nuevo Registro</span>
           </motion.button>
         </div>
       </div>
 
       {/* Stats Summary */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
         <StatCard 
           title="Total Usuarios" 
           value={usuarios.length} 
@@ -285,10 +289,10 @@ export default function UsuariosPage() {
       <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-3xl overflow-hidden">
         
         {/* Filters & Tools */}
-        <div className="p-6 border-b border-gray-50 dark:border-slate-700/50 flex flex-col lg:flex-row items-center gap-6 justify-between bg-gray-50/30 dark:bg-slate-800/30">
+        <div className="p-4 sm:p-6 border-b border-gray-50 dark:border-slate-700/50 flex flex-col lg:flex-row items-stretch lg:items-center gap-3 sm:gap-4 lg:gap-6 justify-between bg-gray-50/30 dark:bg-slate-800/30">
           <div className="relative w-full lg:max-w-md group">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-indigo-500 transition-colors" size={20} />
-            <input 
+            <input
               type="text"
               placeholder="Buscar por nombre, correo o @usuario..."
               className="card-3d w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-700/40 border-0 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/20 focus:border-indigo-400 dark:text-white transition-all shadow-sm"
@@ -297,10 +301,10 @@ export default function UsuariosPage() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 w-full lg:w-auto">
-            <div className="card-3d flex items-center gap-2 bg-white dark:bg-slate-700/40 p-1.5 rounded-2xl shadow-sm">
-              <select 
-                className="bg-transparent border-none text-sm font-semibold text-gray-600 dark:text-gray-300 focus:ring-0 cursor-pointer px-3 py-1.5"
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full lg:w-auto">
+            <div className="card-3d flex items-center gap-1 sm:gap-2 bg-white dark:bg-slate-700/40 p-1.5 rounded-2xl shadow-sm">
+              <select
+                className="bg-transparent border-none text-sm font-semibold text-gray-600 dark:text-gray-300 focus:ring-0 cursor-pointer px-2 sm:px-3 py-1.5 flex-1 min-w-0"
                 value={filterRol}
                 onChange={(e) => setFilterRol(e.target.value)}
               >
@@ -308,8 +312,8 @@ export default function UsuariosPage() {
                 {roles.map(r => <option key={r.idRol} value={r.nombreRol}>{r.nombreRol}</option>)}
               </select>
               <div className="w-px h-6 bg-gray-200 dark:bg-slate-600/50" />
-              <select 
-                className="bg-transparent border-none text-sm font-semibold text-gray-600 dark:text-gray-300 focus:ring-0 cursor-pointer px-3 py-1.5"
+              <select
+                className="bg-transparent border-none text-sm font-semibold text-gray-600 dark:text-gray-300 focus:ring-0 cursor-pointer px-2 sm:px-3 py-1.5 flex-1 min-w-0"
                 value={filterEstado}
                 onChange={(e) => setFilterEstado(e.target.value)}
               >
@@ -319,16 +323,16 @@ export default function UsuariosPage() {
                 <option value="bloqueado">Bloqueado</option>
               </select>
             </div>
-            
-            <button className="hidden md:flex items-center gap-2 px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-slate-700/30 dark:hover:bg-slate-700/50 rounded-xl transition-colors font-medium">
+
+            <button className="hidden md:flex items-center justify-center gap-2 px-4 py-3 text-gray-600 dark:text-gray-300 hover:bg-slate-700/30 dark:hover:bg-slate-700/50 rounded-xl transition-colors font-medium shrink-0">
               <Download size={18} />
               Exportar
             </button>
           </div>
         </div>
 
-        {/* User List / Table */}
-        <div className="overflow-x-auto">
+        {/* User List / Table - Desktop */}
+        <div className="hidden lg:block overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
               <tr className="bg-gray-50/50 dark:bg-slate-800/30 text-left">
@@ -473,7 +477,109 @@ export default function UsuariosPage() {
             </tbody>
           </table>
         </div>
-        
+
+        {/* User List - Mobile Cards */}
+        <div className="lg:hidden divide-y divide-gray-50 dark:divide-slate-700/50">
+          <AnimatePresence>
+            {filteredUsers.length === 0 ? (
+              <div className="px-6 py-16 text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400">
+                    <Users size={32} />
+                  </div>
+                  <p className="text-gray-500 dark:text-gray-400 font-medium text-sm">No se encontraron usuarios con esos filtros.</p>
+                </div>
+              </div>
+            ) : (
+              filteredUsers.map((u, idx) => (
+                <motion.div
+                  key={u.idUsuario}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.03 }}
+                  className="p-4 sm:p-5 active:bg-indigo-50/40 dark:active:bg-indigo-900/10 transition-colors"
+                >
+                  <div className="flex items-start gap-3">
+                    <div className={`card-3d w-11 h-11 shrink-0 rounded-xl flex items-center justify-center font-semibold text-white text-sm shadow-lg ${u.estado === 'activo' ? 'bg-gradient-to-br from-indigo-500 to-blue-600 shadow-blue-200/50 dark:shadow-none' : 'bg-gray-400'}`}>
+                      {u.nombres?.charAt(0)}{u.apellidos?.charAt(0)}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="min-w-0">
+                          <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">{u.nombres} {u.apellidos}</div>
+                          <div className="text-xs font-mono text-gray-400 dark:text-gray-500">@{u.usuario}</div>
+                        </div>
+                        <button
+                          onClick={() => toggleEstado(u)}
+                          className={`shrink-0 px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase
+                          ${u.estado === 'activo' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' :
+                            'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400'}`}
+                        >
+                          {u.estado}
+                        </button>
+                      </div>
+
+                      <div className="mt-2 space-y-1 text-xs">
+                        <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 truncate">
+                          <Mail size={12} className="text-indigo-500 shrink-0" />
+                          <span className="truncate">{u.correoElectronico}</span>
+                        </div>
+                        {u.telefono && (
+                          <div className="flex items-center gap-1.5 text-gray-500 dark:text-gray-400">
+                            <Phone size={12} className="text-emerald-500 shrink-0" />
+                            {u.telefono}
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="mt-3 flex items-center justify-between gap-2 flex-wrap">
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-tight
+                          ${u.rol?.nombreRol === 'Administrador' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' :
+                            u.rol?.nombreRol === 'Vendedor' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                            'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>
+                          <Shield size={11} />
+                          {u.rol?.nombreRol}
+                        </span>
+
+                        <div className="flex items-center gap-1">
+                          <button
+                            onClick={() => { setSelectedUser(u); setIsDetailsOpen(true); }}
+                            className="card-3d p-2 text-indigo-500 active:bg-indigo-50 dark:active:bg-indigo-900/30 rounded-lg"
+                            title="Ver Perfil"
+                          >
+                            <Eye size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleOpenModal(u)}
+                            className="card-3d p-2 text-amber-500 active:bg-amber-50 dark:active:bg-amber-900/30 rounded-lg"
+                            title="Editar"
+                          >
+                            <Edit3 size={16} />
+                          </button>
+                          <button
+                            onClick={() => navigate(`/admin/usuarios/${u.idUsuario}/ventas`)}
+                            className="card-3d p-2 text-emerald-500 active:bg-emerald-50 dark:active:bg-emerald-900/30 rounded-lg"
+                            title="Ver Ventas"
+                          >
+                            <History size={16} />
+                          </button>
+                          <button
+                            onClick={() => navigate(`/admin/usuarios/${u.idUsuario}/creditos`)}
+                            className="card-3d p-2 text-violet-500 active:bg-violet-50 dark:active:bg-violet-900/30 rounded-lg"
+                            title="Ver Créditos"
+                          >
+                            <CreditCard size={16} />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))
+            )}
+          </AnimatePresence>
+        </div>
+
         {/* Footer info */}
         <div className="p-6 bg-gray-50/50 dark:bg-slate-800/30 border-t border-gray-100 dark:border-slate-700/50 flex justify-between items-center">
             <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
@@ -498,23 +604,23 @@ export default function UsuariosPage() {
               className="card-3d card-elevated w-full max-w-2xl h-full bg-white dark:bg-slate-800/60 shadow-2xl overflow-y-auto md:rounded-3xl flex flex-col"
             >
               {/* Modal Header */}
-              <div className="card-3d p-8 border-b border-gray-50 dark:border-slate-700/50 flex items-center justify-between bg-white dark:bg-slate-800/60 sticky top-0 z-10">
+              <div className="card-3d p-5 sm:p-8 border-b border-gray-50 dark:border-slate-700/50 flex items-center justify-between bg-white dark:bg-slate-800/60 sticky top-0 z-10">
                 <div>
-                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-white flex items-center gap-3">
-                    <div className={`card-3d p-2 rounded-xl ${isEditing ? 'bg-amber-100 text-amber-600' : 'bg-indigo-100 text-indigo-600'}`}>
-                      {isEditing ? <Edit3 size={24} /> : <UserPlus size={24} />}
+                  <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white flex items-center gap-2 sm:gap-3">
+                    <div className={`card-3d p-1.5 sm:p-2 rounded-xl ${isEditing ? 'bg-amber-100 text-amber-600' : 'bg-indigo-100 text-indigo-600'}`}>
+                      {isEditing ? <Edit3 size={20} className="sm:w-6 sm:h-6" /> : <UserPlus size={20} className="sm:w-6 sm:h-6" />}
                     </div>
                     {isEditing ? 'Actualizar Información' : 'Nuevo Colaborador / Cliente'}
                   </h2>
-                  <p className="text-gray-500 dark:text-gray-400 mt-1">Completa todos los campos requeridos para continuar.</p>
+                  <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm sm:text-base">Completa todos los campos requeridos para continuar.</p>
                 </div>
-                <button onClick={() => setIsModalOpen(false)} className="card-3d p-2 hover:bg-gray-100 dark:hover:bg-slate-700/50 rounded-xl transition-all text-gray-400 hover:text-gray-950 dark:hover:text-white">
-                  <X size={28} />
+                <button onClick={() => setIsModalOpen(false)} className="card-3d p-2 hover:bg-gray-100 dark:hover:bg-slate-700/50 rounded-xl transition-all text-gray-400 hover:text-gray-950 dark:hover:text-white shrink-0 ml-2">
+                  <X size={24} className="sm:w-7 sm:h-7" />
                 </button>
               </div>
 
               {/* Form Content */}
-              <form onSubmit={handleSave} className="p-8 space-y-8 flex-1">
+              <form onSubmit={handleSave} className="p-5 sm:p-8 space-y-6 sm:space-y-8 flex-1">
                 <div className="space-y-6">
                   <h4 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 dark:text-indigo-400">Datos Personales</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -683,14 +789,14 @@ export default function UsuariosPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-12">
                 {/* Left Side: Profile Summary */}
-                <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-blue-700 p-10 text-white flex flex-col items-center text-center">
-                  <div className="w-40 h-40 bg-white/20 backdrop-blur-md rounded-[3rem] p-1.5 border border-white/20 shadow-2xl mb-6">
-                    <div className="w-full h-full bg-white rounded-[2.8rem] flex items-center justify-center text-5xl font-semibold text-indigo-600">
+                <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-blue-700 p-6 sm:p-10 text-white flex flex-col items-center text-center">
+                  <div className="w-28 h-28 sm:w-40 sm:h-40 bg-white/20 backdrop-blur-md rounded-[2.2rem] sm:rounded-[3rem] p-1.5 border border-white/20 shadow-2xl mb-4 sm:mb-6">
+                    <div className="w-full h-full bg-white rounded-[2rem] sm:rounded-[2.8rem] flex items-center justify-center text-3xl sm:text-5xl font-semibold text-indigo-600">
                       {selectedUser.nombres?.charAt(0)}{selectedUser.apellidos?.charAt(0)}
                     </div>
                   </div>
-                  
-                  <h3 className="text-3xl font-semibold tracking-tight">{selectedUser.nombres} {selectedUser.apellidos}</h3>
+
+                  <h3 className="text-xl sm:text-3xl font-semibold tracking-tight">{selectedUser.nombres} {selectedUser.apellidos}</h3>
                   <p className="text-indigo-100 font-medium opacity-80 mt-1">@{selectedUser.usuario}</p>
                   
                   <div className="mt-8 px-6 py-3 bg-white/10 backdrop-blur rounded-2xl border border-white/10 w-full">
@@ -701,22 +807,22 @@ export default function UsuariosPage() {
                     </div>
                   </div>
 
-                  <div className="mt-10 grid grid-cols-2 gap-4 w-full">
-                     <div className="bg-black/10 rounded-2xl p-4 text-left border border-white/5">
-                        <TrendingUp size={20} className="mb-2 opacity-60" />
-                        <div className="text-2xl font-semibold">{selectedUser._count?.ventasComoCliente || 0}</div>
-                        <div className="text-[11px] uppercase font-semibold text-indigo-200">Total Compras</div>
+                  <div className="mt-6 sm:mt-10 grid grid-cols-2 gap-3 sm:gap-4 w-full">
+                     <div className="bg-black/10 rounded-2xl p-3 sm:p-4 text-left border border-white/5">
+                        <TrendingUp size={18} className="mb-1.5 sm:mb-2 opacity-60" />
+                        <div className="text-lg sm:text-2xl font-semibold">{selectedUser._count?.ventasComoCliente || 0}</div>
+                        <div className="text-[10px] sm:text-[11px] uppercase font-semibold text-indigo-200">Total Compras</div>
                      </div>
-                     <div className="bg-black/10 rounded-2xl p-4 text-left border border-white/5">
-                        <Wallet size={20} className="mb-2 opacity-60" />
-                        <div className="text-lg font-semibold leading-tight">
+                     <div className="bg-black/10 rounded-2xl p-3 sm:p-4 text-left border border-white/5">
+                        <Wallet size={18} className="mb-1.5 sm:mb-2 opacity-60" />
+                        <div className="text-base sm:text-lg font-semibold leading-tight">
                             <PrecioFormateado precio={selectedUser.resumenCredito?.saldoTotal || 0} />
                         </div>
-                        <div className="text-[11px] uppercase font-semibold text-indigo-200">Saldo Deuda</div>
+                        <div className="text-[10px] sm:text-[11px] uppercase font-semibold text-indigo-200">Saldo Deuda</div>
                      </div>
                   </div>
 
-                  <div className="mt-auto pt-10 w-full flex flex-col gap-3">
+                  <div className="mt-6 sm:mt-auto pt-6 sm:pt-10 w-full flex flex-col gap-3">
                      <button 
                         onClick={() => { setIsDetailsOpen(false); handleOpenModal(selectedUser); }}
                         className="w-full py-4 bg-white text-indigo-700 rounded-2xl font-semibold shadow-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
@@ -728,55 +834,55 @@ export default function UsuariosPage() {
                 </div>
 
                 {/* Right Side: Detailed Info */}
-                <div className="lg:col-span-7 p-10 bg-white dark:bg-slate-800/50 overflow-y-auto max-h-[80vh] lg:max-h-none">
-                  <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-8 border-b border-gray-100 dark:border-slate-700/50 pb-4">Detalles de Contacto y Cuenta</h4>
-                  
-                  <div className="space-y-8">
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-2xl">
-                        <Mail size={24} />
+                <div className="lg:col-span-7 p-6 sm:p-10 bg-white dark:bg-slate-800/50 overflow-y-auto max-h-[80vh] lg:max-h-none">
+                  <h4 className="text-base sm:text-xl font-semibold text-gray-900 dark:text-white mb-5 sm:mb-8 border-b border-gray-100 dark:border-slate-700/50 pb-3 sm:pb-4">Detalles de Contacto y Cuenta</h4>
+
+                  <div className="space-y-5 sm:space-y-8">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="p-2.5 sm:p-3 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-2xl shrink-0">
+                        <Mail size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Correo Corporativo / Personal</p>
-                        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300 break-all">{selectedUser.correoElectronico}</p>
+                        <p className="text-sm sm:text-lg font-semibold text-gray-700 dark:text-gray-300 break-all">{selectedUser.correoElectronico}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 rounded-2xl">
-                        <Phone size={24} />
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="p-2.5 sm:p-3 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 rounded-2xl shrink-0">
+                        <Phone size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Teléfono Móvil / WhatsApp</p>
-                        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">{selectedUser.telefono || 'Información no proporcionada'}</p>
+                        <p className="text-sm sm:text-lg font-semibold text-gray-700 dark:text-gray-300">{selectedUser.telefono || 'Información no proporcionada'}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 rounded-2xl">
-                        <MapPin size={24} />
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="p-2.5 sm:p-3 bg-orange-50 dark:bg-orange-900/20 text-orange-600 rounded-2xl shrink-0">
+                        <MapPin size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Dirección Registrada</p>
-                        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">{selectedUser.direccion || 'Sin dirección de domicilio'}</p>
+                        <p className="text-sm sm:text-lg font-semibold text-gray-700 dark:text-gray-300">{selectedUser.direccion || 'Sin dirección de domicilio'}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-2xl">
-                        <Calendar size={24} />
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="p-2.5 sm:p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-2xl shrink-0">
+                        <Calendar size={20} className="sm:w-6 sm:h-6" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <p className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-1">Fecha de Registro</p>
-                        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                        <p className="text-sm sm:text-lg font-semibold text-gray-700 dark:text-gray-300">
                           {new Date(selectedUser.creadoEn).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' })}
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-12 p-6 bg-gray-50 dark:bg-slate-700/30 rounded-3xl border border-dashed border-gray-200 dark:border-slate-600/50">
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                  <div className="mt-8 sm:mt-12 p-5 sm:p-6 bg-gray-50 dark:bg-slate-700/30 rounded-3xl border border-dashed border-gray-200 dark:border-slate-600/50">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2 text-sm sm:text-base">
                        <History size={18} className="text-indigo-500" />
                        Accesos Rápidos
                     </h5>
