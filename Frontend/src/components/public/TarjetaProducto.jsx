@@ -13,12 +13,15 @@ const TarjetaProducto = ({
   coloresDisponibles = [],
   esNuevo = false,
   descuento = null,
+  stockTotal = null,
   slug
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { estaEnFavoritos, toggleFavorito } = useFavoritos();
 
   const isFavorito = estaEnFavoritos(id);
+  const agotado = stockTotal === 0;
+  const stockBajo = stockTotal !== null && stockTotal > 0 && stockTotal <= 3;
 
   const formatearCantidad = (valor) => {
     return new Intl.NumberFormat('es-CO', {
@@ -84,7 +87,7 @@ const TarjetaProducto = ({
               isHovered && imagenSecundaria
                 ? 'opacity-0 scale-105'
                 : 'opacity-100 scale-100'
-            }`}
+            } ${agotado ? 'grayscale opacity-70' : ''}`}
             loading="lazy"
           />
 
@@ -101,23 +104,32 @@ const TarjetaProducto = ({
             />
           )}
 
-          {/* Badge NEW */}
-          {esNuevo && (
-            <div className="absolute top-2 left-2 z-20">
-              <span className="bg-tertiary-container text-on-tertiary-container font-label-caps text-label-caps px-2 py-1 rounded-full">
-                Nuevo
+          {/* Badges: agotado tiene prioridad, luego descuento, luego nuevo, luego stock bajo */}
+          <div className="absolute top-2 left-2 z-20 flex flex-col items-start gap-1.5">
+            {agotado ? (
+              <span className="bg-surface-container-high text-text-main font-label-caps text-label-caps px-2 py-1 rounded-full">
+                Agotado
               </span>
-            </div>
-          )}
-
-          {/* Badge SALE */}
-          {descuento && (
-            <div className="absolute top-2 left-2 z-20">
-              <span className="bg-tertiary text-on-tertiary font-label-caps text-label-caps px-2 py-1 rounded-full">
-                -{descuento}%
-              </span>
-            </div>
-          )}
+            ) : (
+              <>
+                {descuento && (
+                  <span className="bg-tertiary text-on-tertiary font-label-caps text-label-caps px-2 py-1 rounded-full">
+                    -{descuento}%
+                  </span>
+                )}
+                {esNuevo && (
+                  <span className="bg-tertiary-container text-on-tertiary-container font-label-caps text-label-caps px-2 py-1 rounded-full">
+                    Nuevo
+                  </span>
+                )}
+                {stockBajo && (
+                  <span className="bg-primary text-on-primary font-label-caps text-label-caps px-2 py-1 rounded-full">
+                    Últimas unidades
+                  </span>
+                )}
+              </>
+            )}
+          </div>
 
           {/* Favorite button */}
           <button
@@ -141,9 +153,15 @@ const TarjetaProducto = ({
           <div className={`absolute bottom-0 left-0 w-full p-4 transition-transform duration-300 ${
             isHovered ? 'translate-y-0' : 'translate-y-full'
           }`}>
-            <span className="w-full flex items-center justify-center gap-2 bg-primary text-on-primary font-body-sm text-body-sm font-medium py-3 rounded-lg">
-              <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
-              Agregar al carrito
+            <span className={`w-full flex items-center justify-center gap-2 font-body-sm text-body-sm font-medium py-3 rounded-lg ${
+              agotado
+                ? 'bg-surface-container-high text-text-main'
+                : 'bg-primary text-on-primary'
+            }`}>
+              <span className="material-symbols-outlined text-[18px]">
+                {agotado ? 'block' : 'shopping_bag'}
+              </span>
+              {agotado ? 'Sin existencias' : 'Agregar al carrito'}
             </span>
           </div>
         </div>
@@ -216,6 +234,7 @@ TarjetaProducto.propTypes = {
   ),
   esNuevo: PropTypes.bool,
   descuento: PropTypes.number,
+  stockTotal: PropTypes.number,
   slug: PropTypes.string,
 };
 

@@ -159,13 +159,15 @@ async function buscarProductos(req, res, next) {
  */
 async function listarProductos(req, res, next) {
   try {
-    const { pagina, limite, orden, idCategoria } = req.query;
-    
+    const { pagina, limite, orden, idCategoria, precioMin, precioMax } = req.query;
+
     const resultado = await publicService.obtenerProductosPublicos({
       pagina,
       limite,
       orden,
-      idCategoria
+      idCategoria,
+      precioMin,
+      precioMax
     });
 
     res.json({

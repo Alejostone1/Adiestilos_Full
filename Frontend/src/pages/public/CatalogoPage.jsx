@@ -8,6 +8,8 @@ import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { obtenerCategoriasPublicas, obtenerProductosPublicos, buscarProductos } from '../../api/publicApi';
 import TarjetaProducto from '../../components/public/TarjetaProducto';
+import FiltroCategoriasJerarquico from '../../components/public/FiltroCategoriasJerarquico';
+import FiltroPrecio from '../../components/public/FiltroPrecio';
 import { getImagenURL } from '../../utils/imageUrl';
 
 const esProductoNuevo = (fecha) => {
@@ -15,6 +17,16 @@ const esProductoNuevo = (fecha) => {
   const hace7Dias = new Date();
   hace7Dias.setDate(hace7Dias.getDate() - 7);
   return new Date(fecha) > hace7Dias;
+};
+
+const encontrarCategoriaPorId = (categorias, id) => {
+  if (!id) return null;
+  for (const cat of categorias) {
+    if (cat.idCategoria === id) return cat;
+    const sub = cat.subcategorias?.find((s) => s.idCategoria === id);
+    if (sub) return sub;
+  }
+  return null;
 };
 
 const CatalogoPage = () => {
@@ -26,8 +38,11 @@ const CatalogoPage = () => {
   const [paginacion, setPaginacion] = useState(null);
 
   const categoriaActiva = searchParams.get('categoria');
+  const categoriaActivaId = categoriaActiva ? parseInt(categoriaActiva, 10) : null;
   const ordenActivo = searchParams.get('orden') || 'recientes';
   const busqueda = searchParams.get('buscar') || '';
+  const precioMin = searchParams.get('precioMin') || '';
+  const precioMax = searchParams.get('precioMax') || '';
   const paginaActual = parseInt(searchParams.get('pagina') || '1', 10);
 
   const [showFilters, setShowFilters] = useState(false);
@@ -53,14 +68,18 @@ const CatalogoPage = () => {
           res = await buscarProductos(busqueda, {
             pagina: paginaActual,
             limite: 12,
-            idCategoria: categoriaActiva
+            idCategoria: categoriaActiva,
+            precioMin: precioMin || undefined,
+            precioMax: precioMax || undefined
           });
         } else {
           res = await obtenerProductosPublicos({
             pagina: paginaActual,
             limite: 12,
             idCategoria: categoriaActiva,
-            orden: ordenActivo
+            orden: ordenActivo,
+            precioMin: precioMin || undefined,
+            precioMax: precioMax || undefined
           });
         }
         const prodsFormateados = (res.datos || []).map(prod => ({
@@ -68,7 +87,9 @@ const CatalogoPage = () => {
           nombre: prod.nombreProducto,
           precio: prod.precioVentaSugerido || prod.precioMinimo,
           imagenPrincipal: getImagenURL(prod.imagenPrincipal) || '/images/placeholder-producto.svg',
+          imagenes: (prod.imagenes || []).map(img => ({ ...img, rutaImagen: getImagenURL(img.rutaImagen) })),
           coloresDisponibles: prod.coloresDisponibles || [],
+          stockTotal: typeof prod.stockTotal === 'number' ? prod.stockTotal : null,
           esNuevo: esProductoNuevo(prod.creadoEn)
         }));
         setProductos(prodsFormateados);
@@ -81,7 +102,7 @@ const CatalogoPage = () => {
       }
     };
     cargarProductos();
-  }, [categoriaActiva, ordenActivo, busqueda, paginaActual]);
+  }, [categoriaActiva, ordenActivo, busqueda, paginaActual, precioMin, precioMax]);
 
   const updateFilters = (newFilters) => {
     const params = new URLSearchParams(searchParams);
@@ -98,9 +119,19 @@ const CatalogoPage = () => {
     setSearchParams(params);
   };
 
-  const categoriaSeleccionada = useMemo(() => {
-    return categorias.find(c => c.idCategoria === parseInt(categoriaActiva, 10));
-  }, [categorias, categoriaActiva]);
+  const categoriaSeleccionada = useMemo(
+    () => encontrarCategoriaPorId(categorias, categoriaActivaId),
+    [categorias, categoriaActivaId]
+  );
+
+  const hayFiltroPrecio = Boolean(precioMin || precioMax);
+  const cantidadFiltrosActivos = (categoriaActiva ? 1 : 0) + (hayFiltroPrecio ? 1 : 0);
+
+  const formatoPrecioChip = () => {
+    if (precioMin && precioMax) return `$${precioMin} – $${precioMax}`;
+    if (precioMin) return `Desde $${precioMin}`;
+    return `Hasta $${precioMax}`;
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -112,7 +143,7 @@ const CatalogoPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="font-display-lg text-display-lg md:text-primary mb-4">
+            <h1 className="font-display-lg text-display-lg text-primary mb-4">
               {busqueda ? (
                 <>Resultados para &quot;{busqueda}&quot;</>
               ) : categoriaSeleccionada ? (
@@ -135,16 +166,21 @@ const CatalogoPage = () => {
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pb-24">
         {/* Top Controls */}
         <div className="flex justify-between items-center mb-8 pb-4 border-b border-outline-variant/30">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setShowFilters(true)}
-              className="lg:hidden flex items-center gap-2"
-            >
-              <span className="material-symbols-outlined text-outline">tune</span>
-              <span className="font-label-caps text-label-caps text-text-main">Filtros</span>
-            </button>
-            <span className="hidden lg:block material-symbols-outlined text-outline">tune</span>
-            <span className="hidden lg:block font-label-caps text-label-caps text-text-main">Filtros</span>
+          <button
+            onClick={() => setShowFilters(true)}
+            className="lg:hidden relative flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-outline">tune</span>
+            <span className="font-label-caps text-label-caps text-text-main">Filtros</span>
+            {cantidadFiltrosActivos > 0 && (
+              <span className="absolute -top-2 -right-2 w-4 h-4 flex items-center justify-center bg-primary text-on-primary text-[10px] rounded-full">
+                {cantidadFiltrosActivos}
+              </span>
+            )}
+          </button>
+          <div className="hidden lg:flex items-center gap-2">
+            <span className="material-symbols-outlined text-outline">tune</span>
+            <span className="font-label-caps text-label-caps text-text-main">Filtros</span>
           </div>
           <div className="flex items-center gap-4">
             <div className="relative">
@@ -162,7 +198,7 @@ const CatalogoPage = () => {
                 expand_more
               </span>
             </div>
-            <span className="font-body-sm text-body-sm text-text-main">
+            <span className="hidden sm:block font-body-sm text-body-sm text-text-main">
               {paginacion?.totalRegistros || productos.length} Productos
             </span>
           </div>
@@ -170,53 +206,51 @@ const CatalogoPage = () => {
 
         <div className="flex gap-gutter">
           {/* Sidebar - Desktop */}
-          <aside className="w-64 shrink-0 hidden lg:block">
+          <aside className="w-72 shrink-0 hidden lg:block">
             <div className="sticky top-28 space-y-8">
               {/* Categorías */}
               <div>
                 <h3 className="font-headline-sm text-headline-sm text-primary mb-4">Categoría</h3>
-                <ul className="space-y-2 font-body-md text-body-md text-text-main">
-                  <li>
-                    <label className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
-                      <input
-                        type="radio"
-                        name="categoria"
-                        checked={!categoriaActiva}
-                        onChange={() => updateFilters({ categoria: null })}
-                        className="accent-primary"
-                      />
-                      Todas
-                    </label>
-                  </li>
-                  {categorias.map((cat) => (
-                    <li key={cat.idCategoria}>
-                      <label className="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
-                        <input
-                          type="radio"
-                          name="categoria"
-                          checked={categoriaActiva === String(cat.idCategoria)}
-                          onChange={() => updateFilters({ categoria: cat.idCategoria })}
-                          className="accent-primary"
-                        />
-                        {cat.nombreCategoria}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
+                <FiltroCategoriasJerarquico
+                  categorias={categorias}
+                  categoriaActivaId={categoriaActivaId}
+                  onSelect={(id) => updateFilters({ categoria: id })}
+                />
+              </div>
+
+              {/* Precio */}
+              <div>
+                <h3 className="font-headline-sm text-headline-sm text-primary mb-4">Precio</h3>
+                <FiltroPrecio
+                  precioMin={precioMin}
+                  precioMax={precioMax}
+                  onAplicar={(vals) => updateFilters(vals)}
+                />
               </div>
             </div>
           </aside>
 
           {/* Product Grid */}
-          <main className="flex-1">
+          <main className="flex-1 min-w-0">
             {/* Active Filters */}
-            {(categoriaActiva || busqueda) && (
-              <div className="flex items-center gap-3 mb-6">
+            {(categoriaActiva || busqueda || hayFiltroPrecio) && (
+              <div className="flex flex-wrap items-center gap-3 mb-6">
                 {categoriaSeleccionada && (
                   <span className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full font-label-caps text-label-caps text-text-main">
                     {categoriaSeleccionada.nombreCategoria}
                     <button
                       onClick={() => updateFilters({ categoria: null })}
+                      className="text-outline hover:text-primary"
+                    >
+                      ×
+                    </button>
+                  </span>
+                )}
+                {hayFiltroPrecio && (
+                  <span className="inline-flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full font-label-caps text-label-caps text-text-main">
+                    {formatoPrecioChip()}
+                    <button
+                      onClick={() => updateFilters({ precioMin: null, precioMax: null })}
                       className="text-outline hover:text-primary"
                     >
                       ×
@@ -239,18 +273,18 @@ const CatalogoPage = () => {
 
             {/* Products Grid */}
             {loading ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
-                {[...Array(9)].map((_, i) => (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
+                {[...Array(8)].map((_, i) => (
                   <div key={i} className="animate-pulse">
                     <div className="aspect-[3/4] bg-surface-container-low rounded-lg mb-4" />
-                    <div className="h-4 bg-surface-container-low w-3/4 mb-2 rounded" />
-                    <div className="h-4 bg-surface-container-low w-1/2 rounded" />
+                    <div className="h-4 bg-surface-container-low w-3/4 mb-2 rounded mx-auto" />
+                    <div className="h-4 bg-surface-container-low w-1/2 rounded mx-auto" />
                   </div>
                 ))}
               </div>
             ) : productos.length > 0 ? (
               <>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-10 md:gap-x-6 md:gap-y-12">
                   <AnimatePresence mode="popLayout">
                     {productos.map((producto, index) => (
                       <motion.div
@@ -363,36 +397,26 @@ const CatalogoPage = () => {
 
                 <div className="mb-8">
                   <h3 className="font-headline-sm text-headline-sm text-primary mb-4">Categoría</h3>
-                  <ul className="space-y-3">
-                    <li>
-                      <button
-                        onClick={() => {
-                          updateFilters({ categoria: null });
-                          setShowFilters(false);
-                        }}
-                        className={`font-body-md text-body-md ${!categoriaActiva ? 'text-primary font-medium' : 'text-text-main'}`}
-                      >
-                        Todas
-                      </button>
-                    </li>
-                    {categorias.map((cat) => (
-                      <li key={cat.idCategoria}>
-                        <button
-                          onClick={() => {
-                            updateFilters({ categoria: cat.idCategoria });
-                            setShowFilters(false);
-                          }}
-                          className={`font-body-md text-body-md ${
-                            categoriaActiva === String(cat.idCategoria)
-                              ? 'text-primary font-medium'
-                              : 'text-text-main'
-                          }`}
-                        >
-                          {cat.nombreCategoria}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
+                  <FiltroCategoriasJerarquico
+                    categorias={categorias}
+                    categoriaActivaId={categoriaActivaId}
+                    onSelect={(id) => {
+                      updateFilters({ categoria: id });
+                      setShowFilters(false);
+                    }}
+                  />
+                </div>
+
+                <div className="mb-8">
+                  <h3 className="font-headline-sm text-headline-sm text-primary mb-4">Precio</h3>
+                  <FiltroPrecio
+                    precioMin={precioMin}
+                    precioMax={precioMax}
+                    onAplicar={(vals) => {
+                      updateFilters(vals);
+                      setShowFilters(false);
+                    }}
+                  />
                 </div>
 
                 <button

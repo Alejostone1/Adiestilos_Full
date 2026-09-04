@@ -48,9 +48,11 @@ function generarSku(codigoReferencia, nombreColor, nombreTalla) {
 }
 
 async function upsertImagenProducto(prisma, idProducto, imagen) {
-  // Si la imagen en BD ya tiene URL de Cloudinary, no sobrescribir
+  // Si esta imagen puntual (idProducto + descripcion) ya tiene URL de Cloudinary, no sobrescribir.
+  // OJO: el filtro debe incluir `descripcion` — si solo se filtra por idProducto, un producto con
+  // varias imágenes deja de crear la 2da/3ra en cuanto la 1ra ya está en Cloudinary.
   const existenteCloud = await prisma.imagenProducto.findFirst({
-    where: { idProducto, rutaImagen: { startsWith: 'https://' } }
+    where: { idProducto, descripcion: imagen.descripcion, rutaImagen: { startsWith: 'https://' } }
   });
   if (existenteCloud) return existenteCloud;
 
@@ -66,9 +68,9 @@ async function upsertImagenProducto(prisma, idProducto, imagen) {
     });
   }
 
-  // Si la ruta cambió (local → Cloudinary), actualizar la existente
+  // Si la ruta cambió (local → Cloudinary), actualizar la existente para esta misma imagen
   const existenteLocal = await prisma.imagenProducto.findFirst({
-    where: { idProducto }
+    where: { idProducto, descripcion: imagen.descripcion }
   });
   if (existenteLocal && !existenteLocal.rutaImagen.startsWith('http')) {
     return prisma.imagenProducto.update({

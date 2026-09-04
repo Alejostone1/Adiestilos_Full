@@ -512,9 +512,9 @@ async function buscarProductos(termino, opciones = {}) {
         codigoReferencia: true,
         precioVentaSugerido: true,
         imagenes: {
-          where: { esPrincipal: true },
-          take: 1,
-          select: { rutaImagen: true }
+          take: 2,
+          orderBy: [{ esPrincipal: 'desc' }, { orden: 'asc' }],
+          select: { rutaImagen: true, esPrincipal: true }
         },
         tieneColores: true,
         tieneTallas: true,
@@ -528,7 +528,8 @@ async function buscarProductos(termino, opciones = {}) {
           where: { estado: 'activo' },
           select: {
             precioVenta: true,
-            cantidadStock: true
+            cantidadStock: true,
+            color: { select: { idColor: true, nombreColor: true, codigoHex: true } }
           }
         }
       },
@@ -539,20 +540,31 @@ async function buscarProductos(termino, opciones = {}) {
     prisma.producto.count({ where })
   ]);
 
-  const productosFormateados = productos.map(p => ({
-    idProducto: p.idProducto,
-    nombreProducto: p.nombreProducto,
-    codigoReferencia: p.codigoReferencia,
-    precioVentaSugerido: Number(p.precioVentaSugerido),
-    imagenPrincipal: p.imagenes[0]?.rutaImagen || null,
-    tieneColores: p.tieneColores,
-    tieneTallas: p.tieneTallas,
-    categoria: p.categoria,
-    stockTotal: p.variantes.reduce((sum, v) => sum + Number(v.cantidadStock), 0),
-    precioMinimo: p.variantes.length > 0
-      ? Math.min(...p.variantes.map(v => Number(v.precioVenta)))
-      : Number(p.precioVentaSugerido)
-  }));
+  const productosFormateados = productos.map(p => {
+    const coloresUnicos = [];
+    p.variantes.forEach(v => {
+      if (v.color && !coloresUnicos.find(c => c.idColor === v.color.idColor)) {
+        coloresUnicos.push(v.color);
+      }
+    });
+
+    return {
+      idProducto: p.idProducto,
+      nombreProducto: p.nombreProducto,
+      codigoReferencia: p.codigoReferencia,
+      precioVentaSugerido: Number(p.precioVentaSugerido),
+      imagenPrincipal: p.imagenes.find(img => img.esPrincipal)?.rutaImagen || p.imagenes[0]?.rutaImagen || null,
+      imagenes: p.imagenes,
+      tieneColores: p.tieneColores,
+      tieneTallas: p.tieneTallas,
+      categoria: p.categoria,
+      stockTotal: p.variantes.reduce((sum, v) => sum + Number(v.cantidadStock), 0),
+      precioMinimo: p.variantes.length > 0
+        ? Math.min(...p.variantes.map(v => Number(v.precioVenta)))
+        : Number(p.precioVentaSugerido),
+      coloresDisponibles: coloresUnicos
+    };
+  });
 
   return {
     datos: productosFormateados,
@@ -569,7 +581,7 @@ async function buscarProductos(termino, opciones = {}) {
  * Obtiene todos los productos con filtros y paginación
  */
 async function obtenerProductosPublicos(opciones = {}) {
-  const { pagina = 1, limite = 12, orden = 'recientes', idCategoria } = opciones;
+  const { pagina = 1, limite = 12, orden = 'recientes', idCategoria, precioMin, precioMax } = opciones;
   const skip = (Number(pagina) - 1) * Number(limite);
 
   let orderBy = { creadoEn: 'desc' };
@@ -578,7 +590,7 @@ async function obtenerProductosPublicos(opciones = {}) {
   if (orden === 'nombre') orderBy = { nombreProducto: 'asc' };
 
   const where = { estado: 'activo' };
-  
+
   if (idCategoria) {
     const categoriasIds = [Number(idCategoria)];
     const subcategorias = await prisma.categoria.findMany({
@@ -587,6 +599,12 @@ async function obtenerProductosPublicos(opciones = {}) {
     });
     subcategorias.forEach(sub => categoriasIds.push(sub.idCategoria));
     where.idCategoria = { in: categoriasIds };
+  }
+
+  if (precioMin || precioMax) {
+    where.precioVentaSugerido = {};
+    if (precioMin) where.precioVentaSugerido.gte = Number(precioMin);
+    if (precioMax) where.precioVentaSugerido.lte = Number(precioMax);
   }
 
   const [productos, total] = await prisma.$transaction([
@@ -598,9 +616,9 @@ async function obtenerProductosPublicos(opciones = {}) {
         codigoReferencia: true,
         precioVentaSugerido: true,
         imagenes: {
-          where: { esPrincipal: true },
-          take: 1,
-          select: { rutaImagen: true }
+          take: 2,
+          orderBy: [{ esPrincipal: 'desc' }, { orden: 'asc' }],
+          select: { rutaImagen: true, esPrincipal: true }
         },
         tieneColores: true,
         tieneTallas: true,
@@ -624,7 +642,7 @@ async function obtenerProductosPublicos(opciones = {}) {
 
   const productosFormateados = productos.map(p => {
     const coloresUnicos = [];
-    
+
     p.variantes.forEach(v => {
       if (v.color && !coloresUnicos.find(c => c.idColor === v.color.idColor)) {
         coloresUnicos.push(v.color);
@@ -636,7 +654,8 @@ async function obtenerProductosPublicos(opciones = {}) {
       nombreProducto: p.nombreProducto,
       codigoReferencia: p.codigoReferencia,
       precioVentaSugerido: Number(p.precioVentaSugerido),
-      imagenPrincipal: p.imagenes[0]?.rutaImagen || null,
+      imagenPrincipal: p.imagenes.find(img => img.esPrincipal)?.rutaImagen || p.imagenes[0]?.rutaImagen || null,
+      imagenes: p.imagenes,
       tieneColores: p.tieneColores,
       tieneTallas: p.tieneTallas,
       creadoEn: p.creadoEn,
