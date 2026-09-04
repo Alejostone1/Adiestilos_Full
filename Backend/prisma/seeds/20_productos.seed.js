@@ -318,7 +318,9 @@ module.exports = async function seedProductos(prisma) {
             idTalla: tallaPorNombre[nombreTalla],
             precioVenta: p.venta,
             precioCosto: p.costo,
-            cantidadStock: 0,
+            // cantidadStock NO se toca aquí: se gestiona únicamente vía compras
+            // (seed 30_compras). Sobrescribirla en cada re-seed pondría el stock
+            // real en 0 sin que 30_compras lo repusiera (esa compra ya existiría).
             stockMinimo: p.stockMinimo,
             stockMaximo: p.stockMaximo,
             estado: 'activo'

@@ -58,6 +58,11 @@ async function crear(datos) {
     let subtotalCompra = 0;
     let descuentoTotalCompra = 0;
 
+    // Caché de variantes validadas en el paso 2, reutilizada en el paso 5
+    // para evitar volver a consultarlas (reduce a la mitad los round-trips
+    // dentro de la transacción y el riesgo de exceder el timeout).
+    const variantesPorId = new Map();
+
     // 2. Validar cada item del detalle y calcular totales
     for (const item of detalleCompras) {
       const variante = await tx.varianteProducto.findUnique({
@@ -68,6 +73,7 @@ async function crear(datos) {
       if (variante.producto.idProveedor !== idProveedor) {
         throw new ErrorConflicto(`El producto '${variante.producto.nombreProducto}' no pertenece al proveedor seleccionado.`);
       }
+      variantesPorId.set(item.idVariante, variante);
 
       // Calcular subtotal de la línea (cantidad * precio unitario)
       const subtotalLinea = item.cantidad * item.precioUnitario;
@@ -136,10 +142,8 @@ async function crear(datos) {
         }
       });
 
-      // Actualizar stock de la variante
-      const variante = await tx.varianteProducto.findUnique({ 
-        where: { idVariante: item.idVariante } 
-      });
+      // Actualizar stock de la variante (reutiliza la variante ya validada en el paso 2)
+      const variante = variantesPorId.get(item.idVariante);
       const stockAnterior = variante.cantidadStock;
       const stockNuevo = stockAnterior + item.cantidad;
 
@@ -170,7 +174,7 @@ async function crear(datos) {
       where: { idCompra: nuevaCompra.idCompra },
       include: includeRelacionesCompra
     });
-  });
+  }, { timeout: 20000 }); // Compras con muchas líneas pueden exceder el default de 5s
 }
 
 /**
