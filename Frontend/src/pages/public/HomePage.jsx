@@ -88,7 +88,7 @@ const HomePage = () => {
       {/* Hero Banner */}
       <HeroBanner
         titulo="Tu estilo, tu esencia"
-        subtitulo="Descubre prendas diseñadas para realzar tu belleza natural y brindarte comodidad con un toque de elegancia suprema."
+        subtitulo="Moda para mujer y hombre en Pereira, Risaralda. Prendas diseñadas para realzar tu belleza natural, con envíos a toda Colombia."
         ctaTexto="Comprar ahora"
         ctaLink="/tienda"
         imagenesFondo={[

@@ -58,7 +58,7 @@ const Footer = () => {
           <div className="col-span-1">
             <Logo size="xl" className="mb-6" />
             <p className="font-body-sm text-body-sm text-on-surface-variant mb-6 max-w-xs">
-              Elevando la moda con elegancia sutil y diseño consciente para la mujer moderna.
+              Tienda de ropa en Pereira, Risaralda. Elevando la moda con elegancia sutil y diseño consciente, con envíos a toda Colombia.
             </p>
             <div className="flex gap-4 text-primary">
               {socialLinks.map((social) => (

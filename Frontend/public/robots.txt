@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /cliente
+Disallow: /perfil
+Disallow: /login
+Disallow: /registro
+Disallow: /checkout-whatsapp
+
+Sitemap: https://www.adiestilos.top/sitemap.xml
