@@ -29,14 +29,14 @@ const TarjetaCategoria = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-      className="group relative w-full max-w-[320px] mx-auto"
+      className="group relative w-full"
     >
       <Link
         to={`/categoria/${id}`}
         className="block relative bg-pure-white rounded-2xl overflow-hidden border border-primary/15 hover:border-primary/50 shadow-card hover:shadow-card-hover transition-all duration-300 group-hover:-translate-y-1"
       >
         {/* Imagen */}
-        <div className="relative aspect-[4/5] overflow-hidden m-2.5 rounded-xl bg-background">
+        <div className="relative aspect-[4/5] overflow-hidden m-1.5 md:m-2.5 rounded-xl bg-background">
           {/* Skeleton */}
           {!imageLoaded && (
             <div className="absolute inset-0 bg-background animate-pulse" />
@@ -57,17 +57,17 @@ const TarjetaCategoria = ({
           <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent opacity-90" />
 
           {/* Badge contador */}
-          <div className="absolute top-0 left-0 bg-primary-container/90 text-on-primary-container text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 rounded-bl-xl font-label-caps">
+          <div className="absolute top-0 left-0 bg-primary-container/90 text-on-primary-container text-[8px] md:text-[10px] uppercase tracking-[0.1em] md:tracking-[0.15em] px-2 md:px-3 py-1 md:py-1.5 rounded-bl-xl font-label-caps">
             {formatCount(cantidadProductos)}
           </div>
         </div>
 
         {/* Contenido */}
-        <div className="px-5 pb-5 pt-3 text-center">
-          <h3 className="font-headline-md text-headline-md text-on-surface leading-tight">
+        <div className="px-2.5 pb-3 pt-2 md:px-5 md:pb-5 md:pt-3 text-center">
+          <h3 className="font-headline-md text-[13px] md:text-headline-md text-on-surface leading-tight line-clamp-1">
             {nombre}
           </h3>
-          <div className="mt-3 inline-flex items-center gap-2 font-label-caps text-label-caps text-primary">
+          <div className="hidden md:inline-flex mt-3 items-center gap-2 font-label-caps text-label-caps text-primary">
             Explorar
             <span className="material-symbols-outlined text-[16px] transition-transform duration-300 group-hover:translate-x-1">
               arrow_forward

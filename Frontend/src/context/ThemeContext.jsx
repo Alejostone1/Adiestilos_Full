@@ -15,13 +15,9 @@ export const useTheme = () => {
 // Provider del tema
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
-    // Obtener tema del localStorage o preferencia del sistema
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      return savedTheme;
-    }
-    // Detectar preferencia del sistema
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    // Siempre claro por defecto, sin importar el modo oscuro del sistema.
+    // Solo cambia si el usuario lo activa manualmente (se guarda en localStorage).
+    return localStorage.getItem('theme') || 'light';
   });
 
   // Aplicar tema al DOM
@@ -35,19 +31,6 @@ export const ThemeProvider = ({ children }) => {
     // Guardar en localStorage
     localStorage.setItem('theme', theme);
   }, [theme]);
-
-  // Escuchar cambios en preferencia del sistema
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e) => {
-      if (!localStorage.getItem('theme')) {
-        setTheme(e.matches ? 'dark' : 'light');
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
 
   // Función para cambiar tema
   const toggleTheme = () => {

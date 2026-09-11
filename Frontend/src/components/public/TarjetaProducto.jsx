@@ -77,7 +77,7 @@ const TarjetaProducto = ({
     >
       <Link to={linkDestino} className="block relative">
         {/* Image container */}
-        <div className="relative m-2 aspect-[3/4] bg-surface-container-low overflow-hidden rounded-md">
+        <div className="relative m-1.5 md:m-2 aspect-[3/4] bg-surface-container-low overflow-hidden rounded-md">
           {/* Primary image */}
           <img
             src={imagenPrimaria}
@@ -167,23 +167,23 @@ const TarjetaProducto = ({
         </div>
 
         {/* Product info */}
-        <div className="px-5 pb-5 pt-4">
+        <div className="px-2.5 pb-2.5 pt-2 md:px-5 md:pb-5 md:pt-4">
           {/* Name */}
-          <h4 className="font-body-md text-body-md text-on-surface mb-2.5 line-clamp-2 text-center font-medium">
+          <h4 className="font-body-md text-[12.5px] md:text-body-md text-on-surface mb-1 md:mb-2.5 line-clamp-1 md:line-clamp-2 text-center font-medium leading-tight">
             {nombre}
           </h4>
 
-          {/* Divider */}
-          <div className="w-8 h-px bg-primary/25 mx-auto mb-2.5" />
+          {/* Divider (solo desktop) */}
+          <div className="hidden md:block w-8 h-px bg-primary/25 mx-auto mb-2.5" />
 
           {/* Price */}
-          <div className="flex items-baseline justify-center gap-2">
-            <p className="font-body-md text-[15px] text-primary font-semibold tabular-nums tracking-tight">
-              <span className="text-[11px] font-medium mr-px">$</span>
+          <div className="flex items-baseline justify-center gap-1.5 md:gap-2">
+            <p className="font-body-md text-[13px] md:text-[15px] text-primary font-semibold tabular-nums tracking-tight">
+              <span className="text-[10px] md:text-[11px] font-medium mr-px">$</span>
               {formatearPrecio(precio)}
             </p>
             {descuento && (
-              <p className="text-[12px] text-outline line-through font-medium tabular-nums">
+              <p className="text-[10px] md:text-[12px] text-outline line-through font-medium tabular-nums">
                 ${formatearPrecio(precio * (1 + descuento / 100))}
               </p>
             )}
@@ -191,7 +191,7 @@ const TarjetaProducto = ({
 
           {/* Color swatches */}
           {coloresDisponibles.length > 0 && (
-            <div className="flex items-center justify-center gap-1.5 mt-3">
+            <div className="hidden md:flex items-center justify-center gap-1.5 mt-3">
               {coloresDisponibles.slice(0, 5).map((color) => (
                 <span
                   key={color.idColor}

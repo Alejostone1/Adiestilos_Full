@@ -108,11 +108,11 @@ const CarruselProductos = ({
         </motion.div>
 
         <div className="overflow-hidden" ref={emblaRef}>
-          <div className="flex gap-4 md:gap-6">
+          <div className="flex gap-3 md:gap-6">
             {productos.map((producto) => (
               <div
                 key={producto.id}
-                className="flex-none w-[70%] sm:w-[45%] md:w-[30%] lg:w-[23%]"
+                className="flex-none w-[46%] sm:w-[38%] md:w-[30%] lg:w-[23%]"
               >
                 <TarjetaProducto {...producto} />
               </div>
