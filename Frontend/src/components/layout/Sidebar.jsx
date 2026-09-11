@@ -296,8 +296,8 @@ const Sidebar = () => {
           to={section.path}
           className={`group relative flex items-center gap-3.5 px-4 py-3 mx-2 rounded-2xl transition-all duration-300
             ${isItemActive
-              ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/40'
-              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-blue-600 dark:hover:text-blue-400'
+              ? 'bg-primary text-on-primary shadow-lg shadow-primary/40'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-surface-container dark:hover:bg-slate-800/80 hover:text-primary dark:hover:text-primary-fixed-dim'
             }
             ${sidebarCollapsed ? 'justify-center px-0' : ''}
           `}
@@ -331,14 +331,14 @@ const Sidebar = () => {
           onClick={() => toggleSection(section.key)}
           className={`group w-full flex items-center justify-between px-4 py-3 mx-2 rounded-2xl transition-all duration-300
             ${isExpanded || anySubitemActive
-              ? 'bg-slate-50 dark:bg-slate-700/40 text-blue-600 dark:text-blue-300'
-              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/60 hover:text-blue-600 dark:hover:text-blue-300'
+              ? 'bg-primary-fixed/40 dark:bg-slate-700/40 text-primary dark:text-primary-fixed-dim'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-surface-container dark:hover:bg-slate-700/60 hover:text-primary dark:hover:text-primary-fixed-dim'
             }
             ${sidebarCollapsed ? 'justify-center px-0' : ''}
           `}
         >
           <div className="flex items-center gap-3.5">
-            <div className={`flex items-center justify-center transition-all duration-300 ${isExpanded ? 'scale-110 text-blue-500' : 'group-hover:scale-110'}`}>
+            <div className={`flex items-center justify-center transition-all duration-300 ${isExpanded ? 'scale-110 text-primary' : 'group-hover:scale-110'}`}>
                <span className="text-xl">{section.icon}</span>
             </div>
 
@@ -348,13 +348,13 @@ const Sidebar = () => {
           </div>
 
           {!sidebarCollapsed && (
-            <div className={`transition-all duration-500 ${isExpanded ? 'rotate-180 text-blue-500' : 'text-slate-300'}`}>
+            <div className={`transition-all duration-500 ${isExpanded ? 'rotate-180 text-primary' : 'text-slate-300'}`}>
               <FaChevronDown className="text-[11px]" />
             </div>
           )}
-          
+
           {anySubitemActive && !isExpanded && !sidebarCollapsed && (
-             <div className="absolute left-1 w-1 h-6 bg-blue-500 rounded-full" />
+             <div className="absolute left-1 w-1 h-6 bg-primary rounded-full" />
           )}
         </button>
 
@@ -371,13 +371,13 @@ const Sidebar = () => {
                 to={item.path}
                 className={`group/item relative flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200
                   ${isActive(item.path)
-                    ? 'bg-blue-50 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300 font-semibold'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-blue-500 dark:hover:text-blue-300 hover:bg-slate-50 dark:hover:bg-slate-700/30'
+                    ? 'bg-primary-fixed dark:bg-primary/20 text-primary dark:text-primary-fixed-dim font-semibold'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-primary-fixed-dim hover:bg-surface-container dark:hover:bg-slate-700/30'
                   }
                 `}
               >
                 {isActive(item.path) && (
-                   <div className="absolute -left-[9px] w-2 h-2 bg-blue-500 rounded-full border-2 border-white dark:border-slate-800" />
+                   <div className="absolute -left-[9px] w-2 h-2 bg-primary rounded-full border-2 border-white dark:border-slate-800" />
                 )}
                 <span className="text-sm">{item.text}</span>
               </Link>
@@ -401,7 +401,8 @@ const Sidebar = () => {
       {/* Botón flotante para móvil */}
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-110 active:scale-95"
+        aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-gradient-to-br from-primary to-tertiary text-on-primary shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-110 active:scale-95"
       >
         {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
       </button>
@@ -418,9 +419,9 @@ const Sidebar = () => {
         <div className="px-6 py-8 border-b border-slate-200 dark:border-slate-700/50">
           <div className={`flex items-center gap-4 transition-all duration-500 ${sidebarCollapsed ? 'justify-center' : ''}`}>
              <div className="relative group/logo cursor-pointer" onClick={() => navigate('/admin/dashboard')}>
-                <div className="absolute inset-0 bg-blue-600 rounded-2xl blur-xl opacity-20 group-hover/logo:opacity-40 transition-opacity" />
-                <div className="relative w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 dark:from-blue-500 dark:to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transform group-hover/logo:scale-110 group-hover/logo:rotate-3 transition-all duration-500">
-                  <FaHeart className="text-xl text-white" />
+                <div className="absolute inset-0 bg-primary rounded-2xl blur-xl opacity-20 group-hover/logo:opacity-40 transition-opacity" />
+                <div className="relative w-12 h-12 bg-gradient-to-br from-primary to-tertiary rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 transform group-hover/logo:scale-110 group-hover/logo:rotate-3 transition-all duration-500">
+                  <FaHeart className="text-xl text-on-primary" />
                 </div>
              </div>
 
@@ -442,14 +443,14 @@ const Sidebar = () => {
         {!sidebarCollapsed && (
           <div className="px-5 mb-6">
             <div className="relative group">
-              <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 group-focus-within:text-blue-500 dark:group-focus-within:text-blue-400 transition-colors text-xs" />
+              <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 group-focus-within:text-primary dark:group-focus-within:text-primary-fixed-dim transition-colors text-xs" />
               <input
                 type="text"
                 placeholder="Buscar funcionalidad..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-3 bg-slate-100/50 dark:bg-slate-700/40 border border-slate-200 dark:border-slate-600/50
-                         focus:border-blue-500/50 dark:focus:border-blue-400/50 rounded-2xl text-xs font-semibold text-slate-800 dark:text-slate-200
+                         focus:border-primary/50 dark:focus:border-primary-fixed-dim/50 rounded-2xl text-xs font-semibold text-slate-800 dark:text-slate-200
                          placeholder-slate-400 dark:placeholder-slate-500
                          focus:outline-none transition-all shadow-inner dark:shadow-slate-900/30"
               />
