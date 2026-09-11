@@ -137,7 +137,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
         icon: 'success',
         title: '¡Abono Exitoso!',
         text: `Se han registrado pagos por un total de ${formatearPrecio(totalAbono)}`,
-        confirmButtonColor: '#4F46E5',
+        confirmButtonColor: '#a73162',
         customClass: {
           popup: 'rounded-[2rem]',
           confirmButton: 'rounded-xl font-semibold px-8 py-3'

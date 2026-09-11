@@ -111,7 +111,7 @@ const MetodosPagoPage = () => {
       text: "El método de pago será desactivado del sistema.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#4F46E5',
+      confirmButtonColor: '#a73162',
       cancelButtonColor: '#EF4444',
       confirmButtonText: 'Sí, desactivar',
       cancelButtonText: 'Cancelar',

@@ -338,7 +338,7 @@ export default function AjustesInventarioPage() {
       text: "Esta acción modificará el stock actual de forma definitiva en el inventario real.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#4f46e5',
+      confirmButtonColor: '#a73162',
       cancelButtonColor: '#ef4444',
       confirmButtonText: 'Sí, sincronizar stock',
       cancelButtonText: 'Cancelar',

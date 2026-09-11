@@ -93,7 +93,7 @@ const CreditosEstadisticas = ({ data, loading }) => {
           <Row gutter={[16, 16]}>
             {data.creditos.slice(0, 3).map((credito, index) => (
               <Col key={index} xs={24} sm={8}>
-                <Card size="small" style={{ borderLeft: '4px solid #3b82f6' }}>
+                <Card size="small" style={{ borderLeft: '4px solid #a73162' }}>
                   <div className="text-sm">
                     <div className="font-medium text-gray-900">
                       {credito.usuarioCliente.nombres} {credito.usuarioCliente.apellidos}

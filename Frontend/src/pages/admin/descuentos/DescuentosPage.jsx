@@ -220,7 +220,7 @@ export default function DescuentosPage() {
       text: "Esta acción marcará el descuento como inactivo.",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#4F46E5',
+      confirmButtonColor: '#a73162',
       cancelButtonColor: '#EF4444',
       confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'

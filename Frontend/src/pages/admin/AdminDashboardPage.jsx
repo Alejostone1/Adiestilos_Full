@@ -105,8 +105,8 @@ const AdminDashboardPage = () => {
     <div className="dashboard-container relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="bg-mesh">
-        <div className="mesh-circle" style={{ top: '-10%', left: '-5%', width: '40%', height: '40%', background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' }} />
-        <div className="mesh-circle" style={{ bottom: '-10%', right: '-5%', width: '35%', height: '35%', background: 'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)' }} />
+        <div className="mesh-circle" style={{ top: '-10%', left: '-5%', width: '40%', height: '40%', background: 'linear-gradient(135deg, #a73162 0%, #ff76a8 100%)' }} />
+        <div className="mesh-circle" style={{ bottom: '-10%', right: '-5%', width: '35%', height: '35%', background: 'linear-gradient(135deg, #10b981 0%, #ab2a63 100%)' }} />
       </div>
 
       <Content className="relative z-10 p-5 md:p-8 lg:p-10 max-w-[1700px] mx-auto w-full">

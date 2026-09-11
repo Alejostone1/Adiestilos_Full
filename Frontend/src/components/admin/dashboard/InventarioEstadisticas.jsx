@@ -61,18 +61,18 @@ const InventarioEstadisticas = ({ data, loading }) => {
           <Statistic
             title="Total SKU's"
             value={numeroSkus}
-            prefix={<InboxOutlined style={{ color: '#3b82f6' }} />}
+            prefix={<InboxOutlined style={{ color: '#a73162' }} />}
             formatter={formatNumber}
-            styles={{ content: { color: '#3b82f6', fontSize: '20px' } }}
+            styles={{ content: { color: '#a73162', fontSize: '20px' } }}
           />
         </Col>
         <Col xs={24} sm={12} md={6}>
           <Statistic
             title="Unidades Totales"
             value={unidadesTotales}
-            prefix={<InboxOutlined style={{ color: '#8b5cf6' }} />}
+            prefix={<InboxOutlined style={{ color: '#f59e0b' }} />}
             formatter={formatNumber}
-            styles={{ content: { color: '#8b5cf6', fontSize: '20px' } }}
+            styles={{ content: { color: '#f59e0b', fontSize: '20px' } }}
           />
         </Col>
         <Col xs={24} sm={12} md={6}>

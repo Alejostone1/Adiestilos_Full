@@ -244,7 +244,7 @@ const InventarioPage = () => {
               value={estadisticas.valorTotalInventario || 0}
               prefix="$"
               precision={2}
-              valueStyle={{ color: '#1890ff' }}
+              valueStyle={{ color: '#a73162' }}
             />
           </Card>
         </Col>

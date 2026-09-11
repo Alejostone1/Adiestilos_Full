@@ -70,7 +70,7 @@ const VentasCreditoPage = () => {
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Confirmar Abono',
-      confirmButtonColor: '#4f46e5',
+      confirmButtonColor: '#a73162',
       preConfirm: () => {
         return {
           monto: document.getElementById('swal-monto').value,
