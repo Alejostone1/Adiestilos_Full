@@ -6,6 +6,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import useSeo from '../../hooks/useSeo';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -15,6 +16,12 @@ const fadeInUp = {
 };
 
 const NosotrosPage = () => {
+  useSeo({
+    title: 'Nuestra Historia | Adi Estilos - Ropa en Pereira',
+    description: 'Conoce Adi Estilos, tienda de moda en Pereira, Risaralda. Ropa para mujer y hombre con calidad, diseño consciente y elegancia sutil.',
+    path: '/nosotros',
+  });
+
   const valores = [
     {
       icono: <span className="material-symbols-outlined text-[28px]">favorite</span>,

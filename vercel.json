@@ -2,5 +2,8 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "installCommand": "npm install --prefix Frontend",
   "buildCommand": "npm --prefix Frontend run build",
-  "outputDirectory": "Frontend/dist"
+  "outputDirectory": "Frontend/dist",
+  "rewrites": [
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
 }

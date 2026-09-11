@@ -5,8 +5,15 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import useSeo from '../../hooks/useSeo';
 
 const ContactoPage = () => {
+  useSeo({
+    title: 'Contacto | Adi Estilos - Tienda de Ropa en Pereira',
+    description: 'Visítanos en Centro Comercial Victoria Plaza, Local 205, Pereira, Risaralda. Escríbenos o llámanos — Adi Estilos, tu tienda de ropa en Pereira.',
+    path: '/contacto',
+  });
+
   const infoItems = [
     {
       icono: 'location_on',

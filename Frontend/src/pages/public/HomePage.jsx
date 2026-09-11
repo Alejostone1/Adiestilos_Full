@@ -11,6 +11,7 @@ import HeroBanner from '../../components/public/HeroBanner';
 import SeccionCategorias from '../../components/public/SeccionCategorias';
 import CarruselProductos from '../../components/public/CarruselProductos';
 import { getImagenURL } from '../../utils/imageUrl';
+import useSeo from '../../hooks/useSeo';
 
 const esProductoNuevo = (fecha) => {
   if (!fecha) return false;
@@ -20,6 +21,12 @@ const esProductoNuevo = (fecha) => {
 };
 
 const HomePage = () => {
+  useSeo({
+    title: 'Adi Estilos | Tienda de Ropa en Pereira, Risaralda',
+    description: 'Adi Estilos: tienda de ropa en Pereira, Risaralda. Moda para mujer y hombre con estilo y calidad — camisetas, blusas, vestidos y pantalones. Envíos a toda Colombia.',
+    path: '/',
+  });
+
   const [categorias, setCategorias] = useState([]);
   const [productosDestacados, setProductosDestacados] = useState([]);
   const [loading, setLoading] = useState(true);
