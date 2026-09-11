@@ -45,7 +45,7 @@ export default function UsuariosVentas() {
     if (s === 'completado' || s === 'entregado') return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 border-emerald-200';
     if (s === 'pendiente') return 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border-amber-200';
     if (s === 'cancelado') return 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 border-rose-200';
-    return 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 border-blue-200';
+    return 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary border-primary-fixed';
   };
 
   return (
@@ -58,7 +58,7 @@ export default function UsuariosVentas() {
              whileHover={{ scale: 1.1, x: -5 }}
              whileTap={{ scale: 0.9 }}
              onClick={() => navigate('/admin/usuarios')}
-             className="p-4 bg-white dark:bg-gray-900 rounded-3xl text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-xl shadow-gray-200/50 dark:shadow-none transition-all"
+             className="p-4 bg-white dark:bg-gray-900 rounded-3xl text-gray-400 hover:text-primary dark:hover:text-primary shadow-xl shadow-gray-200/50 dark:shadow-none transition-all"
            >
              <ArrowLeft size={28} />
            </motion.button>
@@ -66,12 +66,12 @@ export default function UsuariosVentas() {
            <div>
               <div className="flex items-center gap-3 mb-2">
                  <h1 className="text-2xl font-semibold text-gray-900 dark:text-white tracking-tight">Historial de Ventas</h1>
-                 <span className="px-3 py-1 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-full text-[11px] font-semibold uppercase tracking-wide">Auditoría Cliente</span>
+                 <span className="px-3 py-1 bg-primary-fixed text-primary dark:bg-tertiary/40 dark:text-primary rounded-full text-[11px] font-semibold uppercase tracking-wide">Auditoría Cliente</span>
               </div>
               <div className="flex items-center gap-4">
                  {usuario && (
                     <div className="flex items-center gap-3 bg-white dark:bg-gray-900 px-5 py-2.5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
-                       <div className="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-semibold">
+                       <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-semibold">
                           {usuario.nombres?.charAt(0)}
                        </div>
                        <div>
@@ -82,7 +82,7 @@ export default function UsuariosVentas() {
                  )}
                  <div className="hidden md:flex flex-col">
                     <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Total Acuñado</span>
-                    <span className="text-lg font-semibold text-indigo-600 dark:text-indigo-400 leading-tight">
+                    <span className="text-lg font-semibold text-primary dark:text-primary leading-tight">
                         <PrecioFormateado precio={ventas.reduce((acc, v) => acc + parseFloat(v.total), 0)} />
                     </span>
                  </div>
@@ -92,18 +92,18 @@ export default function UsuariosVentas() {
 
         <div className="flex items-center gap-4 w-full xl:w-auto">
            <div className="relative flex-1 xl:w-80 group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" size={20} />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" size={20} />
               <input 
                 type="text" 
                 placeholder="Nº Factura..."
-                className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all shadow-sm font-semibold"
+                className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all shadow-sm font-semibold"
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
               />
            </div>
            <button 
              onClick={() => fetchDatos()}
-             className="p-4 bg-white dark:bg-gray-900 text-gray-400 hover:text-indigo-500 rounded-2xl border border-gray-100 dark:border-gray-800 transition-all shadow-sm"
+             className="p-4 bg-white dark:bg-gray-900 text-gray-400 hover:text-primary rounded-2xl border border-gray-100 dark:border-gray-800 transition-all shadow-sm"
            >
              <RotateCcw size={24} className={loading ? 'animate-spin' : ''} />
            </button>
@@ -113,7 +113,7 @@ export default function UsuariosVentas() {
       {/* Stats QuickView */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
          <div className="bg-white dark:bg-gray-900 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-5">
-            <div className="p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-2xl">
+            <div className="p-3 bg-primary-fixed dark:bg-tertiary/20 text-primary rounded-2xl">
                <Receipt size={24} />
             </div>
             <div>
@@ -179,7 +179,7 @@ export default function UsuariosVentas() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.05 }}
-                        className="bg-white dark:bg-gray-900 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/5 dark:hover:shadow-none transition-all group overflow-hidden"
+                        className="bg-white dark:bg-gray-900 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-2xl hover:shadow-primary/5 dark:hover:shadow-none transition-all group overflow-hidden"
                     >
                         <div className="p-8 flex flex-col lg:flex-row lg:items-center gap-8">
                            {/* Icon & Factura */}
@@ -223,7 +223,7 @@ export default function UsuariosVentas() {
                                  </p>
                               </div>
                               <div>
-                                 <p className="text-[11px] font-semibold text-indigo-500 uppercase tracking-wide mb-1 leading-none">Total Neto</p>
+                                 <p className="text-[11px] font-semibold text-primary uppercase tracking-wide mb-1 leading-none">Total Neto</p>
                                  <p className="text-lg font-semibold text-gray-900 dark:text-white leading-none truncate">
                                     <PrecioFormateado precio={venta.total} />
                                  </p>
@@ -249,7 +249,7 @@ export default function UsuariosVentas() {
                                 whileHover={{ scale: 1.1, x: 5 }}
                                 whileTap={{ scale: 0.9 }}
                                 onClick={() => navigate(`/admin/usuarios/${id}/ventas/${venta.idVenta}`)}
-                                className="p-4 bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-2xl border border-gray-100 dark:border-gray-800 transition-all shadow-sm"
+                                className="p-4 bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-primary dark:hover:text-primary rounded-2xl border border-gray-100 dark:border-gray-800 transition-all shadow-sm"
                               >
                                  <ChevronRight size={24} />
                               </motion.button>
@@ -259,16 +259,16 @@ export default function UsuariosVentas() {
                         {/* Extra Trace Info */}
                         <div className="px-10 py-4 bg-gray-50 dark:bg-gray-800/40 border-t border-gray-100 dark:border-gray-800 flex flex-wrap gap-8 items-center text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
                            <div className="flex items-center gap-2">
-                              <div className="w-1.5 h-1.5 bg-indigo-500 rounded-full" />
+                              <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                               ID Operación: <span className="text-gray-600 dark:text-gray-300 ml-1">#VNT-{venta.idVenta}</span>
                            </div>
                            {venta.usuarioVendedor && (
                               <div className="flex items-center gap-2">
-                                 <div className="w-1.5 h-1.5 bg-blue-500 rounded-full" />
+                                 <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                                  Vendedor: <span className="text-gray-600 dark:text-gray-300 ml-1">{venta.usuarioVendedor.nombres}</span>
                               </div>
                            )}
-                           <div className="flex items-center gap-2 ml-auto text-indigo-500 hover:text-indigo-600 cursor-pointer transition-colors" onClick={() => navigate(`/admin/usuarios/${id}/ventas/${venta.idVenta}`)}>
+                           <div className="flex items-center gap-2 ml-auto text-primary hover:text-primary cursor-pointer transition-colors" onClick={() => navigate(`/admin/usuarios/${id}/ventas/${venta.idVenta}`)}>
                               Ver Detalles Completos <ExternalLink size={12} />
                            </div>
                         </div>
@@ -284,7 +284,7 @@ export default function UsuariosVentas() {
                <button 
                   disabled={paginacion.paginaActual === 1}
                   onClick={() => fetchDatos(paginacion.paginaActual - 1)}
-                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-semibold text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
+                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-semibold text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all shadow-sm"
                > Anterior </button>
                
                <div className="flex items-center gap-2">
@@ -292,7 +292,7 @@ export default function UsuariosVentas() {
                     <button 
                         key={i}
                         onClick={() => fetchDatos(i + 1)}
-                        className={`w-12 h-12 rounded-2xl text-sm font-semibold transition-all ${paginacion.paginaActual === i + 1 ? 'bg-indigo-600 text-white shadow-xl shadow-indigo-200 dark:shadow-none' : 'bg-white dark:bg-gray-900 text-gray-400 border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+                        className={`w-12 h-12 rounded-2xl text-sm font-semibold transition-all ${paginacion.paginaActual === i + 1 ? 'bg-primary text-white shadow-xl shadow-primary dark:shadow-none' : 'bg-white dark:bg-gray-900 text-gray-400 border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
                     > {i + 1} </button>
                   ))}
                </div>
@@ -300,7 +300,7 @@ export default function UsuariosVentas() {
                <button 
                   disabled={paginacion.paginaActual === paginacion.totalPaginas}
                   onClick={() => fetchDatos(paginacion.paginaActual + 1)}
-                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-semibold text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-indigo-500 hover:text-indigo-600 transition-all shadow-sm"
+                  className="px-6 py-3 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl text-sm font-semibold text-gray-500 disabled:opacity-30 disabled:cursor-not-allowed hover:border-primary hover:text-primary transition-all shadow-sm"
                > Siguiente </button>
             </div>
          )}

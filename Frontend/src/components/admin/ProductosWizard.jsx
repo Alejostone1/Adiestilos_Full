@@ -304,13 +304,13 @@ const ProductosWizard = ({ isOpen, onClose, producto = null, onSuccess }) => {
         <div className="w-full max-w-2xl bg-white dark:bg-gray-900 rounded-2xl shadow-2xl overflow-hidden">
           
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-900 dark:to-blue-800 px-8 py-6 relative">
+          <div className="bg-gradient-to-r from-primary to-tertiary dark:from-primary dark:to-tertiary px-8 py-6 relative">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-semibold text-white">
                   {producto ? 'Editar Producto' : 'Crear Nuevo Producto'}
                 </h2>
-                <p className="text-blue-100 text-sm mt-1">Paso {pasoActual} de 5</p>
+                <p className="text-primary-fixed text-sm mt-1">Paso {pasoActual} de 5</p>
               </div>
               <button
                 onClick={onClose}
@@ -336,7 +336,7 @@ const ProductosWizard = ({ isOpen, onClose, producto = null, onSuccess }) => {
                         flex items-center justify-center w-10 h-10 rounded-lg font-semibold text-sm
                         transition-all duration-300
                         ${esActivo
-                          ? 'bg-blue-600 text-white ring-2 ring-blue-300 dark:ring-blue-400'
+                          ? 'bg-primary text-white ring-2 ring-primary dark:ring-primary'
                           : esCompletado
                           ? 'bg-green-500 text-white'
                           : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
@@ -405,7 +405,7 @@ const ProductosWizard = ({ isOpen, onClose, producto = null, onSuccess }) => {
             </button>
 
             <div className="flex items-center gap-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-              <span className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+              <span className="w-8 h-8 rounded-full bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary flex items-center justify-center">
                 {pasoActual}
               </span>
               /
@@ -433,7 +433,7 @@ const ProductosWizard = ({ isOpen, onClose, producto = null, onSuccess }) => {
             ) : (
               <button
                 onClick={handleNext}
-                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg font-medium transition-all duration-300"
+                className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-primary to-tertiary hover:from-primary hover:to-tertiary text-white rounded-lg font-medium transition-all duration-300"
               >
                 Siguiente
                 <ChevronRight className="w-4 h-4" />

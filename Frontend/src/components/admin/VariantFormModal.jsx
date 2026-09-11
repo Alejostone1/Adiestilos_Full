@@ -141,7 +141,7 @@ const VariantFormModal = ({
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-10">
           <div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-              <Package className="w-5 h-5 text-purple-600" />
+              <Package className="w-5 h-5 text-primary" />
               {initialData ? 'Editar Variante' : 'Nueva Variante'}
             </h2>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
@@ -171,7 +171,7 @@ const VariantFormModal = ({
             {/* Sección: Atributos (Visual) */}
             <div className="space-y-6">
               <div className="flex items-center gap-2 pb-2 border-b border-gray-100 dark:border-slate-800">
-                <Tag className="w-4 h-4 text-purple-600" />
+                <Tag className="w-4 h-4 text-primary" />
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">Atributos</h3>
               </div>
               
@@ -204,7 +204,7 @@ const VariantFormModal = ({
             {/* Sección: Información General */}
             <div className="space-y-6">
                <div className="flex items-center gap-2 pb-2 border-b border-gray-100 dark:border-slate-800">
-                <Layers className="w-4 h-4 text-purple-600" />
+                <Layers className="w-4 h-4 text-primary" />
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">Detalles Generales</h3>
               </div>
 
@@ -217,7 +217,7 @@ const VariantFormModal = ({
                         name="codigoSku"
                         value={formData.codigoSku}
                         onChange={handleChange}
-                        className="w-full pl-4 pr-10 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-mono text-sm"
+                        className="w-full pl-4 pr-10 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-mono text-sm"
                         placeholder="ej. PROD-ROJ-L"
                     />
                     <div className="absolute right-3 top-2.5 text-gray-400 pointer-events-none">
@@ -233,7 +233,7 @@ const VariantFormModal = ({
                     name="estado"
                     value={formData.estado}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all"
+                    className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                   >
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
@@ -245,7 +245,7 @@ const VariantFormModal = ({
             {/* Sección: Precios e Inventario */}
             <div className="space-y-6">
               <div className="flex items-center gap-2 pb-2 border-b border-gray-100 dark:border-slate-800">
-                <DollarSign className="w-4 h-4 text-purple-600" />
+                <DollarSign className="w-4 h-4 text-primary" />
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">Precio e Inventario</h3>
               </div>
 
@@ -262,7 +262,7 @@ const VariantFormModal = ({
                             onChange={handleChange}
                             min="0"
                             step="0.01"
-                            className="w-full pl-7 pr-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all"
+                            className="w-full pl-7 pr-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                         />
                     </div>
                  </div>
@@ -278,7 +278,7 @@ const VariantFormModal = ({
                             onChange={handleChange}
                             min="0"
                              step="0.01"
-                            className="w-full pl-7 pr-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-semibold"
+                            className="w-full pl-7 pr-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-semibold"
                         />
                     </div>
                  </div>
@@ -292,7 +292,7 @@ const VariantFormModal = ({
                         value={formData.cantidadStock}
                         onChange={handleChange}
                         min="0"
-                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                     />
                  </div>
               </div>
@@ -306,7 +306,7 @@ const VariantFormModal = ({
                         value={formData.stockMinimo}
                         onChange={handleChange}
                         min="0"
-                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                     />
                  </div>
                  <div className="space-y-2">
@@ -317,7 +317,7 @@ const VariantFormModal = ({
                         value={formData.stockMaximo}
                         onChange={handleChange}
                         min="0"
-                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all"
+                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
                     />
                  </div>
               </div>
@@ -326,7 +326,7 @@ const VariantFormModal = ({
             {/* Sección: Imágenes */}
              <div className="space-y-6">
               <div className="flex items-center gap-2 pb-2 border-b border-gray-100 dark:border-slate-800">
-                <ImageIcon className="w-4 h-4 text-purple-600" />
+                <ImageIcon className="w-4 h-4 text-primary" />
                 <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wider">Imágenes</h3>
               </div>
               
@@ -341,10 +341,10 @@ const VariantFormModal = ({
                  />
                  <label htmlFor="variant-images" className="cursor-pointer flex flex-col items-center gap-3">
                     <div className="p-3 bg-white dark:bg-slate-700 rounded-full shadow-sm group-hover:scale-110 transition-transform">
-                        <Upload className="w-6 h-6 text-purple-600" />
+                        <Upload className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                        <span className="text-purple-600 font-medium hover:underline">Sube imágenes</span>
+                        <span className="text-primary font-medium hover:underline">Sube imágenes</span>
                         <span className="text-gray-500 dark:text-gray-400"> o arrástralas aquí</span>
                     </div>
                     <p className="text-xs text-gray-400 dark:text-gray-500">PNG, JPG, GIF hasta 5MB</p>
@@ -390,7 +390,7 @@ const VariantFormModal = ({
             type="submit"
             form="variant-form"
             disabled={isSubmitting}
-            className="px-6 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-medium shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-all active:scale-95"
+            className="px-6 py-2.5 rounded-xl bg-primary hover:bg-tertiary text-white font-medium shadow-lg shadow-primary/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 transition-all active:scale-95"
           >
             {isSubmitting ? (
                 <>

@@ -250,14 +250,14 @@ export default function DescuentosPage() {
   // Components
   const StatCard = ({ title, value, icon: Icon, color }) => (
     <div className="bg-white dark:bg-slate-900 p-6 rounded-[2rem] border border-slate-100 dark:border-slate-800 shadow-sm flex items-center justify-between group overflow-hidden relative">
-      <div className={`absolute -right-4 -bottom-4 opacity-5 text-indigo-500 group-hover:scale-110 transition-transform duration-500`}>
+      <div className={`absolute -right-4 -bottom-4 opacity-5 text-primary group-hover:scale-110 transition-transform duration-500`}>
         <Icon size={120} />
       </div>
       <div className="relative z-10">
         <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wide mb-1">{title}</p>
         <h3 className="text-3xl font-semibold text-slate-900 dark:text-white tracking-tight">{value}</h3>
       </div>
-      <div className={`h-14 w-14 rounded-2xl flex items-center justify-center bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400`}>
+      <div className={`h-14 w-14 rounded-2xl flex items-center justify-center bg-primary-fixed dark:bg-tertiary/20 text-primary dark:text-primary`}>
         <Icon className="h-7 w-7" />
       </div>
     </div>
@@ -269,7 +269,7 @@ export default function DescuentosPage() {
       {/* Header Premium */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-6">
-          <div className="h-16 w-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none rotate-3">
+          <div className="h-16 w-16 bg-gradient-to-br from-primary to-tertiary rounded-3xl flex items-center justify-center shadow-lg shadow-primary dark:shadow-none rotate-3">
             <Tag className="h-8 w-8 text-white" />
           </div>
           <div>
@@ -280,7 +280,7 @@ export default function DescuentosPage() {
         
         <button 
           onClick={() => { resetForm(); setShowWizard(true); }}
-          className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-xl shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-sm"
+          className="px-8 py-4 bg-primary hover:bg-tertiary text-white font-semibold rounded-2xl flex items-center gap-2 shadow-xl shadow-primary dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-sm"
         >
           <Plus className="h-5 w-5" />
           Crear Promo
@@ -301,25 +301,25 @@ export default function DescuentosPage() {
       <div className="bg-white dark:bg-slate-900 p-6 rounded-[2.5rem] border border-slate-100 dark:border-slate-800 shadow-sm space-y-6">
         <div className="flex flex-col md:flex-row items-center gap-4">
           <div className="relative flex-1 group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 group-focus-within:text-primary transition-colors" />
             <input 
               type="text"
               placeholder="Buscar por nombre o código..."
               value={filters.buscar}
               onChange={(e) => handleFilterChange('buscar', e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all text-sm font-medium"
+              className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-primary dark:text-white transition-all text-sm font-medium"
             />
           </div>
           <div className="flex items-center gap-3">
              <button 
               onClick={() => setShowFilters(!showFilters)}
-              className={`p-3.5 rounded-2xl transition-all ${showFilters ? 'bg-indigo-600 text-white' : 'bg-slate-50 dark:bg-slate-800 text-slate-500 hover:bg-slate-100'}`}
+              className={`p-3.5 rounded-2xl transition-all ${showFilters ? 'bg-primary text-white' : 'bg-slate-50 dark:bg-slate-800 text-slate-500 hover:bg-slate-100'}`}
              >
                <Filter className="h-5 w-5" />
              </button>
              <button 
                onClick={cargarDatos}
-               className="p-3.5 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-2xl hover:text-indigo-600 transition-all"
+               className="p-3.5 bg-slate-50 dark:bg-slate-800 text-slate-500 rounded-2xl hover:text-primary transition-all"
              >
                <RefreshCcw className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`} />
              </button>
@@ -402,7 +402,7 @@ export default function DescuentosPage() {
               {loading && !descuentos.length ? (
                 <tr>
                   <td colSpan="5" className="px-8 py-20 text-center">
-                    <Loader2 className="h-8 w-8 text-indigo-500 animate-spin mx-auto mb-4" />
+                    <Loader2 className="h-8 w-8 text-primary animate-spin mx-auto mb-4" />
                     <span className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Consultando promociones...</span>
                   </td>
                 </tr>
@@ -421,7 +421,7 @@ export default function DescuentosPage() {
                   <tr key={d.idDescuento} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/20 transition-all">
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
-                        <div className={`h-12 w-12 rounded-2xl flex items-center justify-center ${d.estado === 'activo' ? 'bg-indigo-50 text-indigo-600 dark:bg-indigo-900/20 dark:text-indigo-400' : 'bg-slate-100 text-slate-400 dark:bg-slate-800'}`}>
+                        <div className={`h-12 w-12 rounded-2xl flex items-center justify-center ${d.estado === 'activo' ? 'bg-primary-fixed text-primary dark:bg-tertiary/20 dark:text-primary' : 'bg-slate-100 text-slate-400 dark:bg-slate-800'}`}>
                           <Gift className="h-6 w-6" />
                         </div>
                         <div>
@@ -436,7 +436,7 @@ export default function DescuentosPage() {
                              </span>
                           </div>
                           {d.codigoDescuento && (
-                            <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-semibold text-indigo-600 dark:text-indigo-400">
+                            <div className="flex items-center gap-1 mt-1 font-mono text-[11px] font-semibold text-primary dark:text-primary">
                                <Tag className="h-3 w-3" />
                                {d.codigoDescuento}
                             </div>
@@ -469,7 +469,7 @@ export default function DescuentosPage() {
                            </div>
                            <div className="w-20 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
                               <div 
-                                className="h-full bg-indigo-500 rounded-full transition-all duration-1000"
+                                className="h-full bg-primary rounded-full transition-all duration-1000"
                                 style={{ width: d.cantidadMaximaUsos ? `${(d.usosActuales / d.cantidadMaximaUsos) * 100}%` : '100%' }}
                               />
                            </div>
@@ -490,7 +490,7 @@ export default function DescuentosPage() {
                           </button>
                           <button 
                             onClick={() => openEditWizard(d)}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             title="Editar promo"
                           >
                             <Edit className="h-5 w-5" />
@@ -533,7 +533,7 @@ export default function DescuentosPage() {
               {/* Header Wizard */}
               <div className="p-8 border-b border-slate-50 dark:border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                   <div className="h-12 w-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white">
+                   <div className="h-12 w-12 bg-primary rounded-2xl flex items-center justify-center text-white">
                       <Gift className="h-6 w-6" />
                    </div>
                    <div>
@@ -551,7 +551,7 @@ export default function DescuentosPage() {
               {/* Progress Bar */}
               <div className="flex w-full h-1.5 bg-slate-50 dark:bg-slate-800">
                 {[1,2,3,4].map(s => (
-                  <div key={s} className={`flex-1 transition-all duration-500 ${s <= wizardStep ? 'bg-indigo-600' : ''}`} />
+                  <div key={s} className={`flex-1 transition-all duration-500 ${s <= wizardStep ? 'bg-primary' : ''}`} />
                 ))}
               </div>
 
@@ -573,7 +573,7 @@ export default function DescuentosPage() {
                            name="nombreDescuento"
                            value={formData.nombreDescuento}
                            onChange={handleInputChange}
-                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300"
+                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-primary dark:text-white transition-all font-semibold placeholder:text-slate-300"
                            placeholder="Ej: Black Friday 2026"
                          />
                       </div>
@@ -584,14 +584,14 @@ export default function DescuentosPage() {
                            name="descripcion"
                            value={formData.descripcion}
                            onChange={handleInputChange}
-                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300 resize-none"
+                           className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-primary dark:text-white transition-all font-semibold placeholder:text-slate-300 resize-none"
                            placeholder="Notas sobre el objetivo de esta promoción..."
                          />
                       </div>
-                      <div className="p-6 bg-indigo-50 dark:bg-indigo-900/10 rounded-3xl border-2 border-dashed border-indigo-200 dark:border-indigo-800/40">
+                      <div className="p-6 bg-primary-fixed dark:bg-tertiary/10 rounded-3xl border-2 border-dashed border-primary-fixed dark:border-tertiary/40">
                          <div className="flex items-center gap-3 mb-4">
-                            <Tag className="h-5 w-5 text-indigo-600" />
-                            <h4 className="text-sm font-semibold text-indigo-900 dark:text-indigo-400 uppercase">¿Requiere Código de Cupón?</h4>
+                            <Tag className="h-5 w-5 text-primary" />
+                            <h4 className="text-sm font-semibold text-tertiary dark:text-primary uppercase">¿Requiere Código de Cupón?</h4>
                          </div>
                          <div className="flex items-center gap-6">
                             <label className="flex items-center gap-2 cursor-pointer group">
@@ -601,7 +601,7 @@ export default function DescuentosPage() {
                                  checked={formData.requiereCodigo}
                                  onChange={(e) => setFormData({...formData, requiereCodigo: e.target.checked})}
                                />
-                               <div className={`h-6 w-6 rounded-lg border-2 flex items-center justify-center transition-all ${formData.requiereCodigo ? 'bg-indigo-600 border-indigo-600' : 'border-slate-300'}`}>
+                               <div className={`h-6 w-6 rounded-lg border-2 flex items-center justify-center transition-all ${formData.requiereCodigo ? 'bg-primary border-primary' : 'border-slate-300'}`}>
                                  {formData.requiereCodigo && <CheckCircle className="h-4 w-4 text-white" />}
                                </div>
                                <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">Sí, crear cupón</span>
@@ -612,7 +612,7 @@ export default function DescuentosPage() {
                                 name="codigoDescuento"
                                 value={formData.codigoDescuento}
                                 onChange={handleInputChange}
-                                className="flex-1 px-4 py-2 bg-white dark:bg-slate-800 border border-indigo-200 dark:border-indigo-800/50 rounded-xl font-mono text-sm uppercase font-semibold tracking-wide text-indigo-600 dark:text-indigo-400"
+                                className="flex-1 px-4 py-2 bg-white dark:bg-slate-800 border border-primary-fixed dark:border-tertiary/50 rounded-xl font-mono text-sm uppercase font-semibold tracking-wide text-primary dark:text-primary"
                                 placeholder="CUPONVIP20"
                               />
                             )}
@@ -632,14 +632,14 @@ export default function DescuentosPage() {
                       <div className="grid grid-cols-2 gap-4">
                          <button 
                            onClick={() => setFormData({...formData, tipoDescuento: 'porcentaje'})}
-                           className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 ${formData.tipoDescuento === 'porcentaje' ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10 text-indigo-600' : 'border-slate-50 dark:border-slate-800 text-slate-400'}`}
+                           className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 ${formData.tipoDescuento === 'porcentaje' ? 'border-primary bg-primary-fixed dark:bg-tertiary/10 text-primary' : 'border-slate-50 dark:border-slate-800 text-slate-400'}`}
                          >
                            <Percent size={32} />
                            <span className="text-xs font-semibold uppercase">Porcentaje</span>
                          </button>
                          <button 
                            onClick={() => setFormData({...formData, tipoDescuento: 'valor_fijo'})}
-                           className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 ${formData.tipoDescuento === 'valor_fijo' ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10 text-indigo-600' : 'border-slate-50 dark:border-slate-800 text-slate-400'}`}
+                           className={`p-6 rounded-[2rem] border-2 transition-all flex flex-col items-center gap-3 ${formData.tipoDescuento === 'valor_fijo' ? 'border-primary bg-primary-fixed dark:bg-tertiary/10 text-primary' : 'border-slate-50 dark:border-slate-800 text-slate-400'}`}
                          >
                            <DollarSign size={32} />
                            <span className="text-xs font-semibold uppercase">Monto Fijo</span>
@@ -653,7 +653,7 @@ export default function DescuentosPage() {
                            name="valorDescuento"
                            value={formData.valorDescuento}
                            onChange={handleInputChange}
-                           className="w-full px-8 py-6 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl text-4xl font-semibold text-center text-indigo-600 focus:ring-0 placeholder:text-slate-200"
+                           className="w-full px-8 py-6 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl text-4xl font-semibold text-center text-primary focus:ring-0 placeholder:text-slate-200"
                            placeholder={formData.tipoDescuento === 'porcentaje' ? '0%' : '$ 0.00'}
                          />
                       </div>
@@ -780,7 +780,7 @@ export default function DescuentosPage() {
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                           <div className="space-y-4">
                              <div className="flex items-center gap-3 ml-2">
-                                <Calendar size={18} className="text-indigo-500" />
+                                <Calendar size={18} className="text-primary" />
                                 <h4 className="text-[11px] font-semibold text-slate-400 uppercase tracking-wide">Inicia el día</h4>
                              </div>
                              <input 
@@ -788,7 +788,7 @@ export default function DescuentosPage() {
                                name="fechaInicio"
                                value={formData.fechaInicio}
                                onChange={handleInputChange}
-                               className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl font-semibold text-indigo-600 dark:text-indigo-400 transition-all focus:ring-2 focus:ring-indigo-500"
+                               className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl font-semibold text-primary dark:text-primary transition-all focus:ring-2 focus:ring-primary"
                              />
                           </div>
                           <div className="space-y-4">
@@ -807,8 +807,8 @@ export default function DescuentosPage() {
                        </div>
 
                        <div className="bg-slate-900 text-white p-10 rounded-[3.5rem] flex flex-col items-center text-center gap-4 relative overflow-hidden group">
-                          <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 blur-3xl group-hover:bg-indigo-500/40 transition-all" />
-                          <Gift size={48} className="text-indigo-400 animate-bounce" />
+                          <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl group-hover:bg-primary/40 transition-all" />
+                          <Gift size={48} className="text-primary animate-bounce" />
                           <h3 className="text-2xl font-semibold uppercase tracking-tight">¡Todo Listo!</h3>
                           <p className="text-slate-400 text-sm font-medium max-w-xs">Verifica que los datos sean correctos antes de activar tu nueva campaña promocional.</p>
                        </div>
@@ -830,7 +830,7 @@ export default function DescuentosPage() {
                  {wizardStep < 4 ? (
                    <button 
                     onClick={handleNext}
-                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-xs"
+                    className="px-8 py-4 bg-primary hover:bg-tertiary text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-primary dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-xs"
                    >
                      Continuar <ChevronRight size={16} />
                    </button>
@@ -838,7 +838,7 @@ export default function DescuentosPage() {
                    <button 
                     onClick={handleSave}
                     disabled={loading}
-                    className="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-xs"
+                    className="px-8 py-4 bg-primary hover:bg-tertiary text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-primary dark:shadow-none transition-all active:scale-95 uppercase tracking-wide text-xs"
                    >
                      {loading ? <Loader2 size={16} className="animate-spin" /> : <CheckCircle size={16} />} 
                      {isEditing ? 'Guardar Cambios' : 'Lanzar Promoción'}

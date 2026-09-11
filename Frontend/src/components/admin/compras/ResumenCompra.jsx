@@ -19,7 +19,7 @@ const ResumenCompra = ({ subtotal, impuestos, total, alConfirmar, procesando, va
 
         <div className="border-t border-gray-200 dark:border-gray-700 pt-3 flex justify-between">
           <dt className="text-base font-medium text-gray-900 dark:text-white">Total</dt>
-          <dd className="text-base font-medium text-indigo-600 dark:text-indigo-400">${total.toFixed(2)}</dd>
+          <dd className="text-base font-medium text-primary dark:text-primary">${total.toFixed(2)}</dd>
         </div>
       </dl>
 
@@ -29,8 +29,8 @@ const ResumenCompra = ({ subtotal, impuestos, total, alConfirmar, procesando, va
           disabled={!valido || procesando}
           className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
             ${valido && !procesando 
-              ? 'bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' 
-              : 'bg-indigo-300 cursor-not-allowed'}`}
+              ? 'bg-primary hover:bg-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary' 
+              : 'bg-primary-fixed cursor-not-allowed'}`}
         >
           {procesando ? 'Procesando...' : 'Confirmar Compra'}
         </button>

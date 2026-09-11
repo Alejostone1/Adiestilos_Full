@@ -163,14 +163,14 @@ const WizardStep5 = ({ formData, producto }) => {
             </p>
           </div>
 
-          <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
-            <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">
+          <div className="bg-primary-fixed dark:bg-tertiary/20 rounded-lg p-3 border border-primary-fixed dark:border-tertiary">
+            <p className="text-xs font-semibold text-primary dark:text-primary uppercase tracking-wide">
               Margen
             </p>
-            <p className="text-lg font-semibold text-blue-700 dark:text-blue-300 mt-1">
+            <p className="text-lg font-semibold text-tertiary dark:text-primary mt-1">
               ${margenActual.toFixed(2)}
             </p>
-            <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+            <p className="text-xs text-primary dark:text-primary mt-1">
               {porcentajeGanancia}%
             </p>
           </div>
@@ -206,8 +206,8 @@ const WizardStep5 = ({ formData, producto }) => {
       </div>
 
       {/* Acción Final */}
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 text-center">
-        <p className="text-sm font-semibold text-blue-900 dark:text-blue-300">
+      <div className="bg-primary-fixed dark:bg-tertiary/20 border border-primary-fixed dark:border-tertiary rounded-lg p-4 text-center">
+        <p className="text-sm font-semibold text-tertiary dark:text-primary">
           ✓ {producto ? 'El producto será actualizado' : 'El producto será creado'} cuando hagas clic en "Guardar"
         </p>
       </div>

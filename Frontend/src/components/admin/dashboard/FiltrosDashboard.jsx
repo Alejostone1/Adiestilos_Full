@@ -31,7 +31,7 @@ const FiltrosDashboard = ({ filtros, onFiltrosChange, onRefresh }) => {
     <Row gutter={[24, 24]} align="middle">
       <Col xs={24} md={6}>
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center text-blue-500">
+          <div className="w-8 h-8 rounded-lg bg-primary-fixed dark:bg-tertiary/30 flex items-center justify-center text-primary">
              <FilterOutlined />
           </div>
           <Text className="!font-semibold !text-sm !tracking-tight">FILTRAR RESULTADOS</Text>
@@ -73,7 +73,7 @@ const FiltrosDashboard = ({ filtros, onFiltrosChange, onRefresh }) => {
               size="large"
               icon={<ReloadOutlined />}
               onClick={handleRefresh}
-              className="!bg-blue-600 !border-0 !font-semibold shadow-lg shadow-blue-500/20"
+              className="!bg-primary !border-0 !font-semibold shadow-lg shadow-primary/20"
             >
               Aplicar
             </Button>

@@ -39,21 +39,21 @@ const GestionCreditosPage = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Dashboard Header */}
-        <div className="bg-indigo-600 rounded-[2.5rem] p-8 text-white shadow-xl shadow-indigo-500/30 relative overflow-hidden">
+        <div className="bg-primary rounded-[2.5rem] p-8 text-white shadow-xl shadow-primary/30 relative overflow-hidden">
            <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
               <div>
                  <h1 className="text-3xl font-semibold tracking-tight">Gestión de Cobranza</h1>
-                 <p className="text-indigo-200 font-medium">Panel de control de créditos activos</p>
+                 <p className="text-primary-fixed font-medium">Panel de control de créditos activos</p>
               </div>
               <div className="text-center md:text-right">
-                 <p className="text-xs font-semibold uppercase tracking-wide text-indigo-200 mb-1">Total por Cobrar</p>
+                 <p className="text-xs font-semibold uppercase tracking-wide text-primary-fixed mb-1">Total por Cobrar</p>
                  <p className="text-4xl font-semibold">{formatearPrecio(totalPorCobrar)}</p>
               </div>
            </div>
            
            {/* Decorativo */}
            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
-           <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-900/20 rounded-full -ml-12 -mb-12 blur-2xl" />
+           <div className="absolute bottom-0 left-0 w-48 h-48 bg-tertiary/20 rounded-full -ml-12 -mb-12 blur-2xl" />
         </div>
 
         {/* Grid de Créditos Activos */}
@@ -89,14 +89,14 @@ const GestionCreditosPage = () => {
                         <span className="text-gray-400">Deuda Original</span>
                         <span className="font-semibold text-gray-600 dark:text-gray-300">{formatearPrecio(credito.montoTotal)}</span>
                      </div>
-                     <div className="flex justify-between text-lg font-semibold text-indigo-600 border-t border-gray-100 dark:border-gray-800 pt-4">
+                     <div className="flex justify-between text-lg font-semibold text-primary border-t border-gray-100 dark:border-gray-800 pt-4">
                         <span>Saldo</span>
                         <span>{formatearPrecio(credito.saldoPendiente)}</span>
                      </div>
                      
                      <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-2 overflow-hidden">
                         <div 
-                           className="bg-indigo-500 h-full rounded-full" 
+                           className="bg-primary h-full rounded-full" 
                            style={{ width: `${Math.round(((credito.montoTotal - credito.saldoPendiente) / credito.montoTotal) * 100)}%` }} 
                         />
                      </div>

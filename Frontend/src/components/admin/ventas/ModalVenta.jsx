@@ -278,7 +278,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
         {/* Header */}
         <div className="px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50">
           <div className="flex items-center gap-6">
-            <div className="h-14 w-14 rounded-2xl bg-indigo-600 flex items-center justify-center text-white shadow-xl shadow-indigo-500/30">
+            <div className="h-14 w-14 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
               <FiShoppingCart className="h-7 w-7" />
             </div>
             <div className="flex flex-col md:flex-row md:items-center gap-4">
@@ -293,7 +293,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
               <div className="hidden md:flex items-center gap-3 pl-6 border-l border-gray-200 dark:border-gray-700">
                 {cliente && (
                   <div className="flex items-center gap-3 bg-white dark:bg-gray-800 py-1.5 px-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 animate-in fade-in slide-in-from-left-2 transition-all">
-                    <div className="h-7 w-7 rounded-full bg-indigo-50 dark:bg-indigo-900/40 flex items-center justify-center text-indigo-600">
+                    <div className="h-7 w-7 rounded-full bg-primary-fixed dark:bg-tertiary/40 flex items-center justify-center text-primary">
                       <FiUser className="h-4 w-4" />
                     </div>
                     <div className="flex flex-col">
@@ -326,7 +326,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           {[1,2,3,4,5].map(i => (
             <div 
               key={i} 
-              className={`flex-1 transition-all duration-500 ${i <= paso ? 'bg-indigo-600' : ''}`}
+              className={`flex-1 transition-all duration-500 ${i <= paso ? 'bg-primary' : ''}`}
             />
           ))}
         </div>
@@ -350,7 +350,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                 
                 {/* Resumen Superior Financiero */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="bg-indigo-600 p-6 rounded-[2rem] text-white shadow-xl shadow-indigo-500/20">
+                  <div className="bg-primary p-6 rounded-[2rem] text-white shadow-xl shadow-primary/20">
                     <p className="text-[11px] font-semibold uppercase opacity-70 mb-1">Total Venta</p>
                     <p className="text-2xl font-semibold">{formatearPrecio(totalFinal)}</p>
                   </div>
@@ -373,7 +373,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                 {/* Sección de Pagos Multimetodo */}
                 <div className="bg-white dark:bg-gray-800/50 p-8 rounded-[3rem] border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden">
                    <div className="flex items-center gap-4 mb-8">
-                      <div className="h-12 w-12 bg-indigo-100 dark:bg-indigo-900/40 rounded-2xl flex items-center justify-center text-indigo-600">
+                      <div className="h-12 w-12 bg-primary-fixed dark:bg-tertiary/40 rounded-2xl flex items-center justify-center text-primary">
                          <FiCreditCard className="h-6 w-6" />
                       </div>
                       <div>
@@ -440,8 +440,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                               className={`
                                 flex-shrink-0 px-4 py-3 rounded-2xl border font-semibold text-xs uppercase tracking-wide transition-all
                                 ${estaSeleccionado 
-                                  ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-500/30 scale-105' 
-                                  : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500 hover:border-indigo-300 hover:bg-indigo-50 dark:hover:bg-gray-700'
+                                  ? 'bg-primary border-primary text-white shadow-lg shadow-primary/30 scale-105' 
+                                  : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500 hover:border-primary hover:bg-primary-fixed dark:hover:bg-gray-700'
                                 }
                               `}
                             >
@@ -464,7 +464,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                           const requiresRef = metodo.requiereReferencia;
 
                           return (
-                            <div key={idKey} className="group relative space-y-3 bg-gray-50/50 dark:bg-gray-700/30 p-4 rounded-2xl border border-gray-200 dark:border-gray-600 transition-all hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg hover:border-indigo-200 dark:hover:border-indigo-900">
+                            <div key={idKey} className="group relative space-y-3 bg-gray-50/50 dark:bg-gray-700/30 p-4 rounded-2xl border border-gray-200 dark:border-gray-600 transition-all hover:bg-white dark:hover:bg-gray-800 hover:shadow-lg hover:border-primary-fixed dark:hover:border-tertiary">
                                <div className="flex items-center justify-between">
                                   <label className="text-[11px] font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide truncate max-w-[120px]" title={metodo.nombreMetodo}>
                                     {metodo.nombreMetodo}
@@ -484,7 +484,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                            [idKey]: restante
                                          }));
                                        }}
-                                       className="text-[11px] font-semibold text-indigo-600 uppercase hover:underline whitespace-nowrap bg-indigo-50 dark:bg-indigo-900/40 px-2 py-1 rounded-lg"
+                                       className="text-[11px] font-semibold text-primary uppercase hover:underline whitespace-nowrap bg-primary-fixed dark:bg-tertiary/40 px-2 py-1 rounded-lg"
                                     >
                                       Cubrir
                                     </button>
@@ -519,7 +519,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                       }));
                                     }}
                                     autoFocus
-                                    className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-3 pl-8 pr-4 text-sm font-semibold text-gray-800 dark:text-white focus:ring-2 focus:ring-indigo-500 transition-all shadow-sm"
+                                    className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-3 pl-8 pr-4 text-sm font-semibold text-gray-800 dark:text-white focus:ring-2 focus:ring-primary transition-all shadow-sm"
                                     placeholder="0.00"
                                   />
                                </div>
@@ -532,7 +532,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                      ...prev,
                                      [`referencia_${idKey}`]: e.target.value
                                    }))}
-                                   className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-2 px-3 text-[11px] font-semibold text-gray-500 focus:ring-1 focus:ring-indigo-500 mt-2 shadow-sm animate-in fade-in slide-in-from-top-1"
+                                   className="w-full bg-white dark:bg-gray-900 border-none rounded-xl py-2 px-3 text-[11px] font-semibold text-gray-500 focus:ring-1 focus:ring-primary mt-2 shadow-sm animate-in fade-in slide-in-from-top-1"
                                    placeholder={`Ref. ${metodo.nombreMetodo}...`}
                                  />
                                )}
@@ -574,7 +574,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                   {/* Descuentos y Cupones (Versión Compacta) */}
                   <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-3 mb-4">
-                      <FiPercent className="h-4 w-4 text-indigo-500" />
+                      <FiPercent className="h-4 w-4 text-primary" />
                       <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Cupones & IVA</span>
                     </div>
                     <div className="flex gap-2 mb-4">
@@ -587,7 +587,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                           placeholder="CÓDIGO..."
                         />
                         {!infoCupon ? (
-                          <button onClick={aplicarCupon} className="bg-indigo-600 text-white px-4 rounded-xl text-[11px] font-semibold uppercase">Validar</button>
+                          <button onClick={aplicarCupon} className="bg-primary text-white px-4 rounded-xl text-[11px] font-semibold uppercase">Validar</button>
                         ) : (
                           <button onClick={() => setInfoCupon(null)} className="bg-rose-50 text-rose-500 px-4 rounded-xl"><FiX /></button>
                         )}
@@ -605,7 +605,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
 
                   <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700">
                     <div className="flex items-center gap-3 mb-4">
-                      <FiTruck className="h-4 w-4 text-indigo-500" />
+                      <FiTruck className="h-4 w-4 text-primary" />
                       <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide">Logística & Notas</span>
                     </div>
                     <input 
@@ -644,7 +644,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                    <div className="space-y-4">
                       <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm">
                           <h4 className="text-sm font-semibold text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
-                            <FiUser className="text-indigo-500" /> Datos del Cliente
+                            <FiUser className="text-primary" /> Datos del Cliente
                           </h4>
                           <div className="grid grid-cols-2 gap-4">
                              <div>
@@ -664,13 +664,13 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
 
                       <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm">
                           <h4 className="text-sm font-semibold text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
-                            <FiCreditCard className="text-indigo-500" /> Detalle de Pagos
+                            <FiCreditCard className="text-primary" /> Detalle de Pagos
                           </h4>
                           
                           <div className="space-y-3">
                              <div className="flex justify-between items-center pb-2 border-b border-gray-100 dark:border-gray-700">
                                 <span className="text-xs text-gray-500 font-semibold">Tipo de Transacción</span>
-                                <span className="text-xs font-semibold uppercase bg-indigo-50 text-indigo-600 px-2 py-1 rounded-lg">
+                                <span className="text-xs font-semibold uppercase bg-primary-fixed text-primary px-2 py-1 rounded-lg">
                                   {montoCredito > 0 && montoAbonado > 0 ? 'Mixto (Crédito + Contado)' : montoCredito > 0 ? 'Crédito' : 'Contado'}
                                 </span>
                              </div>
@@ -687,7 +687,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                                 );
                               })}
                              
-                             <div className="pt-2 mt-2 border-t border-dashed border-gray-200 dark:border-gray-600 flex justify-between items-center text-indigo-600">
+                             <div className="pt-2 mt-2 border-t border-dashed border-gray-200 dark:border-gray-600 flex justify-between items-center text-primary">
                                 <span className="text-xs font-semibold uppercase">Total a Pagar</span>
                                 <span className="text-lg font-semibold">{formatearPrecio(totalFinal)}</span>
                              </div>
@@ -698,7 +698,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                    {/* Columna Derecha: Productos */}
                    <div className="bg-white dark:bg-gray-800 p-6 rounded-[2rem] border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col h-full max-h-[400px]">
                       <h4 className="text-sm font-semibold text-gray-800 dark:text-white uppercase mb-4 flex items-center gap-2">
-                        <FiShoppingBag className="text-indigo-500" /> Productos en Orden <span className="bg-gray-100 text-gray-600 text-[11px] px-2 py-0.5 rounded-full">{carrito.length}</span>
+                        <FiShoppingBag className="text-primary" /> Productos en Orden <span className="bg-gray-100 text-gray-600 text-[11px] px-2 py-0.5 rounded-full">{carrito.length}</span>
                       </h4>
                       
                       <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar space-y-3">
@@ -729,7 +729,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                               </div>
                               <div className="flex flex-col justify-center items-end text-right">
                                  <p className="text-xs font-semibold text-gray-400">x{item.cantidad}</p>
-                                 <p className="text-sm font-semibold text-indigo-600">{formatearPrecio(item.precioUnitario)}</p>
+                                 <p className="text-sm font-semibold text-primary">{formatearPrecio(item.precioUnitario)}</p>
                               </div>
                            </div>
                          ))}
@@ -791,7 +791,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           </div>
 
           {/* Precio */}
-          <p className="text-xs font-semibold text-indigo-600">
+          <p className="text-xs font-semibold text-primary">
             {formatearPrecio(
               item.cantidad * item.precioUnitario - (item.descuentoLinea || 0)
             )}
@@ -821,7 +821,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
             {paso < 5 ? (
               <button 
                 onClick={handleSiguiente}
-                className="flex items-center gap-2 px-10 py-4 bg-indigo-600 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
+                className="flex items-center gap-2 px-10 py-4 bg-primary text-white font-semibold rounded-2xl shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all"
               >
                 Siguiente <FiChevronRight />
               </button>

@@ -55,7 +55,7 @@ const TablaDetalleCompra = ({ items, alActualizarCantidad, alActualizarPrecio, a
                     <input
                       type="number"
                       min="1"
-                      className="w-20 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="w-20 rounded border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
                       value={item.cantidad}
                       onChange={(e) => alActualizarCantidad(item.idVariante, e.target.value)}
                     />
@@ -69,7 +69,7 @@ const TablaDetalleCompra = ({ items, alActualizarCantidad, alActualizarPrecio, a
                         type="number"
                         min="0"
                         step="0.01"
-                        className="block w-full rounded-md border-gray-300 pl-7 pr-3 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                        className="block w-full rounded-md border-gray-300 pl-7 pr-3 focus:border-primary focus:ring-primary sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                         value={item.precioUnitario}
                         onChange={(e) => alActualizarPrecio(item.idVariante, e.target.value)}
                       />

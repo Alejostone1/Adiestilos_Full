@@ -33,8 +33,8 @@ const WizardStep1 = ({ formData, onUpdateFormData }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3">
-        <div className="text-blue-600 dark:text-blue-400 text-sm">
+      <div className="bg-primary-fixed dark:bg-tertiary/20 border border-primary-fixed dark:border-tertiary rounded-lg p-4 flex items-start gap-3">
+        <div className="text-primary dark:text-primary text-sm">
           ℹ️ Ingresa los datos básicos de tu producto. Asegúrate de que el código de referencia sea único.
         </div>
       </div>
@@ -49,7 +49,7 @@ const WizardStep1 = ({ formData, onUpdateFormData }) => {
           value={formData.nombreProducto}
           onChange={(e) => onUpdateFormData({ nombreProducto: e.target.value })}
           placeholder="Ej: Camiseta Estampada Blanca"
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
         />
       </div>
 
@@ -63,7 +63,7 @@ const WizardStep1 = ({ formData, onUpdateFormData }) => {
           value={formData.codigoReferencia}
           onChange={(e) => onUpdateFormData({ codigoReferencia: e.target.value.toUpperCase() })}
           placeholder="Ej: CAMISETA-BL-001"
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all uppercase"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all uppercase"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Este código debe ser único en el sistema
@@ -84,7 +84,7 @@ const WizardStep1 = ({ formData, onUpdateFormData }) => {
               value={searchCategoria}
               onChange={(e) => setSearchCategoria(e.target.value)}
               placeholder="Buscar categoría..."
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
             />
           </div>
 
@@ -115,7 +115,7 @@ const WizardStep1 = ({ formData, onUpdateFormData }) => {
                     w-full text-left px-4 py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0
                     transition-colors hover:bg-gray-50 dark:hover:bg-gray-700
                     ${formData.idCategoria === categoria.idCategoria
-                      ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium'
+                      ? 'bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary font-medium'
                       : 'text-gray-900 dark:text-white'
                     }
                   `}

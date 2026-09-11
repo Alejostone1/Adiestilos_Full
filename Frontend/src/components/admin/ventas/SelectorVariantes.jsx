@@ -52,11 +52,11 @@ const SelectorVariantes = ({ alAgregar }) => {
 
       <div className="relative group">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <FiSearch className="h-5 w-5 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+          <FiSearch className="h-5 w-5 text-gray-400 group-focus-within:text-primary transition-colors" />
         </div>
         <input
           type="text"
-          className="w-full bg-white dark:bg-gray-800 border-2 border-transparent ring-1 ring-gray-100 dark:ring-gray-700/50 rounded-[1.5rem] py-4 pl-12 pr-4 text-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all shadow-sm font-medium"
+          className="w-full bg-white dark:bg-gray-800 border-2 border-transparent ring-1 ring-gray-100 dark:ring-gray-700/50 rounded-[1.5rem] py-4 pl-12 pr-4 text-sm focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all shadow-sm font-medium"
           placeholder="Buscar por nombre de producto o referencia..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
@@ -67,8 +67,8 @@ const SelectorVariantes = ({ alAgregar }) => {
         {cargando ? (
           <div className="flex flex-col items-center justify-center py-24">
             <div className="relative">
-              <div className="animate-spin rounded-full h-16 w-16 border-4 border-indigo-100 border-t-indigo-600"></div>
-              <FiBox className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 text-indigo-600 animate-pulse" />
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-primary-fixed border-t-primary"></div>
+              <FiBox className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-6 w-6 text-primary animate-pulse" />
             </div>
             <p className="mt-6 text-xs font-semibold text-gray-400 uppercase tracking-[0.1em]">Cargando Inventario</p>
           </div>
@@ -86,13 +86,13 @@ const SelectorVariantes = ({ alAgregar }) => {
               key={producto.id}
               className={`group bg-white dark:bg-gray-800 border-2 transition-all duration-300 rounded-[2rem] overflow-hidden ${
                 expandidos[producto.id] 
-                ? 'border-indigo-500/20 shadow-xl shadow-indigo-500/5 ring-1 ring-indigo-500/10' 
-                : 'border-transparent ring-1 ring-gray-100 dark:ring-gray-700/50 hover:ring-indigo-500/30 shadow-sm hover:shadow-md'
+                ? 'border-primary/20 shadow-xl shadow-primary/5 ring-1 ring-primary/10' 
+                : 'border-transparent ring-1 ring-gray-100 dark:ring-gray-700/50 hover:ring-primary/30 shadow-sm hover:shadow-md'
               }`}
             >
               <div 
                 className={`p-4 flex items-center gap-5 cursor-pointer transition-colors ${
-                  expandidos[producto.id] ? 'bg-indigo-50/20 dark:bg-indigo-900/10' : 'hover:bg-gray-50/50 dark:hover:bg-gray-700/30'
+                  expandidos[producto.id] ? 'bg-primary-fixed/20 dark:bg-tertiary/10' : 'hover:bg-gray-50/50 dark:hover:bg-gray-700/30'
                 }`}
                 onClick={() => toggleExpandir(producto.id)}
               >
@@ -109,18 +109,18 @@ const SelectorVariantes = ({ alAgregar }) => {
                     </div>
                   )}
                   {expandidos[producto.id] && (
-                    <div className="absolute inset-0 bg-indigo-600/10 backdrop-blur-[1px]" />
+                    <div className="absolute inset-0 bg-primary/10 backdrop-blur-[1px]" />
                   )}
                 </div>
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-[11px] font-semibold uppercase tracking-wide text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg border border-indigo-100 dark:border-indigo-800/50">
+                    <span className="text-[11px] font-semibold uppercase tracking-wide text-primary bg-primary-fixed dark:bg-tertiary/30 px-2 py-0.5 rounded-lg border border-primary-fixed dark:border-tertiary/50">
                       {producto.nombreCategoria || 'General'}
                     </span>
                     <span className="text-[11px] font-semibold text-gray-400">Ref: {producto.subtitulo}</span>
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate group-hover:text-primary transition-colors">
                     {producto.titulo}
                   </h3>
                   <div className="flex items-center gap-4 mt-2">
@@ -149,7 +149,7 @@ const SelectorVariantes = ({ alAgregar }) => {
 
                 <div className="flex flex-col items-end gap-2">
                    <div className={`p-2 rounded-xl transition-all ${
-                     expandidos[producto.id] ? 'bg-indigo-600 text-white rotate-180 shadow-lg shadow-indigo-200' : 'bg-gray-100 dark:bg-gray-700 text-gray-400'
+                     expandidos[producto.id] ? 'bg-primary text-white rotate-180 shadow-lg shadow-primary' : 'bg-gray-100 dark:bg-gray-700 text-gray-400'
                    }`}>
                      <FiChevronDown className="h-4 w-4" />
                    </div>
@@ -163,7 +163,7 @@ const SelectorVariantes = ({ alAgregar }) => {
                       producto.variantes.map(variante => (
                         <div 
                           key={variante.id}
-                          className="flex items-center gap-4 bg-white dark:bg-gray-800/80 p-3 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-indigo-500/50 hover:shadow-xl transition-all duration-300 group/item relative overflow-hidden"
+                          className="flex items-center gap-4 bg-white dark:bg-gray-800/80 p-3 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-primary/50 hover:shadow-xl transition-all duration-300 group/item relative overflow-hidden"
                         >
                           <div className="h-14 w-14 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-900 flex-shrink-0 border border-gray-100 dark:border-gray-700 shadow-inner group-hover/item:scale-105 transition-transform duration-500">
                              <img 
@@ -190,7 +190,7 @@ const SelectorVariantes = ({ alAgregar }) => {
                             </div>
                             
                             <div className="flex items-center gap-3 mt-1.5">
-                              <span className="text-sm font-semibold text-indigo-600">
+                              <span className="text-sm font-semibold text-primary">
                                 ${variante.precioVenta?.toLocaleString() || '0'}
                               </span>
                               <span className={`text-[11px] font-semibold uppercase tracking-tight ${
@@ -213,7 +213,7 @@ const SelectorVariantes = ({ alAgregar }) => {
                             disabled={variante.cantidadStock <= 0}
                             className={`h-10 w-10 rounded-xl transition-all flex items-center justify-center shadow-lg ${
                               variante.cantidadStock > 0 
-                                ? 'bg-indigo-600 text-white hover:bg-indigo-700 hover:scale-110 active:scale-90 shadow-indigo-100 dark:shadow-none' 
+                                ? 'bg-primary text-white hover:bg-tertiary hover:scale-110 active:scale-90 shadow-primary dark:shadow-none' 
                                 : 'bg-gray-100 dark:bg-gray-700 text-gray-300 cursor-not-allowed shadow-none'
                             }`}
                           >

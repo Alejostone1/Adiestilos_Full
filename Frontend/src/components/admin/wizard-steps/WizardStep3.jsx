@@ -29,8 +29,8 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3">
-        <div className="text-blue-600 dark:text-blue-400 text-sm">
+      <div className="bg-primary-fixed dark:bg-tertiary/20 border border-primary-fixed dark:border-tertiary rounded-lg p-4 flex items-start gap-3">
+        <div className="text-primary dark:text-primary text-sm">
           ℹ️ Ingresa los precios de compra y venta. El margen se calcula automáticamente.
         </div>
       </div>
@@ -52,7 +52,7 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
               value={formData.precioCompra}
               onChange={handlePrecioCompraChange}
               placeholder="0.00"
-              className="w-full pl-7 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full pl-7 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             />
           </div>
         </div>
@@ -73,7 +73,7 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
               value={formData.precioVenta}
               onChange={handlePrecioVentaChange}
               placeholder="0.00"
-              className="w-full pl-7 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full pl-7 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
             />
           </div>
         </div>
@@ -90,14 +90,14 @@ const WizardStep3 = ({ formData, onUpdateFormData }) => {
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-          <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-1">
+        <div className="bg-gradient-to-br from-primary to-tertiary dark:from-primary/20 dark:to-tertiary/20 rounded-lg p-4 border border-primary-fixed dark:border-tertiary">
+          <p className="text-xs font-semibold text-primary dark:text-primary uppercase tracking-wide mb-1">
             Margen
           </p>
-          <p className="text-2xl font-semibold text-blue-700 dark:text-blue-300">
+          <p className="text-2xl font-semibold text-tertiary dark:text-primary">
             ${margenActual.toFixed(2)}
           </p>
-          <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+          <p className="text-xs text-primary dark:text-primary mt-1">
             {porcentajeGanancia}%
           </p>
         </div>

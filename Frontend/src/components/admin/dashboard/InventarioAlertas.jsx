@@ -89,7 +89,7 @@ const InventarioAlertas = ({ data, loading }) => {
       )}
 
       <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-700/50">
-        <button className="w-full py-2 text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-blue-500 dark:hover:text-blue-400 transition-colors">Ignorar todas</button>
+        <button className="w-full py-2 text-slate-500 dark:text-slate-400 font-semibold text-sm hover:text-primary dark:hover:text-primary transition-colors">Ignorar todas</button>
       </div>
     </div>
   );

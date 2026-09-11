@@ -63,7 +63,7 @@ const HistorialCreditosPage = () => {
           
           <div className="flex items-center gap-4 bg-white dark:bg-gray-900 p-2 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
              <div className="flex items-center gap-3 px-4 py-2 border-r border-gray-100 dark:border-gray-800">
-                <div className="p-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 rounded-lg">
+                <div className="p-2 bg-primary-fixed dark:bg-tertiary/30 text-primary rounded-lg">
                    <FiDollarSign />
                 </div>
                 <div>
@@ -86,13 +86,13 @@ const HistorialCreditosPage = () => {
         {/* Filtros y Búsqueda */}
         <div className="flex flex-col md:flex-row items-center gap-4 justify-between">
            <div className="relative w-full md:w-96 group">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors" />
               <input 
                 type="text" 
                 placeholder="Buscar por cliente o factura..." 
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-900 border-none rounded-2xl shadow-sm ring-1 ring-gray-100 dark:ring-gray-800 focus:ring-2 focus:ring-indigo-500 transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-white dark:bg-gray-900 border-none rounded-2xl shadow-sm ring-1 ring-gray-100 dark:ring-gray-800 focus:ring-2 focus:ring-primary transition-all"
               />
            </div>
            
@@ -168,7 +168,7 @@ const HistorialCreditosPage = () => {
                        <td className="px-8 py-5 text-right">
                           <button 
                             onClick={() => navigate(`/admin/creditos/detalle/${credito.idCredito}`)}
-                            className="p-2 bg-white dark:bg-gray-800 text-gray-400 hover:text-indigo-600 border border-gray-200 dark:border-gray-700 rounded-xl hover:shadow-md transition-all"
+                            className="p-2 bg-white dark:bg-gray-800 text-gray-400 hover:text-primary border border-gray-200 dark:border-gray-700 rounded-xl hover:shadow-md transition-all"
                           >
                              <FiArrowRight />
                           </button>

@@ -91,8 +91,8 @@ export default function UsuariosDetalleVenta() {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-white dark:bg-gray-950 space-y-6">
         <div className="relative">
-            <div className="absolute inset-0 bg-indigo-500 blur-2xl opacity-10 animate-pulse rounded-full"></div>
-            <div className="relative animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-indigo-600 border-t-transparent"></div>
+            <div className="absolute inset-0 bg-primary blur-2xl opacity-10 animate-pulse rounded-full"></div>
+            <div className="relative animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary border-t-transparent"></div>
         </div>
         <p className="text-gray-400 font-medium uppercase tracking-[0.1em] text-[11px] animate-pulse">Sincronizando Factura</p>
       </div>
@@ -110,7 +110,7 @@ export default function UsuariosDetalleVenta() {
           <p className="text-gray-500 dark:text-gray-400 mb-6 font-medium">{error || 'La venta solicitada no está disponible en este momento.'}</p>
           <button 
             onClick={() => navigate(-1)} 
-            className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-all flex items-center justify-center gap-2 mx-auto shadow-lg shadow-indigo-100 dark:shadow-none"
+            className="px-6 py-3 bg-primary text-white rounded-xl font-semibold hover:bg-tertiary transition-all flex items-center justify-center gap-2 mx-auto shadow-lg shadow-primary dark:shadow-none"
           >
             <ArrowLeft size={18} />
             Volver
@@ -140,7 +140,7 @@ export default function UsuariosDetalleVenta() {
               whileHover={{ scale: 1.05, x: -3 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate(-1)}
-              className="p-4 bg-white dark:bg-gray-900 rounded-2xl text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-sm border border-gray-100 dark:border-gray-800 transition-all"
+              className="p-4 bg-white dark:bg-gray-900 rounded-2xl text-gray-400 hover:text-primary dark:hover:text-primary shadow-sm border border-gray-100 dark:border-gray-800 transition-all"
             >
               <ArrowLeft size={24} />
             </motion.button>
@@ -155,7 +155,7 @@ export default function UsuariosDetalleVenta() {
                   </span>
                </div>
                <div className="flex items-center gap-3 text-xs font-medium text-gray-500">
-                  <span className="flex items-center gap-1.5"><Calendar size={14} className="text-indigo-500"/> {new Date(venta.creadoEn).toLocaleDateString()}</span>
+                  <span className="flex items-center gap-1.5"><Calendar size={14} className="text-primary"/> {new Date(venta.creadoEn).toLocaleDateString()}</span>
                   <span className="w-1 h-1 bg-gray-300 dark:bg-gray-700 rounded-full" />
                   <span className="flex items-center gap-1.5 uppercase">ID: {venta.idVenta}</span>
                </div>
@@ -165,21 +165,21 @@ export default function UsuariosDetalleVenta() {
          <div className="flex items-center gap-2">
             <button 
               onClick={handlePrint}
-              className="p-3 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:text-indigo-600 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all" 
+              className="p-3 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:text-primary rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all" 
               title="Imprimir"
             >
                <Printer size={20} />
             </button>
             <button 
                onClick={handlePrint}
-               className="p-3 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:text-indigo-600 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all" 
+               className="p-3 bg-white dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:text-primary rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all" 
                title="Descargar PDF"
             >
                <Download size={20} />
             </button>
             <button 
                onClick={handleShare}
-               className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold shadow-lg shadow-indigo-100 dark:shadow-none hover:bg-indigo-700 transition-all text-sm"
+               className="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary dark:shadow-none hover:bg-tertiary transition-all text-sm"
             >
                {isCopied ? <Check size={18} /> : <Share2 size={18} />}
                <span>{isCopied ? 'Enlace Copiado' : 'Compartir'}</span>
@@ -193,7 +193,7 @@ export default function UsuariosDetalleVenta() {
             <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden invoice-card">
                 <div className="p-6 bg-gray-50/30 dark:bg-gray-800/20 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <Layers size={20} className="text-indigo-500" />
+                      <Layers size={20} className="text-primary" />
                       Detalle de Productos 
                       <span className="text-gray-400 font-medium ml-1">({venta.detalleVentas?.length || 0})</span>
                    </h3>
@@ -227,7 +227,7 @@ export default function UsuariosDetalleVenta() {
                         </div>
 
                         <div className="flex-1">
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight leading-tight group-hover:text-indigo-600 transition-colors">
+                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white tracking-tight leading-tight group-hover:text-primary transition-colors">
                                {item.variante?.producto?.nombreProducto || 'Producto No Especificado'}
                             </h4>
                             <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -242,7 +242,7 @@ export default function UsuariosDetalleVenta() {
                                     Talla: {item.variante.talla.nombreTalla}
                                  </span>
                                )}
-                               <span className="px-2.5 py-1 text-[11px] font-semibold text-indigo-500 bg-indigo-50/50 dark:bg-indigo-900/20 rounded-lg border border-indigo-100/50 dark:border-indigo-800/30">
+                               <span className="px-2.5 py-1 text-[11px] font-semibold text-primary bg-primary-fixed/50 dark:bg-tertiary/20 rounded-lg border border-primary-fixed/50 dark:border-tertiary/30">
                                   SKU: {item.variante?.codigoSku || 'N/A'}
                                </span>
                             </div>
@@ -282,7 +282,7 @@ export default function UsuariosDetalleVenta() {
                   )}
                   <div className="pt-6 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center">
                      <div>
-                        <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-[0.1em] block mb-1">Total a Pagar</span>
+                        <span className="text-[11px] font-semibold text-primary uppercase tracking-[0.1em] block mb-1">Total a Pagar</span>
                         <h2 className="text-4xl font-semibold text-gray-900 dark:text-white leading-none tracking-tight">
                            <PrecioFormateado precio={venta.total} />
                         </h2>
@@ -302,7 +302,7 @@ export default function UsuariosDetalleVenta() {
             {/* Logistic & Sales Info */}
             <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-800 space-y-8">
                <h3 className="text-lg font-semibold text-gray-900 dark:text-white border-b border-gray-50 dark:border-gray-800 pb-4 flex items-center gap-2">
-                  <Info size={20} className="text-indigo-500" />
+                  <Info size={20} className="text-primary" />
                   Información Logística
                </h3>
                

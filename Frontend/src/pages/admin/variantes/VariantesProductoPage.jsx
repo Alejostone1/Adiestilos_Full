@@ -361,7 +361,7 @@ export default function VariantesProductoPage() {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center transition-colors duration-300">
         <div className="text-center">
-          <div className="animate-spin h-8 w-8 border-b-2 border-blue-600 rounded-full mx-auto" />
+          <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full mx-auto" />
           <span className="ml-3 text-gray-500 dark:text-gray-400">Cargando variantes...</span>
         </div>
       </div>
@@ -400,7 +400,7 @@ export default function VariantesProductoPage() {
           {producto && (
             <div className="relative overflow-hidden bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-none group">
               {/* Elemento decorativo de fondo */}
-              <div className="absolute -right-20 -top-20 w-64 h-64 bg-purple-500/5 blur-[80px] rounded-full" />
+              <div className="absolute -right-20 -top-20 w-64 h-64 bg-primary/5 blur-[80px] rounded-full" />
               
               <div className="flex flex-col md:flex-row items-stretch">
                 {/* Lado Izquierdo: Imagen del Producto */}
@@ -425,8 +425,8 @@ export default function VariantesProductoPage() {
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
                     <div>
                       <div className="flex items-center gap-2 mb-2">
-                        <Layers className="w-4 h-4 text-purple-600" />
-                        <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-[0.1em]">Catalogo Maestro</span>
+                        <Layers className="w-4 h-4 text-primary" />
+                        <span className="text-[11px] font-semibold text-primary dark:text-primary uppercase tracking-[0.1em]">Catalogo Maestro</span>
                       </div>
                       <h1 className="text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white tracking-tight leading-tight">
                         {producto.nombreProducto}
@@ -435,7 +435,7 @@ export default function VariantesProductoPage() {
                          <span className="bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-lg text-xs font-semibold text-slate-500 dark:text-slate-300">
                            REF: {producto.codigoReferencia}
                          </span>
-                         <span className="bg-blue-50 dark:bg-blue-900/30 px-2 py-1 rounded-lg text-xs font-semibold text-blue-600 dark:text-blue-300">
+                         <span className="bg-primary-fixed dark:bg-tertiary/30 px-2 py-1 rounded-lg text-xs font-semibold text-primary dark:text-primary">
                            {producto.categoria?.nombreCategoria || 'General'}
                          </span>
                       </div>
@@ -468,7 +468,7 @@ export default function VariantesProductoPage() {
                     <div className="col-span-2 flex items-center justify-end">
                        <button 
                         onClick={() => navigate(`/admin/productos`)}
-                        className="text-xs font-semibold text-slate-400 hover:text-purple-600 underline underline-offset-4 transition-colors"
+                        className="text-xs font-semibold text-slate-400 hover:text-primary underline underline-offset-4 transition-colors"
                        >
                          Ver detalles técnicos completa
                        </button>
@@ -491,7 +491,7 @@ export default function VariantesProductoPage() {
                   placeholder="Buscar por SKU, color o talla..."
                   value={busqueda}
                   onChange={(e) => setBusqueda(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
 
@@ -506,7 +506,7 @@ export default function VariantesProductoPage() {
                 <Filter className="w-4 h-4" />
                 Filtros
                 {(filtroColor !== 'todos' || filtroTalla !== 'todos' || filtroEstado !== 'todos') && (
-                  <span className="ml-1 bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  <span className="ml-1 bg-primary text-white text-xs px-2 py-0.5 rounded-full">
                     {(filtroColor !== 'todos' ? 1 : 0) + (filtroTalla !== 'todos' ? 1 : 0) + (filtroEstado !== 'todos' ? 1 : 0)}
                   </span>
                 )}
@@ -527,7 +527,7 @@ export default function VariantesProductoPage() {
                   setVarianteEditando(null);
                   setMostrarFormularioVariante(true);
                 }}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600 text-white hover:bg-purple-700 transition"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white hover:bg-tertiary transition"
               >
                 <Plus className="w-4 h-4" />
                 Nueva Variante
@@ -545,7 +545,7 @@ export default function VariantesProductoPage() {
                     <select
                       value={filtroColor}
                       onChange={(e) => setFiltroColor(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los colores</option>
                       {colores.map(color => (
@@ -561,7 +561,7 @@ export default function VariantesProductoPage() {
                     <select
                       value={filtroTalla}
                       onChange={(e) => setFiltroTalla(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todas las tallas</option>
                       {tallas.map(talla => (
@@ -577,7 +577,7 @@ export default function VariantesProductoPage() {
                     <select
                       value={filtroEstado}
                       onChange={(e) => setFiltroEstado(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los estados</option>
                       <option value="activo">Activo</option>
@@ -619,7 +619,7 @@ export default function VariantesProductoPage() {
                     setFiltroTalla('todos');
                     setFiltroEstado('todos');
                   }}
-                  className="mt-2 text-sm text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 underline"
+                  className="mt-2 text-sm text-primary dark:text-primary hover:text-tertiary dark:hover:text-primary underline"
                 >
                   Limpiar filtros
                 </button>
@@ -630,7 +630,7 @@ export default function VariantesProductoPage() {
                     setVarianteEditando(null);
                     setMostrarFormularioVariante(true);
                   }}
-                  className="mt-4 text-sm text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 underline"
+                  className="mt-4 text-sm text-primary dark:text-primary hover:text-tertiary dark:hover:text-primary underline"
                 >
                   Crear primera variante
                 </button>
@@ -653,7 +653,7 @@ export default function VariantesProductoPage() {
                         onClick={() => setViewMode('table')}
                         className={`p-2 rounded-lg transition ${
                           viewMode === 'table'
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300'
+                            ? 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary'
                             : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800'
                         }`}
                         title="Vista de tabla"
@@ -664,7 +664,7 @@ export default function VariantesProductoPage() {
                         onClick={() => setViewMode('grid')}
                         className={`p-2 rounded-lg transition ${
                           viewMode === 'grid'
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300'
+                            ? 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary'
                             : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-800'
                         }`}
                         title="Vista de cuadrícula"
@@ -782,7 +782,7 @@ export default function VariantesProductoPage() {
                                     setVarianteEditando(variante);
                                     setMostrarFormularioVariante(true);
                                   }}
-                                  className="p-1.5 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition"
+                                  className="p-1.5 text-gray-600 hover:text-primary hover:bg-primary-fixed rounded-lg transition"
                                   title="Editar variante"
                                 >
                                   <Edit className="w-4 h-4" />
@@ -794,7 +794,7 @@ export default function VariantesProductoPage() {
                                       cambiarEstadoVariante(variante.idVariante, nuevoEstado);
                                     }
                                   }}
-                                  className="p-1.5 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                                  className="p-1.5 text-gray-600 hover:text-primary hover:bg-primary-fixed rounded-lg transition"
                                   title={variante.estado === 'activo' ? 'Desactivar' : 'Activar'}
                                 >
                                   {variante.estado === 'activo' ? (
@@ -845,7 +845,7 @@ export default function VariantesProductoPage() {
                                   setVarianteEditando(variante);
                                   setMostrarFormularioVariante(true);
                                 }}
-                                className="p-1 text-gray-400 hover:text-purple-600 transition"
+                                className="p-1 text-gray-400 hover:text-primary transition"
                                 title="Editar"
                               >
                                 <Edit className="w-3 h-3" />
@@ -920,7 +920,7 @@ export default function VariantesProductoPage() {
                         onClick={() => setPaginaActual(pagina)}
                         className={`px-3 py-2 rounded-lg transition ${
                           pagina === paginaActual
-                            ? 'bg-purple-600 text-white'
+                            ? 'bg-primary text-white'
                             : 'border border-gray-300 hover:bg-gray-50'
                         }`}
                       >

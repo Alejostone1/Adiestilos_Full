@@ -42,7 +42,7 @@ const SelectorProductos = ({ idProveedor, alAgregarProducto }) => {
         <input
           type="text"
           placeholder="Buscar producto..."
-          className="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm"
           value={terminoBusqueda}
           onChange={(e) => setTerminoBusqueda(e.target.value)}
           disabled={!idProveedor}
@@ -80,7 +80,7 @@ const SelectorProductos = ({ idProveedor, alAgregarProducto }) => {
                             <span className="text-xs text-gray-500 dark:text-gray-300">Stock: {variante.cantidadStock}</span>
                             <button
                             onClick={() => alAgregarProducto(variante)}
-                            className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="bg-primary hover:bg-tertiary text-white rounded-full p-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                             title="Agregar a la compra"
                             >
                             <FiPlus className="h-4 w-4" />

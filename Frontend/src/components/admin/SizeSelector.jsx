@@ -29,10 +29,10 @@ const SizeSelector = ({
                 onClick={() => onChange(size.idTalla)}
                 className={`
                   px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 border
-                  focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900
+                  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-slate-900
                   ${isSelected
-                    ? 'bg-purple-600 text-white border-purple-600 shadow-md transform scale-105'
-                    : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-slate-700 hover:border-purple-300 dark:hover:border-purple-500 hover:bg-gray-50 dark:hover:bg-slate-700'
+                    ? 'bg-primary text-white border-primary shadow-md transform scale-105'
+                    : 'bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary hover:bg-gray-50 dark:hover:bg-slate-700'
                   }
                 `}
               >

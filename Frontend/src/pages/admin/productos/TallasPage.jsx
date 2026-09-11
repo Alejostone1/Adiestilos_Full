@@ -61,10 +61,10 @@ export default function TallasPage() {
   // Tipos de talla
   // ----------------------
   const tiposTalla = useMemo(() => [
-    { value: 'numerica', label: 'Numérica', color: 'bg-blue-50 text-blue-700 border-blue-100 dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-800/30' },
+    { value: 'numerica', label: 'Numérica', color: 'bg-primary-fixed text-tertiary border-primary-fixed dark:bg-tertiary/20 dark:text-primary dark:border-tertiary/30' },
     { value: 'alfabetica', label: 'Alfabética', color: 'bg-emerald-50 text-emerald-700 border-emerald-100 dark:bg-emerald-900/20 dark:text-emerald-300 dark:border-emerald-800/30' },
     { value: 'bebe', label: 'Bebé', color: 'bg-pink-50 text-pink-700 border-pink-100 dark:bg-pink-900/20 dark:text-pink-300 dark:border-pink-800/30' },
-    { value: 'nino', label: 'Niño', color: 'bg-indigo-50 text-indigo-700 border-indigo-100 dark:bg-indigo-900/20 dark:text-indigo-300 dark:border-indigo-800/30' },
+    { value: 'nino', label: 'Niño', color: 'bg-primary-fixed text-tertiary border-primary-fixed dark:bg-tertiary/20 dark:text-primary dark:border-tertiary/30' },
     { value: 'calzado', label: 'Calzado', color: 'bg-orange-50 text-orange-700 border-orange-100 dark:bg-orange-900/20 dark:text-orange-300 dark:border-orange-800/30' },
     { value: 'otra', label: 'Otra', color: 'bg-slate-50 text-slate-700 border-slate-100 dark:bg-slate-900/20 dark:text-slate-300 dark:border-slate-800/30' },
   ], []);
@@ -119,15 +119,15 @@ export default function TallasPage() {
   return (
     <AdminPageLayout
       title="Maestro de Tallas"
-      icon={<Ruler className="w-8 h-8 text-purple-600" />}
+      icon={<Ruler className="w-8 h-8 text-primary" />}
       description="Define y organiza las dimensiones de tallaje para tus productos"
     >
       {/* Dashboard de Resumen */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         {[
-          { label: 'Total Registros', val: tallas.length, icon: Ruler, color: 'blue' },
+          { label: 'Total Registros', val: tallas.length, icon: Ruler, color: 'pink' },
           { label: 'Tallas Activas', val: tallas.filter(t => t.estado === 'activo').length, icon: CheckCircle, color: 'emerald' },
-          { label: 'Filtros Aplicados', val: tallasFiltradas.length, icon: Filter, color: 'purple' },
+          { label: 'Filtros Aplicados', val: tallasFiltradas.length, icon: Filter, color: 'amber' },
         ].map((stat, idx) => (
           <div key={idx} className="bg-white dark:bg-slate-800 p-5 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm flex items-center gap-4">
              <div className={`w-12 h-12 rounded-2xl bg-${stat.color}-50 dark:bg-${stat.color}-900/20 flex items-center justify-center`}>
@@ -153,7 +153,7 @@ export default function TallasPage() {
                 placeholder="Identificador o nombre de talla..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm font-medium focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-700 rounded-2xl text-sm font-medium focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
               />
             </div>
 
@@ -161,7 +161,7 @@ export default function TallasPage() {
               onClick={() => setMostrarFiltros(!mostrarFiltros)}
               className={`flex items-center gap-2 px-5 py-3 rounded-2xl border font-semibold text-sm transition-all ${
                 mostrarFiltros
-                  ? 'bg-purple-50 border-purple-200 text-purple-700 dark:bg-purple-900/20 dark:border-purple-800'
+                  ? 'bg-primary-fixed border-primary-fixed text-tertiary dark:bg-tertiary/20 dark:border-tertiary'
                   : 'bg-white border-slate-200 hover:bg-slate-50 text-slate-600 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300'
               }`}
             >
@@ -173,13 +173,13 @@ export default function TallasPage() {
           <div className="flex gap-3">
             <button
               onClick={fetchTallas}
-              className="p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-400 hover:text-purple-600 transition-colors"
+              className="p-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-400 hover:text-primary transition-colors"
             >
               <RefreshCcw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
             </button>
             <button
               onClick={() => setMostrarFormulario(true)}
-              className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-purple-600 text-white rounded-2xl font-semibold text-sm tracking-tight hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-slate-900/10"
+              className="flex items-center gap-2 px-6 py-3 bg-slate-900 dark:bg-primary text-white rounded-2xl font-semibold text-sm tracking-tight hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-slate-900/10"
             >
               <Plus className="w-4 h-4" />
               Nueva Talla
@@ -229,7 +229,7 @@ export default function TallasPage() {
       <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-700 overflow-hidden shadow-sm">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
-            <Loader2 className="w-10 h-10 animate-spin text-purple-600 mb-4" />
+            <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
             <span className="text-sm font-semibold text-slate-400 animate-pulse uppercase tracking-wide">Sincronizando tallaje...</span>
           </div>
         ) : tallasFiltradas.length === 0 ? (
@@ -258,7 +258,7 @@ export default function TallasPage() {
                     <tr key={talla.idTalla} className="group hover:bg-slate-50/80 dark:hover:bg-slate-900/30 transition-colors">
                       <td className="px-6 py-5">
                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center border border-purple-100 dark:border-purple-800/30 text-purple-600 font-semibold text-xs">
+                            <div className="w-10 h-10 rounded-xl bg-primary-fixed dark:bg-tertiary/20 flex items-center justify-center border border-primary-fixed dark:border-tertiary/30 text-primary font-semibold text-xs">
                                {talla.nombreTalla?.substring(0, 2).toUpperCase()}
                             </div>
                             <span className="text-sm font-semibold text-slate-900 dark:text-white">{talla.nombreTalla}</span>
@@ -288,7 +288,7 @@ export default function TallasPage() {
                             <button
                               onClick={() => { setTallaEditando(talla); setMostrarFormulario(true); }}
                               title="Editar talla"
-                              className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                              className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             >
                                <Edit className="w-4 h-4" />
                             </button>
@@ -336,7 +336,7 @@ export default function TallasPage() {
                       onClick={() => setPaginaActual(i + 1)}
                       className={`w-9 h-9 rounded-xl font-semibold text-xs transition-all shadow-sm ${
                         paginaActual === i + 1
-                          ? 'bg-slate-900 dark:bg-purple-600 text-white shadow-xl shadow-purple-500/20'
+                          ? 'bg-slate-900 dark:bg-primary text-white shadow-xl shadow-primary/20'
                           : 'bg-white dark:bg-slate-800 text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-100 dark:border-slate-700'
                       }`}
                     >
@@ -416,8 +416,8 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
         <div className="p-8">
            <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
-                 <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center border border-purple-100 dark:border-purple-800/30">
-                    <Settings2 className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                 <div className="w-12 h-12 rounded-2xl bg-primary-fixed dark:bg-tertiary/30 flex items-center justify-center border border-primary-fixed dark:border-tertiary/30">
+                    <Settings2 className="w-6 h-6 text-primary dark:text-primary" />
                  </div>
                  <h2 className="text-2xl font-semibold text-slate-900 dark:text-white leading-tight">
                    {talla ? 'Editar Registro' : 'Configurar Nueva Talla'}
@@ -436,7 +436,7 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
                       type="text" 
                       value={formData.nombreTalla}
                       onChange={e => setFormData({...formData, nombreTalla: e.target.value})}
-                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl font-semibold text-sm outline-none focus:ring-2 focus:ring-purple-500/20"
+                      className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-2xl font-semibold text-sm outline-none focus:ring-2 focus:ring-primary/20"
                       placeholder="Ej: Extra-Large"
                     />
                  </div>
@@ -462,7 +462,7 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
                         onClick={() => setFormData({...formData, estado: est})}
                         className={`py-3 rounded-2xl text-xs font-semibold uppercase transition-all border ${
                           formData.estado === est 
-                            ? 'bg-purple-600 border-purple-500 text-white shadow-lg shadow-purple-500/20' 
+                            ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20' 
                             : 'bg-slate-50 dark:bg-slate-800 border-slate-100 dark:border-slate-700 text-slate-400'
                         }`}
                       >
@@ -476,7 +476,7 @@ function TallaFormModal({ talla, tiposTalla, onClose, onSave, loading }) {
                  <button 
                   type="submit" 
                   disabled={loading || !formData.nombreTalla.trim()}
-                  className="w-full py-4 bg-slate-900 dark:bg-purple-600 text-white rounded-2xl font-semibold text-sm tracking-wide hover:scale-[1.01] active:scale-95 transition-all shadow-xl shadow-slate-900/10"
+                  className="w-full py-4 bg-slate-900 dark:bg-primary text-white rounded-2xl font-semibold text-sm tracking-wide hover:scale-[1.01] active:scale-95 transition-all shadow-xl shadow-slate-900/10"
                  >
                     {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : 'CONFIRMAR Y GUARDAR'}
                  </button>

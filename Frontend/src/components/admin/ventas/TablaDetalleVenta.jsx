@@ -49,7 +49,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
     return (
       <tr
         key={`${item.idVariante}-${index}`}
-        className="bg-white dark:bg-gray-800/50 shadow-sm rounded-[1.8rem] group hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 ring-1 ring-gray-100 dark:ring-gray-700/50 hover:ring-indigo-500/20 hover:shadow-xl hover:shadow-indigo-500/5"
+        className="bg-white dark:bg-gray-800/50 shadow-sm rounded-[1.8rem] group hover:bg-white dark:hover:bg-gray-800 transition-all duration-300 ring-1 ring-gray-100 dark:ring-gray-700/50 hover:ring-primary/20 hover:shadow-xl hover:shadow-primary/5"
       >
         <td className="py-4 pl-6 rounded-l-[1.8rem]">
           <div className="flex items-center gap-4">
@@ -65,7 +65,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
                 {item.producto?.titulo}
               </p>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 rounded-lg border border-indigo-100 dark:border-indigo-800/50">
+                <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 bg-primary-fixed dark:bg-tertiary/30 text-primary rounded-lg border border-primary-fixed dark:border-tertiary/50">
                   {item.color?.nombreColor}
                 </span>
                 <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 bg-gray-50 dark:bg-gray-700/50 text-gray-500 rounded-lg">
@@ -80,7 +80,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
           <div className="inline-flex items-center justify-center p-1 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-700">
             <button
               onClick={() => onActualizarCantidad(item.idVariante, item.cantidad - 1)}
-              className="p-1.5 rounded-xl bg-white dark:bg-gray-800 text-gray-400 hover:text-indigo-600 hover:shadow-sm transition-all active:scale-95"
+              className="p-1.5 rounded-xl bg-white dark:bg-gray-800 text-gray-400 hover:text-primary hover:shadow-sm transition-all active:scale-95"
             >
               <FiMinus className="h-3 w-3" />
             </button>
@@ -91,7 +91,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
 
             <button
               onClick={() => onActualizarCantidad(item.idVariante, item.cantidad + 1)}
-              className="p-1.5 rounded-xl bg-white dark:bg-gray-800 text-gray-400 hover:text-indigo-600 hover:shadow-sm transition-all active:scale-95"
+              className="p-1.5 rounded-xl bg-white dark:bg-gray-800 text-gray-400 hover:text-primary hover:shadow-sm transition-all active:scale-95"
             >
               <FiPlus className="h-3 w-3" />
             </button>
@@ -136,7 +136,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
 
         <td className="py-4 text-right">
           <div className="flex flex-col items-end">
-            <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+            <span className="text-sm font-semibold text-primary dark:text-primary">
               {formatearPrecio(totalLinea)}
             </span>
             {Number(item.descuentoLinea) > 0 && (
@@ -184,7 +184,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
                <div className="pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center">
                   <span className="text-sm font-semibold text-gray-800 dark:text-white uppercase tracking-[0.1em]">Total Final</span>
                   <div className="flex flex-col items-end">
-                    <span className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-indigo-400 dark:from-indigo-400 dark:to-indigo-300">
+                    <span className="text-2xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-primary to-tertiary dark:from-primary dark:to-tertiary">
                       {formatearPrecio(carrito.reduce((acc, i) => acc + (i.cantidad * i.precioUnitario) - Number(i.descuentoLinea || 0), 0))}
                     </span>
                     <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mt-0.5">Venta Enterprise Edition</span>

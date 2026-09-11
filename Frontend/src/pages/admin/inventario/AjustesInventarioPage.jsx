@@ -450,7 +450,7 @@ export default function AjustesInventarioPage() {
         <div>
           <div className="flex items-center gap-3 mb-2">
             <h1 className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tight">Ajustes de Inventario</h1>
-            <span className="px-3 py-1 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-full text-[11px] font-semibold uppercase tracking-wide border border-indigo-200 dark:border-indigo-800">Control de Stock</span>
+            <span className="px-3 py-1 bg-primary-fixed text-primary dark:bg-tertiary/40 dark:text-primary rounded-full text-[11px] font-semibold uppercase tracking-wide border border-primary-fixed dark:border-tertiary">Control de Stock</span>
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-base font-medium">Gestiona ajustes de stock con control de versiones borrador/aplicado.</p>
         </div>
@@ -458,7 +458,7 @@ export default function AjustesInventarioPage() {
           whileHover={{ scale: 1.02, y: -2 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleOpenCreateModal}
-          className="bg-indigo-600 text-white px-8 py-4 rounded-[1.5rem] hover:bg-indigo-700 shadow-xl shadow-indigo-200 dark:shadow-none transition-all flex items-center justify-center gap-3 font-semibold text-base"
+          className="bg-primary text-white px-8 py-4 rounded-[1.5rem] hover:bg-tertiary shadow-xl shadow-primary dark:shadow-none transition-all flex items-center justify-center gap-3 font-semibold text-base"
         >
           <Plus className="w-5 h-5" />
           Nuevo Ajuste en Borrador
@@ -470,18 +470,18 @@ export default function AjustesInventarioPage() {
         <div className="p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-gray-50 dark:border-gray-800">
           <div className="flex items-center gap-3 w-full lg:w-auto flex-1">
             <div className="relative flex-1 max-w-lg group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
               <input
                 type="text"
                 placeholder="Buscar por número, motivo..."
-                className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all text-sm font-medium dark:text-gray-200"
+                className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all text-sm font-medium dark:text-gray-200"
                 value={filters.buscar}
                 onChange={(e) => handleFilterChange('buscar', e.target.value)}
               />
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className={`p-3 rounded-xl border transition-all duration-300 ${showFilters ? 'bg-indigo-50 border-indigo-200 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-800 dark:text-indigo-400' : 'bg-white border-gray-200 text-gray-500 hover:bg-gray-50 dark:bg-gray-900 dark:border-gray-800 dark:hover:bg-gray-800'}`}
+              className={`p-3 rounded-xl border transition-all duration-300 ${showFilters ? 'bg-primary-fixed border-primary-fixed text-primary dark:bg-tertiary/30 dark:border-tertiary dark:text-primary' : 'bg-white border-gray-200 text-gray-500 hover:bg-gray-50 dark:bg-gray-900 dark:border-gray-800 dark:hover:bg-gray-800'}`}
             >
               <Filter className="w-4 h-4" />
             </button>
@@ -493,7 +493,7 @@ export default function AjustesInventarioPage() {
           </div>
           <button
             onClick={cargarDatos}
-            className="p-3 bg-gray-50 dark:bg-gray-800/50 text-gray-400 hover:text-indigo-600 rounded-xl transition-all border border-gray-100 dark:border-gray-700"
+            className="p-3 bg-gray-50 dark:bg-gray-800/50 text-gray-400 hover:text-primary rounded-xl transition-all border border-gray-100 dark:border-gray-700"
             title="Actualizar tabla"
           >
             <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -583,7 +583,7 @@ export default function AjustesInventarioPage() {
                 key: 'numeroAjuste',
                 render: (numero, record) => (
                   <div className="flex items-center gap-4">
-                    <div className="p-2.5 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl">
+                    <div className="p-2.5 bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary rounded-xl">
                       <FileText size={20} />
                     </div>
                     <div>
@@ -682,7 +682,7 @@ export default function AjustesInventarioPage() {
                     <Tooltip title="Explorar detalles">
                       <button
                         onClick={() => handleViewAjuste(record)}
-                        className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/40 rounded-xl transition-all"
+                        className="p-2 text-gray-400 hover:text-primary hover:bg-primary-fixed dark:hover:bg-tertiary/40 rounded-xl transition-all"
                       >
                         <Eye size={18} />
                       </button>
@@ -714,7 +714,7 @@ export default function AjustesInventarioPage() {
                       <Tooltip title="Rastreo de Movimientos">
                         <button
                           onClick={() => navigate(`/admin/inventario/movimientos?idAjuste=${record.idAjuste}`)}
-                          className="p-2 text-indigo-500 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/40 rounded-xl transition-all"
+                          className="p-2 text-primary hover:text-primary hover:bg-primary-fixed dark:hover:bg-tertiary/40 rounded-xl transition-all"
                         >
                           <BarChart3 size={18} />
                         </button>
@@ -747,7 +747,7 @@ export default function AjustesInventarioPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleOpenCreateModal}
-              className="mt-8 px-8 py-3.5 bg-indigo-600 text-white rounded-2xl font-semibold shadow-xl shadow-indigo-100 dark:shadow-none hover:bg-indigo-700 transition-all inline-flex items-center gap-2"
+              className="mt-8 px-8 py-3.5 bg-primary text-white rounded-2xl font-semibold shadow-xl shadow-primary dark:shadow-none hover:bg-tertiary transition-all inline-flex items-center gap-2"
             >
               <Plus className="w-5 h-5" />
               Crear primer ajuste
@@ -759,7 +759,7 @@ export default function AjustesInventarioPage() {
         <Modal
           title={
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl">
+              <div className="p-2 bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary rounded-xl">
                  <Eye size={22} />
               </div>
               <span className="font-semibold text-gray-900 dark:text-white">Expediente de Ajuste</span>
@@ -777,7 +777,7 @@ export default function AjustesInventarioPage() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 bg-gray-50 dark:bg-gray-800/40 rounded-3xl border border-gray-100 dark:border-gray-800">
                 <div>
                   <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1">Número de Ajuste</label>
-                  <div className="text-base font-semibold text-indigo-600 dark:text-indigo-400">{selectedAjuste.numeroAjuste}</div>
+                  <div className="text-base font-semibold text-primary dark:text-primary">{selectedAjuste.numeroAjuste}</div>
                 </div>
                 <div>
                   <label className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide block mb-1">Estado Operativo</label>
@@ -873,7 +873,7 @@ export default function AjustesInventarioPage() {
                         title: 'SKU', 
                         dataIndex: 'sku', 
                         width: 120,
-                        render: (sku) => <span className="text-[11px] font-semibold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/40 px-2 py-0.5 rounded-md">{sku}</span>
+                        render: (sku) => <span className="text-[11px] font-semibold text-primary bg-primary-fixed dark:bg-tertiary/40 px-2 py-0.5 rounded-md">{sku}</span>
                     },
                     {
                       title: 'Impacto',
@@ -934,7 +934,7 @@ export default function AjustesInventarioPage() {
                         handleAplicarAjuste(selectedAjuste.idAjuste);
                         setShowEditModal(false);
                     }}
-                    className="px-8 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold text-sm hover:bg-indigo-700 shadow-lg shadow-indigo-100 dark:shadow-none"
+                    className="px-8 py-2.5 bg-primary text-white rounded-xl font-semibold text-sm hover:bg-tertiary shadow-lg shadow-primary dark:shadow-none"
                   >
                     Ejecutar y Sincronizar Stock
                   </button>
@@ -948,7 +948,7 @@ export default function AjustesInventarioPage() {
         <Modal
           title={
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-xl">
+              <div className="p-2 bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary rounded-xl">
                  <Archive size={22} />
               </div>
               <span className="font-semibold text-gray-900 dark:text-white">Nueva Operación de Stock</span>
@@ -969,14 +969,14 @@ export default function AjustesInventarioPage() {
                 <div key={step} className="flex items-center">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
                     currentStep >= step
-                      ? 'bg-indigo-600 text-white'
+                      ? 'bg-primary text-white'
                       : 'bg-gray-200 text-gray-600'
                   }`}>
                     {step}
                   </div>
                   {step < 4 && (
                     <div className={`w-12 h-0.5 mx-2 ${
-                      currentStep > step ? 'bg-indigo-600' : 'bg-gray-200'
+                      currentStep > step ? 'bg-primary' : 'bg-gray-200'
                     }`} />
                   )}
                 </div>
@@ -1002,7 +1002,7 @@ export default function AjustesInventarioPage() {
               >
                 <div className="p-8 bg-gray-50 dark:bg-gray-800/40 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 space-y-8">
                   <div className="flex items-center gap-3 border-b border-gray-100 dark:border-gray-800 pb-4">
-                     <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
+                     <div className="w-1.5 h-6 bg-primary rounded-full" />
                      <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Parámetros de Auditoría</h3>
                   </div>
 
@@ -1068,7 +1068,7 @@ export default function AjustesInventarioPage() {
                       onChange={(e) => setAjusteForm(prev => ({ ...prev, motivo: e.target.value }))}
                       rows={3}
                       placeholder="Ej: Corrección de stock físico tras inventario cíclico o detección de merma..."
-                      className="resize-none !rounded-3xl !p-5 !bg-white dark:!bg-gray-800 !border-gray-100 dark:!border-gray-700 shadow-sm focus:!ring-4 focus:!ring-indigo-500/10 transition-all font-medium text-sm"
+                      className="resize-none !rounded-3xl !p-5 !bg-white dark:!bg-gray-800 !border-gray-100 dark:!border-gray-700 shadow-sm focus:!ring-4 focus:!ring-primary/10 transition-all font-medium text-sm"
                     />
                   </div>
 
@@ -1119,19 +1119,19 @@ export default function AjustesInventarioPage() {
                         </button>
                       ) : (
                         <div className="flex items-center gap-2">
-                           <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
+                           <div className="w-1.5 h-6 bg-primary rounded-full" />
                            <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Seleccionar Productos</h3>
                         </div>
                       )}
                       {selectedProductForAjuste && (
-                        <span className="text-indigo-500 dark:text-indigo-400 font-semibold text-sm tracking-tight">/ {selectedProductForAjuste.nombreProducto}</span>
+                        <span className="text-primary dark:text-primary font-semibold text-sm tracking-tight">/ {selectedProductForAjuste.nombreProducto}</span>
                       )}
                     </div>
                     <div className="relative group">
-                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 group-focus-within:text-primary transition-colors" />
                       <input
                         placeholder="Filtrar catálogo..."
-                        className="pl-10 pr-4 py-2 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-[1rem] focus:outline-none focus:ring-2 focus:ring-indigo-500/20 text-xs font-medium dark:text-gray-200"
+                        className="pl-10 pr-4 py-2 bg-white dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-[1rem] focus:outline-none focus:ring-2 focus:ring-primary/20 text-xs font-medium dark:text-gray-200"
                         value={searchStep2}
                         onChange={(e) => setSearchStep2(e.target.value)}
                       />
@@ -1163,7 +1163,7 @@ export default function AjustesInventarioPage() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             key={prod.idProducto}
-                            className="group cursor-pointer bg-white dark:bg-gray-800 p-4 rounded-3xl border border-gray-100 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all"
+                            className="group cursor-pointer bg-white dark:bg-gray-800 p-4 rounded-3xl border border-gray-100 dark:border-gray-700 hover:border-primary-fixed dark:hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/10 transition-all"
                             onClick={() => {
                               setSelectedProductForAjuste(prod);
                               setSearchStep2('');
@@ -1179,11 +1179,11 @@ export default function AjustesInventarioPage() {
                                 />
                               </div>
                               <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate group-hover:text-indigo-600 transition-colors leading-tight">
+                                <h4 className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate group-hover:text-primary transition-colors leading-tight">
                                   {prod.nombreProducto}
                                 </h4>
                                 <div className="flex flex-col gap-1.5 mt-2">
-                                  <span className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-lg w-fit uppercase border border-indigo-100 dark:border-indigo-800">
+                                  <span className="text-[11px] font-semibold text-primary dark:text-primary bg-primary-fixed dark:bg-tertiary/30 px-2 py-0.5 rounded-lg w-fit uppercase border border-primary-fixed dark:border-tertiary">
                                     REF: {prod.codigoReferencia}
                                   </span>
                                   <div className="flex items-center gap-1.5 text-gray-400">
@@ -1194,7 +1194,7 @@ export default function AjustesInventarioPage() {
                                   </div>
                                 </div>
                               </div>
-                              <ChevronRight className="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-indigo-500 transform group-hover:translate-x-1 transition-all" />
+                              <ChevronRight className="w-5 h-5 text-gray-300 dark:text-gray-600 group-hover:text-primary transform group-hover:translate-x-1 transition-all" />
                             </div>
                           </motion.div>
                         )) : (
@@ -1228,8 +1228,8 @@ export default function AjustesInventarioPage() {
                               key={variante.idVariante}
                               className={`cursor-pointer group bg-white dark:bg-gray-800 p-4 rounded-3xl border-2 transition-all ${
                                 isSelected 
-                                  ? 'border-indigo-500 ring-4 ring-indigo-500/10' 
-                                  : 'border-gray-50 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-indigo-500/30'
+                                  ? 'border-primary ring-4 ring-primary/10' 
+                                  : 'border-gray-50 dark:border-gray-700 hover:border-primary-fixed dark:hover:border-primary/30'
                               }`}
                               onClick={() => toggleVarianteSeleccion(variante)}
                             >
@@ -1244,7 +1244,7 @@ export default function AjustesInventarioPage() {
                                     />
                                   </div>
                                   <div className="flex-1 min-w-0 pt-1">
-                                    <div className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 uppercase tracking-wide mb-1 leading-none">
+                                    <div className="text-[11px] font-semibold text-primary dark:text-primary uppercase tracking-wide mb-1 leading-none">
                                       {variante.codigoSku}
                                     </div>
                                     <h5 className="font-semibold text-gray-900 dark:text-white text-sm truncate leading-tight">
@@ -1272,12 +1272,12 @@ export default function AjustesInventarioPage() {
                                     <motion.div 
                                         initial={{ scale: 0.5, opacity: 0 }}
                                         animate={{ scale: 1, opacity: 1 }}
-                                        className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-lg shadow-indigo-200"
+                                        className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary"
                                     >
                                       <Check size={18} />
                                     </motion.div>
                                   ) : (
-                                    <div className="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-indigo-50 dark:group-hover:bg-indigo-900/40 group-hover:text-indigo-400 transition-colors">
+                                    <div className="w-8 h-8 rounded-full bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 flex items-center justify-center text-gray-300 dark:text-gray-500 group-hover:bg-primary-fixed dark:group-hover:bg-tertiary/40 group-hover:text-primary transition-colors">
                                         <Plus size={18} />
                                     </div>
                                   )}
@@ -1301,7 +1301,7 @@ export default function AjustesInventarioPage() {
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 20, opacity: 0 }}
-                        className="mt-6 flex items-center justify-between p-5 bg-indigo-600 rounded-[2rem] text-white shadow-2xl shadow-indigo-500/30"
+                        className="mt-6 flex items-center justify-between p-5 bg-primary rounded-[2rem] text-white shadow-2xl shadow-primary/30"
                     >
                       <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-white/20 rounded-[1rem] flex items-center justify-center backdrop-blur-md">
@@ -1316,7 +1316,7 @@ export default function AjustesInventarioPage() {
                       </div>
                       <button 
                         onClick={nextStep} 
-                        className="px-8 py-3 bg-white text-indigo-600 rounded-2xl font-semibold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/10 flex items-center gap-2"
+                        className="px-8 py-3 bg-white text-primary rounded-2xl font-semibold text-sm hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/10 flex items-center gap-2"
                       >
                         Continuar <ChevronRight size={18} />
                       </button>
@@ -1353,7 +1353,7 @@ export default function AjustesInventarioPage() {
               >
                 <div className="space-y-6">
                   <div className="flex items-center gap-3 border-b border-gray-100 dark:border-gray-800 pb-4">
-                     <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
+                     <div className="w-1.5 h-6 bg-primary rounded-full" />
                      <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Magnitud de los Ajustes Técnicos</h3>
                   </div>
 
@@ -1370,7 +1370,7 @@ export default function AjustesInventarioPage() {
                       return (
                         <div 
                           key={variante.idVariante} 
-                          className="group bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-indigo-500/40 transition-all shadow-sm overflow-hidden"
+                          className="group bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 hover:border-primary-fixed dark:hover:border-primary/40 transition-all shadow-sm overflow-hidden"
                         >
                           <div className="flex flex-col xl:flex-row">
                             {/* Visual y Specs */}
@@ -1385,7 +1385,7 @@ export default function AjustesInventarioPage() {
                               </div>
                               <div className="flex-1 xl:text-center min-w-0">
                                 <h4 className="font-semibold text-gray-900 dark:text-gray-100 text-sm truncate">{variante.producto?.nombreProducto}</h4>
-                                <div className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 mt-1 uppercase tracking-wide">{variante.codigoSku}</div>
+                                <div className="text-[11px] font-semibold text-primary dark:text-primary mt-1 uppercase tracking-wide">{variante.codigoSku}</div>
                                 <div className="mt-3 flex flex-wrap gap-1.5 justify-start xl:justify-center">
                                    <span className="px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg text-[11px] font-semibold text-gray-400 border border-gray-100 dark:border-gray-700 uppercase">{variante.color?.nombreColor}</span>
                                    <span className="px-2 py-0.5 bg-white dark:bg-gray-800 rounded-lg text-[11px] font-semibold text-gray-400 border border-gray-100 dark:border-gray-700 uppercase">T:{variante.talla?.nombreTalla}</span>
@@ -1404,23 +1404,23 @@ export default function AjustesInventarioPage() {
 
                                 {/* Centro de Acción: Input */}
                                 <div className="space-y-2">
-                                  <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-wide block text-center mb-1">Magnitud del Ajuste</span>
+                                  <span className="text-[11px] font-semibold text-primary uppercase tracking-wide block text-center mb-1">Magnitud del Ajuste</span>
                                   <div className="relative group/input">
                                     <InputNumber
                                       value={cantidadAjuste}
                                       onChange={(value) => actualizarCantidadAjuste(variante.idVariante, value || 0)}
                                       size="large"
-                                      className="w-full premium-input-number border-2 !border-indigo-100 dark:!border-indigo-900/50 focus:!border-indigo-500 !rounded-2xl dark:!bg-gray-800 transition-all font-semibold text-center !text-lg"
+                                      className="w-full premium-input-number border-2 !border-primary-fixed dark:!border-tertiary/50 focus:!border-primary !rounded-2xl dark:!bg-gray-800 transition-all font-semibold text-center !text-lg"
                                       style={{ height: '56px' }}
                                       placeholder="±0"
                                       controls={{ 
-                                          upIcon: <Plus className="text-indigo-500" size={14} />, 
-                                          downIcon: <Minus className="text-indigo-500" size={14} /> 
+                                          upIcon: <Plus className="text-primary" size={14} />, 
+                                          downIcon: <Minus className="text-primary" size={14} /> 
                                       }}
                                     />
                                     <div className="flex justify-between mt-2 px-1">
-                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) - 1)} className="text-[11px] font-semibold text-indigo-400 hover:text-indigo-600">-1</button>
-                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) + 1)} className="text-[11px] font-semibold text-indigo-400 hover:text-indigo-600">+1</button>
+                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) - 1)} className="text-[11px] font-semibold text-primary hover:text-primary">-1</button>
+                                       <button onClick={() => actualizarCantidadAjuste(variante.idVariante, (detalle?.cantidadAjuste || 0) + 1)} className="text-[11px] font-semibold text-primary hover:text-primary">+1</button>
                                     </div>
                                   </div>
                                 </div>
@@ -1444,7 +1444,7 @@ export default function AjustesInventarioPage() {
                                   placeholder="Nota técnica para este ajuste específico..."
                                   value={detalle?.observaciones || ''}
                                   onChange={(e) => actualizarObservaciones(variante.idVariante, e.target.value)}
-                                  className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 rounded-2xl text-[11px] font-medium text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-400 transition-all"
+                                  className="w-full pl-10 pr-4 py-3 bg-gray-50 dark:bg-gray-900/50 border border-gray-100 dark:border-gray-800 rounded-2xl text-[11px] font-medium text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-4 focus:ring-primary/5 focus:border-primary transition-all"
                                 />
                               </div>
                             </div>
@@ -1454,14 +1454,14 @@ export default function AjustesInventarioPage() {
                     })}
                   </div>
 
-                  <div className="flex items-start gap-4 p-5 bg-indigo-50 dark:bg-indigo-900/20 rounded-[2rem] border border-indigo-100 dark:border-indigo-800/50">
-                    <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/40 rounded-xl flex items-center justify-center text-indigo-600 flex-shrink-0">
+                  <div className="flex items-start gap-4 p-5 bg-primary-fixed dark:bg-tertiary/20 rounded-[2rem] border border-primary-fixed dark:border-tertiary/50">
+                    <div className="w-10 h-10 bg-primary-fixed dark:bg-tertiary/40 rounded-xl flex items-center justify-center text-primary flex-shrink-0">
                        <AlertTriangle size={20} />
                     </div>
                     <div className="pt-1">
-                      <h4 className="text-sm font-semibold text-indigo-900 dark:text-indigo-300">Resumen de Auditoría Crítica</h4>
-                      <p className="text-xs text-indigo-700/80 dark:text-indigo-400/80 mt-1 font-medium leading-relaxed">
-                        Los valores ingresados sincronizarán el stock real. Un valor <span className="font-semibold text-indigo-600 dark:text-indigo-300 underline underline-offset-2">positivo</span> representa entrada de mercancía, un valor <span className="font-semibold text-indigo-600 dark:text-indigo-300 underline underline-offset-2">negativo</span> representa salida o merma.
+                      <h4 className="text-sm font-semibold text-tertiary dark:text-primary">Resumen de Auditoría Crítica</h4>
+                      <p className="text-xs text-tertiary/80 dark:text-primary/80 mt-1 font-medium leading-relaxed">
+                        Los valores ingresados sincronizarán el stock real. Un valor <span className="font-semibold text-primary dark:text-primary underline underline-offset-2">positivo</span> representa entrada de mercancía, un valor <span className="font-semibold text-primary dark:text-primary underline underline-offset-2">negativo</span> representa salida o merma.
                       </p>
                     </div>
                   </div>
@@ -1507,9 +1507,9 @@ export default function AjustesInventarioPage() {
                          {ajusteForm.fechaAjuste ? ajusteForm.fechaAjuste.format('DD [de] MMMM, YYYY') : 'Hoy'}
                       </div>
                     </div>
-                    <div className="p-6 bg-indigo-50 dark:bg-indigo-900/20 rounded-[2rem] border border-indigo-100 dark:border-indigo-800/50">
-                      <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wide block mb-2">Variantes a Sincronizar</span>
-                      <div className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400">
+                    <div className="p-6 bg-primary-fixed dark:bg-tertiary/20 rounded-[2rem] border border-primary-fixed dark:border-tertiary/50">
+                      <span className="text-[11px] font-semibold text-primary uppercase tracking-wide block mb-2">Variantes a Sincronizar</span>
+                      <div className="text-2xl font-semibold text-primary dark:text-primary">
                          {selectedVariantes.length} <span className="text-xs font-medium opacity-70">unidades</span>
                       </div>
                     </div>
@@ -1517,7 +1517,7 @@ export default function AjustesInventarioPage() {
 
                   <div className="p-8 bg-white dark:bg-gray-800 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm space-y-6">
                     <div className="flex items-center gap-3">
-                       <div className="w-1.5 h-6 bg-indigo-500 rounded-full" />
+                       <div className="w-1.5 h-6 bg-primary rounded-full" />
                        <h3 className="font-semibold text-lg text-gray-900 dark:text-white tracking-tight">Manifiesto de Ajuste</h3>
                     </div>
 
@@ -1562,7 +1562,7 @@ export default function AjustesInventarioPage() {
                           {
                             title: 'SKU',
                             dataIndex: 'sku',
-                            render: (sku) => <span className="text-[11px] font-semibold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-md">{sku}</span>
+                            render: (sku) => <span className="text-[11px] font-semibold text-primary bg-primary-fixed dark:bg-tertiary/30 px-2 py-0.5 rounded-md">{sku}</span>
                           },
                           {
                             title: 'En Libros',
@@ -1615,7 +1615,7 @@ export default function AjustesInventarioPage() {
                   <div className="flex justify-between items-center px-4">
                     <button
                       onClick={prevStep}
-                      className="px-8 py-3.5 text-gray-400 hover:text-indigo-600 font-semibold text-sm transition-all flex items-center gap-2"
+                      className="px-8 py-3.5 text-gray-400 hover:text-primary font-semibold text-sm transition-all flex items-center gap-2"
                     >
                       <ChevronLeft size={20} /> Retroceder
                     </button>
@@ -1624,7 +1624,7 @@ export default function AjustesInventarioPage() {
                       whileTap={{ scale: 0.98 }}
                       onClick={handleCreate}
                       disabled={loading}
-                      className="px-10 py-4 bg-indigo-600 text-white rounded-2xl font-semibold text-base shadow-2xl shadow-indigo-500/20 hover:bg-indigo-700 transition-all flex items-center gap-3"
+                      className="px-10 py-4 bg-primary text-white rounded-2xl font-semibold text-base shadow-2xl shadow-primary/20 hover:bg-tertiary transition-all flex items-center gap-3"
                     >
                       {loading ? 'Procesando...' : (
                         <>

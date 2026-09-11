@@ -105,12 +105,12 @@ const DetalleComprasPage = () => {
           <div className="flex items-center space-x-6">
             <button
               onClick={() => navigate('/admin/compras')}
-              className="p-4 bg-white dark:bg-gray-900 rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none hover:scale-110 transition-all text-gray-500 hover:text-indigo-600 border border-gray-100 dark:border-gray-800"
+              className="p-4 bg-white dark:bg-gray-900 rounded-3xl shadow-xl shadow-gray-200/50 dark:shadow-none hover:scale-110 transition-all text-gray-500 hover:text-primary border border-gray-100 dark:border-gray-800"
             >
               <FiArrowLeft className="h-6 w-6" />
             </button>
             <div>
-              <nav className="flex items-center space-x-2 text-[11px] font-semibold uppercase tracking-wide text-indigo-500 mb-1">
+              <nav className="flex items-center space-x-2 text-[11px] font-semibold uppercase tracking-wide text-primary mb-1">
                 <Link to="/admin/compras" className="hover:underline">Abastecimiento</Link>
                 <span>/</span>
                 <span className="text-gray-400">Análisis Profundo</span>
@@ -134,10 +134,10 @@ const DetalleComprasPage = () => {
                   value={filtroBusqueda}
                   onChange={(e) => setFiltroBusqueda(e.target.value)}
                   placeholder="Buscar ítem, referencia o proveedor..."
-                  className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-900 border-none rounded-[20px] shadow-xl shadow-gray-200/50 dark:shadow-none text-sm focus:ring-2 focus:ring-indigo-500 transition-all"
+                  className="w-full pl-12 pr-4 py-4 bg-white dark:bg-gray-900 border-none rounded-[20px] shadow-xl shadow-gray-200/50 dark:shadow-none text-sm focus:ring-2 focus:ring-primary transition-all"
                 />
               </div>
-              <button className="p-4 bg-white dark:bg-gray-900 rounded-[20px] shadow-xl shadow-gray-200/50 dark:shadow-none text-gray-400 hover:text-indigo-600 transition-all border border-gray-100 dark:border-gray-800">
+              <button className="p-4 bg-white dark:bg-gray-900 rounded-[20px] shadow-xl shadow-gray-200/50 dark:shadow-none text-gray-400 hover:text-primary transition-all border border-gray-100 dark:border-gray-800">
                 <FiFilter className="h-6 w-6" />
               </button>
             </div>
@@ -151,14 +151,14 @@ const DetalleComprasPage = () => {
             value={`$${formatearPrecioColombia(estadisticas.totalInversion)}`}
             subtitle="Basado en registros actuales"
             icon={<FiDollarSign />}
-            color="indigo"
+            color="pink"
           />
           <AnalyticsCard
             title="Volumen de Mercancía"
             value={estadisticas.totalItems}
             subtitle="Unidades totales ingresadas"
             icon={<FiPackage />}
-            color="blue"
+            color="amber"
           />
           <AnalyticsCard
             title="Proveedor Estratégico"
@@ -172,7 +172,7 @@ const DetalleComprasPage = () => {
             value={`$${formatearPrecioColombia(estadisticas.promedioItem)}`}
             subtitle="Eficiencia de abastecimiento"
             icon={<FiLayers />}
-            color="purple"
+            color="rose"
           />
         </div>
 
@@ -184,14 +184,14 @@ const DetalleComprasPage = () => {
               <p className="text-sm text-gray-400 font-medium">Lista detallada de variantes y especificaciones</p>
             </div>
             <div className="bg-white dark:bg-gray-800 px-6 py-2 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-              <span className="text-xs font-semibold text-indigo-500 uppercase tracking-wide">{detallesFiltrados.length} Ítems</span>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wide">{detallesFiltrados.length} Ítems</span>
             </div>
           </div>
 
           <div className="overflow-x-auto">
             {cargando ? (
               <div className="py-32 flex flex-col items-center justify-center space-y-6">
-                <div className="w-16 h-16 border-k border-indigo-200 border-t-indigo-600 rounded-full animate-spin border-4" />
+                <div className="w-16 h-16 border-k border-primary-fixed border-t-primary rounded-full animate-spin border-4" />
                 <p className="text-gray-400 font-semibold uppercase tracking-wide text-xs animate-pulse">Compilando datos maestros...</p>
               </div>
             ) : (
@@ -213,7 +213,7 @@ const DetalleComprasPage = () => {
                                 detalle.variante?.producto?.imagenesProductos?.[0]?.rutaImagen;
 
                     return (
-                      <tr key={`${detalle.idDetalleCompra}-${idx}`} className="hover:bg-indigo-50/20 dark:hover:bg-indigo-900/10 transition-colors group">
+                      <tr key={`${detalle.idDetalleCompra}-${idx}`} className="hover:bg-primary-fixed/20 dark:hover:bg-tertiary/10 transition-colors group">
                         <td className="px-10 py-6">
                           <div className="flex items-center space-x-5">
                             <div className="relative h-14 w-14 flex-shrink-0 bg-gray-100 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm group-hover:scale-110 transition-transform">
@@ -236,7 +236,7 @@ const DetalleComprasPage = () => {
                                   )}
                                   <span className="text-[11px] font-semibold text-gray-500 uppercase">{detalle.variante?.color?.nombreColor || 'N/A'}</span>
                                 </div>
-                                <span className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-lg text-[11px] font-semibold uppercase tracking-tighter ring-1 ring-indigo-500/20">
+                                <span className="bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary px-2 py-0.5 rounded-lg text-[11px] font-semibold uppercase tracking-tighter ring-1 ring-primary/20">
                                   {detalle.variante?.talla?.nombreTalla || 'Única'}
                                 </span>
                               </div>
@@ -244,7 +244,7 @@ const DetalleComprasPage = () => {
                           </div>
                         </td>
                         <td className="px-6 py-6">
-                          <Link to={`/admin/compras`} className="flex items-center space-x-2 text-indigo-500 hover:underline">
+                          <Link to={`/admin/compras`} className="flex items-center space-x-2 text-primary hover:underline">
                             <FiHash className="h-3 w-3" />
                             <span className="text-sm font-semibold tracking-tight">{detalle.compraRef}</span>
                           </Link>
@@ -273,7 +273,7 @@ const DetalleComprasPage = () => {
                           </span>
                         </td>
                         <td className="px-10 py-6 text-right">
-                          <span className="text-base font-semibold text-indigo-600 dark:text-indigo-400 tracking-tighter">
+                          <span className="text-base font-semibold text-primary dark:text-primary tracking-tighter">
                             ${formatearPrecioColombia(detalle.totalLinea)}
                           </span>
                         </td>
@@ -294,10 +294,10 @@ const DetalleComprasPage = () => {
 
 const AnalyticsCard = ({ title, value, subtitle, icon, color }) => {
   const styles = {
-    indigo: "from-indigo-600 to-blue-700 shadow-indigo-500/20",
-    blue: "from-blue-500 to-indigo-600 shadow-blue-500/20",
+    pink: "from-primary to-tertiary shadow-primary/20",
+    amber: "from-amber-500 to-orange-600 shadow-amber-500/20",
     emerald: "from-emerald-500 to-teal-700 shadow-emerald-500/20",
-    purple: "from-purple-600 to-indigo-800 shadow-purple-500/20"
+    rose: "from-rose-500 to-pink-600 shadow-rose-500/20"
   };
 
   return (

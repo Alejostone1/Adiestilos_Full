@@ -118,7 +118,7 @@ const VentasCreditoPage = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { icon: <FiClock />, label: 'Créditos Activos', value: paginacion.total || 0, color: 'indigo' },
+          { icon: <FiClock />, label: 'Créditos Activos', value: paginacion.total || 0, color: 'pink' },
           { icon: <FiAlertCircle />, label: 'En Mora / Vencidos', value: '0', color: 'rose' },
           { icon: <FiCheckCircle />, label: 'Recaudado Hoy', value: '$0', color: 'emerald' },
           { icon: <FiTrendingDown />, label: 'Saldo Promedio', value: formatearPrecio(totalEnMora / (creditos.length || 1)), color: 'amber' }
@@ -183,7 +183,7 @@ const VentasCreditoPage = () => {
                           <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
                             {credito.usuarioCliente?.nombres} {credito.usuarioCliente?.apellidos}
                           </span>
-                          <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-tighter">
+                          <span className="text-[11px] font-semibold text-primary uppercase tracking-tighter">
                             Factura: {credito.venta?.numeroFactura}
                           </span>
                        </div>
@@ -215,7 +215,7 @@ const VentasCreditoPage = () => {
                         >
                           <FiPlus /> Abonar
                         </button>
-                        <button className="p-2 bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-indigo-600 rounded-xl">
+                        <button className="p-2 bg-gray-100 dark:bg-gray-700 text-gray-500 hover:text-primary rounded-xl">
                           <FiEye className="h-4 w-4" />
                         </button>
                       </div>

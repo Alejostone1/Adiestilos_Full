@@ -96,7 +96,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
             id="nombreProducto"
             value={datosForm.nombreProducto}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
             required
           />
         </div>
@@ -108,7 +108,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
             id="codigoReferencia"
             value={datosForm.codigoReferencia}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
             required
           />
         </div>
@@ -122,7 +122,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
           value={datosForm.descripcion}
           onChange={handleChange}
           rows="3"
-          className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+          className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
         ></textarea>
       </div>
 
@@ -134,7 +134,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
             id="idCategoria"
             value={datosForm.idCategoria}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
             required
           >
             <option value="">Seleccione una categoría</option>
@@ -150,7 +150,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
             id="idProveedor"
             value={datosForm.idProveedor}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
           >
             <option value="">Seleccione un proveedor</option>
             {proveedores.map(prov => (
@@ -170,7 +170,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
             value={datosForm.precioVentaSugerido}
             onChange={handleChange}
             step="0.01"
-            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
           />
         </div>
         <div>
@@ -180,7 +180,7 @@ const ProductoForm = ({ producto, onGuardar, onCancelar, errorApi }) => {
             id="estado"
             value={datosForm.estado}
             onChange={handleChange}
-            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm text-gray-900 dark:text-white"
+            className="mt-1 block w-full px-3 py-2 bg-white dark:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary sm:text-sm text-gray-900 dark:text-white"
           >
             <option value="activo">Activo</option>
             <option value="inactivo">Inactivo</option>

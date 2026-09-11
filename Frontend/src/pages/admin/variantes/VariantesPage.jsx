@@ -320,7 +320,7 @@ export default function VariantesPage() {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center transition-colors duration-300">
         <div className="text-center">
-          <div className="animate-spin h-8 w-8 border-b-2 border-purple-600 rounded-full mx-auto" />
+          <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full mx-auto" />
           <span className="ml-3 text-gray-500 dark:text-gray-400">Cargando variantes...</span>
         </div>
       </div>
@@ -347,7 +347,7 @@ export default function VariantesPage() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <Layers className="w-8 h-8 text-purple-600" />
+            <Layers className="w-8 h-8 text-primary" />
             <div>
               <h1 className="text-3xl font-semibold text-gray-900 dark:text-white">Gestión de Variantes</h1>
               <p className="text-gray-600 dark:text-gray-400">Panel administrativo para gestión completa de variantes de productos</p>
@@ -362,7 +362,7 @@ export default function VariantesPage() {
                   <span className="text-sm text-gray-500 dark:text-gray-400">Total Variantes</span>
                   <p className="text-2xl font-semibold text-gray-900 dark:text-white">{variantes.length}</p>
                 </div>
-                <Layers className="w-8 h-8 text-purple-600 opacity-20" />
+                <Layers className="w-8 h-8 text-primary opacity-20" />
               </div>
             </div>
             <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-lg border border-gray-200 dark:border-slate-700/50 p-4">
@@ -391,11 +391,11 @@ export default function VariantesPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500 dark:text-gray-400">Productos con Variantes</span>
-                  <p className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
+                  <p className="text-2xl font-semibold text-primary dark:text-primary">
                     {[...new Set(variantes.map(v => v.idProducto))].length}
                   </p>
                 </div>
-                <Package className="w-8 h-8 text-blue-600 opacity-20" />
+                <Package className="w-8 h-8 text-primary opacity-20" />
               </div>
             </div>
           </div>
@@ -412,7 +412,7 @@ export default function VariantesPage() {
                   placeholder="Buscar por SKU, producto, color o talla..."
                   value={busqueda}
                   onChange={(e) => setBusqueda(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
 
@@ -427,7 +427,7 @@ export default function VariantesPage() {
                 <Filter className="w-4 h-4" />
                 Filtros
                 {(filtroProducto !== 'todos' || filtroColor !== 'todos' || filtroTalla !== 'todos' || filtroEstado !== 'todos') && (
-                  <span className="ml-1 bg-purple-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  <span className="ml-1 bg-primary text-white text-xs px-2 py-0.5 rounded-full">
                     {(filtroProducto !== 'todos' ? 1 : 0) + (filtroColor !== 'todos' ? 1 : 0) + (filtroTalla !== 'todos' ? 1 : 0) + (filtroEstado !== 'todos' ? 1 : 0)}
                   </span>
                 )}
@@ -445,7 +445,7 @@ export default function VariantesPage() {
 
               <button
                 onClick={() => navigate('/admin/productos')}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-tertiary text-white transition"
               >
                 <Package className="w-4 h-4" />
                 Ver Productos
@@ -463,7 +463,7 @@ export default function VariantesPage() {
                     <select
                       value={filtroProducto}
                       onChange={(e) => setFiltroProducto(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los productos</option>
                       {productos.map(producto => (
@@ -479,7 +479,7 @@ export default function VariantesPage() {
                     <select
                       value={filtroColor}
                       onChange={(e) => setFiltroColor(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los colores</option>
                       {colores.map(color => (
@@ -495,7 +495,7 @@ export default function VariantesPage() {
                     <select
                       value={filtroTalla}
                       onChange={(e) => setFiltroTalla(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todas las tallas</option>
                       {tallas.map(talla => (
@@ -511,7 +511,7 @@ export default function VariantesPage() {
                     <select
                       value={filtroEstado}
                       onChange={(e) => setFiltroEstado(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500"
+                      className="px-3 py-2 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los estados</option>
                       <option value="activo">Activo</option>
@@ -555,7 +555,7 @@ export default function VariantesPage() {
                     setFiltroTalla('todos');
                     setFiltroEstado('todos');
                   }}
-                  className="mt-2 text-sm text-purple-600 hover:text-purple-800 underline"
+                  className="mt-2 text-sm text-primary hover:text-tertiary underline"
                 >
                   Limpiar filtros
                 </button>
@@ -563,7 +563,7 @@ export default function VariantesPage() {
               {variantes.length === 0 && (
                 <button
                   onClick={() => navigate('/admin/productos')}
-                  className="mt-4 text-sm text-purple-600 hover:text-purple-800 underline"
+                  className="mt-4 text-sm text-primary hover:text-tertiary underline"
                 >
                   Ir a productos para crear variantes
                 </button>
@@ -586,7 +586,7 @@ export default function VariantesPage() {
                         onClick={() => setViewMode('table')}
                         className={`p-2 rounded-lg transition ${
                           viewMode === 'table'
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300'
+                            ? 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary'
                             : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700'
                         }`}
                         title="Vista de tabla"
@@ -597,7 +597,7 @@ export default function VariantesPage() {
                         onClick={() => setViewMode('grid')}
                         className={`p-2 rounded-lg transition ${
                           viewMode === 'grid'
-                            ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300'
+                            ? 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary'
                             : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700'
                         }`}
                         title="Vista de cuadrícula"
@@ -660,9 +660,9 @@ export default function VariantesPage() {
                               </td>
                               <td className="px-6 py-4">
                                 <div className="flex flex-col gap-1">
-                                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 rounded-xl max-w-fit group/prod cursor-help">
-                                    <Package className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                                    <span className="text-sm font-semibold text-blue-900 dark:text-blue-100 tracking-tight">
+                                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-fixed dark:bg-tertiary/20 border border-primary-fixed dark:border-tertiary/30 rounded-xl max-w-fit group/prod cursor-help">
+                                    <Package className="w-3.5 h-3.5 text-primary dark:text-primary" />
+                                    <span className="text-sm font-semibold text-tertiary dark:text-primary-fixed tracking-tight">
                                       {productoInfo?.nombreProducto || 'Producto no encontrado'}
                                     </span>
                                     <button
@@ -670,7 +670,7 @@ export default function VariantesPage() {
                                         e.stopPropagation();
                                         navigate(`/admin/productos/${variante.idProducto}/variantes`);
                                       }}
-                                      className="ml-1 opacity-0 group-hover/prod:opacity-100 text-blue-600 hover:text-blue-800 p-0.5 rounded-md hover:bg-blue-100 transition-all"
+                                      className="ml-1 opacity-0 group-hover/prod:opacity-100 text-primary hover:text-tertiary p-0.5 rounded-md hover:bg-primary-fixed transition-all"
                                       title="Filtrar por este producto"
                                     >
                                       <ArrowRight className="w-3 h-3" />
@@ -740,14 +740,14 @@ export default function VariantesPage() {
                                 <div className="flex items-center justify-end gap-2">
                                   <button
                                     onClick={() => openDetailModal(variante)}
-                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-purple-50 dark:bg-purple-900/40 text-purple-600 dark:text-purple-300 hover:bg-purple-600 hover:text-white border border-purple-100 dark:border-purple-800/60 hover:border-purple-600 shadow-sm hover:shadow-md hover:shadow-purple-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                                     title="Ver detalles completos"
                                   >
                                     <Eye className="w-4 h-4" />
                                   </button>
                                   <button
                                     onClick={() => navigate(`/admin/productos/${variante.idProducto}/variantes`)}
-                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                                    className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                                     title="Gestionar variantes del producto"
                                   >
                                     <Layers className="w-4 h-4" />
@@ -761,7 +761,7 @@ export default function VariantesPage() {
                                     }}
                                     className={`w-10 h-10 flex items-center justify-center rounded-xl border shadow-sm hover:-translate-y-0.5 active:scale-95 transition-all ${
                                       variante.estado === 'activo'
-                                        ? 'bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 hover:bg-blue-600 hover:text-white border-blue-100 dark:border-blue-800/60 hover:border-blue-600 hover:shadow-blue-500/20'
+                                        ? 'bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border-primary-fixed dark:border-tertiary/60 hover:border-primary hover:shadow-primary/20'
                                         : 'bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white border-emerald-100 dark:border-emerald-800/60 hover:border-emerald-600 hover:shadow-emerald-500/20'
                                     }`}
                                     title={variante.estado === 'activo' ? 'Desactivar' : 'Activar'}
@@ -826,14 +826,14 @@ export default function VariantesPage() {
                               <div className="flex gap-1.5">
                                 <button
                                   onClick={() => openDetailModal(variante)}
-                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-purple-600 dark:text-purple-400 hover:bg-purple-600 hover:text-white hover:border-purple-600 transition"
+                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-primary dark:text-primary hover:bg-primary hover:text-white hover:border-primary transition"
                                   title="Ver detalles"
                                 >
                                   <Eye className="w-3.5 h-3.5" />
                                 </button>
                                 <button
                                   onClick={() => navigate(`/admin/productos/${variante.idProducto}/variantes`)}
-                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition"
+                                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 text-primary dark:text-primary hover:bg-primary hover:text-white hover:border-primary transition"
                                   title="Ver producto"
                                 >
                                   <Package className="w-3.5 h-3.5" />
@@ -909,7 +909,7 @@ export default function VariantesPage() {
                         onClick={() => setPaginaActual(pagina)}
                         className={`px-3 py-2 rounded-lg transition ${
                           pagina === paginaActual
-                            ? 'bg-purple-600 text-white'
+                            ? 'bg-primary text-white'
                             : 'border border-gray-300 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-700 dark:text-gray-300'
                         }`}
                       >

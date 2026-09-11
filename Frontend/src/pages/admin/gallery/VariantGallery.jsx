@@ -132,7 +132,7 @@ const VariantGallery = () => {
             placeholder="Buscar por SKU o nombre de producto..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary outline-none"
           />
         </div>
         
@@ -188,7 +188,7 @@ const VariantGallery = () => {
 
                     {/* Product Prefix Badge */}
                     <div className="absolute bottom-2 left-2 right-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm px-2 py-1.5 rounded-lg border border-gray-100 dark:border-slate-700 shadow-sm transition-transform duration-300 transform translate-y-12 group-hover:translate-y-0">
-                        <p className="text-[11px] font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-tighter truncate">PRODUCTO</p>
+                        <p className="text-[11px] font-semibold text-primary dark:text-primary uppercase tracking-tighter truncate">PRODUCTO</p>
                         <p className="text-xs font-semibold text-gray-900 dark:text-white truncate">{item.titulo}</p>
                     </div>
                 </div>
@@ -204,7 +204,7 @@ const VariantGallery = () => {
                     <div className="mt-auto space-y-2">
                         <div className="flex flex-wrap gap-1">
                             {item.atributos.split('/').map((attr, idx) => (
-                                <span key={idx} className="inline-block px-2 py-0.5 bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-300 rounded text-[11px] font-medium border border-purple-100 dark:border-purple-800/30">
+                                <span key={idx} className="inline-block px-2 py-0.5 bg-primary-fixed dark:bg-tertiary/20 text-primary dark:text-primary rounded text-[11px] font-medium border border-primary-fixed dark:border-tertiary/30">
                                     {attr.trim()}
                                 </span>
                             ))}

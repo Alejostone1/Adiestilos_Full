@@ -378,7 +378,7 @@ export default function ProductosPage() {
           <div className="absolute top-2 left-2 flex gap-1">
             {producto.tieneColores && (
               <div className="bg-white/90 backdrop-blur-sm rounded-full p-1.5" title="Tiene colores">
-                <Palette className="w-3 h-3 text-purple-600" />
+                <Palette className="w-3 h-3 text-primary" />
               </div>
             )}
             {producto.tieneTallas && (
@@ -448,7 +448,7 @@ export default function ProductosPage() {
             <button
               title="Gestionar variantes"
               onClick={() => navigate(`/admin/productos/${producto.idProducto}/variantes`)}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-600 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-primary-fixed hover:bg-primary-fixed-dim/50 text-primary text-sm font-medium transition-colors"
             >
               <Layers className="w-4 h-4" />
               Variantes
@@ -914,7 +914,7 @@ export default function ProductosPage() {
               {productoSeleccionado.variantes && productoSeleccionado.variantes.length > 0 && (
                 <div className="mt-10 border-t pt-8">
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                    <Layers className="w-5 h-5 text-purple-600" />
+                    <Layers className="w-5 h-5 text-primary" />
                     Detalle de Variantes y Stock
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

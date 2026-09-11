@@ -188,10 +188,10 @@ export default function UsuariosPage() {
   // UI Components
   const getColorClasses = (color) => {
     const colorMap = {
-      blue: 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400',
+      blue: 'bg-primary-fixed dark:bg-tertiary/20 text-primary dark:text-primary',
       emerald: 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400',
       amber: 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400',
-      purple: 'bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400'
+      purple: 'bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400'
     };
     return colorMap[color] || colorMap.blue;
   };
@@ -219,7 +219,7 @@ export default function UsuariosPage() {
       {/* Header Section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6">
         <div className="flex items-center gap-3 md:gap-4">
-          <div className="card-3d p-2.5 md:p-3 bg-indigo-600 rounded-2xl text-white shadow-lg shadow-indigo-200 dark:shadow-none shrink-0">
+          <div className="card-3d p-2.5 md:p-3 bg-primary rounded-2xl text-white shadow-lg shadow-primary dark:shadow-none shrink-0">
             <Users size={26} className="md:hidden" />
             <Users size={32} className="hidden md:block" />
           </div>
@@ -245,7 +245,7 @@ export default function UsuariosPage() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleOpenModal()}
-            className="card-3d card-elevated flex flex-1 md:flex-none items-center justify-center gap-2 px-4 md:px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold text-sm md:text-base shadow-lg shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all"
+            className="card-3d card-elevated flex flex-1 md:flex-none items-center justify-center gap-2 px-4 md:px-6 py-3 bg-primary text-white rounded-xl font-semibold text-sm md:text-base shadow-lg shadow-primary dark:shadow-none hover:bg-tertiary transition-all"
           >
             <Plus size={20} />
             <span>Nuevo Registro</span>
@@ -291,11 +291,11 @@ export default function UsuariosPage() {
         {/* Filters & Tools */}
         <div className="p-4 sm:p-6 border-b border-gray-50 dark:border-slate-700/50 flex flex-col lg:flex-row items-stretch lg:items-center gap-3 sm:gap-4 lg:gap-6 justify-between bg-gray-50/30 dark:bg-slate-800/30">
           <div className="relative w-full lg:max-w-md group">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-indigo-500 transition-colors" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-primary transition-colors" size={20} />
             <input
               type="text"
               placeholder="Buscar por nombre, correo o @usuario..."
-              className="card-3d w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-700/40 border-0 rounded-2xl focus:outline-none focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/20 focus:border-indigo-400 dark:text-white transition-all shadow-sm"
+              className="card-3d w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-700/40 border-0 rounded-2xl focus:outline-none focus:ring-4 focus:ring-primary dark:focus:ring-primary/20 focus:border-primary dark:text-white transition-all shadow-sm"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -364,15 +364,15 @@ export default function UsuariosPage() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.03 }}
-                      className="hover:bg-indigo-50/30 dark:hover:bg-indigo-900/10 transition-colors group"
+                      className="hover:bg-primary-fixed/30 dark:hover:bg-tertiary/10 transition-colors group"
                     >
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
-                          <div className={`card-3d w-12 h-12 rounded-2xl flex items-center justify-center font-semibold text-white shadow-lg ${u.estado === 'activo' ? 'bg-gradient-to-br from-indigo-500 to-blue-600 shadow-blue-200/50 dark:shadow-none' : 'bg-gray-400'}`}>
+                          <div className={`card-3d w-12 h-12 rounded-2xl flex items-center justify-center font-semibold text-white shadow-lg ${u.estado === 'activo' ? 'bg-gradient-to-br from-primary to-tertiary shadow-primary/50 dark:shadow-none' : 'bg-gray-400'}`}>
                             {u.nombres?.charAt(0)}{u.apellidos?.charAt(0)}
                           </div>
                           <div>
-                            <div className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">{u.nombres} {u.apellidos}</div>
+                            <div className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary transition-colors">{u.nombres} {u.apellidos}</div>
                             <div className="text-xs font-mono text-gray-400 dark:text-gray-500">@{u.usuario}</div>
                           </div>
                         </div>
@@ -380,7 +380,7 @@ export default function UsuariosPage() {
                       <td className="px-6 py-5">
                         <div className="space-y-1.5 text-sm">
                           <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300">
-                            <Mail size={14} className="text-indigo-500" />
+                            <Mail size={14} className="text-primary" />
                             {u.correoElectronico}
                           </div>
                           {u.telefono && (
@@ -394,7 +394,7 @@ export default function UsuariosPage() {
                       <td className="px-6 py-5">
                         <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-tight
                           ${u.rol?.nombreRol === 'Administrador' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' : 
-                            u.rol?.nombreRol === 'Vendedor' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' : 
+                            u.rol?.nombreRol === 'Vendedor' ? 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary' : 
                             'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>
                           <Shield size={12} />
                           {u.rol?.nombreRol}
@@ -403,7 +403,7 @@ export default function UsuariosPage() {
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-4">
                           <div className="flex flex-col items-center">
-                            <ShoppingBag size={18} className="text-indigo-400" />
+                            <ShoppingBag size={18} className="text-primary" />
                             <span className="text-xs font-semibold text-gray-700 dark:text-gray-300 mt-1">{u._count?.ventasComoCliente || 0}</span>
                           </div>
                           <div className="w-px h-8 bg-gray-100 dark:bg-gray-800" />
@@ -431,7 +431,7 @@ export default function UsuariosPage() {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => { setSelectedUser(u); setIsDetailsOpen(true); }}
-                            className="card-3d p-2 text-indigo-500 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
+                            className="card-3d p-2 text-primary hover:bg-primary-fixed dark:hover:bg-tertiary/30 rounded-lg transition-colors"
                             title="Ver Perfil"
                           >
                             <Eye size={18} />
@@ -463,7 +463,7 @@ export default function UsuariosPage() {
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => navigate(`/admin/usuarios/${u.idUsuario}/creditos`)}
-                            className="card-3d p-2 text-violet-500 hover:bg-violet-50 dark:hover:bg-violet-900/30 rounded-lg transition-colors"
+                            className="card-3d p-2 text-primary hover:bg-primary-fixed dark:hover:bg-tertiary/30 rounded-lg transition-colors"
                             title="Ver Créditos"
                           >
                             <CreditCard size={18} />
@@ -497,10 +497,10 @@ export default function UsuariosPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.03 }}
-                  className="p-4 sm:p-5 active:bg-indigo-50/40 dark:active:bg-indigo-900/10 transition-colors"
+                  className="p-4 sm:p-5 active:bg-primary-fixed/40 dark:active:bg-tertiary/10 transition-colors"
                 >
                   <div className="flex items-start gap-3">
-                    <div className={`card-3d w-11 h-11 shrink-0 rounded-xl flex items-center justify-center font-semibold text-white text-sm shadow-lg ${u.estado === 'activo' ? 'bg-gradient-to-br from-indigo-500 to-blue-600 shadow-blue-200/50 dark:shadow-none' : 'bg-gray-400'}`}>
+                    <div className={`card-3d w-11 h-11 shrink-0 rounded-xl flex items-center justify-center font-semibold text-white text-sm shadow-lg ${u.estado === 'activo' ? 'bg-gradient-to-br from-primary to-tertiary shadow-primary/50 dark:shadow-none' : 'bg-gray-400'}`}>
                       {u.nombres?.charAt(0)}{u.apellidos?.charAt(0)}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -521,7 +521,7 @@ export default function UsuariosPage() {
 
                       <div className="mt-2 space-y-1 text-xs">
                         <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-300 truncate">
-                          <Mail size={12} className="text-indigo-500 shrink-0" />
+                          <Mail size={12} className="text-primary shrink-0" />
                           <span className="truncate">{u.correoElectronico}</span>
                         </div>
                         {u.telefono && (
@@ -535,7 +535,7 @@ export default function UsuariosPage() {
                       <div className="mt-3 flex items-center justify-between gap-2 flex-wrap">
                         <span className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[10px] font-semibold uppercase tracking-tight
                           ${u.rol?.nombreRol === 'Administrador' ? 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400' :
-                            u.rol?.nombreRol === 'Vendedor' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                            u.rol?.nombreRol === 'Vendedor' ? 'bg-primary-fixed text-tertiary dark:bg-tertiary/30 dark:text-primary' :
                             'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400'}`}>
                           <Shield size={11} />
                           {u.rol?.nombreRol}
@@ -544,7 +544,7 @@ export default function UsuariosPage() {
                         <div className="flex items-center gap-1">
                           <button
                             onClick={() => { setSelectedUser(u); setIsDetailsOpen(true); }}
-                            className="card-3d p-2 text-indigo-500 active:bg-indigo-50 dark:active:bg-indigo-900/30 rounded-lg"
+                            className="card-3d p-2 text-primary active:bg-primary-fixed dark:active:bg-tertiary/30 rounded-lg"
                             title="Ver Perfil"
                           >
                             <Eye size={16} />
@@ -565,7 +565,7 @@ export default function UsuariosPage() {
                           </button>
                           <button
                             onClick={() => navigate(`/admin/usuarios/${u.idUsuario}/creditos`)}
-                            className="card-3d p-2 text-violet-500 active:bg-violet-50 dark:active:bg-violet-900/30 rounded-lg"
+                            className="card-3d p-2 text-primary active:bg-primary-fixed dark:active:bg-tertiary/30 rounded-lg"
                             title="Ver Créditos"
                           >
                             <CreditCard size={16} />
@@ -583,7 +583,7 @@ export default function UsuariosPage() {
         {/* Footer info */}
         <div className="p-6 bg-gray-50/50 dark:bg-slate-800/30 border-t border-gray-100 dark:border-slate-700/50 flex justify-between items-center">
             <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-              Mostrando <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{filteredUsers.length}</span> de <span className="font-semibold">{usuarios.length}</span> registros totales
+              Mostrando <span className="text-primary dark:text-primary font-semibold">{filteredUsers.length}</span> de <span className="font-semibold">{usuarios.length}</span> registros totales
             </p>
             <div className="flex gap-2">
               <button disabled className="card-3d px-4 py-2 bg-white dark:bg-slate-800/40 rounded-xl text-sm font-semibold text-gray-400 dark:text-gray-600 disabled:cursor-not-allowed">Anterior</button>
@@ -607,7 +607,7 @@ export default function UsuariosPage() {
               <div className="card-3d p-5 sm:p-8 border-b border-gray-50 dark:border-slate-700/50 flex items-center justify-between bg-white dark:bg-slate-800/60 sticky top-0 z-10">
                 <div>
                   <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 dark:text-white flex items-center gap-2 sm:gap-3">
-                    <div className={`card-3d p-1.5 sm:p-2 rounded-xl ${isEditing ? 'bg-amber-100 text-amber-600' : 'bg-indigo-100 text-indigo-600'}`}>
+                    <div className={`card-3d p-1.5 sm:p-2 rounded-xl ${isEditing ? 'bg-amber-100 text-amber-600' : 'bg-primary-fixed text-primary'}`}>
                       {isEditing ? <Edit3 size={20} className="sm:w-6 sm:h-6" /> : <UserPlus size={20} className="sm:w-6 sm:h-6" />}
                     </div>
                     {isEditing ? 'Actualizar Información' : 'Nuevo Colaborador / Cliente'}
@@ -622,14 +622,14 @@ export default function UsuariosPage() {
               {/* Form Content */}
               <form onSubmit={handleSave} className="p-5 sm:p-8 space-y-6 sm:space-y-8 flex-1">
                 <div className="space-y-6">
-                  <h4 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 dark:text-indigo-400">Datos Personales</h4>
+                  <h4 className="text-xs font-semibold uppercase tracking-wide text-primary dark:text-primary">Datos Personales</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                        <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">Nombres</label>
                        <input 
                         required
                         type="text" 
-                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all"
+                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all"
                         placeholder="Ej: Juan Camilo"
                         value={formData.nombres}
                         onChange={(e) => setFormData({...formData, nombres: e.target.value})}
@@ -640,7 +640,7 @@ export default function UsuariosPage() {
                        <input 
                         required
                         type="text" 
-                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all"
+                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all"
                         placeholder="Ej: Pérez García"
                         value={formData.apellidos}
                         onChange={(e) => setFormData({...formData, apellidos: e.target.value})}
@@ -654,7 +654,7 @@ export default function UsuariosPage() {
                       <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                       <input 
                         type="text" 
-                        className="card-3d w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all"
+                        className="card-3d w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all"
                         placeholder="Calle, Carrera, Barrio..."
                         value={formData.direccion}
                         onChange={(e) => setFormData({...formData, direccion: e.target.value})}
@@ -664,14 +664,14 @@ export default function UsuariosPage() {
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 dark:text-indigo-400">Credenciales y Acceso</h4>
+                  <h4 className="text-xs font-semibold uppercase tracking-wide text-primary dark:text-primary">Credenciales y Acceso</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                        <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">@Usuario (Login)</label>
                        <input 
                         required
                         type="text" 
-                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all shadow-inner"
+                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all shadow-inner"
                         placeholder="nombre_usuario"
                         value={formData.usuario}
                         onChange={(e) => setFormData({...formData, usuario: e.target.value})}
@@ -682,7 +682,7 @@ export default function UsuariosPage() {
                        <input 
                         required
                         type="email" 
-                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all"
+                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all"
                         placeholder="ejemplo@correo.com"
                         value={formData.correoElectronico}
                         onChange={(e) => setFormData({...formData, correoElectronico: e.target.value})}
@@ -707,13 +707,13 @@ export default function UsuariosPage() {
                 </div>
 
                 <div className="space-y-6">
-                  <h4 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 dark:text-indigo-400">Permisos y Estado</h4>
+                  <h4 className="text-xs font-semibold uppercase tracking-wide text-primary dark:text-primary">Permisos y Estado</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                        <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">Perfil / Rol</label>
                        <select 
                         required
-                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all"
+                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all"
                         value={formData.idRol}
                         onChange={(e) => setFormData({...formData, idRol: e.target.value})}
                        >
@@ -725,7 +725,7 @@ export default function UsuariosPage() {
                        <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">Teléfono Móvil</label>
                        <input 
                         type="text" 
-                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-indigo-50 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all"
+                        className="card-3d w-full px-4 py-3 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-2xl focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all"
                         placeholder="300 000 0000"
                         value={formData.telefono}
                         onChange={(e) => setFormData({...formData, telefono: e.target.value})}
@@ -733,17 +733,17 @@ export default function UsuariosPage() {
                     </div>
                   </div>
                   
-                  <div className="p-4 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-2xl border border-indigo-100 dark:border-indigo-900/30">
+                  <div className="p-4 bg-primary-fixed/50 dark:bg-tertiary/10 rounded-2xl border border-primary-fixed dark:border-tertiary/30">
                     <label className="flex items-center gap-3 cursor-pointer">
                       <input 
                         type="checkbox" 
-                        className="w-5 h-5 rounded-md text-indigo-600 focus:ring-indigo-500"
+                        className="w-5 h-5 rounded-md text-primary focus:ring-primary"
                         checked={formData.estado === 'activo'}
                         onChange={(e) => setFormData({...formData, estado: e.target.checked ? 'activo' : 'inactivo'})}
                       />
                       <div>
-                        <span className="text-sm font-semibold text-indigo-700 dark:text-indigo-400">Usuario Activo</span>
-                        <p className="text-xs text-indigo-600/60 dark:text-indigo-400/50">Permitir inmediatamente el ingreso al sistema.</p>
+                        <span className="text-sm font-semibold text-tertiary dark:text-primary">Usuario Activo</span>
+                        <p className="text-xs text-primary/60 dark:text-primary/50">Permitir inmediatamente el ingreso al sistema.</p>
                       </div>
                     </label>
                   </div>
@@ -759,7 +759,7 @@ export default function UsuariosPage() {
                   </button>
                   <button 
                     type="submit"
-                    className="card-3d card-elevated flex-[2] py-4 px-6 bg-indigo-600 text-white rounded-2xl font-semibold text-lg shadow-xl shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 dark:hover:bg-indigo-700 hover:scale-[1.01] active:scale-[0.99] transition-all"
+                    className="card-3d card-elevated flex-[2] py-4 px-6 bg-primary text-white rounded-2xl font-semibold text-lg shadow-xl shadow-primary dark:shadow-primary/20 hover:bg-tertiary dark:hover:bg-tertiary hover:scale-[1.01] active:scale-[0.99] transition-all"
                   >
                     {isEditing ? 'Guardar Cambios' : 'Confirmar Registro'}
                   </button>
@@ -789,21 +789,21 @@ export default function UsuariosPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-12">
                 {/* Left Side: Profile Summary */}
-                <div className="lg:col-span-5 bg-gradient-to-br from-indigo-600 to-blue-700 p-6 sm:p-10 text-white flex flex-col items-center text-center">
+                <div className="lg:col-span-5 bg-gradient-to-br from-primary to-tertiary p-6 sm:p-10 text-white flex flex-col items-center text-center">
                   <div className="w-28 h-28 sm:w-40 sm:h-40 bg-white/20 backdrop-blur-md rounded-[2.2rem] sm:rounded-[3rem] p-1.5 border border-white/20 shadow-2xl mb-4 sm:mb-6">
-                    <div className="w-full h-full bg-white rounded-[2rem] sm:rounded-[2.8rem] flex items-center justify-center text-3xl sm:text-5xl font-semibold text-indigo-600">
+                    <div className="w-full h-full bg-white rounded-[2rem] sm:rounded-[2.8rem] flex items-center justify-center text-3xl sm:text-5xl font-semibold text-primary">
                       {selectedUser.nombres?.charAt(0)}{selectedUser.apellidos?.charAt(0)}
                     </div>
                   </div>
 
                   <h3 className="text-xl sm:text-3xl font-semibold tracking-tight">{selectedUser.nombres} {selectedUser.apellidos}</h3>
-                  <p className="text-indigo-100 font-medium opacity-80 mt-1">@{selectedUser.usuario}</p>
+                  <p className="text-primary-fixed font-medium opacity-80 mt-1">@{selectedUser.usuario}</p>
                   
                   <div className="mt-8 px-6 py-3 bg-white/10 backdrop-blur rounded-2xl border border-white/10 w-full">
-                    <div className="text-xs font-semibold uppercase text-indigo-200 tracking-wide mb-1 text-left">Asignación</div>
+                    <div className="text-xs font-semibold uppercase text-primary-fixed tracking-wide mb-1 text-left">Asignación</div>
                     <div className="flex items-center justify-between">
                       <span className="font-semibold flex items-center gap-2"><Shield size={16}/> {selectedUser.rol?.nombreRol}</span>
-                      <span className="text-xs bg-white text-indigo-600 px-2 py-0.5 rounded-lg font-semibold">{selectedUser.estado}</span>
+                      <span className="text-xs bg-white text-primary px-2 py-0.5 rounded-lg font-semibold">{selectedUser.estado}</span>
                     </div>
                   </div>
 
@@ -811,21 +811,21 @@ export default function UsuariosPage() {
                      <div className="bg-black/10 rounded-2xl p-3 sm:p-4 text-left border border-white/5">
                         <TrendingUp size={18} className="mb-1.5 sm:mb-2 opacity-60" />
                         <div className="text-lg sm:text-2xl font-semibold">{selectedUser._count?.ventasComoCliente || 0}</div>
-                        <div className="text-[10px] sm:text-[11px] uppercase font-semibold text-indigo-200">Total Compras</div>
+                        <div className="text-[10px] sm:text-[11px] uppercase font-semibold text-primary-fixed">Total Compras</div>
                      </div>
                      <div className="bg-black/10 rounded-2xl p-3 sm:p-4 text-left border border-white/5">
                         <Wallet size={18} className="mb-1.5 sm:mb-2 opacity-60" />
                         <div className="text-base sm:text-lg font-semibold leading-tight">
                             <PrecioFormateado precio={selectedUser.resumenCredito?.saldoTotal || 0} />
                         </div>
-                        <div className="text-[10px] sm:text-[11px] uppercase font-semibold text-indigo-200">Saldo Deuda</div>
+                        <div className="text-[10px] sm:text-[11px] uppercase font-semibold text-primary-fixed">Saldo Deuda</div>
                      </div>
                   </div>
 
                   <div className="mt-6 sm:mt-auto pt-6 sm:pt-10 w-full flex flex-col gap-3">
                      <button 
                         onClick={() => { setIsDetailsOpen(false); handleOpenModal(selectedUser); }}
-                        className="w-full py-4 bg-white text-indigo-700 rounded-2xl font-semibold shadow-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                        className="w-full py-4 bg-white text-tertiary rounded-2xl font-semibold shadow-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
                       >
                        <Edit3 size={18} />
                        Editar Perfil
@@ -839,7 +839,7 @@ export default function UsuariosPage() {
 
                   <div className="space-y-5 sm:space-y-8">
                     <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="p-2.5 sm:p-3 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-2xl shrink-0">
+                      <div className="p-2.5 sm:p-3 bg-primary-fixed dark:bg-tertiary/20 text-primary rounded-2xl shrink-0">
                         <Mail size={20} className="sm:w-6 sm:h-6" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -869,7 +869,7 @@ export default function UsuariosPage() {
                     </div>
 
                     <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="p-2.5 sm:p-3 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded-2xl shrink-0">
+                      <div className="p-2.5 sm:p-3 bg-primary-fixed dark:bg-tertiary/20 text-primary rounded-2xl shrink-0">
                         <Calendar size={20} className="sm:w-6 sm:h-6" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -883,20 +883,20 @@ export default function UsuariosPage() {
 
                   <div className="mt-8 sm:mt-12 p-5 sm:p-6 bg-gray-50 dark:bg-slate-700/30 rounded-3xl border border-dashed border-gray-200 dark:border-slate-600/50">
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2 text-sm sm:text-base">
-                       <History size={18} className="text-indigo-500" />
+                       <History size={18} className="text-primary" />
                        Accesos Rápidos
                     </h5>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                        <button 
                         onClick={() => navigate(`/admin/usuarios/${selectedUser.idUsuario}/ventas`)}
-                        className="card-3d py-3 px-4 bg-white dark:bg-slate-700/40 border border-gray-200 dark:border-slate-600 rounded-2xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:border-indigo-500 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-between"
+                        className="card-3d py-3 px-4 bg-white dark:bg-slate-700/40 border border-gray-200 dark:border-slate-600 rounded-2xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:border-primary dark:hover:border-primary hover:text-primary dark:hover:text-primary transition-all flex items-center justify-between"
                        >
                          Historial Ventas
                          <ArrowRight size={16} />
                        </button>
                        <button 
                         onClick={() => navigate(`/admin/usuarios/${selectedUser.idUsuario}/creditos`)}
-                        className="card-3d py-3 px-4 bg-white dark:bg-slate-700/40 border border-gray-200 dark:border-slate-600 rounded-2xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:border-indigo-500 dark:hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-between"
+                        className="card-3d py-3 px-4 bg-white dark:bg-slate-700/40 border border-gray-200 dark:border-slate-600 rounded-2xl text-sm font-semibold text-gray-600 dark:text-gray-300 hover:border-primary dark:hover:border-primary hover:text-primary dark:hover:text-primary transition-all flex items-center justify-between"
                        >
                          Gestión Créditos
                          <ArrowRight size={16} />

@@ -81,8 +81,8 @@ const WizardStep4 = ({ formData, onUpdateFormData }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3">
-        <div className="text-blue-600 dark:text-blue-400 text-sm">
+      <div className="bg-primary-fixed dark:bg-tertiary/20 border border-primary-fixed dark:border-tertiary rounded-lg p-4 flex items-start gap-3">
+        <div className="text-primary dark:text-primary text-sm">
           ℹ️ Carga una imagen principal (requerida) e imágenes adicionales para mejorar la presentación del producto.
         </div>
       </div>
@@ -107,13 +107,13 @@ const WizardStep4 = ({ formData, onUpdateFormData }) => {
             transition-all duration-300 bg-gradient-to-br
             ${previewPrincipal
               ? 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/10'
-              : 'border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/10 hover:border-blue-500 dark:hover:border-blue-500'
+              : 'border-primary dark:border-tertiary bg-primary-fixed dark:bg-tertiary/10 hover:border-primary dark:hover:border-primary'
             }
           `}
         >
           {isLoadingPreview ? (
             <div className="flex flex-col items-center justify-center gap-2">
-              <Loader2 className="w-8 h-8 text-blue-600 dark:text-blue-400 animate-spin" />
+              <Loader2 className="w-8 h-8 text-primary dark:text-primary animate-spin" />
               <p className="text-sm text-gray-600 dark:text-gray-400">Procesando imagen...</p>
             </div>
           ) : previewPrincipal ? (
@@ -130,8 +130,8 @@ const WizardStep4 = ({ formData, onUpdateFormData }) => {
             </>
           ) : (
             <div className="flex flex-col items-center justify-center gap-2">
-              <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                <Upload className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              <div className="p-3 bg-primary-fixed dark:bg-tertiary/30 rounded-lg">
+                <Upload className="w-6 h-6 text-primary dark:text-primary" />
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-900 dark:text-white">
@@ -165,7 +165,7 @@ const WizardStep4 = ({ formData, onUpdateFormData }) => {
 
         <div
           onClick={() => inputRefAdicionales.current?.click()}
-          className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center cursor-pointer transition-all duration-300 hover:border-blue-400 dark:hover:border-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800/30"
+          className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-xl p-8 text-center cursor-pointer transition-all duration-300 hover:border-primary dark:hover:border-primary hover:bg-gray-50 dark:hover:bg-gray-800/30"
         >
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-lg">

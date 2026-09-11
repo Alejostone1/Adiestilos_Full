@@ -35,8 +35,8 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 flex items-start gap-3">
-        <div className="text-blue-600 dark:text-blue-400 text-sm">
+      <div className="bg-primary-fixed dark:bg-tertiary/20 border border-primary-fixed dark:border-tertiary rounded-lg p-4 flex items-start gap-3">
+        <div className="text-primary dark:text-primary text-sm">
           ℹ️ Completa la descripción y selecciona un proveedor (opcional). Elige la unidad de medida correcta.
         </div>
       </div>
@@ -51,7 +51,7 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
           onChange={(e) => onUpdateFormData({ descripcion: e.target.value })}
           placeholder="Describe los detalles del producto, características especiales, material, etc..."
           rows={4}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           {formData.descripcion.length}/500 caracteres
@@ -72,7 +72,7 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
               value={searchProveedor}
               onChange={(e) => setSearchProveedor(e.target.value)}
               placeholder="Buscar proveedor..."
-              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
+              className="w-full pl-9 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-sm"
             />
           </div>
 
@@ -116,7 +116,7 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
                     w-full text-left px-4 py-3 border-b border-gray-200 dark:border-gray-700 last:border-b-0
                     transition-colors hover:bg-gray-50 dark:hover:bg-gray-700
                     ${formData.idProveedor === proveedor.idProveedor
-                      ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium'
+                      ? 'bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary font-medium'
                       : 'text-gray-900 dark:text-white'
                     }
                   `}
@@ -151,8 +151,8 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
               className={`
                 px-4 py-2.5 rounded-lg font-medium transition-all border-2
                 ${formData.unidadMedida === unidad
-                  ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                  : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-blue-400'
+                  ? 'border-primary bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary'
+                  : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-primary'
                 }
               `}
             >
@@ -172,8 +172,8 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
             className={`
               flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium transition-all border-2
               ${formData.tieneColores
-                ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-blue-400'
+                ? 'border-primary bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary'
+                : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-primary'
               }
             `}
           >
@@ -190,8 +190,8 @@ const WizardStep2 = ({ formData, onUpdateFormData }) => {
             className={`
               flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium transition-all border-2
               ${formData.tieneTallas
-                ? 'border-blue-600 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-blue-400'
+                ? 'border-primary bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary'
+                : 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:border-primary'
               }
             `}
           >

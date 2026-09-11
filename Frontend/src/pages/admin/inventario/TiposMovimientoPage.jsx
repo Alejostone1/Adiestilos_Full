@@ -161,7 +161,7 @@ const TiposMovimientoPage = () => {
             type="link"
             icon={<EditOutlined />}
             onClick={() => abrirModal(record)}
-            className="dark:text-blue-400 hover:dark:text-blue-300"
+            className="dark:text-primary hover:dark:text-primary"
           >
             Editar
           </Button>
@@ -202,7 +202,7 @@ const TiposMovimientoPage = () => {
           type="primary"
           icon={<PlusOutlined />}
           onClick={() => abrirModal()}
-          className="dark:bg-blue-600 dark:border-blue-600"
+          className="dark:bg-primary dark:border-primary"
         >
           Nuevo Tipo
         </Button>
@@ -291,7 +291,7 @@ const TiposMovimientoPage = () => {
               <Button 
                 type="primary" 
                 htmlType="submit"
-                className="dark:bg-blue-600 dark:border-blue-600"
+                className="dark:bg-primary dark:border-primary"
               >
                 {editingTipo ? 'Actualizar' : 'Crear'}
               </Button>

@@ -45,7 +45,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
     <div className="w-full space-y-6">
       <div className="flex flex-col gap-1">
         <h3 className="text-lg font-semibold text-gray-800 dark:text-white flex items-center gap-2">
-          <div className="h-8 w-8 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600">
+          <div className="h-8 w-8 rounded-xl bg-primary-fixed dark:bg-tertiary/30 flex items-center justify-center text-primary">
             <FiUser className="h-5 w-5" />
           </div>
           Información del Cliente
@@ -56,11 +56,11 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
       <div className="relative">
         <div className="relative w-full group">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <FiSearch className={`h-5 w-5 transition-colors ${mostrarOpciones ? 'text-indigo-500' : 'text-gray-400'}`} />
+            <FiSearch className={`h-5 w-5 transition-colors ${mostrarOpciones ? 'text-primary' : 'text-gray-400'}`} />
           </div>
           <input
             type="text"
-            className="w-full bg-white dark:bg-gray-800 border-2 border-transparent ring-1 ring-gray-100 dark:ring-gray-700/50 rounded-[1.5rem] py-4 pl-12 pr-12 text-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all shadow-sm font-medium"
+            className="w-full bg-white dark:bg-gray-800 border-2 border-transparent ring-1 ring-gray-100 dark:ring-gray-700/50 rounded-[1.5rem] py-4 pl-12 pr-12 text-sm focus:ring-4 focus:ring-primary/10 focus:border-primary transition-all shadow-sm font-medium"
             placeholder="Buscar por nombre, documento o correo comercial..."
             value={consulta}
             onChange={(e) => {
@@ -96,7 +96,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
               <div className="overflow-auto max-h-80 custom-scrollbar py-2">
                 {cargando ? (
                   <div className="py-12 text-center">
-                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600 mx-auto"></div>
+                    <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary mx-auto"></div>
                     <p className="mt-3 text-xs font-semibold text-gray-400 uppercase tracking-wide">Sincronizando Clientes</p>
                   </div>
                 ) : clientesFiltrados.length === 0 ? (
@@ -113,7 +113,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                       key={cliente.idUsuario}
                       className={`relative cursor-pointer select-none py-4 px-6 mx-2 my-1 rounded-2xl transition-all duration-200 group ${
                         seleccionado?.idUsuario === cliente.idUsuario
-                          ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none'
+                          ? 'bg-primary text-white shadow-lg shadow-primary dark:shadow-none'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50'
                       }`}
                       onClick={() => handleSeleccionar(cliente)}
@@ -122,7 +122,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                         <div className={`h-11 w-11 rounded-xl flex items-center justify-center text-lg font-semibold shadow-sm ${
                           seleccionado?.idUsuario === cliente.idUsuario
                             ? 'bg-white/20 text-white'
-                            : 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600'
+                            : 'bg-primary-fixed dark:bg-tertiary/30 text-primary'
                         }`}>
                           {cliente.nombres[0]}{cliente.apellidos[0]}
                         </div>
@@ -131,7 +131,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                             {cliente.nombres} {cliente.apellidos}
                           </span>
                           <div className={`flex items-center gap-4 mt-0.5 text-[11px] font-semibold uppercase tracking-wider ${
-                             seleccionado?.idUsuario === cliente.idUsuario ? 'text-indigo-100' : 'text-gray-400'
+                             seleccionado?.idUsuario === cliente.idUsuario ? 'text-primary-fixed' : 'text-gray-400'
                           }`}>
                             <span className="flex items-center gap-1">
                               <FiFileText className="h-3 w-3" />
@@ -144,7 +144,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                           </div>
                         </div>
                         {seleccionado?.idUsuario === cliente.idUsuario && (
-                          <div className="h-6 w-6 rounded-full bg-white flex items-center justify-center text-indigo-600">
+                          <div className="h-6 w-6 rounded-full bg-white flex items-center justify-center text-primary">
                             <FiCheck className="h-4 w-4" />
                           </div>
                         )}
@@ -160,9 +160,9 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
 
       {seleccionado && (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 dark:from-indigo-600 dark:to-indigo-800 rounded-[2rem] p-6 text-white shadow-xl shadow-indigo-200 dark:shadow-none relative overflow-hidden group">
+          <div className="bg-gradient-to-br from-primary to-tertiary dark:from-primary dark:to-tertiary rounded-[2rem] p-6 text-white shadow-xl shadow-primary dark:shadow-none relative overflow-hidden group">
             <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all duration-700" />
-            <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-indigo-400/20 rounded-full blur-2xl" />
+            <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/20 rounded-full blur-2xl" />
             
             <div className="relative flex flex-col md:flex-row items-center gap-6">
               <div className="h-20 w-20 rounded-[1.5rem] bg-white/20 backdrop-blur-md flex items-center justify-center text-3xl font-semibold border border-white/30 shadow-inner">
@@ -173,11 +173,11 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                 <h4 className="text-2xl font-semibold tracking-tight">{seleccionado.nombres} {seleccionado.apellidos}</h4>
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-3">
                   <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10">
-                    <FiFileText className="h-4 w-4 text-indigo-200" />
+                    <FiFileText className="h-4 w-4 text-primary-fixed" />
                     <span className="text-xs font-semibold uppercase tracking-wide">{seleccionado.usuario || 'ID: NO REGISTRADO'}</span>
                   </div>
                   <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10">
-                    <FiMail className="h-4 w-4 text-indigo-200" />
+                    <FiMail className="h-4 w-4 text-primary-fixed" />
                     <span className="text-xs font-semibold">{seleccionado.correoElectronico}</span>
                   </div>
                 </div>
@@ -185,14 +185,14 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
 
               <div className="grid grid-cols-2 gap-3 w-full md:w-auto">
                 <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <p className="text-[11px] font-semibold uppercase text-indigo-200 mb-1">Teléfono</p>
+                  <p className="text-[11px] font-semibold uppercase text-primary-fixed mb-1">Teléfono</p>
                   <div className="flex items-center gap-2">
                     <FiPhone className="h-3 w-3" />
                     <span className="text-xs font-semibold">{seleccionado.telefono || 'Sin registro'}</span>
                   </div>
                 </div>
                 <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <p className="text-[11px] font-semibold uppercase text-indigo-200 mb-1">Ubicación</p>
+                  <p className="text-[11px] font-semibold uppercase text-primary-fixed mb-1">Ubicación</p>
                   <div className="flex items-center gap-2">
                     <FiMapPin className="h-3 w-3" />
                     <span className="text-xs font-semibold truncate max-w-[100px]">{seleccionado.direccion || 'N/A'}</span>
@@ -204,11 +204,11 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
             <div className="mt-6 pt-4 border-t border-white/10 flex justify-between items-center relative">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-indigo-100">Cliente Verificado y Activo</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-primary-fixed">Cliente Verificado y Activo</span>
               </div>
               <button 
                 onClick={() => alSeleccionar(null)}
-                className="text-[11px] font-semibold uppercase tracking-wide bg-white text-indigo-600 px-4 py-2 rounded-xl shadow-lg hover:bg-gray-100 transition-colors"
+                className="text-[11px] font-semibold uppercase tracking-wide bg-white text-primary px-4 py-2 rounded-xl shadow-lg hover:bg-gray-100 transition-colors"
               >
                 Cambiar Cliente
               </button>

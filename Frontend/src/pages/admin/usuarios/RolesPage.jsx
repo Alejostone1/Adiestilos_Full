@@ -205,7 +205,7 @@ export default function RolesPage() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
         <div className="space-y-1.5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-full text-[11px] font-semibold uppercase tracking-wide">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary rounded-full text-[11px] font-semibold uppercase tracking-wide">
             <Lock size={12} />
             Gobernanza de Datos
           </div>
@@ -227,7 +227,7 @@ export default function RolesPage() {
           </button>
           <button
             onClick={() => handleOpenDrawer()}
-            className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-semibold text-sm shadow-md shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
+            className="px-5 py-2.5 bg-primary text-white rounded-xl font-semibold text-sm shadow-md shadow-primary dark:shadow-none hover:bg-tertiary hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
           >
             <Plus size={18} />
             Crear Nuevo Perfil
@@ -244,7 +244,7 @@ export default function RolesPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: idx * 0.05 }}
-              className={`card-3d card-elevated relative group bg-white dark:bg-slate-800/60 rounded-2xl p-5 border border-gray-100 dark:border-slate-700/50 hover:border-indigo-400 dark:hover:border-indigo-600 transition-all overflow-hidden ${!role.activo ? 'grayscale' : ''}`}
+              className={`card-3d card-elevated relative group bg-white dark:bg-slate-800/60 rounded-2xl p-5 border border-gray-100 dark:border-slate-700/50 hover:border-primary dark:hover:border-primary transition-all overflow-hidden ${!role.activo ? 'grayscale' : ''}`}
             >
               {/* Status Badge */}
               <div className="absolute top-4 right-4">
@@ -265,7 +265,7 @@ export default function RolesPage() {
 
               {/* Icon & Title */}
               <div className="flex items-start gap-3 mb-4">
-                <div className={`p-2.5 rounded-xl ${role.nombreRol === 'Administrador' ? 'bg-red-500 text-white' : 'bg-indigo-600 text-white shadow-md shadow-indigo-100 dark:shadow-none'}`}>
+                <div className={`p-2.5 rounded-xl ${role.nombreRol === 'Administrador' ? 'bg-red-500 text-white' : 'bg-primary text-white shadow-md shadow-primary dark:shadow-none'}`}>
                   <Shield size={20} />
                 </div>
                 <div>
@@ -284,7 +284,7 @@ export default function RolesPage() {
               {/* Progress Summary */}
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between items-end">
-                  <span className="text-[11px] font-semibold text-indigo-500 uppercase tracking-wide">Cobertura de Privilegios</span>
+                  <span className="text-[11px] font-semibold text-primary uppercase tracking-wide">Cobertura de Privilegios</span>
                   <span className="text-lg font-semibold text-gray-900 dark:text-white">
                     {Object.values(role.permisos || {}).filter(v => v !== false && v !== 'none').length} / {availablePermissions.length}
                   </span>
@@ -293,7 +293,7 @@ export default function RolesPage() {
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${(Object.values(role.permisos || {}).filter(v => v !== false && v !== 'none').length / availablePermissions.length) * 100}%` }}
-                    className="h-full bg-gradient-to-r from-indigo-500 to-blue-600 rounded-full shadow-[0_0_10px_rgba(79,70,229,0.3)]"
+                    className="h-full bg-gradient-to-r from-primary to-tertiary rounded-full shadow-[0_0_10px_rgba(79,70,229,0.3)]"
                   />
                 </div>
               </div>
@@ -302,7 +302,7 @@ export default function RolesPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => { setViewingRole(role); setIsViewDrawerOpen(true); }}
-                  className="flex-1 py-2 px-3 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white rounded-lg text-sm font-semibold hover:shadow-md hover:shadow-indigo-500/20 transition-all flex items-center justify-center gap-1.5 border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 active:scale-[0.98]"
+                  className="flex-1 py-2 px-3 bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white rounded-lg text-sm font-semibold hover:shadow-md hover:shadow-primary/20 transition-all flex items-center justify-center gap-1.5 border border-primary-fixed dark:border-tertiary/60 hover:border-primary active:scale-[0.98]"
                   title="Ver atribuciones del perfil"
                 >
                   <Eye size={16} />
@@ -310,7 +310,7 @@ export default function RolesPage() {
                 </button>
                 <button
                   onClick={() => handleOpenDrawer(role)}
-                  className="w-9 h-9 flex items-center justify-center rounded-lg bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                  className="w-9 h-9 flex items-center justify-center rounded-lg bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                   title="Ajustar matriz de seguridad"
                 >
                   <Edit2 size={16} />
@@ -345,7 +345,7 @@ export default function RolesPage() {
               <div className="p-5 card-3d bg-white dark:bg-slate-800/60 border-b border-gray-100 dark:border-slate-700/50 flex items-center justify-between sticky top-0 z-10">
                 <div>
                   <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-3">
-                    <div className="p-2 bg-indigo-600 text-white rounded-lg">
+                    <div className="p-2 bg-primary text-white rounded-lg">
                       <Settings size={18} />
                     </div>
                     {editingRole ? 'Ajustar Matriz de Seguridad' : 'Nueva Configuración de Acceso'}
@@ -362,7 +362,7 @@ export default function RolesPage() {
 
                 {/* Basic Info */}
                 <div className="card-3d bg-white dark:bg-slate-800/60 p-5 rounded-2xl border border-gray-100 dark:border-slate-700/50 space-y-4">
-                  <h4 className="text-xs font-semibold uppercase tracking-wide text-indigo-500 flex items-center gap-1.5">
+                  <h4 className="text-xs font-semibold uppercase tracking-wide text-primary flex items-center gap-1.5">
                     <Info size={14} /> Identidad del Perfil
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -371,24 +371,24 @@ export default function RolesPage() {
                       <input
                         required
                         disabled={editingRole?.nombreRol === 'Administrador'}
-                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all font-medium text-sm disabled:opacity-50"
+                        className="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all font-medium text-sm disabled:opacity-50"
                         placeholder="Ej: Operador de Punto de Venta"
                         value={formData.nombreRol}
                         onChange={(e) => setFormData({...formData, nombreRol: e.target.value})}
                       />
                     </div>
                     <div className="flex flex-col justify-end">
-                      <label className="flex items-center gap-3 p-3 bg-indigo-50/50 dark:bg-indigo-900/10 rounded-xl cursor-pointer border border-indigo-100/50 dark:border-indigo-800/20 group">
+                      <label className="flex items-center gap-3 p-3 bg-primary-fixed/50 dark:bg-tertiary/10 rounded-xl cursor-pointer border border-primary-fixed/50 dark:border-tertiary/20 group">
                         <input
                           type="checkbox"
                           disabled={editingRole?.nombreRol === 'Administrador'}
-                          className="w-5 h-5 rounded text-indigo-600 focus:ring-indigo-500"
+                          className="w-5 h-5 rounded text-primary focus:ring-primary"
                           checked={formData.activo}
                           onChange={(e) => setFormData({...formData, activo: e.target.checked})}
                         />
                         <div>
-                          <span className="block text-sm font-semibold text-indigo-700 dark:text-indigo-400">Perfil Habilitado</span>
-                          <span className="text-[11px] text-indigo-400 font-semibold uppercase tracking-tight">Estado de uso</span>
+                          <span className="block text-sm font-semibold text-tertiary dark:text-primary">Perfil Habilitado</span>
+                          <span className="text-[11px] text-primary font-semibold uppercase tracking-tight">Estado de uso</span>
                         </div>
                       </label>
                     </div>
@@ -397,7 +397,7 @@ export default function RolesPage() {
                     <label className="text-sm font-semibold text-gray-700 dark:text-gray-300 ml-1">Descripción de Responsabilidades</label>
                     <textarea
                       rows="2"
-                      className="card-3d w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-lg focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 focus:border-indigo-500 dark:text-white transition-all text-sm font-medium resize-none shadow-inner"
+                      className="card-3d w-full px-4 py-2.5 bg-gray-50 dark:bg-slate-700/40 border-0 rounded-lg focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 focus:border-primary dark:text-white transition-all text-sm font-medium resize-none shadow-inner"
                       placeholder="Define para qué se usará este rol..."
                       value={formData.descripcion}
                       onChange={(e) => setFormData({...formData, descripcion: e.target.value})}
@@ -409,7 +409,7 @@ export default function RolesPage() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <Lock className="text-indigo-500" size={18} /> Matriz de Privilegios
+                      <Lock className="text-primary" size={18} /> Matriz de Privilegios
                     </h4>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       {esAdministradorEditando
@@ -421,7 +421,7 @@ export default function RolesPage() {
                     type="button"
                     onClick={grantFullAccess}
                     disabled={esAdministradorEditando}
-                    className={`flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-900 border-2 border-dashed border-indigo-300 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 rounded-lg text-sm font-semibold transition-all ${esAdministradorEditando ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:border-solid hover:border-indigo-500'}`}
+                    className={`flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-900 border-2 border-dashed border-primary dark:border-tertiary text-primary dark:text-primary rounded-lg text-sm font-semibold transition-all ${esAdministradorEditando ? 'opacity-40 cursor-not-allowed pointer-events-none' : 'hover:bg-primary-fixed dark:hover:bg-tertiary/20 hover:border-solid hover:border-primary'}`}
                   >
                     <Unlock size={16} /> Entregar Acceso Total
                   </button>
@@ -438,7 +438,7 @@ export default function RolesPage() {
                       className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden"
                     >
                       <div className="px-5 py-3 bg-gray-50/50 dark:bg-gray-800/30 border-b border-gray-100 dark:border-gray-800 flex items-center gap-2.5">
-                        <div className="p-2 bg-white dark:bg-gray-800 rounded-lg text-indigo-500 shadow-sm">
+                        <div className="p-2 bg-white dark:bg-gray-800 rounded-lg text-primary shadow-sm">
                           {ICONOS_CATEGORIAS[cat]}
                         </div>
                         <h5 className="font-semibold text-gray-900 dark:text-white tracking-tight uppercase text-xs">{cat}</h5>
@@ -459,7 +459,7 @@ export default function RolesPage() {
                                     <button
                                       type="button"
                                       onClick={() => setFormData({ ...formData, permisos: { ...formData.permisos, [p.clave]: true } })}
-                                      className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${formData.permisos[p.clave] === true ? 'bg-indigo-600 text-white shadow-md' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+                                      className={`px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${formData.permisos[p.clave] === true ? 'bg-primary text-white shadow-md' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
                                     >SÍ</button>
                                     <button
                                       type="button"
@@ -476,7 +476,7 @@ export default function RolesPage() {
                                           key={opt.value}
                                           type="button"
                                           onClick={() => setFormData({ ...formData, permisos: { ...formData.permisos, [p.clave]: opt.value } })}
-                                          className={`px-3 py-1.5 rounded-md text-[11px] font-semibold uppercase tracking-tight transition-all ${isActive ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
+                                          className={`px-3 py-1.5 rounded-md text-[11px] font-semibold uppercase tracking-tight transition-all ${isActive ? 'bg-white dark:bg-gray-700 text-primary dark:text-primary shadow-sm' : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-200'}`}
                                         >
                                           {opt.label}
                                         </button>
@@ -505,7 +505,7 @@ export default function RolesPage() {
                   type="submit"
                   onClick={handleSave}
                   disabled={submitting}
-                  className="card-3d card-elevated flex-[2] py-3 bg-indigo-600 text-white rounded-xl text-sm font-semibold shadow-md shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 dark:hover:bg-indigo-700 hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="card-3d card-elevated flex-[2] py-3 bg-primary text-white rounded-xl text-sm font-semibold shadow-md shadow-primary dark:shadow-primary/20 hover:bg-tertiary dark:hover:bg-tertiary hover:scale-[1.01] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {submitting ? 'Procesando...' : (editingRole ? 'Guardar Cambios' : 'Finalizar Creación')}
                 </button>
@@ -543,7 +543,7 @@ export default function RolesPage() {
               <div className="flex-1 overflow-y-auto p-5 space-y-5">
                 {Object.entries(permisosAgrupados).map(([cat, permisos]) => (
                   <div key={cat} className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-indigo-500 mb-1">
+                    <div className="flex items-center gap-1.5 text-primary mb-1">
                       {ICONOS_CATEGORIAS[cat]}
                       <span className="text-[11px] font-semibold uppercase tracking-wide">{cat}</span>
                     </div>
@@ -552,13 +552,13 @@ export default function RolesPage() {
                         const valor = viewingRole.permisos[p.clave];
                         const active = valor && valor !== 'none' && valor !== false;
                         return (
-                          <div key={p.clave} className={`p-3 rounded-xl border flex items-center justify-between gap-2 transition-all ${active ? 'bg-indigo-50/50 dark:bg-indigo-900/10 border-indigo-100 dark:border-indigo-800' : 'bg-gray-50/30 dark:bg-gray-800/20 border-gray-100 dark:border-gray-800 opacity-50'}`}>
+                          <div key={p.clave} className={`p-3 rounded-xl border flex items-center justify-between gap-2 transition-all ${active ? 'bg-primary-fixed/50 dark:bg-tertiary/10 border-primary-fixed dark:border-tertiary' : 'bg-gray-50/30 dark:bg-gray-800/20 border-gray-100 dark:border-gray-800 opacity-50'}`}>
                             <div>
-                              <div className={`text-xs font-semibold ${active ? 'text-indigo-700 dark:text-indigo-400' : 'text-gray-400'}`}>{p.modulo}</div>
+                              <div className={`text-xs font-semibold ${active ? 'text-tertiary dark:text-primary' : 'text-gray-400'}`}>{p.modulo}</div>
                               <div className="text-[11px] font-semibold text-gray-400 dark:text-gray-500">{optLabel(p, valor)}</div>
                             </div>
                             {active ? (
-                              <div className="bg-indigo-500 text-white p-1 rounded-md shrink-0">
+                              <div className="bg-primary text-white p-1 rounded-md shrink-0">
                                 <CheckCircle2 size={12} />
                               </div>
                             ) : (
@@ -577,7 +577,7 @@ export default function RolesPage() {
               <div className="p-4 card-3d bg-slate-700/30 dark:bg-slate-700/30 border-t border-gray-100 dark:border-slate-700/50">
                 <button
                   onClick={() => { setIsViewDrawerOpen(false); handleOpenDrawer(viewingRole); }}
-                  className="card-3d card-elevated w-full py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-semibold shadow-md shadow-indigo-200 dark:shadow-indigo-900/20 hover:bg-indigo-700 transition-all flex items-center justify-center gap-2"
+                  className="card-3d card-elevated w-full py-2.5 bg-primary text-white rounded-xl text-sm font-semibold shadow-md shadow-primary dark:shadow-primary/20 hover:bg-tertiary transition-all flex items-center justify-center gap-2"
                 >
                   <Edit2 size={16} />
                   Modificar Privilegios

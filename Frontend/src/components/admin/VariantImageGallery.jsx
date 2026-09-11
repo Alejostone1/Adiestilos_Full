@@ -79,7 +79,7 @@ const VariantImageGallery = ({
       <div className="relative group">
         <button
           onClick={(e) => openGallery(0, e)}
-          className={`${sizeClasses[size]} rounded-lg overflow-hidden border-2 border-gray-200 dark:border-slate-700 hover:border-purple-400 dark:hover:border-purple-500 transition-all duration-200 transform hover:scale-105 ${className}`}
+          className={`${sizeClasses[size]} rounded-lg overflow-hidden border-2 border-gray-200 dark:border-slate-700 hover:border-primary dark:hover:border-primary transition-all duration-200 transform hover:scale-105 ${className}`}
         >
           <img
             src={getImageUrl(displayImage.rutaImagen)}
@@ -91,7 +91,7 @@ const VariantImageGallery = ({
 
         {/* Badge de contador de imágenes */}
         {showBadge && imageCount > 1 && (
-          <div className="absolute -top-2 -right-2 bg-purple-600 text-white text-xs px-1.5 py-0.5 rounded-full font-medium shadow-lg">
+          <div className="absolute -top-2 -right-2 bg-primary text-white text-xs px-1.5 py-0.5 rounded-full font-medium shadow-lg">
             +{imageCount - 1}
           </div>
         )}
@@ -184,7 +184,7 @@ const VariantImageGallery = ({
                     onClick={() => setCurrentImageIndex(index)}
                     className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition ${
                       index === currentImageIndex
-                        ? 'border-purple-500'
+                        ? 'border-primary'
                         : 'border-gray-600 hover:border-gray-400'
                     }`}
                   >

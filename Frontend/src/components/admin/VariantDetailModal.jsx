@@ -63,7 +63,7 @@ const VariantDetailModal = ({
     <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
       <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6">
+        <div className="bg-gradient-to-r from-primary to-tertiary text-white p-6">
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-4">
               <button
@@ -74,7 +74,7 @@ const VariantDetailModal = ({
               </button>
               <div>
                 <h2 className="text-2xl font-semibold">Detalles de Variante</h2>
-                <p className="text-purple-100 mt-1">{variante.codigoSku}</p>
+                <p className="text-primary-fixed mt-1">{variante.codigoSku}</p>
               </div>
             </div>
             <button
@@ -96,7 +96,7 @@ const VariantDetailModal = ({
                   onClick={() => setActiveTab('imagenes')}
                   className={`px-4 py-2 rounded-lg font-medium transition ${
                     activeTab === 'imagenes'
-                      ? 'bg-purple-600 text-white'
+                      ? 'bg-primary text-white'
                       : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600'
                   }`}
                 >
@@ -107,7 +107,7 @@ const VariantDetailModal = ({
                   onClick={() => setActiveTab('info')}
                   className={`px-4 py-2 rounded-lg font-medium transition ${
                     activeTab === 'info'
-                      ? 'bg-purple-600 text-white'
+                      ? 'bg-primary text-white'
                       : 'bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-600'
                   }`}
                 >
@@ -181,7 +181,7 @@ const VariantDetailModal = ({
                             onClick={() => setCurrentImageIndex(index)}
                             className={`aspect-square rounded-lg overflow-hidden border-2 transition ${
                               index === currentImageIndex
-                                ? 'border-purple-500 shadow-lg'
+                                ? 'border-primary shadow-lg'
                                 : 'border-gray-200 hover:border-gray-300'
                             }`}
                           >
@@ -200,7 +200,7 @@ const VariantDetailModal = ({
                     {/* Información del producto */}
                     <div className="bg-white rounded-xl p-6 shadow-sm">
                       <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <Package className="w-5 h-5 text-purple-600" />
+                        <Package className="w-5 h-5 text-primary" />
                         Información del Producto
                       </h3>
                       <div className="space-y-3">
@@ -234,7 +234,7 @@ const VariantDetailModal = ({
                     {/* Información adicional */}
                     <div className="bg-white rounded-xl p-6 shadow-sm">
                       <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <Settings className="w-5 h-5 text-purple-600" />
+                        <Settings className="w-5 h-5 text-primary" />
                         Configuración
                       </h3>
                       <div className="space-y-3">
@@ -268,7 +268,7 @@ const VariantDetailModal = ({
           <div className="lg:w-1/2 p-6 overflow-y-auto">
             <div className="space-y-6">
               {/* Header de la variante */}
-              <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 border border-purple-200">
+              <div className="bg-gradient-to-r from-primary to-tertiary rounded-xl p-6 border border-primary-fixed">
                 <div className="flex items-start justify-between mb-4">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900">
@@ -281,7 +281,7 @@ const VariantDetailModal = ({
                     />
                   </div>
                   <div className="text-right">
-                    <div className="text-2xl font-semibold text-purple-600">
+                    <div className="text-2xl font-semibold text-primary">
                       <PrecioFormateado precio={variante.precioVenta} />
                     </div>
                     <div className="text-sm text-gray-600">
@@ -328,10 +328,10 @@ const VariantDetailModal = ({
                   </div>
                 </div>
                 {typeof variante.precioVenta === 'number' && typeof variante.precioCosto === 'number' && variante.precioCosto > 0 && (
-                  <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-900/50">
+                  <div className="mt-4 p-3 bg-primary-fixed dark:bg-tertiary/20 rounded-lg border border-primary-fixed dark:border-tertiary/50">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-blue-600 dark:text-blue-400">Margen de Ganancia:</span>
-                      <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
+                      <span className="text-sm text-primary dark:text-primary">Margen de Ganancia:</span>
+                      <span className="text-lg font-semibold text-tertiary dark:text-primary">
                         {((variante.precioVenta - variante.precioCosto) / variante.precioCosto * 100).toFixed(1)}%
                       </span>
                     </div>
@@ -342,7 +342,7 @@ const VariantDetailModal = ({
               {/* Información de stock */}
               <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-700">
                 <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                  <Box className="w-5 h-5 text-blue-600" />
+                  <Box className="w-5 h-5 text-primary" />
                   Gestión de Stock
                 </h4>
                 <StockIndicator
@@ -356,15 +356,15 @@ const VariantDetailModal = ({
               {/* Acciones rápidas */}
               <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-slate-700">
                 <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                  <BarChart3 className="w-5 h-5 text-purple-600" />
+                  <BarChart3 className="w-5 h-5 text-primary" />
                   Acciones Rápidas
                 </h4>
                 <div className="grid grid-cols-2 gap-3">
-                  <button className="flex items-center justify-center gap-2 px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+                  <button className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white rounded-lg hover:bg-tertiary transition">
                     <Eye className="w-4 h-4" />
                     Ver en Tienda
                   </button>
-                  <button className="flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                  <button className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white rounded-lg hover:bg-tertiary transition">
                     <Edit className="w-4 h-4" />
                     Editar Variante
                   </button>

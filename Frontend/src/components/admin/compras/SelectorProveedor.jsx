@@ -47,7 +47,7 @@ const SelectorProveedor = ({ seleccionado, alSeleccionar }) => {
         <div className="relative w-full">
           <input
             type="text"
-            className="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm py-2 pl-3 pr-10"
+            className="w-full rounded-lg border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-primary focus:ring-primary sm:text-sm py-2 pl-3 pr-10"
             placeholder="Buscar proveedor..."
             value={mostrarOpciones ? consulta : (seleccionado?.nombreProveedor || '')}
             onChange={(e) => {
@@ -80,9 +80,9 @@ const SelectorProveedor = ({ seleccionado, alSeleccionar }) => {
                 proveedoresFiltrados.map((proveedor) => (
                   <div
                     key={proveedor.idProveedor}
-                    className={`relative cursor-pointer select-none py-2 pl-10 pr-4 hover:bg-indigo-600 hover:text-white ${
+                    className={`relative cursor-pointer select-none py-2 pl-10 pr-4 hover:bg-primary hover:text-white ${
                       seleccionado?.idProveedor === proveedor.idProveedor
-                        ? 'bg-indigo-50 dark:bg-indigo-900 text-indigo-900 dark:text-indigo-100'
+                        ? 'bg-primary-fixed dark:bg-tertiary text-tertiary dark:text-primary-fixed'
                         : 'text-gray-900 dark:text-gray-100'
                     }`}
                     onClick={() => handleSeleccionar(proveedor)}
@@ -93,7 +93,7 @@ const SelectorProveedor = ({ seleccionado, alSeleccionar }) => {
                       {proveedor.nombreProveedor}
                     </span>
                     {seleccionado?.idProveedor === proveedor.idProveedor && (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600 dark:text-indigo-400">
+                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-primary dark:text-primary">
                         <FiCheck className="h-5 w-5" />
                       </span>
                     )}

@@ -74,7 +74,7 @@ const VendedorDashboardPage = () => {
     {
       title: 'Ventas de hoy',
       value: metricas.ventasHoy,
-      icon: <ShoppingCartOutlined className="text-blue-600 text-lg" />,
+      icon: <ShoppingCartOutlined className="text-primary text-lg" />,
     },
     {
       title: 'Ingresos de hoy',
@@ -84,7 +84,7 @@ const VendedorDashboardPage = () => {
     {
       title: 'Ventas totales',
       value: metricas.ventasTotales,
-      icon: <FileTextOutlined className="text-indigo-600 text-lg" />,
+      icon: <FileTextOutlined className="text-primary text-lg" />,
     },
     {
       title: 'Ingresos totales',
@@ -98,7 +98,7 @@ const VendedorDashboardPage = () => {
       label: 'Registrar / Ver ventas',
       path: '/admin/ventas',
       icon: <ShoppingCartOutlined />,
-      color: 'bg-indigo-50 text-indigo-600',
+      color: 'bg-primary-fixed text-primary',
       desc: 'Punto de venta y detalle de pedidos',
     },
     {
@@ -172,7 +172,7 @@ const VendedorDashboardPage = () => {
                 key={item.path}
                 type="button"
                 onClick={() => navigate(item.path)}
-                className="group rounded-2xl border border-gray-100 dark:border-slate-700/50 p-4 text-left transition hover:border-indigo-300 hover:shadow-md"
+                className="group rounded-2xl border border-gray-100 dark:border-slate-700/50 p-4 text-left transition hover:border-primary hover:shadow-md"
               >
                 <div className={`mb-3 inline-flex h-11 w-11 items-center justify-center rounded-xl ${item.color}`}>
                   {item.icon}

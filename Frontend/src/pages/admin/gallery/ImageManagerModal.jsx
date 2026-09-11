@@ -60,7 +60,7 @@ const ImageManagerModal = ({
             <button
               onClick={() => setActiveTab('images')}
               className={`pb-2 px-1 text-sm font-semibold transition-colors relative ${
-                activeTab === 'images' ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'
+                activeTab === 'images' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'
               }`}
             >
               <div className="flex items-center gap-2">
@@ -68,14 +68,14 @@ const ImageManagerModal = ({
                 Imágenes de Galería
                 <span className="bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md text-[11px]">{images.length}</span>
               </div>
-              {activeTab === 'images' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 rounded-full" />}
+              {activeTab === 'images' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />}
             </button>
 
             {variants && variants.length > 0 && (
               <button
                 onClick={() => setActiveTab('variants')}
                 className={`pb-2 px-1 text-sm font-semibold transition-colors relative ${
-                  activeTab === 'variants' ? 'text-purple-600' : 'text-gray-400 hover:text-gray-600'
+                  activeTab === 'variants' ? 'text-primary' : 'text-gray-400 hover:text-gray-600'
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -83,7 +83,7 @@ const ImageManagerModal = ({
                   Variantes Asignadas
                   <span className="bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-md text-[11px]">{variants.length}</span>
                 </div>
-                {activeTab === 'variants' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-purple-600 rounded-full" />}
+                {activeTab === 'variants' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full" />}
               </button>
             )}
           </div>
@@ -100,8 +100,8 @@ const ImageManagerModal = ({
                   className={`
                     border-2 border-dashed rounded-2xl p-10 text-center transition-all duration-200 cursor-pointer group
                     ${isUploading 
-                      ? 'border-purple-200 bg-purple-50 dark:bg-purple-900/10' 
-                      : 'border-gray-300 dark:border-slate-600 hover:border-purple-500 hover:bg-purple-100/50 dark:hover:bg-slate-800'
+                      ? 'border-primary-fixed bg-primary-fixed dark:bg-tertiary/10' 
+                      : 'border-gray-300 dark:border-slate-600 hover:border-primary hover:bg-primary-fixed/50 dark:hover:bg-slate-800'
                     }
                   `}
                   onClick={() => !isUploading && fileInputRef.current?.click()}
@@ -118,19 +118,19 @@ const ImageManagerModal = ({
                   
                   {isUploading ? (
                     <div className="flex flex-col items-center">
-                      <Loader2 className="w-12 h-12 text-purple-600 animate-spin mb-4" />
+                      <Loader2 className="w-12 h-12 text-primary animate-spin mb-4" />
                       <p className="text-gray-700 dark:text-gray-300 font-semibold text-lg">Subiendo fotografías...</p>
                       <p className="text-gray-500 text-sm mt-1">{uploadProgress}% completado</p>
                       <div className="w-full max-w-xs h-2 bg-gray-200 rounded-full mt-4 overflow-hidden shadow-inner">
                         <div 
-                          className="h-full bg-gradient-to-r from-purple-500 to-indigo-600 transition-all duration-300 shadow-[0px_0px_10px_rgba(147,51,234,0.5)]"
+                          className="h-full bg-gradient-to-r from-primary to-tertiary transition-all duration-300 shadow-[0px_0px_10px_rgba(147,51,234,0.5)]"
                           style={{ width: `${uploadProgress}%` }}
                         />
                       </div>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm">
+                      <div className="w-16 h-16 bg-primary-fixed dark:bg-tertiary/30 text-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-sm">
                         <Upload className="w-8 h-8" />
                       </div>
                       <p className="text-gray-900 dark:text-white font-semibold text-xl">
@@ -154,7 +154,7 @@ const ImageManagerModal = ({
                       className={`
                       group relative aspect-square rounded-2xl overflow-hidden border-2 transition-all duration-300
                       ${img.esPrincipal
-                        ? 'border-purple-500 shadow-lg scale-100'
+                        ? 'border-primary shadow-lg scale-100'
                         : 'border-white dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1'
                       }
                     `}
@@ -167,7 +167,7 @@ const ImageManagerModal = ({
 
                       {/* Main Badge */}
                       {img.esPrincipal && (
-                        <div className="absolute top-3 left-3 bg-purple-600 text-white text-[11px] px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md font-semibold z-10 uppercase tracking-wide">
+                        <div className="absolute top-3 left-3 bg-primary text-white text-[11px] px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-md font-semibold z-10 uppercase tracking-wide">
                           <Star className="w-3 h-3 fill-current" />
                           Principal
                         </div>
@@ -178,7 +178,7 @@ const ImageManagerModal = ({
                         {!img.esPrincipal && onSetMain && (
                           <button
                             onClick={() => onSetMain(imageId)}
-                            className="p-3 bg-white/20 hover:bg-white text-white hover:text-purple-600 rounded-xl transition-all backdrop-blur-md hover:scale-110"
+                            className="p-3 bg-white/20 hover:bg-white text-white hover:text-primary rounded-xl transition-all backdrop-blur-md hover:scale-110"
                             title="Establecer como principal"
                           >
                             <Star className="w-6 h-6" />
@@ -214,7 +214,7 @@ const ImageManagerModal = ({
                 <div 
                   key={v.idVariante}
                   onClick={() => onVariantClick && onVariantClick(v)}
-                  className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 hover:border-purple-400 cursor-pointer transition-all hover:shadow-md hover:-translate-x-1"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 hover:border-primary cursor-pointer transition-all hover:shadow-md hover:-translate-x-1"
                 >
                    <div className="w-16 h-16 rounded-xl bg-gray-100 dark:bg-slate-900 flex-shrink-0 overflow-hidden border border-gray-50 dark:border-slate-800 shadow-inner">
                       {v.imagenesVariantes?.[0] ? (
@@ -234,13 +234,13 @@ const ImageManagerModal = ({
                       </div>
                       <div className="flex gap-2 mt-1.5 flex-wrap">
                          {v.color && (
-                           <span className="flex items-center gap-1 text-[11px] font-semibold text-purple-600 dark:text-purple-400 uppercase bg-purple-50 dark:bg-purple-900/20 px-2 py-0.5 rounded-full">
+                           <span className="flex items-center gap-1 text-[11px] font-semibold text-primary dark:text-primary uppercase bg-primary-fixed dark:bg-tertiary/20 px-2 py-0.5 rounded-full">
                               <Palette className="w-3 h-3" />
                               {v.color.nombreColor}
                            </span>
                          )}
                          {v.talla && (
-                           <span className="flex items-center gap-1 text-[11px] font-semibold text-blue-600 dark:text-blue-400 uppercase bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded-full">
+                           <span className="flex items-center gap-1 text-[11px] font-semibold text-primary dark:text-primary uppercase bg-primary-fixed dark:bg-tertiary/20 px-2 py-0.5 rounded-full">
                               <Ruler className="w-3 h-3" />
                               {v.talla.nombreTalla}
                            </span>

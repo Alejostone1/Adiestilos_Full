@@ -153,9 +153,9 @@ const AbonosCreditosPage = () => {
             placeholder="Buscar por cliente..."
             value={filtros.cliente}
             onChange={handleFiltroChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary"
           />
-          <select name="estado" value={filtros.estado} onChange={handleFiltroChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500">
+          <select name="estado" value={filtros.estado} onChange={handleFiltroChange} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary">
             <option value="">Todos los estados</option>
             <option value="activo">Activo</option>
             <option value="pagado">Pagado</option>

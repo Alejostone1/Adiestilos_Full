@@ -90,7 +90,7 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
 
         <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-6 py-4 flex justify-between items-center text-white">
+          <div className="bg-gradient-to-r from-primary to-tertiary px-6 py-4 flex justify-between items-center text-white">
             <div className="flex items-center space-x-3">
               <FiRefreshCw className={`h-6 w-6 ${procesando ? 'animate-spin' : ''}`} />
               <h3 className="text-xl font-semibold">Cambiar Estado</h3>
@@ -107,7 +107,7 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
 
             {cargando ? (
               <div className="text-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto"></div>
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
               </div>
             ) : (
               <div className="space-y-3">
@@ -118,7 +118,7 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
                     disabled={procesando}
                     className={`w-full flex items-center justify-between p-4 rounded-xl border-2 transition-all hover:scale-102 ${
                       compra.idEstadoPedido === estado.idEstadoPedido
-                        ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20'
+                        ? 'border-primary bg-primary-fixed dark:bg-tertiary/20'
                         : 'border-white dark:border-gray-800 bg-white dark:bg-gray-800 hover:border-gray-200 dark:hover:border-gray-700 shadow-sm'
                     }`}
                   >
@@ -129,23 +129,23 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
                       />
                       <span className={`font-semibold ${
                         compra.idEstadoPedido === estado.idEstadoPedido
-                          ? 'text-indigo-700 dark:text-indigo-400'
+                          ? 'text-tertiary dark:text-primary'
                           : 'text-gray-700 dark:text-gray-300'
                       }`}>
                         {estado.nombreEstado}
                       </span>
                     </div>
                     {compra.idEstadoPedido === estado.idEstadoPedido && (
-                      <FiCheckCircle className="text-indigo-500 h-5 w-5" />
+                      <FiCheckCircle className="text-primary h-5 w-5" />
                     )}
                   </button>
                 ))}
               </div>
             )}
             
-            <div className="mt-8 p-4 bg-indigo-50 dark:bg-indigo-900/10 rounded-xl flex items-start space-x-3 border border-indigo-100 dark:border-indigo-800">
-              <FiAlertCircle className="text-indigo-600 h-5 w-5 mt-0.5" />
-              <p className="text-xs text-indigo-700 dark:text-indigo-400 italic">
+            <div className="mt-8 p-4 bg-primary-fixed dark:bg-tertiary/10 rounded-xl flex items-start space-x-3 border border-primary-fixed dark:border-tertiary">
+              <FiAlertCircle className="text-primary h-5 w-5 mt-0.5" />
+              <p className="text-xs text-tertiary dark:text-primary italic">
                 Cambiar el estado puede activar notificaciones automáticas o afectar el flujo de inventario dependiendo de la configuración.
               </p>
             </div>

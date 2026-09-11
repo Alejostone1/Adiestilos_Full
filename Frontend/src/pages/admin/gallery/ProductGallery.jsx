@@ -128,7 +128,7 @@ const ProductGallery = () => {
             placeholder="Buscar producto por nombre o código..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-xl focus:ring-2 focus:ring-primary outline-none"
           />
         </div>
 
@@ -184,7 +184,7 @@ const ProductGallery = () => {
                             {product.imagenes?.length || 0}
                         </div>
                          {/* Variantes Count */}
-                        <div className="absolute top-2 left-2 bg-purple-500/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
+                        <div className="absolute top-2 left-2 bg-primary/80 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full flex items-center gap-1">
                           <Layers className="w-3 h-3" />
                           {product.variantes?.length || 0}
                         </div>

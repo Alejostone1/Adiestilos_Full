@@ -191,7 +191,7 @@ export default function HistorialDescuentosPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight flex items-center gap-3">
-            <History className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
+            <History className="w-8 h-8 text-primary dark:text-primary" />
             Historial de Uso
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1 text-lg">Monitorea en tiempo real quién está usando tus promociones.</p>
@@ -214,7 +214,7 @@ export default function HistorialDescuentosPage() {
             title="Total Usos Registrados"
             value={pagination.total}
             icon={Tag}
-            color="blue"
+            color="pink"
             secondaryValue="Transacciones totales"
         />
         <StatCard
@@ -228,7 +228,7 @@ export default function HistorialDescuentosPage() {
             title="Cupones Únicos"
             value={new Set(historial.map(item => item.idDescuento)).size}
             icon={Receipt}
-            color="purple"
+            color="rose"
             secondaryValue="Variedad de promociones"
         />
       </div>
@@ -241,7 +241,7 @@ export default function HistorialDescuentosPage() {
                   onClick={() => setShowFilters(!showFilters)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors font-medium ${
                       showFilters
-                      ? 'bg-indigo-50 border-indigo-200 text-indigo-600 dark:bg-indigo-900/20 dark:border-indigo-800 dark:text-indigo-400'
+                      ? 'bg-primary-fixed border-primary-fixed text-primary dark:bg-tertiary/20 dark:border-tertiary dark:text-primary'
                       : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-700'
                   }`}
                 >
@@ -256,7 +256,7 @@ export default function HistorialDescuentosPage() {
             </div>
             <button
                 onClick={cargarDatos}
-                className="p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                className="p-2 text-gray-400 hover:text-primary dark:hover:text-primary transition-colors"
                 title="Actualizar tabla"
             >
                 <RefreshCcw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
@@ -276,7 +276,7 @@ export default function HistorialDescuentosPage() {
                   <select
                     value={filters.idDescuento}
                     onChange={(e) => handleFilterChange('idDescuento', e.target.value)}
-                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-indigo-500 dark:text-white transition-colors"
+                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-primary dark:text-white transition-colors"
                   >
                     <option value="">Todas</option>
                     {descuentos.map(descuento => (
@@ -292,7 +292,7 @@ export default function HistorialDescuentosPage() {
                   <select
                     value={filters.idUsuario}
                     onChange={(e) => handleFilterChange('idUsuario', e.target.value)}
-                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-indigo-500 dark:text-white transition-colors"
+                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-primary dark:text-white transition-colors"
                   >
                     <option value="">Todos</option>
                     {usuarios.map(usuario => (
@@ -309,7 +309,7 @@ export default function HistorialDescuentosPage() {
                     type="date"
                     value={filters.fechaInicio}
                     onChange={(e) => handleFilterChange('fechaInicio', e.target.value)}
-                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-indigo-500 dark:text-white transition-colors"
+                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-primary dark:text-white transition-colors"
                   />
               </div>
 
@@ -319,7 +319,7 @@ export default function HistorialDescuentosPage() {
                     type="date"
                     value={filters.fechaFin}
                     onChange={(e) => handleFilterChange('fechaFin', e.target.value)}
-                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-indigo-500 dark:text-white transition-colors"
+                    className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:border-primary dark:text-white transition-colors"
                   />
               </div>
             </motion.div>
@@ -343,7 +343,7 @@ export default function HistorialDescuentosPage() {
                {loading && historial.length === 0 ? (
                 <tr>
                   <td colSpan="6" className="px-6 py-12 text-center">
-                    <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mx-auto" />
+                    <Loader2 className="w-8 h-8 text-primary animate-spin mx-auto" />
                     <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">Cargando historial...</p>
                   </td>
                 </tr>
@@ -373,13 +373,13 @@ export default function HistorialDescuentosPage() {
                      </td>
                      <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                            <div className="w-8 h-8 rounded-lg bg-primary-fixed dark:bg-tertiary/30 flex items-center justify-center text-primary dark:text-primary">
                                 <Tag className="w-4 h-4" />
                             </div>
                             <div>
                                 <p className="text-sm font-semibold text-gray-900 dark:text-white">{getDescuentoNombre(item.idDescuento)}</p>
                                 {item.descuento && (
-                                     <span className="text-xs text-purple-600 dark:text-purple-400 font-medium inline-block bg-purple-50 dark:bg-purple-900/20 px-1.5 rounded mt-0.5">
+                                     <span className="text-xs text-primary dark:text-primary font-medium inline-block bg-primary-fixed dark:bg-tertiary/20 px-1.5 rounded mt-0.5">
                                         {item.descuento.tipoDescuento === 'porcentaje' ? `${item.descuento.valorDescuento}% OFF` : <PrecioFormateado precio={item.descuento.valorDescuento} />}
                                      </span>
                                 )}
@@ -388,7 +388,7 @@ export default function HistorialDescuentosPage() {
                      </td>
                      <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                             <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                             <div className="w-8 h-8 rounded-full bg-primary-fixed dark:bg-tertiary/30 flex items-center justify-center text-primary dark:text-primary">
                                 <User className="w-4 h-4" />
                             </div>
                             <div>
@@ -417,7 +417,7 @@ export default function HistorialDescuentosPage() {
                      <td className="px-6 py-4 text-right">
                         <button
                           onClick={() => openDetailsModal(item)}
-                          className="p-2 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-700/50 rounded-lg transition-all"
+                          className="p-2 text-gray-400 hover:text-primary dark:hover:text-primary hover:bg-gray-100 dark:hover:bg-gray-700/50 rounded-lg transition-all"
                           title="Ver detalles completos"
                         >
                           <Eye className="w-4 h-4" />
@@ -468,7 +468,7 @@ export default function HistorialDescuentosPage() {
           >
             <div className="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                <Receipt className="w-5 h-5 text-indigo-500" />
+                <Receipt className="w-5 h-5 text-primary" />
                 Detalle de Transacción
               </h3>
               <button onClick={() => { setShowDetailsModal(false); setSelectedItem(null); }} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors">
@@ -477,9 +477,9 @@ export default function HistorialDescuentosPage() {
             </div>
 
             <div className="p-8">
-                <div className="bg-indigo-50 dark:bg-indigo-900/20 rounded-xl p-6 mb-8 text-center border border-indigo-100 dark:border-indigo-900/50">
-                    <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400 mb-1">Ahorro Total Aplicado</p>
-                    <p className="text-4xl font-extrabold text-indigo-700 dark:text-indigo-300">
+                <div className="bg-primary-fixed dark:bg-tertiary/20 rounded-xl p-6 mb-8 text-center border border-primary-fixed dark:border-tertiary/50">
+                    <p className="text-sm font-medium text-primary dark:text-primary mb-1">Ahorro Total Aplicado</p>
+                    <p className="text-4xl font-extrabold text-tertiary dark:text-primary">
                         -<PrecioFormateado precio={selectedItem.valorAplicado} />
                     </p>
                 </div>
@@ -487,7 +487,7 @@ export default function HistorialDescuentosPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 mb-2">
-                            <Tag className="w-4 h-4 text-purple-500" />
+                            <Tag className="w-4 h-4 text-primary" />
                             <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Promoción</h4>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl border border-gray-100 dark:border-gray-700 space-y-3">
@@ -506,7 +506,7 @@ export default function HistorialDescuentosPage() {
                                             {selectedItem.descuento.aplicaA === 'producto' && selectedItem.descuento.producto && (
                                                 <>
                                                     <span className="text-gray-400 text-sm mx-1">•</span>
-                                                    <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{selectedItem.descuento.producto.nombreProducto}</span>
+                                                    <span className="text-primary dark:text-primary font-semibold">{selectedItem.descuento.producto.nombreProducto}</span>
                                                 </>
                                             )}
                                             {selectedItem.descuento.aplicaA === 'categoria' && selectedItem.descuento.categoria && (
@@ -524,7 +524,7 @@ export default function HistorialDescuentosPage() {
 
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 mb-2">
-                            <User className="w-4 h-4 text-blue-500" />
+                            <User className="w-4 h-4 text-primary" />
                             <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider">Cliente</h4>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-xl border border-gray-100 dark:border-gray-700 space-y-3">

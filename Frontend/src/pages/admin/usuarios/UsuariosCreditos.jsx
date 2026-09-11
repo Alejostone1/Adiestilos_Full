@@ -70,7 +70,7 @@ export default function UsuariosCreditos() {
               whileHover={{ scale: 1.1, x: -5 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => navigate('/admin/usuarios')}
-              className="p-5 bg-white dark:bg-gray-900 rounded-[2rem] text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 shadow-xl shadow-gray-200/50 dark:shadow-none transition-all border border-gray-50 dark:border-gray-800"
+              className="p-5 bg-white dark:bg-gray-900 rounded-[2rem] text-gray-400 hover:text-primary dark:hover:text-primary shadow-xl shadow-gray-200/50 dark:shadow-none transition-all border border-gray-50 dark:border-gray-800"
             >
               <ArrowLeft size={32} />
             </motion.button>
@@ -78,14 +78,14 @@ export default function UsuariosCreditos() {
             <div>
                <div className="flex items-center gap-3 mb-3">
                   <h1 className="text-3xl font-semibold text-gray-900 dark:text-white tracking-tight leading-none text-balance">Gestión de Carteras</h1>
-                  <div className="flex items-center gap-1 px-3 py-1 bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-400 rounded-full text-[11px] font-semibold uppercase tracking-wide">
+                  <div className="flex items-center gap-1 px-3 py-1 bg-primary-fixed text-primary dark:bg-tertiary/40 dark:text-primary rounded-full text-[11px] font-semibold uppercase tracking-wide">
                      <ShieldCheck size={12} /> Cliente VIP
                   </div>
                </div>
                
                {usuario && (
                   <div className="flex items-center gap-4 group">
-                     <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">Analizando créditos de <span className="text-gray-900 dark:text-white font-semibold border-b-2 border-indigo-500/30 group-hover:border-indigo-500 transition-all">{usuario.nombres} {usuario.apellidos}</span></p>
+                     <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">Analizando créditos de <span className="text-gray-900 dark:text-white font-semibold border-b-2 border-primary/30 group-hover:border-primary transition-all">{usuario.nombres} {usuario.apellidos}</span></p>
                      <p className="hidden md:block text-xs font-mono bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-lg text-gray-400">ID-SYS: {usuario.idUsuario}</p>
                   </div>
                )}
@@ -97,13 +97,13 @@ export default function UsuariosCreditos() {
                whileHover={{ scale: 1.02 }}
                whileTap={{ scale: 0.98 }}
                onClick={() => navigate('/admin/creditos/gestion')}
-               className="flex items-center gap-3 px-8 py-4 bg-indigo-600 text-white rounded-[1.5rem] font-semibold shadow-2xl shadow-indigo-200 dark:shadow-none hover:bg-indigo-700 transition-all text-lg"
+               className="flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-[1.5rem] font-semibold shadow-2xl shadow-primary dark:shadow-none hover:bg-tertiary transition-all text-lg"
             >
                <Plus size={24} /> Nueva Obligación
             </motion.button>
             <button 
                onClick={fetchDatos}
-               className="p-4 bg-white dark:bg-gray-900 text-gray-400 hover:text-indigo-500 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all"
+               className="p-4 bg-white dark:bg-gray-900 text-gray-400 hover:text-primary rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all"
             >
                <RefreshCcw size={24} className={loading ? 'animate-spin' : ''} />
             </button>
@@ -117,10 +117,10 @@ export default function UsuariosCreditos() {
             animate={{ opacity: 1, y: 0 }}
             className="bg-white dark:bg-gray-900 p-8 rounded-[3rem] border border-gray-100 dark:border-gray-800 shadow-sm relative overflow-hidden group"
          >
-            <div className="absolute top-0 right-0 p-8 text-indigo-500/5 group-hover:text-indigo-500/10 transition-all group-hover:scale-150 duration-500">
+            <div className="absolute top-0 right-0 p-8 text-primary/5 group-hover:text-primary/10 transition-all group-hover:scale-150 duration-500">
                <Wallet size={120} />
             </div>
-            <div className="p-4 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 rounded-2xl w-fit mb-6">
+            <div className="p-4 bg-primary-fixed dark:bg-tertiary/20 text-primary rounded-2xl w-fit mb-6">
                <Banknote size={32} />
             </div>
             <p className="text-[11px] font-semibold text-gray-400 uppercase tracking-[0.1em] mb-2 leading-none">Deuda Global Vigente</p>
@@ -172,7 +172,7 @@ export default function UsuariosCreditos() {
                <PrecioFormateado precio={estadisticas.totalPagado} />
             </h4>
             <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-gray-400">
-               <History size={14} className="text-indigo-500" />
+               <History size={14} className="text-primary" />
                {creditos.length} Créditos otorgados
             </div>
          </motion.div>
@@ -182,14 +182,14 @@ export default function UsuariosCreditos() {
       <div className="bg-white dark:bg-gray-900 rounded-[3rem] shadow-xl shadow-gray-200/50 dark:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden">
          <div className="p-8 border-b border-gray-50 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between gap-6 bg-gray-50/20 dark:bg-gray-800/10">
             <h5 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-3">
-               <ListFilter size={24} className="text-indigo-600" /> Listado Detallado de Obligaciones
+               <ListFilter size={24} className="text-primary" /> Listado Detallado de Obligaciones
             </h5>
             <div className="flex gap-4 w-full md:w-auto">
                <div className="relative flex-1 md:w-64 group">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500" size={18} />
-                  <input type="text" placeholder="Buscar Nº Crédito..." className="w-full pl-10 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-sm font-semibold focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900/30 transition-all outline-none" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary" size={18} />
+                  <input type="text" placeholder="Buscar Nº Crédito..." className="w-full pl-10 pr-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-sm font-semibold focus:ring-4 focus:ring-primary dark:focus:ring-primary/30 transition-all outline-none" />
                </div>
-               <button className="p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-400 hover:text-indigo-600 transition-all">
+               <button className="p-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-400 hover:text-primary transition-all">
                   <Filter size={20} />
                </button>
             </div>
@@ -225,16 +225,16 @@ export default function UsuariosCreditos() {
                           initial={{ opacity: 0, x: -20 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: idx * 0.05 }}
-                          className="hover:bg-indigo-50/20 dark:hover:bg-indigo-900/5 transition-colors group cursor-pointer"
+                          className="hover:bg-primary-fixed/20 dark:hover:bg-tertiary/5 transition-colors group cursor-pointer"
                           onClick={() => navigate(`/admin/creditos/detalle/${c.idCredito}`)}
                         >
                            <td className="px-8 py-7">
                               <div className="flex items-center gap-4">
-                                 <div className="p-3 bg-indigo-100 text-indigo-600 dark:bg-indigo-900/40 dark:text-indigo-400 rounded-2xl shadow-inner">
+                                 <div className="p-3 bg-primary-fixed text-primary dark:bg-tertiary/40 dark:text-primary rounded-2xl shadow-inner">
                                     <CreditCard size={20} />
                                  </div>
                                  <div>
-                                    <div className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors uppercase">Oblig. #{c.idCredito}</div>
+                                    <div className="text-sm font-semibold text-gray-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary transition-colors uppercase">Oblig. #{c.idCredito}</div>
                                     <div className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mt-0.5">Ref: {c.venta?.numeroFactura || 'Préstamo Directo'}</div>
                                  </div>
                               </div>
@@ -247,13 +247,13 @@ export default function UsuariosCreditos() {
                            </td>
                            <td className="px-8 py-7">
                               <div className="space-y-2">
-                                 <div className="flex justify-between items-center text-[11px] font-semibold text-indigo-500 uppercase tracking-wide">
+                                 <div className="flex justify-between items-center text-[11px] font-semibold text-primary uppercase tracking-wide">
                                     <span>Progreso</span>
                                     <span>{Math.round((parseFloat(c.montoPagado) / parseFloat(c.montoTotal)) * 100)}%</span>
                                  </div>
                                  <div className="w-32 h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                                      <div 
-                                        className="h-full bg-indigo-500 rounded-full" 
+                                        className="h-full bg-primary rounded-full" 
                                         style={{ width: `${(parseFloat(c.montoPagado) / parseFloat(c.montoTotal)) * 100}%` }}
                                      />
                                  </div>
@@ -270,7 +270,7 @@ export default function UsuariosCreditos() {
                               </span>
                            </td>
                            <td className="px-8 py-7 text-right">
-                              <button className="p-3 bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 rounded-2xl hover:scale-110 transition-all border border-transparent hover:border-indigo-100">
+                              <button className="p-3 bg-gray-50 dark:bg-gray-800 text-gray-400 hover:text-primary dark:hover:text-primary rounded-2xl hover:scale-110 transition-all border border-transparent hover:border-primary-fixed">
                                  <ChevronRight size={24} />
                               </button>
                            </td>
@@ -289,7 +289,7 @@ export default function UsuariosCreditos() {
                 Los saldos mostrados se actualizan en tiempo real tras cada pago registrado.
              </div>
              <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">
-                Mostrando <span className="text-indigo-600">{creditos.length}</span> obligacione(s) activas
+                Mostrando <span className="text-primary">{creditos.length}</span> obligacione(s) activas
              </p>
          </div>
       </div>

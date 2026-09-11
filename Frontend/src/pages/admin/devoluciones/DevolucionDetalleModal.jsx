@@ -93,7 +93,7 @@ const DevolucionDetalleModal = ({ devolucion, onClose }) => {
               </div>
               <span className={`px-3 py-1 text-sm rounded-full font-medium ${
                 devolucion.tipoDevolucion === 'total' 
-                  ? 'bg-purple-100 text-purple-800' 
+                  ? 'bg-primary-fixed text-tertiary' 
                   : 'bg-orange-100 text-orange-800'
               }`}>
                 {devolucion.tipoDevolucion === 'total' ? 'Total' : 'Parcial'}
@@ -123,7 +123,7 @@ const DevolucionDetalleModal = ({ devolucion, onClose }) => {
           <div className="space-y-4">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Motivo de Devolución</h3>
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="bg-primary-fixed border border-primary-fixed rounded-lg p-4">
                 <p className="text-gray-800">{devolucion.motivo}</p>
               </div>
             </div>
@@ -236,7 +236,7 @@ const DevolucionDetalleModal = ({ devolucion, onClose }) => {
               <div className="border-t border-gray-300 pt-3">
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold text-gray-900">Total Devolución:</span>
-                  <span className="text-lg font-semibold text-blue-600">
+                  <span className="text-lg font-semibold text-primary">
                     {formatearMoneda(devolucion.totalDevolucion)}
                   </span>
                 </div>

@@ -153,7 +153,7 @@ const DevolucionesPage = () => {
     if (cargando) {
       return (
         <div className="flex justify-center items-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
           <span className="ml-2 text-gray-600">Cargando devoluciones...</span>
         </div>
       );
@@ -165,7 +165,7 @@ const DevolucionesPage = () => {
           <div className="text-red-600 mb-4">{error}</div>
           <button
             onClick={cargarDevoluciones}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition-colors"
           >
             <RefreshCw className="w-4 h-4 inline mr-2" />
             Reintentar
@@ -182,7 +182,7 @@ const DevolucionesPage = () => {
           <p className="text-gray-500 mb-4">No se encontraron devoluciones con los filtros actuales.</p>
           <button
             onClick={handleNuevaDevolucion}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition-colors"
           >
             <Plus className="w-4 h-4 inline mr-2" />
             Crear Devolución
@@ -221,7 +221,7 @@ const DevolucionesPage = () => {
               <tr key={devolucion.idDevolucion} className={`hover:bg-gray-50 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                    <div className="h-10 w-10 rounded-xl bg-primary-fixed text-primary flex items-center justify-center">
                       <Package className="w-5 h-5" />
                     </div>
                     <div>
@@ -239,7 +239,7 @@ const DevolucionesPage = () => {
                 <td className="px-6 py-4">
                   <span className={`inline-flex items-center px-2.5 py-1 text-xs rounded-full border ${
                     devolucion.tipoDevolucion === 'total'
-                      ? 'bg-purple-50 text-purple-700 border-purple-200'
+                      ? 'bg-primary-fixed text-tertiary border-primary-fixed'
                       : 'bg-orange-50 text-orange-700 border-orange-200'
                   }`}>
                     {devolucion.tipoDevolucion === 'total' ? 'Total' : 'Parcial'}
@@ -255,7 +255,7 @@ const DevolucionesPage = () => {
                     <select
                       value={devolucion.estado}
                       onChange={(e) => handleCambiarEstado(devolucion.idDevolucion, e.target.value)}
-                      className="w-full text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white focus:ring-2 focus:ring-blue-500"
+                      className="w-full text-xs border border-gray-200 rounded-lg px-2 py-1 bg-white focus:ring-2 focus:ring-primary"
                     >
                       {estadosDevolucion.map((estado) => (
                         <option key={estado.value} value={estado.value}>
@@ -269,7 +269,7 @@ const DevolucionesPage = () => {
                   <div className="flex justify-end gap-2">
                     <button
                       onClick={() => handleVerDetalle(devolucion)}
-                      className="p-2 rounded-lg text-blue-600 hover:text-blue-900 hover:bg-blue-50"
+                      className="p-2 rounded-lg text-primary hover:text-tertiary hover:bg-primary-fixed"
                       title="Ver detalle"
                     >
                       <Eye className="w-4 h-4" />
@@ -278,7 +278,7 @@ const DevolucionesPage = () => {
                       <>
                         <button
                           onClick={() => handleEditarDevolucion(devolucion)}
-                          className="p-2 rounded-lg text-indigo-600 hover:text-indigo-900 hover:bg-indigo-50"
+                          className="p-2 rounded-lg text-primary hover:text-tertiary hover:bg-primary-fixed"
                           title="Editar"
                         >
                           <RefreshCw className="w-4 h-4" />
@@ -312,7 +312,7 @@ const DevolucionesPage = () => {
         </div>
         <button
           onClick={handleNuevaDevolucion}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"
+          className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition-colors flex items-center"
         >
           <Plus className="w-4 h-4 mr-2" />
           Nueva Devolución
@@ -334,7 +334,7 @@ const DevolucionesPage = () => {
                 placeholder="Buscar por número, cliente..."
                 value={filtros.busqueda}
                 onChange={(e) => handleBusqueda(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
               />
             </div>
           </div>
@@ -347,7 +347,7 @@ const DevolucionesPage = () => {
             <select
               value={filtros.estado}
               onChange={(e) => handleFiltroChange('estado', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
             >
               <option value="">Todos</option>
               <option value="pendiente">Pendiente</option>
@@ -365,7 +365,7 @@ const DevolucionesPage = () => {
             <select
               value={filtros.tipoDevolucion}
               onChange={(e) => handleFiltroChange('tipoDevolucion', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
             >
               <option value="">Todos</option>
               <option value="total">Total</option>
@@ -382,7 +382,7 @@ const DevolucionesPage = () => {
               type="date"
               value={filtros.fechaInicio}
               onChange={(e) => handleFiltroChange('fechaInicio', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
             />
           </div>
         </div>

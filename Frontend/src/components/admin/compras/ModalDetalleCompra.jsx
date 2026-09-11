@@ -28,14 +28,14 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
 
         <div className="inline-block align-bottom bg-white dark:bg-gray-950 rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full border border-gray-100 dark:border-gray-800">
           {/* Header con gradiente Premium */}
-          <div className="bg-gradient-to-r from-indigo-600 via-indigo-700 to-blue-800 px-8 py-6 flex justify-between items-center text-white">
+          <div className="bg-gradient-to-r from-primary via-primary-container to-tertiary px-8 py-6 flex justify-between items-center text-white">
             <div className="flex items-center space-x-5">
               <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md border border-white/30">
                 <FiPackage className="h-7 w-7" />
               </div>
               <div>
                 <h3 className="text-2xl font-semibold tracking-tight">Análisis Detallado de Compra</h3>
-                <div className="flex items-center space-x-3 mt-1 text-indigo-100 text-sm font-medium">
+                <div className="flex items-center space-x-3 mt-1 text-primary-fixed text-sm font-medium">
                   <span className="flex items-center gap-1"><FiHash className="h-3.5 w-3.5" /> {compra.numeroCompra || `#${compra.idCompra}`}</span>
                   <span className="opacity-40">|</span>
                   <span className="flex items-center gap-1"><FiClock className="h-3.5 w-3.5" /> ID Interno: {compra.idCompra}</span>
@@ -55,8 +55,8 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Proveedor */}
               <div className="bg-white dark:bg-gray-900 p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-indigo-500/5 rounded-bl-full -translate-y-4 translate-x-4" />
-                <div className="flex items-center space-x-3 text-indigo-600 dark:text-indigo-400 mb-4">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -translate-y-4 translate-x-4" />
+                <div className="flex items-center space-x-3 text-primary dark:text-primary mb-4">
                   <FiUser className="h-5 w-5" />
                   <span className="text-[11px] font-semibold uppercase tracking-wide">Socio Estratégico</span>
                 </div>
@@ -90,8 +90,8 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
 
               {/* Estado y Responsable */}
               <div className="bg-white dark:bg-gray-900 p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-800 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-purple-500/5 rounded-bl-full -translate-y-4 translate-x-4" />
-                <div className="flex items-center space-x-3 text-purple-600 dark:text-purple-400 mb-4">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -translate-y-4 translate-x-4" />
+                <div className="flex items-center space-x-3 text-primary dark:text-primary mb-4">
                   <FiInfo className="h-5 w-5" />
                   <span className="text-[11px] font-semibold uppercase tracking-wide">Estatus & Registro</span>
                 </div>
@@ -112,10 +112,10 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
 
             {/* Notas con diseño de citación */}
             {compra.notas && (
-              <div className="bg-indigo-50/50 dark:bg-indigo-900/10 p-6 rounded-3xl border-l-4 border-indigo-500 flex items-start space-x-4">
-                <FiFileText className="h-6 w-6 text-indigo-500 mt-1 flex-shrink-0" />
+              <div className="bg-primary-fixed/50 dark:bg-tertiary/10 p-6 rounded-3xl border-l-4 border-primary flex items-start space-x-4">
+                <FiFileText className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
                 <div className="space-y-1">
-                  <span className="text-[11px] font-semibold uppercase tracking-wide text-indigo-400">Observaciones Generales</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">Observaciones Generales</span>
                   <p className="text-sm text-gray-700 dark:text-gray-300 font-medium italic">"{compra.notas}"</p>
                 </div>
               </div>
@@ -125,7 +125,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
             <div className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 overflow-hidden shadow-2xl shadow-gray-200/20">
               <div className="px-8 py-5 border-b border-gray-50 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/30">
                 <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wide flex items-center gap-2">
-                  <FiTag className="text-indigo-500" /> Detalle de Ítems Adquiridos
+                  <FiTag className="text-primary" /> Detalle de Ítems Adquiridos
                 </h4>
               </div>
               <div className="overflow-x-auto">
@@ -172,7 +172,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
                                       {detalle.variante?.color?.nombreColor || 'N/A'}
                                     </span>
                                   </div>
-                                  <span className="px-2 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 text-[11px] font-semibold rounded-lg uppercase tracking-tighter ring-1 ring-indigo-500/20">
+                                  <span className="px-2 py-1 bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary text-[11px] font-semibold rounded-lg uppercase tracking-tighter ring-1 ring-primary/20">
                                     Talla-{detalle.variante?.talla?.nombreTalla || 'U'}
                                   </span>
                                 </div>
@@ -195,7 +195,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
                             </span>
                           </td>
                           <td className="px-8 py-6 text-right">
-                            <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 tracking-tight">
+                            <span className="text-sm font-semibold text-primary dark:text-primary tracking-tight">
                               ${formatearPrecioColombia(detalle.totalLinea)}
                             </span>
                           </td>
@@ -209,7 +209,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
 
             {/* Resumen Financiero Estilizado */}
             <div className="flex justify-end pt-4">
-              <div className="w-full md:w-80 bg-white dark:bg-gray-900 p-8 rounded-[40px] shadow-2xl shadow-indigo-500/10 border border-gray-100 dark:border-gray-800 space-y-5">
+              <div className="w-full md:w-80 bg-white dark:bg-gray-900 p-8 rounded-[40px] shadow-2xl shadow-primary/10 border border-gray-100 dark:border-gray-800 space-y-5">
                 <h5 className="text-[11px] font-semibold text-gray-400 uppercase tracking-[0.1em] text-center mb-6">Conciliación Financiera</h5>
                 
                 <div className="flex justify-between items-center text-sm group">
@@ -224,15 +224,15 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
                 
                 <div className="flex justify-between items-center text-sm group">
                   <span className="text-gray-500 font-medium">Impuestos Directos</span>
-                  <span className="font-semibold text-blue-500 group-hover:scale-110">${formatearPrecioColombia(compra.impuestos)}</span>
+                  <span className="font-semibold text-primary group-hover:scale-110">${formatearPrecioColombia(compra.impuestos)}</span>
                 </div>
                 
                 <div className="pt-6 border-t border-gray-100 dark:border-gray-800">
                   <div className="flex justify-between items-end mb-1">
-                    <span className="text-xs font-semibold text-indigo-400 uppercase tracking-wide">Inversión Total</span>
-                    <FiDollarSign className="h-4 w-4 text-indigo-500" />
+                    <span className="text-xs font-semibold text-primary uppercase tracking-wide">Inversión Total</span>
+                    <FiDollarSign className="h-4 w-4 text-primary" />
                   </div>
-                  <p className="text-4xl font-semibold text-indigo-600 dark:text-indigo-400 tracking-tighter text-right">
+                  <p className="text-4xl font-semibold text-primary dark:text-primary tracking-tighter text-right">
                     ${formatearPrecioColombia(compra.total)}
                   </p>
                 </div>

@@ -31,7 +31,7 @@ const ResumenVenta = ({ subtotal, descuentoTotal, impuestos, total }) => {
 
         <div className="flex justify-between items-center group">
           <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 text-indigo-500">
+            <div className="p-1.5 rounded-lg bg-primary-fixed dark:bg-tertiary/20 text-primary">
               <FiPercent className="h-3 w-3" />
             </div>
             <span className="text-xs font-semibold text-gray-500 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">Impuestos Sugeridos</span>
@@ -43,7 +43,7 @@ const ResumenVenta = ({ subtotal, descuentoTotal, impuestos, total }) => {
           <div className="flex justify-between items-center">
             <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">Total a Pagar</span>
             <div className="flex flex-col items-end">
-              <span className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400 tracking-tighter">
+              <span className="text-2xl font-semibold text-primary dark:text-primary tracking-tighter">
                 {formatearPrecio(total)}
               </span>
               <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter">Iva Incluido (si aplica)</span>
@@ -52,13 +52,13 @@ const ResumenVenta = ({ subtotal, descuentoTotal, impuestos, total }) => {
         </div>
       </div>
 
-      <div className="mt-8 p-4 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-2xl shadow-lg shadow-indigo-500/20">
+      <div className="mt-8 p-4 bg-gradient-to-br from-primary to-tertiary rounded-2xl shadow-lg shadow-primary/20">
         <div className="flex items-center gap-3">
           <div className="h-10 w-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
             <FiDollarSign className="h-6 w-6" />
           </div>
           <div>
-            <p className="text-[11px] font-semibold text-indigo-100 uppercase tracking-wide">Valor Neto Venta</p>
+            <p className="text-[11px] font-semibold text-primary-fixed uppercase tracking-wide">Valor Neto Venta</p>
             <p className="text-lg font-semibold text-white leading-none">{formatearPrecio(total)}</p>
           </div>
         </div>

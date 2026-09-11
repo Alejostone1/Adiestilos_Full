@@ -192,7 +192,7 @@ const InventarioPage = () => {
           <Button
             type="primary"
             onClick={() => navigate('/admin/inventario/ajustes')}
-            className="dark:bg-blue-600 dark:border-blue-600"
+            className="dark:bg-primary dark:border-primary"
           >
             Nuevo Ajuste
           </Button>

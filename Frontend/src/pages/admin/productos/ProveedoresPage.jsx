@@ -266,7 +266,7 @@ export default function ProveedoresPage() {
           <h3 className="font-medium text-gray-900 text-sm sm:text-base mb-1 line-clamp-2">{producto.nombreProducto}</h3>
           <p className="text-xs text-gray-500 font-mono mb-2">{producto.codigoReferencia}</p>
           <div className="flex items-center justify-between">
-            <span className="text-sm sm:text-base font-semibold text-blue-600">
+            <span className="text-sm sm:text-base font-semibold text-primary">
               ${formatearPrecio(producto.precioVentaSugerido)}
             </span>
             {stockTotal !== null && (
@@ -285,9 +285,9 @@ export default function ProveedoresPage() {
 
 
     return (
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-blue-300 overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-primary overflow-hidden">
         {/* Header con imagen */}
-        <div className="relative h-32 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
+        <div className="relative h-32 bg-gradient-to-br from-primary to-tertiary overflow-hidden">
           <img
             src={getImagenUrl(proveedor.imagenProveedor)}
             alt={proveedor.nombreProveedor}
@@ -303,7 +303,7 @@ export default function ProveedoresPage() {
             <div className="flex items-center gap-3">
               <div className="flex-shrink-0">
                 <div className="h-12 w-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                  <Building2 className="h-6 w-6 text-blue-600" />
+                  <Building2 className="h-6 w-6 text-primary" />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
@@ -358,8 +358,8 @@ export default function ProveedoresPage() {
 
           {/* Métricas */}
           <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="text-center p-2 bg-blue-50 rounded-lg">
-              <Package className="h-5 w-5 text-blue-600 mx-auto mb-1" />
+            <div className="text-center p-2 bg-primary-fixed rounded-lg">
+              <Package className="h-5 w-5 text-primary mx-auto mb-1" />
               <div className="text-sm font-semibold text-gray-900">{productosCount}</div>
               <div className="text-xs text-gray-600">Productos</div>
             </div>
@@ -370,8 +370,8 @@ export default function ProveedoresPage() {
               <div className="text-xs text-gray-600">Estado</div>
             </div>
 
-            <div className="text-center p-2 bg-purple-50 rounded-lg">
-              <Calendar className="h-5 w-5 text-purple-600 mx-auto mb-1" />
+            <div className="text-center p-2 bg-primary-fixed rounded-lg">
+              <Calendar className="h-5 w-5 text-primary mx-auto mb-1" />
               <div className="text-sm font-semibold text-gray-900">
                 {formatearFecha(proveedor.creadoEn, {
   month: 'short',
@@ -391,7 +391,7 @@ export default function ProveedoresPage() {
                 setProveedorSeleccionado(proveedor);
                 setMostrarDetalles(true);
               }}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-primary-fixed hover:bg-primary-fixed text-primary text-sm font-medium transition-colors"
             >
               <Eye className="w-4 h-4" />
               Detalles
@@ -404,7 +404,7 @@ export default function ProveedoresPage() {
                 await fetchProductosProveedor(proveedor.idProveedor);
                 setMostrarProductos(true);
               }}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-600 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-primary-fixed hover:bg-primary-fixed text-primary text-sm font-medium transition-colors"
             >
               <Package className="w-4 h-4" />
               Productos
@@ -463,7 +463,7 @@ export default function ProveedoresPage() {
         {/* Header */}
         <div className="mb-6 sm:mb-8">
           <div className="flex items-center gap-2 sm:gap-3 mb-2">
-            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
+            <Users className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
             <h1 className="text-xl sm:text-3xl font-semibold text-gray-900">Gestión de Proveedores</h1>
           </div>
           <p className="text-sm sm:text-base text-gray-600">Panel administrativo profesional para gestión completa de proveedores y sus productos</p>
@@ -480,7 +480,7 @@ export default function ProveedoresPage() {
                   placeholder="Buscar por nombre, NIT, contacto..."
                   value={busqueda}
                   onChange={(e) => setBusqueda(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary focus:border-primary"
                 />
               </div>
 
@@ -495,7 +495,7 @@ export default function ProveedoresPage() {
                 <Filter className="w-4 h-4" />
                 Filtros
                 {filtroEstado !== 'todos' && (
-                  <span className="ml-1 bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  <span className="ml-1 bg-primary text-white text-xs px-2 py-0.5 rounded-full">
                     1
                   </span>
                 )}
@@ -513,7 +513,7 @@ export default function ProveedoresPage() {
 
               <button
                 onClick={() => setMostrarFormulario(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition text-sm sm:text-base"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white hover:bg-tertiary transition text-sm sm:text-base"
               >
                 <Plus className="w-4 h-4" />
                 Nuevo Proveedor
@@ -531,7 +531,7 @@ export default function ProveedoresPage() {
                     <select
                       value={filtroEstado}
                       onChange={(e) => setFiltroEstado(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
+                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los estados</option>
                       <option value="activo">Activo</option>
@@ -557,7 +557,7 @@ export default function ProveedoresPage() {
           {/* Estados */}
           {loading && (
             <div className="flex justify-center items-center py-12">
-              <div className="animate-spin h-8 w-8 border-b-2 border-blue-600 rounded-full" />
+              <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full" />
               <span className="ml-3 text-gray-500">Cargando proveedores...</span>
             </div>
           )}
@@ -586,7 +586,7 @@ export default function ProveedoresPage() {
                     setBusqueda('');
                     setFiltroEstado('todos');
                   }}
-                  className="mt-2 text-sm text-blue-600 hover:text-blue-800 underline"
+                  className="mt-2 text-sm text-primary hover:text-tertiary underline"
                 >
                   Limpiar filtros
                 </button>
@@ -624,7 +624,7 @@ export default function ProveedoresPage() {
                         onClick={() => setPaginaActual(pagina)}
                         className={`px-3 py-2 rounded-lg transition ${
                           pagina === paginaActual
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-primary text-white'
                             : 'border border-gray-300 hover:bg-gray-50'
                         }`}
                       >
@@ -652,7 +652,7 @@ export default function ProveedoresPage() {
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-2 sm:p-4">
           <div className="bg-white rounded-xl w-full max-w-2xl max-h-[95vh] overflow-y-auto shadow-2xl">
             {/* Hero con imagen */}
-            <div className="relative h-40 sm:h-56 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden rounded-t-xl">
+            <div className="relative h-40 sm:h-56 bg-gradient-to-br from-primary to-tertiary overflow-hidden rounded-t-xl">
               <img
                 src={getImagenUrl(proveedorSeleccionado.imagenProveedor)}
                 alt={proveedorSeleccionado.nombreProveedor}
@@ -693,7 +693,7 @@ export default function ProveedoresPage() {
               {/* Info en tarjetas con icono */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-gray-500">Contacto</p>
                     <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.contacto || 'No especificado'}</p>
@@ -701,7 +701,7 @@ export default function ProveedoresPage() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-gray-500">Correo Electrónico</p>
                     <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.correoElectronico || 'No especificado'}</p>
@@ -709,7 +709,7 @@ export default function ProveedoresPage() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-gray-500">Teléfono</p>
                     <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.telefono || 'No especificado'}</p>
@@ -717,7 +717,7 @@ export default function ProveedoresPage() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
-                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-gray-500">Fecha de Registro</p>
                     <p className="text-sm text-gray-900">
@@ -731,7 +731,7 @@ export default function ProveedoresPage() {
                 </div>
 
                 <div className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg sm:col-span-2">
-                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600 mt-0.5 shrink-0" />
+                  <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 shrink-0" />
                   <div className="min-w-0">
                     <p className="text-xs font-medium text-gray-500">Dirección</p>
                     <p className="text-sm text-gray-900 break-words">{proveedorSeleccionado.direccion || 'No especificada'}</p>
@@ -769,7 +769,7 @@ export default function ProveedoresPage() {
                     setProveedorEditando(proveedorSeleccionado);
                     setMostrarFormulario(true);
                   }}
-                  className="flex items-center gap-1.5 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
+                  className="flex items-center gap-1.5 px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition text-sm"
                 >
                   <Edit className="w-4 h-4" />
                   Editar Proveedor
@@ -803,7 +803,7 @@ export default function ProveedoresPage() {
 
               {cargandoProductos ? (
                 <div className="flex justify-center items-center py-12">
-                  <div className="animate-spin h-8 w-8 border-b-2 border-blue-600 rounded-full" />
+                  <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full" />
                   <span className="ml-3 text-gray-500">Cargando productos...</span>
                 </div>
               ) : (productosPorProveedor[proveedorSeleccionado.idProveedor]?.length ?? 0) === 0 ? (
@@ -956,7 +956,7 @@ export default function ProveedoresPage() {
                       name="nombreProveedor"
                       defaultValue={proveedorEditando?.nombreProveedor}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     />
                   </div>
 
@@ -967,7 +967,7 @@ export default function ProveedoresPage() {
                       name="nitCC"
                       defaultValue={proveedorEditando?.nitCC}
                       required
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     />
                   </div>
                 </div>
@@ -979,7 +979,7 @@ export default function ProveedoresPage() {
                       type="text"
                       name="contacto"
                       defaultValue={proveedorEditando?.contacto}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     />
                   </div>
 
@@ -989,7 +989,7 @@ export default function ProveedoresPage() {
                       type="email"
                       name="correoElectronico"
                       defaultValue={proveedorEditando?.correoElectronico}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     />
                   </div>
                 </div>
@@ -1001,7 +1001,7 @@ export default function ProveedoresPage() {
                       type="tel"
                       name="telefono"
                       defaultValue={proveedorEditando?.telefono}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     />
                   </div>
 
@@ -1010,7 +1010,7 @@ export default function ProveedoresPage() {
                     <select
                       name="estado"
                       defaultValue={proveedorEditando?.estado || 'activo'}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     >
                       <option value="activo">Activo</option>
                       <option value="inactivo">Inactivo</option>
@@ -1024,7 +1024,7 @@ export default function ProveedoresPage() {
                     name="direccion"
                     rows={3}
                     defaultValue={proveedorEditando?.direccion}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -1035,7 +1035,7 @@ export default function ProveedoresPage() {
                     rows={4}
                     placeholder="Notas adicionales sobre el proveedor..."
                     defaultValue={proveedorEditando?.notas}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                   />
                 </div>
 
@@ -1053,7 +1053,7 @@ export default function ProveedoresPage() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition"
                   >
                     {proveedorEditando ? 'Actualizar' : 'Crear'} Proveedor
                   </button>

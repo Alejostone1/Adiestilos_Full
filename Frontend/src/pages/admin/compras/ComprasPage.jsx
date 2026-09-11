@@ -122,12 +122,12 @@ const ComprasPage = () => {
             onClick={() => navigate('/admin/compras/detalle')}
             className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-semibold rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 transition-all"
           >
-            <FiPackage className="text-indigo-500" />
+            <FiPackage className="text-primary" />
             <span>Ver Análisis de Ítems</span>
           </button>
           <button
             onClick={() => setModalCompraOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-tertiary text-white font-semibold rounded-2xl shadow-lg shadow-primary/30 hover:scale-105 transition-all"
           >
             <FiPlus />
             <span>Nueva Compra</span>
@@ -141,7 +141,7 @@ const ComprasPage = () => {
             title="Órdenes Totales"
             value={estadisticas.totalCompras}
             icon={<FiPackage />}
-            color="indigo"
+            color="pink"
           />
           <KPICard
             title="Inversión Mensual"
@@ -174,14 +174,14 @@ const ComprasPage = () => {
                   placeholder="Buscar compra..."
                   value={busqueda}
                   onChange={(e) => setBusqueda(e.target.value)}
-                  className="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 transition-all w-64"
+                  className="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary transition-all w-64"
                 />
               </div>
               <button 
                 onClick={() => setFiltrosVisibles(!filtrosVisibles)}
                 className={`p-2 rounded-xl transition-colors ${
                   filtrosVisibles 
-                    ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400' 
+                    ? 'bg-primary-fixed dark:bg-tertiary/30 text-primary dark:text-primary' 
                     : 'bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
@@ -250,7 +250,7 @@ const ComprasPage = () => {
                 </button>
                 <button
                   onClick={() => cargarComprasConFiltros()}
-                  className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700"
+                  className="px-4 py-2 bg-primary text-white text-sm rounded-lg hover:bg-tertiary"
                 >
                   Aplicar Filtros
                 </button>
@@ -261,7 +261,7 @@ const ComprasPage = () => {
           <div className="overflow-x-auto">
             {cargando ? (
               <div className="flex flex-col items-center justify-center py-20 space-y-4">
-                <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin" />
+                <div className="w-12 h-12 border-4 border-primary-fixed border-t-primary rounded-full animate-spin" />
                 <p className="font-medium text-gray-500 animate-pulse">Analizando registros de almacén...</p>
               </div>
             ) : compras.length === 0 ? (
@@ -280,10 +280,10 @@ const ComprasPage = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
                   {compras.map((compra) => (
-                    <tr key={compra.idCompra} className="hover:bg-indigo-50/30 dark:hover:bg-indigo-900/10 transition-colors group">
+                    <tr key={compra.idCompra} className="hover:bg-primary-fixed/30 dark:hover:bg-tertiary/10 transition-colors group">
                       <td className="px-8 py-6">
                         <div className="flex items-center space-x-3">
-                          <div className="h-10 w-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-semibold">
+                          <div className="h-10 w-10 rounded-xl bg-primary-fixed dark:bg-tertiary/50 flex items-center justify-center text-primary dark:text-primary font-semibold">
                             <FiHash />
                           </div>
                           <div>
@@ -307,7 +307,7 @@ const ComprasPage = () => {
                         </div>
                       </td>
                       <td className="px-8 py-6 text-right">
-                        <span className="text-base font-semibold text-indigo-600 dark:text-indigo-400">
+                        <span className="text-base font-semibold text-primary dark:text-primary">
                           ${formatearPrecioColombia(compra.total)}
                         </span>
                       </td>
@@ -328,7 +328,7 @@ const ComprasPage = () => {
                         <div className="flex items-center justify-center gap-2">
                           <button
                             onClick={() => abrirDetalle(compra)}
-                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 hover:bg-blue-600 hover:text-white border border-blue-100 dark:border-blue-800/60 hover:border-blue-600 shadow-sm hover:shadow-md hover:shadow-blue-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                            className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                             title="Ver Detalle"
                           >
                             <FiEye className="h-4 w-4" />
@@ -377,7 +377,7 @@ const ComprasPage = () => {
 
 const KPICard = ({ title, value, icon, color }) => {
   const themes = {
-    indigo: "from-indigo-500 to-blue-600 shadow-indigo-200",
+    pink: "from-primary to-tertiary shadow-primary",
     emerald: "from-emerald-500 to-teal-600 shadow-emerald-200",
     amber: "from-amber-500 to-orange-600 shadow-amber-200"
   };
@@ -401,14 +401,14 @@ const KPICard = ({ title, value, icon, color }) => {
 const EmptyState = ({ onClick }) => (
   <div className="text-center py-24 px-8 group">
     <div className="relative inline-block mb-6">
-      <div className="absolute inset-0 bg-indigo-500 rounded-full blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
+      <div className="absolute inset-0 bg-primary rounded-full blur-2xl opacity-10 group-hover:opacity-20 transition-opacity" />
       <FiPackage className="h-20 w-20 text-gray-200 dark:text-gray-800 mx-auto relative z-10" />
     </div>
     <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Bóveda de Compras Vacía</h3>
     <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-xs mx-auto">Comienza abastecer tu inventario registrando tu primera orden de compra estratégica.</p>
     <button
       onClick={onClick}
-      className="inline-flex items-center space-x-2 text-indigo-600 hover:text-indigo-700 font-semibold uppercase tracking-wide text-[11px] transition-all"
+      className="inline-flex items-center space-x-2 text-primary hover:text-tertiary font-semibold uppercase tracking-wide text-[11px] transition-all"
     >
       <span>Ejecutar Primera Compra</span>
       <FiArrowRight className="h-3 w-3" />

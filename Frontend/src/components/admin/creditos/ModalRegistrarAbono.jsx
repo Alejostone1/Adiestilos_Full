@@ -171,10 +171,10 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
       <div className="relative bg-white dark:bg-gray-900 rounded-[3rem] shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-white/20 animate-in zoom-in-95 duration-500">
         
         {/* Header Premium */}
-        <div className="bg-gradient-to-br from-indigo-700 via-indigo-600 to-blue-600 p-8 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-br from-primary via-primary-container to-tertiary p-8 text-white relative overflow-hidden">
            {/* Decoración fondo */}
            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
-           <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400/10 rounded-full -ml-20 -mb-20 blur-2xl" />
+           <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/10 rounded-full -ml-20 -mb-20 blur-2xl" />
 
            <div className="relative z-10 flex justify-between items-center">
               <div className="flex items-center gap-5">
@@ -198,9 +198,9 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
               <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Deuda Pendiente</span>
               <p className="text-xl font-semibold text-rose-500">{formatearPrecio(credito.saldoPendiente)}</p>
            </div>
-           <div className="p-6 flex flex-col items-center bg-indigo-50/30 dark:bg-indigo-900/5">
-              <span className="text-[11px] font-semibold text-indigo-400 uppercase tracking-wide mb-1">Total a Abonar</span>
-              <p className="text-2xl font-semibold text-indigo-600 dark:text-indigo-400">{formatearPrecio(totalAbono)}</p>
+           <div className="p-6 flex flex-col items-center bg-primary-fixed/30 dark:bg-tertiary/5">
+              <span className="text-[11px] font-semibold text-primary uppercase tracking-wide mb-1">Total a Abonar</span>
+              <p className="text-2xl font-semibold text-primary dark:text-primary">{formatearPrecio(totalAbono)}</p>
            </div>
            <div className="p-6 flex flex-col items-center">
               <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wide mb-1">Nuevo Saldo</span>
@@ -216,7 +216,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
            {/* Selector de Métodos de Pago */}
            <section>
               <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.1em] mb-6 flex items-center gap-2">
-                 <FiPlus className="text-indigo-500" /> Selecciona Formas de Pago
+                 <FiPlus className="text-primary" /> Selecciona Formas de Pago
               </h3>
               <div className="flex flex-wrap gap-3">
                  {metodosPago
@@ -230,8 +230,8 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                           onClick={() => toggleMetodo(metodo)}
                           className={`px-5 py-3 rounded-2xl border-2 font-semibold text-[11px] uppercase tracking-wider transition-all duration-300 flex items-center gap-3 ${
                              activo 
-                             ? 'bg-indigo-600 border-indigo-600 text-white shadow-lg shadow-indigo-500/30 -translate-y-1' 
-                             : 'bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 text-gray-400 hover:border-indigo-200 hover:text-indigo-500 shadow-sm'
+                             ? 'bg-primary border-primary text-white shadow-lg shadow-primary/30 -translate-y-1' 
+                             : 'bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800 text-gray-400 hover:border-primary-fixed hover:text-primary shadow-sm'
                           }`}
                        >
                           <FiCreditCard className={activo ? 'text-white' : 'text-gray-300'} />
@@ -253,7 +253,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                        return (
                           <div 
                              key={idKey} 
-                             className="bg-white dark:bg-gray-800 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl hover:border-indigo-100 dark:hover:border-indigo-900/30 transition-all group animate-in slide-in-from-bottom-2"
+                             className="bg-white dark:bg-gray-800 p-6 rounded-[2.5rem] border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl hover:border-primary-fixed dark:hover:border-tertiary/30 transition-all group animate-in slide-in-from-bottom-2"
                           >
                              <div className="flex justify-between items-center mb-4">
                                 <span className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">{metodo.nombreMetodo}</span>
@@ -265,7 +265,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                                           .reduce((acc, [_, v]) => acc + (Number(v) || 0), 0);
                                         updateMonto(idKey, Math.max(0, Number(credito.saldoPendiente) - totalOtros));
                                       }}
-                                      className="text-[11px] font-semibold text-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 px-2 py-1 rounded-lg hover:bg-indigo-100 transition-colors uppercase"
+                                      className="text-[11px] font-semibold text-primary bg-primary-fixed dark:bg-tertiary/20 px-2 py-1 rounded-lg hover:bg-primary-fixed transition-colors uppercase"
                                    >
                                       Saldar
                                    </button>
@@ -283,7 +283,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                                    type="number"
                                    value={pagosMultimetodo[idKey] || ''}
                                    onChange={(e) => updateMonto(idKey, e.target.value)}
-                                   className="w-full bg-gray-50 dark:bg-gray-900/50 border-none rounded-2xl py-4 pl-10 pr-4 text-xl font-semibold text-gray-800 dark:text-white focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:text-gray-300"
+                                   className="w-full bg-gray-50 dark:bg-gray-900/50 border-none rounded-2xl py-4 pl-10 pr-4 text-xl font-semibold text-gray-800 dark:text-white focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-gray-300"
                                    placeholder="0.00"
                                    autoFocus
                                 />
@@ -319,7 +319,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
                  value={notas}
                  onChange={(e) => setNotas(e.target.value)}
                  rows="2"
-                 className="w-full bg-white dark:bg-gray-900 border-none rounded-2xl p-4 text-sm font-medium text-gray-600 dark:text-gray-300 focus:ring-4 focus:ring-indigo-500/10 transition-all resize-none shadow-sm"
+                 className="w-full bg-white dark:bg-gray-900 border-none rounded-2xl p-4 text-sm font-medium text-gray-600 dark:text-gray-300 focus:ring-4 focus:ring-primary/10 transition-all resize-none shadow-sm"
                  placeholder="Escribe aquí cualquier detalle extra sobre este abono..."
               />
            </section>
@@ -337,7 +337,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
            <button
               onClick={handleSubmit}
               disabled={procesando || totalAbono <= 0}
-              className="flex-[2] px-8 py-5 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-3xl shadow-xl shadow-indigo-500/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3 uppercase text-xs tracking-wide"
+              className="flex-[2] px-8 py-5 bg-gradient-to-r from-primary to-tertiary text-white font-semibold rounded-3xl shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3 uppercase text-xs tracking-wide"
            >
               {procesando ? (
                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />

@@ -31,8 +31,8 @@ const TopProductos = ({ data, loading }) => {
           <Title level={4} className="!m-0 !font-semibold dark:!text-white">Best Sellers</Title>
           <Paragraph className="!text-slate-500 dark:!text-slate-400 !text-sm !m-0">Productos de mayor rotación</Paragraph>
         </div>
-        <div className="card-3d w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center">
-          <CrownOutlined className="text-purple-600 dark:text-purple-400 text-xl" />
+        <div className="card-3d w-10 h-10 bg-primary-fixed dark:bg-tertiary/30 rounded-xl flex items-center justify-center">
+          <CrownOutlined className="text-primary dark:text-primary text-xl" />
         </div>
       </div>
 
@@ -57,7 +57,7 @@ const TopProductos = ({ data, loading }) => {
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <Text className="!font-semibold block truncate !text-sm dark:!text-slate-200 group-hover:text-blue-500 transition-colors">
+                  <Text className="!font-semibold block truncate !text-sm dark:!text-slate-200 group-hover:text-primary transition-colors">
                     {item.variante?.producto?.nombreProducto || 'Producto desconocido'}
                   </Text>
                   <Text className="!text-[11px] !text-slate-400 dark:!text-slate-500 !font-medium">
@@ -79,7 +79,7 @@ const TopProductos = ({ data, loading }) => {
       )}
       
       <div className="mt-8 pt-4 border-t border-slate-100 dark:border-slate-700/50">
-        <button className="w-full py-2 text-blue-500 dark:text-blue-400 font-semibold text-sm hover:underline">Ver reporte detallado</button>
+        <button className="w-full py-2 text-primary dark:text-primary font-semibold text-sm hover:underline">Ver reporte detallado</button>
       </div>
     </div>
   );

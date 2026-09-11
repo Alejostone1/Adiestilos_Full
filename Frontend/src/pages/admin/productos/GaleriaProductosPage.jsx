@@ -272,7 +272,7 @@ export default function GaleriaProductosPage() {
     const totalVariantes = producto.variantes?.length || 0;
 
     return (
-      <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-xl border border-gray-200 dark:border-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-300 overflow-hidden group">
+      <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-xl border border-gray-200 dark:border-slate-700/50 hover:border-primary-fixed dark:hover:border-primary transition-all duration-300 overflow-hidden group">
         {/* Imagen principal */}
         <div className="relative aspect-video bg-gray-100 dark:bg-slate-800/30 overflow-hidden">
           {imagenPrincipal ? (
@@ -316,7 +316,7 @@ export default function GaleriaProductosPage() {
               </div>
             )}
             {totalVariantes > 0 && (
-              <div className="bg-purple-600/90 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
+              <div className="bg-primary/90 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
                 <Layers className="w-3 h-3" />
                 {totalVariantes}
               </div>
@@ -352,7 +352,7 @@ export default function GaleriaProductosPage() {
                 <span className="text-xs font-medium text-gray-700">Variantes</span>
                 <button
                   onClick={() => navigate(`/admin/productos/${producto.idProducto}/variantes`)}
-                  className="text-xs text-purple-600 hover:text-purple-700"
+                  className="text-xs text-primary hover:text-primary"
                 >
                   Ver todas
                 </button>
@@ -373,7 +373,7 @@ export default function GaleriaProductosPage() {
                       />
                     </div>
                     {variante.imagenesVariantes?.length > 0 && (
-                      <div className="absolute -top-1 -right-1 bg-blue-500 text-white text-xs w-3 h-3 rounded-full flex items-center justify-center">
+                      <div className="absolute -top-1 -right-1 bg-primary text-white text-xs w-3 h-3 rounded-full flex items-center justify-center">
                         {variante.imagenesVariantes.length}
                       </div>
                     )}
@@ -400,11 +400,11 @@ export default function GaleriaProductosPage() {
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
+          <div className="bg-gradient-to-r from-primary to-tertiary text-white p-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-semibold">Galería de Producto</h2>
-                <p className="text-purple-100 mt-1">{selectedProduct.nombreProducto}</p>
+                <p className="text-primary-fixed mt-1">{selectedProduct.nombreProducto}</p>
               </div>
               <button
                 onClick={() => setShowProductGallery(false)}
@@ -419,7 +419,7 @@ export default function GaleriaProductosPage() {
           <div className="p-6 max-h-[calc(90vh-120px)] overflow-y-auto">
             {/* Upload section */}
             <div className="mb-6">
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-purple-400 transition">
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-primary transition">
                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-3" />
                 <p className="text-gray-600 mb-2">Arrastra imágenes o haz clic para seleccionar</p>
                 <input
@@ -432,7 +432,7 @@ export default function GaleriaProductosPage() {
                 />
                 <label
                   htmlFor="producto-upload"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary transition cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   Subir imágenes
@@ -447,7 +447,7 @@ export default function GaleriaProductosPage() {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div
-                      className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+                      className="bg-primary h-2 rounded-full transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
                     />
                   </div>
@@ -524,11 +524,11 @@ export default function GaleriaProductosPage() {
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
         <div className="bg-white rounded-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
+          <div className="bg-gradient-to-r from-primary to-tertiary text-white p-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-2xl font-semibold">Galería de Variante</h2>
-                <p className="text-purple-100 mt-1">
+                <p className="text-primary-fixed mt-1">
                   {selectedProduct.nombreProducto} - {selectedVariant.codigoSku}
                 </p>
                 <div className="flex items-center gap-3 mt-2">
@@ -549,7 +549,7 @@ export default function GaleriaProductosPage() {
           <div className="p-6 max-h-[calc(90vh-120px)] overflow-y-auto">
             {/* Upload section */}
             <div className="mb-6">
-              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-purple-400 transition">
+              <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-primary transition">
                 <Upload className="w-12 h-12 text-gray-400 mx-auto mb-3" />
                 <p className="text-gray-600 mb-2">Arrastra imágenes o haz clic para seleccionar</p>
                 <input
@@ -562,7 +562,7 @@ export default function GaleriaProductosPage() {
                 />
                 <label
                   htmlFor="variante-upload"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary transition cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   Subir imágenes de variante
@@ -577,7 +577,7 @@ export default function GaleriaProductosPage() {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
                     <div
-                      className="bg-purple-600 h-2 rounded-full transition-all duration-300"
+                      className="bg-primary h-2 rounded-full transition-all duration-300"
                       style={{ width: `${uploadProgress}%` }}
                     />
                   </div>
@@ -598,7 +598,7 @@ export default function GaleriaProductosPage() {
                   </div>
 
                   {/* Badge de variante */}
-                  <div className="absolute top-2 left-2 bg-purple-600 text-white px-2 py-1 rounded text-xs flex items-center gap-1">
+                  <div className="absolute top-2 left-2 bg-primary text-white px-2 py-1 rounded text-xs flex items-center gap-1">
                     <Layers className="w-3 h-3" />
                     Variante
                   </div>
@@ -657,7 +657,7 @@ export default function GaleriaProductosPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mx-auto mb-3" />
+          <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-3" />
           <span className="text-gray-500">Cargando galería de productos...</span>
         </div>
       </div>
@@ -685,7 +685,7 @@ export default function GaleriaProductosPage() {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <ImageIcon className="w-8 h-8 text-purple-600" />
+            <ImageIcon className="w-8 h-8 text-primary" />
             <div>
               <h1 className="text-3xl font-semibold text-gray-900">Galería de Productos</h1>
               <p className="text-gray-600">Panel central de gestión visual de imágenes</p>
@@ -700,7 +700,7 @@ export default function GaleriaProductosPage() {
                   <span className="text-sm text-gray-500">Total Productos</span>
                   <p className="text-2xl font-semibold text-gray-900">{productos.length}</p>
                 </div>
-                <Package className="w-8 h-8 text-purple-600 opacity-20" />
+                <Package className="w-8 h-8 text-primary opacity-20" />
               </div>
             </div>
             <div className="bg-white rounded-lg border border-gray-200 p-4">
@@ -718,24 +718,24 @@ export default function GaleriaProductosPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500">Total Variantes</span>
-                  <p className="text-2xl font-semibold text-blue-600">
+                  <p className="text-2xl font-semibold text-primary">
                     {productos.reduce((total, p) => total + (p.variantes?.length || 0), 0)}
                   </p>
                 </div>
-                <Layers className="w-8 h-8 text-blue-600 opacity-20" />
+                <Layers className="w-8 h-8 text-primary opacity-20" />
               </div>
             </div>
             <div className="bg-white rounded-lg border border-gray-200 p-4">
               <div className="flex items-center justify-between">
                 <div>
                   <span className="text-sm text-gray-500">Imágenes Variantes</span>
-                  <p className="text-2xl font-semibold text-purple-600">
+                  <p className="text-2xl font-semibold text-primary">
                     {productos.reduce((total, p) =>
                       total + (p.variantes?.reduce((subtotal, v) => subtotal + (v.imagenesVariantes?.length || 0), 0) || 0), 0
                     )}
                   </p>
                 </div>
-                <Grid3x3 className="w-8 h-8 text-purple-600 opacity-20" />
+                <Grid3x3 className="w-8 h-8 text-primary opacity-20" />
               </div>
             </div>
           </div>
@@ -753,7 +753,7 @@ export default function GaleriaProductosPage() {
                   placeholder="Buscar productos por nombre o código..."
                   value={busqueda}
                   onChange={(e) => setBusqueda(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 />
               </div>
             </div>
@@ -770,7 +770,7 @@ export default function GaleriaProductosPage() {
             {/* Botón de nuevo producto */}
             <button
               onClick={() => navigate('/admin/productos/nuevo')}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+              className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary transition"
             >
               <Plus className="w-4 h-4" />
               Nuevo Producto
@@ -785,7 +785,7 @@ export default function GaleriaProductosPage() {
                 <select
                   value={filtroCategoria}
                   onChange={(e) => setFiltroCategoria(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="todos">Todas las categorías</option>
                   {categorias.map((categoria) => (
@@ -800,7 +800,7 @@ export default function GaleriaProductosPage() {
                 <select
                   value={filtroProveedor}
                   onChange={(e) => setFiltroProveedor(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                 >
                   <option value="todos">Todos los proveedores</option>
                   {proveedores.map((proveedor) => (
@@ -834,7 +834,7 @@ export default function GaleriaProductosPage() {
             </p>
             <button
               onClick={() => navigate('/admin/productos/nuevo')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary transition"
             >
               <Plus className="w-4 h-4" />
               Nuevo Producto

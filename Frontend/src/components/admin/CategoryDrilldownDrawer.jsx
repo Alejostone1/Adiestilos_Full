@@ -104,8 +104,8 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
           <div className="px-6 py-8 border-b border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900/50 sticky top-0 z-10">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center border border-purple-100 dark:border-purple-800/50">
-                  <LayoutGrid className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                <div className="w-12 h-12 bg-primary-fixed dark:bg-tertiary/30 rounded-2xl flex items-center justify-center border border-primary-fixed dark:border-tertiary/50">
+                  <LayoutGrid className="w-6 h-6 text-primary dark:text-primary" />
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-slate-900 dark:text-white leading-tight">
@@ -139,7 +139,7 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
           <div className="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar space-y-4">
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20 opacity-50">
-                <Loader2 className="w-10 h-10 animate-spin text-purple-600 mb-4" />
+                <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
                 <span className="font-semibold text-slate-400 animate-pulse">Analizando inventario...</span>
               </div>
             ) : productos.length === 0 ? (
@@ -154,7 +154,7 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
                   key={producto.idProducto}
                   className={`group relative overflow-hidden bg-white dark:bg-slate-800 rounded-3xl border transition-all duration-300 ${
                     expandedProduct === producto.idProducto 
-                    ? 'border-purple-200 dark:border-purple-800 shadow-xl shadow-purple-500/10' 
+                    ? 'border-primary-fixed dark:border-tertiary shadow-xl shadow-primary/10' 
                     : 'border-slate-100 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-lg'
                   }`}
                 >
@@ -173,7 +173,7 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-slate-900 dark:text-white truncate pr-6 group-hover:text-purple-600 transition-colors">
+                      <h4 className="font-semibold text-slate-900 dark:text-white truncate pr-6 group-hover:text-primary transition-colors">
                         {producto.nombreProducto}
                       </h4>
                       <div className="flex items-center gap-3 mt-1.5 flex-wrap">
@@ -192,7 +192,7 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
 
                     <div className="flex items-center gap-3">
                       {expandedProduct === producto.idProducto ? (
-                        <ChevronUp className="w-5 h-5 text-purple-600" />
+                        <ChevronUp className="w-5 h-5 text-primary" />
                       ) : (
                         <ChevronDown className="w-5 h-5 text-slate-300 group-hover:text-slate-500 transition-colors" />
                       )}
@@ -204,13 +204,13 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
                     <div className="px-5 pb-5 pt-2 animate-in slide-in-from-top-4 duration-300">
                       <div className="border-t border-slate-50 dark:border-slate-700/50 mt-2 pt-4">
                         <div className="flex items-center gap-2 mb-4">
-                           <Layers className="w-3.5 h-3.5 text-purple-500" />
+                           <Layers className="w-3.5 h-3.5 text-primary" />
                            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-[0.1em]">Variantes Disponibles</span>
                         </div>
 
                         {loadingVariantes[producto.idProducto] ? (
                           <div className="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl">
-                             <Loader2 className="w-4 h-4 animate-spin text-purple-500" />
+                             <Loader2 className="w-4 h-4 animate-spin text-primary" />
                              <span className="text-xs font-semibold text-slate-400 italic">Desglosando stock...</span>
                           </div>
                         ) : !variantesMap[producto.idProducto] || variantesMap[producto.idProducto].length === 0 ? (
@@ -260,7 +260,7 @@ export default function CategoryDrilldownDrawer({ isOpen, onClose, categoria }) 
                         <div className="mt-4 flex justify-center">
                            <button 
                             onClick={() => navigate(`/admin/productos/${producto.idProducto}/variantes`)}
-                            className="flex items-center gap-2 text-[11px] font-semibold text-purple-600 dark:text-purple-400 hover:text-purple-800 transition-colors uppercase tracking-wide px-4 py-2 bg-purple-50 dark:bg-purple-900/30 rounded-xl"
+                            className="flex items-center gap-2 text-[11px] font-semibold text-primary dark:text-primary hover:text-tertiary transition-colors uppercase tracking-wide px-4 py-2 bg-primary-fixed dark:bg-tertiary/30 rounded-xl"
                            >
                              Gestionar en maestro <ExternalLink className="w-3 h-3" />
                            </button>

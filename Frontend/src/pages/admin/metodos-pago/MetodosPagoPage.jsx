@@ -140,7 +140,7 @@ const MetodosPagoPage = () => {
       {/* Header Premium */}
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white dark:bg-slate-900 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800">
         <div className="flex items-center gap-6">
-          <div className="h-16 w-16 bg-indigo-600 rounded-3xl flex items-center justify-center shadow-lg shadow-indigo-200 dark:shadow-none rotate-3 hover:rotate-0 transition-transform duration-300">
+          <div className="h-16 w-16 bg-primary rounded-3xl flex items-center justify-center shadow-lg shadow-primary dark:shadow-none rotate-3 hover:rotate-0 transition-transform duration-300">
             <CreditCard className="h-8 w-8 text-white" />
           </div>
           <div>
@@ -157,12 +157,12 @@ const MetodosPagoPage = () => {
               placeholder="Buscar pasarela..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all text-sm font-medium"
+              className="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-primary dark:text-white transition-all text-sm font-medium"
             />
           </div>
           <button 
             onClick={() => handleOpenModal()}
-            className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-indigo-200 dark:shadow-none transition-all active:scale-95"
+            className="px-6 py-3 bg-primary hover:bg-tertiary text-white font-semibold rounded-2xl flex items-center gap-2 shadow-lg shadow-primary dark:shadow-none transition-all active:scale-95"
           >
             <Plus className="h-5 w-5" />
             Nueva Pasarela
@@ -173,7 +173,7 @@ const MetodosPagoPage = () => {
       {/* Grid de Tarjetas de Métodos de Pago */}
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <RefreshCcw className="h-10 w-10 text-indigo-500 animate-spin" />
+          <RefreshCcw className="h-10 w-10 text-primary animate-spin" />
           <p className="text-slate-400 font-semibold uppercase tracking-wide text-xs">Sincronizando pasarelas...</p>
         </div>
       ) : (
@@ -186,16 +186,16 @@ const MetodosPagoPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 key={metodo.idMetodoPago}
-                className="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 shadow-sm hover:shadow-2xl hover:shadow-indigo-500/10 transition-all border border-slate-100 dark:border-slate-800 overflow-hidden"
+                className="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 shadow-sm hover:shadow-2xl hover:shadow-primary/10 transition-all border border-slate-100 dark:border-slate-800 overflow-hidden"
               >
                 {/* Decoración Fondo */}
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl group-hover:bg-indigo-500/10 transition-colors" />
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
                 
                 <div className="flex justify-between items-start mb-6">
                   <div className={`p-4 rounded-2xl ${
                     metodo.tipoMetodo?.codigo === 'efectivo' ? 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20' :
-                    metodo.tipoMetodo?.codigo === 'tarjeta_credito' ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20' :
-                    metodo.tipoMetodo?.codigo === 'transferencia' ? 'bg-purple-50 text-purple-600 dark:bg-purple-900/20' :
+                    metodo.tipoMetodo?.codigo === 'tarjeta_credito' ? 'bg-primary-fixed text-primary dark:bg-tertiary/20' :
+                    metodo.tipoMetodo?.codigo === 'transferencia' ? 'bg-primary-fixed text-primary dark:bg-tertiary/20' :
                     'bg-slate-50 text-slate-600 dark:bg-slate-800'
                   }`}>
                     <CreditCard className="h-6 w-6" />
@@ -203,7 +203,7 @@ const MetodosPagoPage = () => {
                   <div className="flex gap-2">
                     <button 
                       onClick={() => handleOpenModal(metodo)}
-                      className="w-9 h-9 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                      className="w-9 h-9 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-tertiary/40 text-primary dark:text-primary hover:bg-primary hover:text-white border border-primary-fixed dark:border-tertiary/60 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                       title="Editar pasarela"
                     >
                       <Edit2 className="h-4 w-4" />
@@ -220,7 +220,7 @@ const MetodosPagoPage = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <span className="text-[11px] font-semibold text-indigo-500 dark:text-indigo-400 uppercase tracking-wide mb-1 block">Pasarela</span>
+                    <span className="text-[11px] font-semibold text-primary dark:text-primary uppercase tracking-wide mb-1 block">Pasarela</span>
                     <h3 className="text-xl font-semibold text-slate-900 dark:text-white truncate uppercase">{metodo.nombreMetodo}</h3>
                   </div>
 
@@ -290,7 +290,7 @@ const MetodosPagoPage = () => {
               <div className="p-10">
                 <div className="flex justify-between items-center mb-10">
                   <div className="flex items-center gap-4">
-                    <div className="h-12 w-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl flex items-center justify-center text-indigo-600">
+                    <div className="h-12 w-12 bg-primary-fixed dark:bg-tertiary/20 rounded-2xl flex items-center justify-center text-primary">
                       <Settings2 className="h-6 w-6" />
                     </div>
                     <div>
@@ -311,7 +311,7 @@ const MetodosPagoPage = () => {
                     <input 
                       required
                       type="text"
-                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300"
+                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-primary dark:text-white transition-all font-semibold placeholder:text-slate-300"
                       placeholder="Ej. Nequi, Tarjeta Visa..."
                       value={formData.nombreMetodo}
                       onChange={(e) => setFormData({...formData, nombreMetodo: e.target.value})}
@@ -323,7 +323,7 @@ const MetodosPagoPage = () => {
                       <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] ml-2">Tipo de Pasarela</label>
                       <select 
                         required
-                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold appearance-none cursor-pointer"
+                        className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-primary dark:text-white transition-all font-semibold appearance-none cursor-pointer"
                         value={formData.idTipoMetodo}
                         onChange={(e) => setFormData({...formData, idTipoMetodo: e.target.value})}
                       >
@@ -342,7 +342,7 @@ const MetodosPagoPage = () => {
                             onChange={(e) => setFormData({...formData, requiereReferencia: e.target.checked})}
                           />
                           <div className={`h-6 w-6 rounded-lg border-2 flex items-center justify-center transition-all ${
-                            formData.requiereReferencia ? 'bg-indigo-600 border-indigo-600 shadow-lg shadow-indigo-200' : 'border-slate-200 dark:border-slate-700'
+                            formData.requiereReferencia ? 'bg-primary border-primary shadow-lg shadow-primary' : 'border-slate-200 dark:border-slate-700'
                           }`}>
                             {formData.requiereReferencia && <CheckCircle className="h-4 w-4 text-white" />}
                           </div>
@@ -355,7 +355,7 @@ const MetodosPagoPage = () => {
                     <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-[0.1em] ml-2">Instrucciones / Notas</label>
                     <textarea 
                       rows="3"
-                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-indigo-500 dark:text-white transition-all font-semibold placeholder:text-slate-300 resize-none"
+                      className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-3xl focus:ring-2 focus:ring-primary dark:text-white transition-all font-semibold placeholder:text-slate-300 resize-none"
                       placeholder="Indica al vendedor qué datos pedir..."
                       value={formData.descripcion}
                       onChange={(e) => setFormData({...formData, descripcion: e.target.value})}
@@ -365,7 +365,7 @@ const MetodosPagoPage = () => {
                   <div className="pt-6">
                     <button 
                       type="submit"
-                      className="w-full py-5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-3xl flex items-center justify-center gap-3 shadow-2xl shadow-indigo-500/20 transition-all active:scale-95 text-lg uppercase tracking-wide"
+                      className="w-full py-5 bg-primary hover:bg-tertiary text-white font-semibold rounded-3xl flex items-center justify-center gap-3 shadow-2xl shadow-primary/20 transition-all active:scale-95 text-lg uppercase tracking-wide"
                     >
                       {editingMetodo ? 'Guardar Cambios' : 'Activar Pasarela'}
                     </button>

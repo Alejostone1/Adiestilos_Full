@@ -253,7 +253,7 @@ export default function CategoriasPage() {
           <div className="flex gap-1">
             <button
               onClick={(e) => { e.stopPropagation(); handleOpenModal(categoria); }}
-              className="p-2 text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-900/30 rounded-lg transition-colors"
+              className="p-2 text-primary hover:bg-primary-fixed dark:text-primary dark:hover:bg-tertiary/30 rounded-lg transition-colors"
               title="Editar"
             >
               <Edit className="w-4 h-4" />
@@ -289,7 +289,7 @@ export default function CategoriasPage() {
 
             <button
               onClick={() => handleOpenModal()}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition-colors"
             >
               <Plus className="w-4 h-4" />
               Nueva Categoría
@@ -311,7 +311,7 @@ export default function CategoriasPage() {
                 placeholder="Buscar categorías..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
 
@@ -328,13 +328,13 @@ export default function CategoriasPage() {
               <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`}
+                  className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-white dark:bg-gray-600 text-primary dark:text-primary' : 'text-gray-600 dark:text-gray-400'}`}
                 >
                   <Grid3X3 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white dark:bg-gray-600 text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400'}`}
+                  className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-white dark:bg-gray-600 text-primary dark:text-primary' : 'text-gray-600 dark:text-gray-400'}`}
                 >
                   <List className="w-4 h-4" />
                 </button>
@@ -346,7 +346,7 @@ export default function CategoriasPage() {
         {/* Estados */}
         {loading && (
           <div className="flex items-center justify-center py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-blue-600 mr-2" />
+            <Loader2 className="w-6 h-6 animate-spin text-primary mr-2" />
             <span className="text-gray-600 dark:text-gray-400">Cargando categorías...</span>
           </div>
         )}
@@ -425,7 +425,7 @@ export default function CategoriasPage() {
                             )}
                           </div>
                           <div className="ml-4">
-                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover/item:text-blue-600 transition-colors">
+                            <div className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover/item:text-primary transition-colors">
                               {categoria.nombreCategoria}
                             </div>
                             <div className="text-[11px] uppercase font-semibold text-gray-400 dark:text-gray-500 flex items-center gap-1">
@@ -461,7 +461,7 @@ export default function CategoriasPage() {
                           )}
                           <button
                             onClick={() => handleOpenModal(categoria)}
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                            className="text-primary hover:text-tertiary dark:text-primary dark:hover:text-primary"
                             title="Editar"
                           >
                             <Edit className="w-4 h-4" />
@@ -557,7 +557,7 @@ export default function CategoriasPage() {
                     >
                       {isUploading ? (
                         <>
-                          <Loader2 className="w-8 h-8 text-blue-600 animate-spin mb-2" />
+                          <Loader2 className="w-8 h-8 text-primary animate-spin mb-2" />
                           <span className="text-sm text-gray-600 dark:text-gray-400">Subiendo...</span>
                         </>
                       ) : (
@@ -587,7 +587,7 @@ export default function CategoriasPage() {
                     required
                     value={formData.nombreCategoria}
                     onChange={(e) => setFormData({ ...formData, nombreCategoria: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Ej: Ropa Masculina"
                   />
                 </div>
@@ -600,7 +600,7 @@ export default function CategoriasPage() {
                     value={formData.descripcion}
                     onChange={(e) => setFormData({ ...formData, descripcion: e.target.value })}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="Describe brevemente esta categoría..."
                   />
                 </div>
@@ -612,7 +612,7 @@ export default function CategoriasPage() {
                   <select
                     value={formData.estado}
                     onChange={(e) => setFormData({ ...formData, estado: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary"
                   >
                     <option value="activo">Activo</option>
                     <option value="inactivo">Inactivo</option>
@@ -631,7 +631,7 @@ export default function CategoriasPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-tertiary transition-colors"
                 >
                   {editingCategoria ? 'Actualizar' : 'Crear'} Categoría
                 </button>

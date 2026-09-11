@@ -55,7 +55,7 @@ const GalleryLayout = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold text-gray-900 dark:text-white flex items-center gap-3">
-            <ImageIcon className="w-8 h-8 text-purple-600" />
+            <ImageIcon className="w-8 h-8 text-primary" />
             Galería Central
           </h1>
           <p className="text-gray-500 dark:text-gray-400 mt-1">
@@ -76,7 +76,7 @@ const GalleryLayout = () => {
               className={`
                 flex-1 flex items-center justify-center gap-2 py-3 px-6 rounded-xl text-sm font-medium transition-all duration-200 whitespace-nowrap
                 ${isActive 
-                  ? 'bg-purple-600 text-white shadow-md' 
+                  ? 'bg-primary text-white shadow-md' 
                   : 'text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700'
                 }
               `}
