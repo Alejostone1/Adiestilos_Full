@@ -10,7 +10,7 @@ import useSeo from '../../hooks/useSeo';
 const ContactoPage = () => {
   useSeo({
     title: 'Contacto | Adi Estilos - Tienda de Ropa en Pereira',
-    description: 'Visítanos en Centro Comercial Victoria Plaza, Local 205, Pereira, Risaralda. Escríbenos o llámanos — Adi Estilos, tu tienda de ropa en Pereira.',
+    description: 'Visítanos en Carrera 5 con Calle 20, Pereira, Risaralda. Escríbenos o llámanos — Adi Estilos, tu tienda de ropa en Pereira.',
     path: '/contacto',
   });
 
@@ -18,28 +18,28 @@ const ContactoPage = () => {
     {
       icono: 'location_on',
       titulo: 'Nuestra Tienda',
-      lineas: ['Centro Comercial Victoria Plaza', 'Local 205, Pereira, Risaralda']
+      lineas: ['Carrera 5 con Calle 20', 'Pereira, Risaralda']
     },
     {
       icono: 'mail',
       titulo: 'Correo Electrónico',
-      lineas: ['hola@adiestilos.com']
+      lineas: ['adiestilos1@gmail.com']
     },
     {
       icono: 'call',
       titulo: 'Teléfono',
-      lineas: ['+57 (606) 333 4567']
+      lineas: ['+57 318 469 2226']
     },
     {
       icono: 'schedule',
       titulo: 'Horarios',
-      lineas: ['Lunes a Sábado: 10:00 AM - 8:00 PM', 'Domingos: 11:00 AM - 6:00 PM']
+      lineas: ['Tienda virtual: 24/7', 'Punto físico: Lunes a Sábado, 8:00 AM - 6:00 PM']
     }
   ];
 
   const redesSociales = [
-    { icono: 'Instagram', url: '#', label: 'Instagram' },
-    { icono: 'Facebook', url: '#', label: 'Facebook' },
+    { icono: 'Instagram', url: 'https://www.instagram.com/adiestilos/', label: 'Instagram' },
+    { icono: 'Facebook', url: 'https://www.facebook.com/adi.estilos/', label: 'Facebook' },
     { icono: 'TikTok', url: '#', label: 'TikTok' }
   ];
 
@@ -159,7 +159,7 @@ const ContactoPage = () => {
             {/* Mapa */}
             <div className="rounded-lg overflow-hidden border border-outline-variant/20 aspect-[16/10]">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63635.33!2d-75.7!3d4.81!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38876f90f3e8f7%3A0x67f9a36d1b0a5d67!2sPereira%2C%20Risaralda%2C%20Colombia!5e0!3m2!1ses!2sco!4v1699999999999!5m2!1ses!2sco"
+                src="https://www.google.com/maps?q=Carrera+5+con+Calle+20,+Pereira,+Risaralda,+Colombia&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
