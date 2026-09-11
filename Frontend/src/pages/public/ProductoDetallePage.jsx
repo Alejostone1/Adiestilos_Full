@@ -361,11 +361,11 @@ const ProductoDetallePage = () => {
             {producto.datosTecnicos && Object.keys(producto.datosTecnicos).length > 0 && (
               <div className="border-t border-outline-variant/30 pt-6">
                 <h4 className="font-label-caps text-label-caps text-primary tracking-wider mb-4 uppercase">Detalles</h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2 list-none pl-0">
                   {Object.entries(producto.datosTecnicos).map(([key, value]) => (
-                    <li key={key} className="flex justify-between gap-3 border-b border-outline-variant/20 pb-2 last:border-0 font-body-sm text-body-sm">
-                      <span className="text-outline capitalize shrink-0">{key.replace(/_/g, ' ')}</span>
-                      <span className="font-medium text-text-main text-right min-w-0 flex-1">{value}</span>
+                    <li key={key} className="flex flex-col sm:flex-row sm:justify-between gap-0.5 sm:gap-3 border-b border-outline-variant/20 pb-2 last:border-0 font-body-sm text-body-sm">
+                      <span className="text-outline capitalize">{key.replace(/_/g, ' ')}</span>
+                      <span className="font-medium text-text-main sm:text-right break-words">{value}</span>
                     </li>
                   ))}
                 </ul>
