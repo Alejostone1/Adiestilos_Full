@@ -1,8 +1,17 @@
+/**
+ * @file RegistroPage.jsx
+ * @brief Página de registro — editorial, animada y responsive.
+ */
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { registrarUsuario } from '../../api/authApi'; // Asegúrate que la ruta es correcta
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { registrarUsuario } from '../../api/authApi';
 import Swal from 'sweetalert2';
+import Logo from '../../components/common/Logo';
+
+const campoBase =
+  'w-full rounded-xl border pl-11 pr-4 py-3 text-sm text-on-surface placeholder-outline focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all';
 
 const RegistroPage = () => {
   const navigate = useNavigate();
@@ -22,7 +31,6 @@ const RegistroPage = () => {
   const [apiError, setApiError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
 
   const validateField = (name, value) => {
     let error = '';
@@ -90,7 +98,7 @@ const RegistroPage = () => {
     setApiError('');
     const newErrors = {};
     for (const key in formData) {
-      if (key === 'telefono' || key === 'direccion') continue; // No validar campos opcionales
+      if (key === 'telefono' || key === 'direccion') continue;
       const error = validateField(key, formData[key]);
       if (error) {
         newErrors[key] = error;
@@ -102,7 +110,6 @@ const RegistroPage = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsLoading(true);
       try {
-        // Excluir confirmarContrasena y campos opcionales vacíos del envío
         const { confirmarContrasena, ...datosParaApi } = formData;
         if (!datosParaApi.telefono) delete datosParaApi.telefono;
         if (!datosParaApi.direccion) delete datosParaApi.direccion;
@@ -123,9 +130,9 @@ const RegistroPage = () => {
           title: 'Error en el Registro',
           text: errorMessage,
           icon: 'error',
-          confirmButtonText: 'Entendido'
+          confirmButtonText: 'Entendido',
+          confirmButtonColor: '#a73162',
         });
-        // Mantenemos el apiError por si se quiere mostrar también en el formulario
         setApiError(errorMessage);
       } finally {
         setIsLoading(false);
@@ -133,182 +140,273 @@ const RegistroPage = () => {
     }
   };
 
+  const campoConError = (name) => (errors[name] ? 'border-error' : 'border-outline-variant');
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Crea tu cuenta en <span className="text-adi-red">Adi Estilos</span>
-          </h2>
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-surface px-4 py-16">
+      {/* Blobs decorativos de marca */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute -top-24 -right-16 w-72 h-72 rounded-full bg-primary-container/40 blur-3xl"
+          animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <motion.div
+          className="absolute -bottom-24 -left-16 w-80 h-80 rounded-full bg-primary/20 blur-3xl"
+          animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="relative w-full max-w-lg bg-pure-white rounded-[2rem] shadow-card-hover border border-primary/10 overflow-hidden"
+      >
+        <div className="px-8 pt-10 pb-2 text-center">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex justify-center mb-4"
+          >
+            <Logo size="xl" ring />
+          </motion.div>
+          <h1 className="font-headline-md text-headline-md text-on-surface">
+            Crea tu cuenta
+          </h1>
+          <p className="mt-2 font-body-sm text-body-sm text-text-main">
+            Únete a Adi Estilos y descubre tu estilo
+          </p>
         </div>
-        <form className="mt-8 space-y-6 bg-white p-8 shadow-2xl rounded-lg" onSubmit={handleSubmit} noValidate>
+
+        <form className="px-8 py-6 space-y-5" onSubmit={handleSubmit} noValidate>
           {apiError && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-              <strong className="font-bold">Error: </strong>
-              <span className="block sm:inline">{apiError}</span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-error-container border border-error/30 text-on-error-container px-4 py-3 rounded-xl text-sm"
+              role="alert"
+            >
+              <strong className="font-semibold">Error: </strong>
+              {apiError}
+            </motion.div>
           )}
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="nombres" className="sr-only">Nombres</label>
+
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.18 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            <div>
+              <label htmlFor="nombres" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Nombres</label>
+              <div className="relative">
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">badge</span>
                 <input
                   id="nombres"
                   name="nombres"
                   type="text"
                   required
-                  className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${errors.nombres ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm`}
+                  className={`${campoBase} ${campoConError('nombres')}`}
                   placeholder="Nombres"
                   value={formData.nombres}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={isLoading}
                 />
-                {errors.nombres && <p className="text-red-500 text-xs mt-1">{errors.nombres}</p>}
               </div>
-              <div>
-                <label htmlFor="apellidos" className="sr-only">Apellidos</label>
+              {errors.nombres && <p className="text-error text-xs mt-1">{errors.nombres}</p>}
+            </div>
+            <div>
+              <label htmlFor="apellidos" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Apellidos</label>
+              <div className="relative">
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">badge</span>
                 <input
                   id="apellidos"
                   name="apellidos"
                   type="text"
                   required
-                  className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${errors.apellidos ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm`}
+                  className={`${campoBase} ${campoConError('apellidos')}`}
                   placeholder="Apellidos"
                   value={formData.apellidos}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={isLoading}
                 />
-                {errors.apellidos && <p className="text-red-500 text-xs mt-1">{errors.apellidos}</p>}
               </div>
+              {errors.apellidos && <p className="text-error text-xs mt-1">{errors.apellidos}</p>}
             </div>
-            <div className="pt-4">
-              <label htmlFor="usuario" className="sr-only">Usuario</label>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.22 }}>
+            <label htmlFor="usuario" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Usuario</label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">person</span>
               <input
                 id="usuario"
                 name="usuario"
                 type="text"
                 required
-                className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${errors.usuario ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm`}
+                className={`${campoBase} ${campoConError('usuario')}`}
                 placeholder="Nombre de usuario"
                 value={formData.usuario}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 disabled={isLoading}
               />
-              {errors.usuario && <p className="text-red-500 text-xs mt-1">{errors.usuario}</p>}
             </div>
-            <div className="pt-4">
-              <label htmlFor="correoElectronico" className="sr-only">Correo Electrónico</label>
+            {errors.usuario && <p className="text-error text-xs mt-1">{errors.usuario}</p>}
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.26 }}>
+            <label htmlFor="correoElectronico" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Correo electrónico</label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">mail</span>
               <input
                 id="correoElectronico"
                 name="correoElectronico"
                 type="email"
                 autoComplete="email"
                 required
-                className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${errors.correoElectronico ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm`}
-                placeholder="Correo electrónico"
+                className={`${campoBase} ${campoConError('correoElectronico')}`}
+                placeholder="tu@correo.com"
                 value={formData.correoElectronico}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 disabled={isLoading}
               />
-              {errors.correoElectronico && <p className="text-red-500 text-xs mt-1">{errors.correoElectronico}</p>}
             </div>
-            <div className="grid grid-cols-2 gap-4 pt-4">
+            {errors.correoElectronico && <p className="text-error text-xs mt-1">{errors.correoElectronico}</p>}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="grid grid-cols-2 gap-4"
+          >
+            <div>
+              <label htmlFor="contrasena" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Contraseña</label>
               <div className="relative">
-                <label htmlFor="contrasena" className="sr-only">Contraseña</label>
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
                 <input
                   id="contrasena"
                   name="contrasena"
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${errors.contrasena ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm`}
+                  className={`${campoBase} pr-11 ${campoConError('contrasena')}`}
                   placeholder="Contraseña"
                   value={formData.contrasena}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={isLoading}
                 />
-                <div
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
-                  onClick={() => setShowPassword(!showPassword)}
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((v) => !v)}
+                  aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
                 >
-                  {showPassword ? <FaEyeSlash /> : <FaEye />}
-                </div>
-                {errors.contrasena && <p className="text-red-500 text-xs mt-1">{errors.contrasena}</p>}
+                  <span className="material-symbols-outlined text-[20px]">
+                    {showPassword ? 'visibility_off' : 'visibility'}
+                  </span>
+                </button>
               </div>
+              {errors.contrasena && <p className="text-error text-xs mt-1">{errors.contrasena}</p>}
+            </div>
+            <div>
+              <label htmlFor="confirmarContrasena" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Confirmar</label>
               <div className="relative">
-                <label htmlFor="confirmarContrasena" className="sr-only">Confirmar Contraseña</label>
+                <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">lock_reset</span>
                 <input
                   id="confirmarContrasena"
                   name="confirmarContrasena"
                   type={showConfirmPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${errors.confirmarContrasena ? 'border-red-500' : 'border-gray-300'} placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm`}
-                  placeholder="Confirmar contraseña"
+                  className={`${campoBase} pr-11 ${campoConError('confirmarContrasena')}`}
+                  placeholder="Confirmar"
                   value={formData.confirmarContrasena}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   disabled={isLoading}
                 />
-                <div
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 cursor-pointer"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((v) => !v)}
+                  aria-label={showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
                 >
-                  {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                </div>
-                {errors.confirmarContrasena && <p className="text-red-500 text-xs mt-1">{errors.confirmarContrasena}</p>}
+                  <span className="material-symbols-outlined text-[20px]">
+                    {showConfirmPassword ? 'visibility_off' : 'visibility'}
+                  </span>
+                </button>
               </div>
+              {errors.confirmarContrasena && <p className="text-error text-xs mt-1">{errors.confirmarContrasena}</p>}
             </div>
-            <div className="pt-4">
-              <label htmlFor="telefono" className="sr-only">Teléfono</label>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.34 }}>
+            <label htmlFor="telefono" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Teléfono <span className="text-outline font-normal">(opcional)</span></label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">call</span>
               <input
                 id="telefono"
                 name="telefono"
                 type="tel"
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm"
-                placeholder="Teléfono (Opcional)"
+                className={campoBase}
+                placeholder="Teléfono"
                 value={formData.telefono}
                 onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
-            <div className="pt-4">
-              <label htmlFor="direccion" className="sr-only">Dirección</label>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4, delay: 0.38 }}>
+            <label htmlFor="direccion" className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium">Dirección <span className="text-outline font-normal">(opcional)</span></label>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3.5 top-3 text-outline text-[20px]">home_pin</span>
               <textarea
                 id="direccion"
                 name="direccion"
                 rows="2"
-                className="appearance-none rounded-md relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-adi-red focus:border-adi-red focus:z-10 sm:text-sm"
-                placeholder="Dirección (Opcional)"
+                className={`${campoBase} pt-3 resize-none`}
+                placeholder="Dirección"
                 value={formData.direccion}
                 onChange={handleChange}
                 disabled={isLoading}
               />
             </div>
-          </div>
+          </motion.div>
 
-          <div>
-            <button
-              type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-adi-red hover:bg-adi-red-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-adi-red-dark disabled:bg-gray-400"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Creando cuenta...' : 'Crear cuenta'}
-            </button>
-          </div>
-          <div className="text-sm text-center">
-            <Link to="/login" className="font-medium text-adi-red hover:text-adi-red-dark">
-              ¿Ya tienes una cuenta? Inicia sesión
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.44 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            type="submit"
+            disabled={isLoading}
+            className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary text-on-primary py-3.5 text-sm font-semibold tracking-wide hover:bg-tertiary transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {isLoading && (
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            )}
+            {isLoading ? 'Creando cuenta...' : 'Crear cuenta'}
+          </motion.button>
+
+          <div className="text-center font-body-sm text-body-sm text-text-main">
+            ¿Ya tienes una cuenta?{' '}
+            <Link to="/login" className="font-semibold text-primary hover:text-tertiary transition-colors">
+              Inicia sesión
             </Link>
           </div>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

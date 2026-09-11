@@ -1,18 +1,15 @@
 /**
  * @file LoginPage.jsx
- * @brief Página de inicio de sesión.
- *
- * Login moderno y minimalista para la tienda
- * de ropa y accesorios "Adi Estilos".
- * Diseñado completamente con Tailwind CSS
- * y alertas con SweetAlert2.
+ * @brief Página de inicio de sesión — editorial, animada y responsive.
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { useAuth } from "../../context/AuthContext";
 import { loginUsuario } from "../../api/authApi";
+import Logo from "../../components/common/Logo";
 
 const LoginPage = () => {
   const [credenciales, setCredenciales] = useState({
@@ -20,6 +17,7 @@ const LoginPage = () => {
     contrasena: "",
   });
   const [cargando, setCargando] = useState(false);
+  const [mostrarContrasena, setMostrarContrasena] = useState(false);
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -35,37 +33,29 @@ const LoginPage = () => {
     e.preventDefault();
     setCargando(true);
 
-    // Validación
     if (!credenciales.identificador || !credenciales.contrasena) {
       Swal.fire({
         icon: "warning",
         title: "Campos incompletos",
         text: "Por favor, complete todos los campos.",
-        confirmButtonColor: "#111827",
+        confirmButtonColor: "#a73162",
       });
       setCargando(false);
       return;
     }
 
     try {
-
       const data = await loginUsuario(credenciales);
-      console.log("LOGIN: Respuesta recibida de la API:", data);
 
-      // Verificación de la estructura de datos
       if (!data || !data.datos || !data.datos.usuario || !data.datos.tokenAcceso) {
-        console.error("LOGIN_ERROR: La respuesta de la API no tiene la estructura esperada (tokenAcceso o data.datos.usuario).");
         throw new Error("Respuesta inesperada del servidor.");
       }
 
       const { tokenAcceso, usuario } = data.datos;
-      console.log("LOGIN: Llamando a context.login con token y usuario extraídos.");
       login({ tokenAcceso, usuario });
 
       const nombreRol = usuario?.rol?.nombreRol || '';
-      console.log(`LOGIN: Rol del usuario detectado: ${nombreRol}`);
 
-      // Redirección por rol (por nombre, los IDs de rol no son estables)
       if (nombreRol === 'Administrador' || nombreRol === 'Vendedor') {
         navigate("/admin/dashboard");
       } else {
@@ -80,14 +70,11 @@ const LoginPage = () => {
         showConfirmButton: false,
       });
     } catch (err) {
-      console.error("LOGIN_ERROR: Error en el bloque catch de handleSubmit", err);
       Swal.fire({
         icon: "error",
         title: "Error al iniciar sesión",
-        text:
-          err?.mensaje ||
-          "Verifique su correo electrónico y contraseña.",
-        confirmButtonColor: "#111827",
+        text: err?.mensaje || "Verifique su correo electrónico y contraseña.",
+        confirmButtonColor: "#a73162",
       });
     } finally {
       setCargando(false);
@@ -95,93 +82,138 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-surface px-4 py-16">
+      {/* Blobs decorativos de marca */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute -top-24 -left-16 w-72 h-72 rounded-full bg-primary-container/40 blur-3xl"
+          animate={{ y: [0, 20, 0], x: [0, 10, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-24 -right-16 w-80 h-80 rounded-full bg-primary/20 blur-3xl"
+          animate={{ y: [0, -20, 0], x: [0, -10, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
-        {/* =============================
-            CABECERA
-        ============================== */}
-        <div className="px-8 pt-8 text-center">
-          <h1 className="text-2xl font-semibold tracking-wide text-gray-900">
-            Adi Estilos
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="relative w-full max-w-md bg-pure-white rounded-[2rem] shadow-card-hover border border-primary/10 overflow-hidden"
+      >
+        {/* Cabecera */}
+        <div className="px-8 pt-10 pb-2 text-center">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="flex justify-center mb-4"
+          >
+            <Logo size="xl" ring />
+          </motion.div>
+          <h1 className="font-headline-md text-headline-md text-on-surface">
+            Bienvenida de nuevo
           </h1>
-          <p className="mt-2 text-sm text-gray-500">
-            Inicia sesión para continuar
+          <p className="mt-2 font-body-sm text-body-sm text-text-main">
+            Inicia sesión para continuar en Adi Estilos
           </p>
         </div>
 
-        {/* =============================
-            FORMULARIO
-        ============================== */}
+        {/* Formulario */}
         <form onSubmit={handleSubmit} className="px-8 py-6 space-y-5">
-
-          {/* Identificador */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
             <label
               htmlFor="identificador"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium"
             >
-              Usuario o Correo electrónico
+              Usuario o correo electrónico
             </label>
-            <input
-              type="text"
-              id="identificador"
-              name="identificador"
-              placeholder="usuario o tu@correo.com"
-              value={credenciales.identificador}
-              onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition"
-              required
-            />
-          </div>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">
+                person
+              </span>
+              <input
+                type="text"
+                id="identificador"
+                name="identificador"
+                placeholder="usuario o tu@correo.com"
+                value={credenciales.identificador}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-outline-variant pl-11 pr-4 py-3 text-sm text-on-surface placeholder-outline focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+                required
+              />
+            </div>
+          </motion.div>
 
-          {/* Contraseña */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.28 }}
+          >
             <label
               htmlFor="contrasena"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block font-body-sm text-body-sm text-text-main mb-1.5 font-medium"
             >
               Contraseña
             </label>
-            <input
-              type="password"
-              id="contrasena"
-              name="contrasena"
-              placeholder="••••••••"
-              value={credenciales.contrasena}
-              onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition"
-              required
-            />
-          </div>
+            <div className="relative">
+              <span className="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-[20px]">
+                lock
+              </span>
+              <input
+                type={mostrarContrasena ? "text" : "password"}
+                id="contrasena"
+                name="contrasena"
+                placeholder="••••••••"
+                value={credenciales.contrasena}
+                onChange={handleChange}
+                className="w-full rounded-xl border border-outline-variant pl-11 pr-11 py-3 text-sm text-on-surface placeholder-outline focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-all"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setMostrarContrasena((v) => !v)}
+                aria-label={mostrarContrasena ? "Ocultar contraseña" : "Mostrar contraseña"}
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors"
+              >
+                <span className="material-symbols-outlined text-[20px]">
+                  {mostrarContrasena ? "visibility_off" : "visibility"}
+                </span>
+              </button>
+            </div>
+          </motion.div>
 
-          {/* Botón */}
-          <button
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.36 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
             disabled={cargando}
-            className="w-full flex items-center justify-center gap-2 rounded-lg bg-gray-900 text-white py-2.5 text-sm font-medium hover:bg-gray-800 transition disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full flex items-center justify-center gap-2 rounded-xl bg-primary text-on-primary py-3.5 text-sm font-semibold tracking-wide hover:bg-tertiary transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {cargando && (
-              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
             )}
             {cargando ? "Iniciando sesión..." : "Iniciar sesión"}
-          </button>
+          </motion.button>
         </form>
 
-        {/* =============================
-            PIE
-        ============================== */}
-        <div className="px-8 pb-8 text-center text-sm text-gray-500">
+        {/* Pie */}
+        <div className="px-8 pb-9 text-center font-body-sm text-body-sm text-text-main">
           ¿No tienes una cuenta?{" "}
-          <Link
-            to="/registro"
-            className="font-medium text-gray-900 hover:underline"
-          >
+          <Link to="/registro" className="font-semibold text-primary hover:text-tertiary transition-colors">
             Regístrate aquí
           </Link>
         </div>
-
-      </div>
+      </motion.div>
     </div>
   );
 };
