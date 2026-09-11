@@ -14,28 +14,20 @@ export const useTheme = () => {
 
 // Provider del tema
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    // Siempre claro por defecto, sin importar el modo oscuro del sistema.
-    // Solo cambia si el usuario lo activa manualmente (se guarda en localStorage).
-    return localStorage.getItem('theme') || 'light';
-  });
+  // El modo oscuro quedo deshabilitado (decision de producto): siempre claro,
+  // sin importar el sistema o una preferencia oscura guardada de antes.
+  const [theme, setTheme] = useState('light');
 
-  // Aplicar tema al DOM
+  // Aplicar tema al DOM y limpiar cualquier 'dark' que haya quedado guardado
+  // de una version anterior de la app.
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    // Guardar en localStorage
-    localStorage.setItem('theme', theme);
+    document.documentElement.classList.remove('dark');
+    localStorage.removeItem('theme');
   }, [theme]);
 
-  // Función para cambiar tema
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+  // Funcion para cambiar tema (deshabilitada; se mantiene por compatibilidad
+  // con componentes que la invocan, pero no hace nada).
+  const toggleTheme = () => {};
 
   const value = {
     theme,

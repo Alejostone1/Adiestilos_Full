@@ -29,20 +29,16 @@ import {
   FaChartLine,
   FaUserCog,
   FaSearch,
-  FaBars,
-  FaTimes,
-  FaMoon,
-  FaSun
+  FaBars
 } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 import { tienePermiso } from "../../utils/permisosHelper";
-import ThemeSwitch from '../common/ThemeSwitch';
 import Swal from "sweetalert2";
 import { Typography, Skeleton } from 'antd';
 
 const { Title, Text } = Typography;
 
-const Sidebar = () => {
+const Sidebar = ({ isMobileMenuOpen = false, setIsMobileMenuOpen = () => {} }) => {
   const { logout, usuario, estaAutenticado } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,7 +62,6 @@ const Sidebar = () => {
   });
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const savedState = localStorage.getItem('sidebarCollapsed');
@@ -92,7 +87,7 @@ const Sidebar = () => {
       showCancelButton: true,
       confirmButtonText: "Sí, cerrar sesión",
       cancelButtonText: "Cancelar",
-      confirmButtonColor: "#3b82f6",
+      confirmButtonColor: "#a73162",
       cancelButtonColor: "#6b7280",
       customClass: {
         popup: 'dark:bg-slate-800 dark:text-white',
@@ -398,15 +393,6 @@ const Sidebar = () => {
         />
       )}
 
-      {/* Botón flotante para móvil */}
-      <button
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-        className="lg:hidden fixed top-4 left-4 z-50 p-3 rounded-2xl bg-gradient-to-br from-primary to-tertiary text-on-primary shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-110 active:scale-95"
-      >
-        {isMobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
-      </button>
-
       <aside className={`
         fixed lg:relative top-0 left-0 z-50 h-[calc(100vh-2rem)] my-4 ml-4
         glass-card !rounded-[32px] bg-white dark:bg-gradient-to-b dark:from-slate-800 dark:to-slate-900 dark:border-slate-700/50 border-slate-200/50
@@ -470,18 +456,15 @@ const Sidebar = () => {
         {/* Control Footer - Simplified */}
         <div className="p-5 mt-auto border-t border-slate-200 dark:border-slate-700/50">
            <div className="flex gap-2.5">
-              <div className="flex-1 glass-card !rounded-2xl !p-1.5 flex items-center justify-center bg-white dark:bg-slate-700/40 hover:bg-slate-50 dark:hover:bg-slate-700/60 transition-all duration-300 border border-slate-100 dark:border-slate-600/50 shadow-sm">
-                 <ThemeSwitch />
-              </div>
-              
-              <button 
+              <button
                 onClick={handleLogout}
-                className="w-12 h-12 rounded-2xl bg-rose-500/10 dark:bg-rose-500/20 text-rose-500 dark:text-rose-400 flex items-center justify-center hover:bg-rose-500 dark:hover:bg-rose-600 hover:text-white hover:shadow-lg hover:shadow-rose-500/20 transition-all duration-500 group/logout border border-rose-500/20 dark:border-rose-500/30"
+                className="flex-1 h-12 rounded-2xl bg-rose-500/10 dark:bg-rose-500/20 text-rose-500 dark:text-rose-400 flex items-center justify-center gap-2 hover:bg-rose-500 dark:hover:bg-rose-600 hover:text-white hover:shadow-lg hover:shadow-rose-500/20 transition-all duration-500 group/logout border border-rose-500/20 dark:border-rose-500/30 font-semibold text-sm"
               >
                 <FaSignOutAlt className="group-hover/logout:rotate-12 transition-transform" />
+                {!sidebarCollapsed && <span>Cerrar sesión</span>}
               </button>
-              
-              <button 
+
+              <button
                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
                  className="w-12 h-12 rounded-2xl glass-card !p-0 flex items-center justify-center text-pink-400 dark:text-pink-300 hover:text-pink-600 dark:hover:text-pink-200 hover:bg-pink-50 dark:hover:bg-slate-700/60 transition-all duration-300 border border-pink-100/50 dark:border-slate-600/50 shadow-sm"
               >

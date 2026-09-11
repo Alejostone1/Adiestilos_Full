@@ -249,7 +249,6 @@ const ProductoDetallePage = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="order-2 md:order-1"
           >
             <GaleriaImagenes
               imagenes={imagenesGaleria}
@@ -263,7 +262,7 @@ const ProductoDetallePage = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="order-1 md:order-2 flex flex-col gap-6"
+            className="flex flex-col gap-6"
           >
             <div>
               <span className="font-label-caps text-label-caps text-primary tracking-[0.15em] mb-2 block uppercase">
@@ -364,9 +363,9 @@ const ProductoDetallePage = () => {
                 <h4 className="font-label-caps text-label-caps text-primary tracking-wider mb-4 uppercase">Detalles</h4>
                 <ul className="space-y-2">
                   {Object.entries(producto.datosTecnicos).map(([key, value]) => (
-                    <li key={key} className="flex justify-between border-b border-outline-variant/20 pb-2 last:border-0 font-body-sm text-body-sm">
-                      <span className="text-outline capitalize">{key.replace(/_/g, ' ')}</span>
-                      <span className="font-medium text-text-main">{value}</span>
+                    <li key={key} className="flex justify-between gap-3 border-b border-outline-variant/20 pb-2 last:border-0 font-body-sm text-body-sm">
+                      <span className="text-outline capitalize shrink-0">{key.replace(/_/g, ' ')}</span>
+                      <span className="font-medium text-text-main text-right">{value}</span>
                     </li>
                   ))}
                 </ul>
