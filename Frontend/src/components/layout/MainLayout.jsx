@@ -7,6 +7,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
+import BotonWhatsappFlotante from '../common/BotonWhatsappFlotante';
 
 const MainLayout = () => {
   return (
@@ -16,6 +17,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <BotonWhatsappFlotante />
     </div>
   );
 };

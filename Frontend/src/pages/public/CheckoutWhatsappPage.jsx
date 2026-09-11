@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useCarrito } from '../../context/CarritoContext';
-
-const WHATSAPP_NUMBER = '573186758469';
+import { WHATSAPP_NUMBER } from '../../config/contacto';
 
 const CheckoutWhatsappPage = () => {
   const navigate = useNavigate();
