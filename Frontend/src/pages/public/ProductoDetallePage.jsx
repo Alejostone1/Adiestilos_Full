@@ -365,7 +365,7 @@ const ProductoDetallePage = () => {
                   {Object.entries(producto.datosTecnicos).map(([key, value]) => (
                     <li key={key} className="flex justify-between gap-3 border-b border-outline-variant/20 pb-2 last:border-0 font-body-sm text-body-sm">
                       <span className="text-outline capitalize shrink-0">{key.replace(/_/g, ' ')}</span>
-                      <span className="font-medium text-text-main text-right">{value}</span>
+                      <span className="font-medium text-text-main text-right min-w-0 flex-1">{value}</span>
                     </li>
                   ))}
                 </ul>
