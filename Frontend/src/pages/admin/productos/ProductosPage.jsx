@@ -357,7 +357,7 @@ export default function ProductosPage() {
     const totalVariantes = producto.variantes?.length || 0;
 
     return (
-      <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-xl border border-gray-200 dark:border-slate-700/50 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-300 overflow-hidden">
+      <div className="card-3d card-elevated bg-white dark:bg-slate-800/60 rounded-xl border border-gray-200 dark:border-slate-700/50 hover:border-primary-fixed-dim dark:hover:border-primary transition-all duration-300 overflow-hidden">
         {/* Imagen del producto */}
         <div className="relative h-48 bg-gray-100 overflow-hidden">
           <img
@@ -383,7 +383,7 @@ export default function ProductosPage() {
             )}
             {producto.tieneTallas && (
               <div className="bg-white/90 backdrop-blur-sm rounded-full p-1.5" title="Tiene tallas">
-                <Ruler className="w-3 h-3 text-blue-600" />
+                <Ruler className="w-3 h-3 text-primary" />
               </div>
             )}
           </div>
@@ -439,7 +439,7 @@ export default function ProductosPage() {
                 setProductoSeleccionado(producto);
                 setMostrarDetalles(true);
               }}
-              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-primary-fixed hover:bg-primary-fixed-dim/50 text-primary text-sm font-medium transition-colors"
             >
               <Eye className="w-4 h-4" />
               Detalles
@@ -518,7 +518,7 @@ export default function ProductosPage() {
 
             <button
               onClick={() => handleOpenModal()}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg hover:bg-tertiary transition-colors"
             >
               <Plus className="w-4 h-4" />
               Nuevo Producto
@@ -540,7 +540,7 @@ export default function ProductosPage() {
                 placeholder="Buscar por nombre o código..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-primary focus:border-primary"
               />
             </div>
 
@@ -556,7 +556,7 @@ export default function ProductosPage() {
                 <Filter className="w-4 h-4" />
                 Filtros
                 {(filtroCategoria !== 'todos' || filtroProveedor !== 'todos' || filtroEstado !== 'todos') && (
-                  <span className="ml-1 bg-blue-600 text-white text-xs px-2 py-0.5 rounded-full">
+                  <span className="ml-1 bg-primary text-on-primary text-xs px-2 py-0.5 rounded-full">
                     {(filtroCategoria !== 'todos' ? 1 : 0) + (filtroProveedor !== 'todos' ? 1 : 0) + (filtroEstado !== 'todos' ? 1 : 0)}
                   </span>
                 )}
@@ -582,7 +582,7 @@ export default function ProductosPage() {
                     <select
                       value={filtroCategoria}
                       onChange={(e) => setFiltroCategoria(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
+                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todas las categorías</option>
                       {categorias.map(categoria => (
@@ -598,7 +598,7 @@ export default function ProductosPage() {
                     <select
                       value={filtroProveedor}
                       onChange={(e) => setFiltroProveedor(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
+                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los proveedores</option>
                       <option value="">Sin proveedor</option>
@@ -615,7 +615,7 @@ export default function ProductosPage() {
                     <select
                       value={filtroEstado}
                       onChange={(e) => setFiltroEstado(e.target.value)}
-                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-blue-500"
+                      className="px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 focus:ring-2 focus:ring-primary"
                     >
                       <option value="todos">Todos los estados</option>
                       <option value="activo">Activo</option>
@@ -645,7 +645,7 @@ export default function ProductosPage() {
         {/* Estados */}
         {loading && (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin h-8 w-8 border-b-2 border-blue-600 rounded-full" />
+            <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full" />
             <span className="ml-3 text-gray-500">Cargando productos...</span>
           </div>
         )}
@@ -676,7 +676,7 @@ export default function ProductosPage() {
                   setFiltroProveedor('todos');
                   setFiltroEstado('todos');
                 }}
-                className="mt-2 text-sm text-blue-600 hover:text-blue-800 underline"
+                className="mt-2 text-sm text-primary hover:text-tertiary underline"
               >
                 Limpiar filtros
               </button>
@@ -714,7 +714,7 @@ export default function ProductosPage() {
                       onClick={() => setPaginaActual(pagina)}
                       className={`px-3 py-2 rounded-lg transition ${
                         pagina === paginaActual
-                          ? 'bg-blue-600 text-white'
+                          ? 'bg-primary text-on-primary'
                           : 'border border-gray-300 hover:bg-gray-50'
                       }`}
                     >
@@ -783,7 +783,7 @@ export default function ProductosPage() {
                         setGalleryImages(productoSeleccionado.imagenes ?? []);
                         setMostrarGaleriaImagenes(true);
                       }}
-                      className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
+                      className="flex items-center gap-1 text-sm font-medium text-primary hover:text-tertiary"
                     >
                       <Camera className="w-4 h-4" />
                       Ver galería
@@ -1012,7 +1012,7 @@ export default function ProductosPage() {
                       />
                     </div>
                     {imagen.esPrincipal && (
-                      <div className="absolute top-2 left-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+                      <div className="absolute top-2 left-2 bg-primary text-on-primary text-xs px-2 py-1 rounded-full">
                         Principal
                       </div>
                     )}
@@ -1034,7 +1034,7 @@ export default function ProductosPage() {
                       {!imagen.esPrincipal && (
                         <button
                           onClick={() => handleSetPrincipal(imagen.idImagen)}
-                          className="bg-blue-600/80 text-white p-2 rounded-full hover:bg-blue-600 transition"
+                          className="bg-primary/80 text-on-primary p-2 rounded-full hover:bg-primary transition"
                           title="Marcar como principal"
                         >
                           <CheckCircle className="w-4 h-4" />
@@ -1056,7 +1056,7 @@ export default function ProductosPage() {
                   />
                   <label htmlFor="gallery-image-upload" className={`cursor-pointer text-center ${isGalleryUploading ? 'opacity-50 cursor-not-allowed' : ''}`}>
                     {isGalleryUploading ? (
-                      <div className="animate-spin h-8 w-8 border-b-2 border-blue-600 rounded-full mx-auto mb-2" />
+                      <div className="animate-spin h-8 w-8 border-b-2 border-primary rounded-full mx-auto mb-2" />
                     ) : (
                       <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                     )}

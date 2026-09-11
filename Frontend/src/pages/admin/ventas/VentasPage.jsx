@@ -184,7 +184,7 @@ const VentasPage = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-semibold text-gray-800 dark:text-white flex items-center gap-3">
-            <FiDollarSign className="text-indigo-600" />
+            <FiDollarSign className="text-primary" />
             Ventas & Facturación
           </h1>
           <p className="text-sm font-semibold text-gray-400 uppercase tracking-wide mt-1">
@@ -198,14 +198,14 @@ const VentasPage = () => {
             onClick={() => navigate('/admin/ventas/detalles')}
             className="flex items-center gap-2 px-5 py-3 bg-white dark:bg-gray-800 text-gray-700 dark:text-white font-semibold rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 transition-all"
           >
-            <FiActivity className="text-indigo-500" />
+            <FiActivity className="text-primary" />
             <span>Ver Análisis Detallado</span>
           </button>
 
           {/* Botón para crear nueva venta */}
           <button
             onClick={() => setModalVentaOpen(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-blue-600 text-white font-semibold rounded-2xl shadow-lg shadow-indigo-500/30 hover:scale-105 active:scale-95 transition-all"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary to-tertiary text-on-primary font-semibold rounded-2xl shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all"
           >
             <FiPlus className="h-5 w-5" />
             <span>Nueva Venta</span>
@@ -222,14 +222,14 @@ const VentasPage = () => {
             icon: <FiDollarSign />,
             label: 'Ventas Totales',
             value: formatearPrecio(totalVendido),
-            color: 'indigo',
+            color: 'pink',
             trend: '+12.5%'
           },
           {
             icon: <FiPackage />,
             label: 'Ordenes Procesadas',
             value: paginacion.totalRegistros || ventas.length,
-            color: 'blue',
+            color: 'amber',
             trend: 'Hoy'
           },
           {
@@ -249,7 +249,7 @@ const VentasPage = () => {
         ].map((kpi, i) => (
           <div
             key={i}
-            className="bg-white dark:bg-gray-800 p-6 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-700 group hover:border-indigo-500 transition-all"
+            className="bg-white dark:bg-gray-800 p-6 rounded-[2.5rem] shadow-sm border border-gray-100 dark:border-gray-700 group hover:border-primary-fixed-dim transition-all"
           >
             {/* Icono del KPI */}
             <div className={`h-12 w-12 rounded-2xl bg-${kpi.color}-50 dark:bg-${kpi.color}-900/20 text-${kpi.color}-600 dark:text-${kpi.color}-400 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform`}>
@@ -289,7 +289,7 @@ const VentasPage = () => {
             <input
               type="text"
               placeholder="Buscar por factura o cliente..."
-              className="w-full bg-gray-50 dark:bg-gray-900 border-none rounded-2xl py-3 pl-12 pr-4 text-sm focus:ring-2 focus:ring-indigo-500 transition-all"
+              className="w-full bg-gray-50 dark:bg-gray-900 border-none rounded-2xl py-3 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary transition-all"
               value={filtros.busqueda}
               onChange={(e) => setFiltros({ ...filtros, busqueda: e.target.value })}
             />
@@ -349,7 +349,7 @@ const VentasPage = () => {
                   >
                     {/* Número de factura */}
                     <td className="py-5 px-8">
-                      <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
+                      <span className="text-xs font-semibold text-primary dark:text-primary-fixed-dim bg-primary-fixed dark:bg-primary/20 px-3 py-1 rounded-lg">
                         {venta.numeroFactura}
                       </span>
                     </td>
@@ -404,7 +404,7 @@ const VentasPage = () => {
                         {/* Ver detalles */}
                         <button
                           onClick={() => navigate(`/admin/ventas/detalles/${venta.idVenta}`)}
-                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-100 dark:border-indigo-800/60 hover:border-indigo-600 shadow-sm hover:shadow-md hover:shadow-indigo-500/20 hover:-translate-y-0.5 active:scale-95 transition-all"
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-primary-fixed dark:bg-primary/20 text-primary dark:text-primary-fixed-dim hover:bg-primary hover:text-on-primary border border-primary-fixed dark:border-primary/40 hover:border-primary shadow-sm hover:shadow-md hover:shadow-primary/20 hover:-translate-y-0.5 active:scale-95 transition-all"
                           title="Ver detalles"
                         >
                           <FiEye className="h-4 w-4" />
@@ -456,7 +456,7 @@ const VentasPage = () => {
             <button
               disabled={paginacion.paginaActual === paginacion.totalPaginas}
               onClick={() => setFiltros({ ...filtros, pagina: filtros.pagina + 1 })}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-lg shadow-indigo-500/20 hover:scale-105 transition-all disabled:opacity-50"
+              className="px-4 py-2 bg-primary text-on-primary rounded-xl text-xs font-semibold shadow-lg shadow-primary/20 hover:scale-105 transition-all disabled:opacity-50"
             >
               Siguiente
             </button>
@@ -488,7 +488,7 @@ const VentasPage = () => {
               {/* Título y botón de cerrar */}
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-semibold text-gray-800 dark:text-white flex items-center gap-3">
-                  <FiEdit3 className="text-indigo-600" />
+                  <FiEdit3 className="text-primary" />
                   Cambiar Estado del Pedido
                 </h2>
                 <button
@@ -507,7 +507,7 @@ const VentasPage = () => {
                 {/* Número de factura */}
                 <div className="flex items-center gap-2">
                   <span className="text-gray-400 font-semibold">Factura:</span>
-                  <span className="text-indigo-600 dark:text-indigo-400 font-semibold bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
+                  <span className="text-primary dark:text-primary-fixed-dim font-semibold bg-primary-fixed dark:bg-primary/20 px-3 py-1 rounded-lg">
                     {ventaSeleccionada.numeroFactura}
                   </span>
                 </div>
@@ -550,7 +550,7 @@ const VentasPage = () => {
                       disabled={isActual}
                       className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
                         isActual
-                          ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-900/20 cursor-default'
+                          ? 'border-primary bg-primary-fixed dark:bg-primary/20 cursor-default'
                           : 'border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:shadow-lg hover:scale-105 active:scale-95'
                       }`}
                       style={{
@@ -559,7 +559,7 @@ const VentasPage = () => {
                     >
                       {/* Indicador de estado actual */}
                       {isActual && (
-                        <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[8px] font-semibold px-2 py-1 rounded-full shadow-lg">
+                        <div className="absolute -top-2 -right-2 bg-primary text-on-primary text-[8px] font-semibold px-2 py-1 rounded-full shadow-lg">
                           ACTUAL
                         </div>
                       )}
@@ -592,7 +592,7 @@ const VentasPage = () => {
 
                       {/* Overlay de hover effect */}
                       {!isActual && (
-                        <div className="absolute inset-0 bg-gradient-to-br from-transparent to-indigo-500/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-transparent to-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       )}
                     </button>
                   );
