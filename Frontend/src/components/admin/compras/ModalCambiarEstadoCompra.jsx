@@ -89,13 +89,15 @@ const ModalCambiarEstadoCompra = ({ isOpen, onClose, compra, onEstadoActualizado
         <div className="fixed inset-0 transition-opacity bg-gray-900/75 backdrop-blur-sm" onClick={onClose} />
 
         <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md sm:w-full">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-primary to-tertiary px-6 py-4 flex justify-between items-center text-white">
+          {/* Header claro con acentos rosa */}
+          <div className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50 border-b border-gray-100 dark:border-gray-800 px-6 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <FiRefreshCw className={`h-6 w-6 ${procesando ? 'animate-spin' : ''}`} />
-              <h3 className="text-xl font-semibold">Cambiar Estado</h3>
+              <div className="bg-primary-fixed dark:bg-tertiary/30 p-2 rounded-xl border border-primary/10">
+                <FiRefreshCw className={`h-5 w-5 text-primary ${procesando ? 'animate-spin' : ''}`} />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Cambiar Estado</h3>
             </div>
-            <button onClick={onClose} className="hover:bg-white/20 p-2 rounded-lg transition-colors">
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 p-2 rounded-lg transition-colors">
               <FiX className="h-6 w-6" />
             </button>
           </div>

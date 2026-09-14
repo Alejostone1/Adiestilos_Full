@@ -27,15 +27,15 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
         <div className="fixed inset-0 transition-opacity bg-gray-900/80 backdrop-blur-md" onClick={onClose} />
 
         <div className="inline-block align-bottom bg-white dark:bg-gray-950 rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full border border-gray-100 dark:border-gray-800">
-          {/* Header con gradiente Premium */}
-          <div className="bg-gradient-to-r from-primary via-primary-container to-tertiary px-4 py-4 sm:px-8 sm:py-6 flex justify-between items-center gap-2 text-white">
+          {/* Header claro con acentos rosa */}
+          <div className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50 border-b border-gray-100 dark:border-gray-800 px-4 py-4 sm:px-8 sm:py-6 flex justify-between items-center gap-2">
             <div className="flex items-center gap-3 sm:space-x-5 min-w-0">
-              <div className="bg-white/20 p-2 sm:p-3 shrink-0 rounded-2xl backdrop-blur-md border border-white/30">
-                <FiPackage className="h-5 w-5 sm:h-7 sm:w-7" />
+              <div className="bg-primary-fixed dark:bg-tertiary/30 p-2 sm:p-3 shrink-0 rounded-2xl border border-primary/10">
+                <FiPackage className="h-5 w-5 sm:h-7 sm:w-7 text-primary" />
               </div>
               <div className="min-w-0">
-                <h3 className="text-base sm:text-2xl font-semibold tracking-tight truncate">Análisis Detallado de Compra</h3>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-1 text-white/80 text-xs sm:text-sm font-medium">
+                <h3 className="text-base sm:text-2xl font-semibold tracking-tight truncate text-gray-800 dark:text-white">Análisis Detallado de Compra</h3>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-1 text-gray-500 dark:text-gray-400 text-xs sm:text-sm font-medium">
                   <span className="flex items-center gap-1"><FiHash className="h-3.5 w-3.5" /> {compra.numeroCompra || `#${compra.idCompra}`}</span>
                   <span className="hidden sm:inline opacity-40">|</span>
                   <span className="hidden sm:flex items-center gap-1"><FiClock className="h-3.5 w-3.5" /> ID Interno: {compra.idCompra}</span>
@@ -44,7 +44,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
             </div>
             <button
               onClick={onClose}
-              className="bg-white/10 hover:bg-white/20 p-2 sm:p-2.5 shrink-0 rounded-xl transition-all border border-white/20 group"
+              className="bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 p-2 sm:p-2.5 shrink-0 rounded-xl transition-all border border-gray-200 dark:border-gray-700 group text-gray-600 dark:text-gray-300"
             >
               <FiX className="h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-90 transition-transform duration-300" />
             </button>

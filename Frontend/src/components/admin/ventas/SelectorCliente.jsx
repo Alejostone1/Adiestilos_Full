@@ -160,55 +160,52 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
 
       {seleccionado && (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="bg-gradient-to-br from-primary to-tertiary dark:from-primary dark:to-tertiary rounded-[2rem] p-6 text-white shadow-xl shadow-primary dark:shadow-none relative overflow-hidden group">
-            <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/10 rounded-full blur-3xl group-hover:bg-white/20 transition-all duration-700" />
-            <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/20 rounded-full blur-2xl" />
-            
+          <div className="bg-white dark:bg-gray-800 rounded-[2rem] p-6 border-2 border-primary/15 dark:border-primary/25 shadow-sm relative overflow-hidden">
             <div className="relative flex flex-col md:flex-row items-center gap-6">
-              <div className="h-20 w-20 rounded-[1.5rem] bg-white/20 backdrop-blur-md flex items-center justify-center text-3xl font-semibold border border-white/30 shadow-inner">
+              <div className="h-20 w-20 rounded-[1.5rem] bg-primary-fixed dark:bg-tertiary/30 flex items-center justify-center text-3xl font-semibold text-primary shadow-inner">
                 {seleccionado.nombres[0]}{seleccionado.apellidos[0]}
               </div>
-              
+
               <div className="flex-1 text-center md:text-left">
-                <h4 className="text-2xl font-semibold tracking-tight">{seleccionado.nombres} {seleccionado.apellidos}</h4>
+                <h4 className="text-2xl font-semibold tracking-tight text-gray-800 dark:text-white">{seleccionado.nombres} {seleccionado.apellidos}</h4>
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-3">
-                  <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10">
-                    <FiFileText className="h-4 w-4 text-white/80" />
-                    <span className="text-xs font-semibold uppercase tracking-wide">{seleccionado.usuario || 'ID: NO REGISTRADO'}</span>
+                  <div className="flex items-center gap-2 bg-primary-fixed/50 dark:bg-tertiary/10 px-3 py-1.5 rounded-xl border border-primary/10">
+                    <FiFileText className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-semibold uppercase tracking-wide text-gray-700 dark:text-gray-200">{seleccionado.usuario || 'ID: NO REGISTRADO'}</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10">
-                    <FiMail className="h-4 w-4 text-white/80" />
-                    <span className="text-xs font-semibold">{seleccionado.correoElectronico}</span>
+                  <div className="flex items-center gap-2 bg-primary-fixed/50 dark:bg-tertiary/10 px-3 py-1.5 rounded-xl border border-primary/10">
+                    <FiMail className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-semibold text-gray-700 dark:text-gray-200">{seleccionado.correoElectronico}</span>
                   </div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3 w-full md:w-auto">
-                <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <p className="text-[11px] font-semibold uppercase text-white/70 mb-1">Teléfono</p>
-                  <div className="flex items-center gap-2">
+                <div className="bg-gray-50 dark:bg-gray-700/40 p-3 rounded-2xl border border-gray-100 dark:border-gray-700">
+                  <p className="text-[11px] font-semibold uppercase text-primary mb-1">Teléfono</p>
+                  <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
                     <FiPhone className="h-3 w-3" />
                     <span className="text-xs font-semibold">{seleccionado.telefono || 'Sin registro'}</span>
                   </div>
                 </div>
-                <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <p className="text-[11px] font-semibold uppercase text-white/70 mb-1">Ubicación</p>
-                  <div className="flex items-center gap-2">
+                <div className="bg-gray-50 dark:bg-gray-700/40 p-3 rounded-2xl border border-gray-100 dark:border-gray-700">
+                  <p className="text-[11px] font-semibold uppercase text-primary mb-1">Ubicación</p>
+                  <div className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
                     <FiMapPin className="h-3 w-3" />
                     <span className="text-xs font-semibold truncate max-w-[100px]">{seleccionado.direccion || 'N/A'}</span>
                   </div>
                 </div>
               </div>
             </div>
-            
-            <div className="mt-6 pt-4 border-t border-white/10 flex justify-between items-center relative">
+
+            <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center relative">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-white/80">Cliente Verificado y Activo</span>
+                <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Cliente Verificado y Activo</span>
               </div>
-              <button 
+              <button
                 onClick={() => alSeleccionar(null)}
-                className="text-[11px] font-semibold uppercase tracking-wide bg-white text-primary px-4 py-2 rounded-xl shadow-lg hover:bg-gray-100 transition-colors"
+                className="text-[11px] font-semibold uppercase tracking-wide bg-primary text-white px-4 py-2 rounded-xl shadow-sm hover:bg-tertiary transition-colors"
               >
                 Cambiar Cliente
               </button>

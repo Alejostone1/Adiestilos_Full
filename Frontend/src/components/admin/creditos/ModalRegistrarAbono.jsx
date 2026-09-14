@@ -170,23 +170,19 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
       
       <div className="relative bg-white dark:bg-gray-900 rounded-[3rem] shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-white/20 animate-in zoom-in-95 duration-500">
         
-        {/* Header Premium */}
-        <div className="bg-gradient-to-br from-primary via-primary-container to-tertiary p-4 sm:p-6 md:p-8 text-white relative overflow-hidden">
-           {/* Decoración fondo */}
-           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
-           <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/10 rounded-full -ml-20 -mb-20 blur-2xl" />
-
+        {/* Header claro con acentos rosa */}
+        <div className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50 border-b border-gray-100 dark:border-gray-800 p-4 sm:p-6 md:p-8 relative overflow-hidden">
            <div className="relative z-10 flex justify-between items-center gap-2">
               <div className="flex items-center gap-3 sm:gap-5 min-w-0">
-                 <div className="h-11 w-11 sm:h-16 sm:w-16 shrink-0 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white/30">
-                    <FiActivity className="h-5 w-5 sm:h-8 sm:w-8 text-white" />
+                 <div className="h-11 w-11 sm:h-16 sm:w-16 shrink-0 bg-primary-fixed dark:bg-tertiary/30 rounded-2xl flex items-center justify-center border border-primary/10">
+                    <FiActivity className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
                  </div>
                  <div className="min-w-0">
-                    <h2 className="text-base sm:text-2xl font-semibold tracking-tight leading-none mb-1 truncate">Registrar Abono</h2>
-                    <p className="text-white/70 font-semibold uppercase text-[10px] sm:text-[11px] tracking-[0.1em] truncate">Expediente de Crédito #{credito.idCredito}</p>
+                    <h2 className="text-base sm:text-2xl font-semibold tracking-tight leading-none mb-1 truncate text-gray-800 dark:text-white">Registrar Abono</h2>
+                    <p className="text-gray-500 dark:text-gray-400 font-semibold uppercase text-[10px] sm:text-[11px] tracking-[0.1em] truncate">Expediente de Crédito #{credito.idCredito}</p>
                  </div>
               </div>
-              <button onClick={onClose} className="p-2 sm:p-3 shrink-0 hover:bg-white/10 rounded-2xl transition-all">
+              <button onClick={onClose} className="p-2 sm:p-3 shrink-0 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-2xl transition-all">
                 <FiX className="h-5 w-5 sm:h-7 sm:w-7" />
               </button>
            </div>

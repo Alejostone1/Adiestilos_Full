@@ -332,16 +332,16 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
 
         {/* Modal */}
         <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-6xl sm:w-full">
-          {/* Header con gradiente */}
-          <div className="bg-gradient-to-r from-primary via-primary-container to-tertiary px-6 py-5">
+          {/* Header claro con acentos rosa */}
+          <div className="bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50 border-b border-gray-100 dark:border-gray-800 px-6 py-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
-                <div className="bg-white/20 backdrop-blur-lg p-3 rounded-xl shadow-lg">
-                  <FiShoppingCart className="h-7 w-7 text-white" />
+                <div className="bg-primary-fixed dark:bg-tertiary/30 p-3 rounded-xl border border-primary/10">
+                  <FiShoppingCart className="h-7 w-7 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold text-white">Nueva Orden de Compra</h3>
-                  <p className="text-sm text-white/80 mt-1">Paso {paso} de 3 - {
+                  <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">Nueva Orden de Compra</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Paso {paso} de 3 - {
                     paso === 1 ? 'Seleccionar Proveedor' :
                     paso === 2 ? 'Agregar Productos' :
                     'Confirmar Compra'
@@ -350,7 +350,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
               </div>
               <button
                 onClick={onClose}
-                className="text-white/80 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-white transition-colors p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg"
               >
                 <FiX className="h-6 w-6" />
               </button>
@@ -367,8 +367,8 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                   <div className="flex flex-col items-center flex-1">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                       paso >= step.num
-                        ? 'bg-white text-primary shadow-lg scale-110'
-                        : 'bg-white/20 text-white/60 scale-100'
+                        ? 'bg-primary text-white shadow-md scale-110'
+                        : 'bg-gray-100 dark:bg-gray-800 text-gray-400 scale-100'
                     }`}>
                       {paso > step.num ? (
                         <FiCheck className="h-6 w-6" />
@@ -377,14 +377,14 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                       )}
                     </div>
                     <span className={`mt-2 text-xs font-semibold ${
-                      paso >= step.num ? 'text-white' : 'text-white/70'
+                      paso >= step.num ? 'text-primary' : 'text-gray-400'
                     }`}>
                       {step.label}
                     </span>
                   </div>
                   {idx < 2 && (
                     <div className={`flex-1 h-1.5 mx-3 rounded-full transition-all duration-300 ${
-                      paso > step.num ? 'bg-white shadow-md' : 'bg-white/20'
+                      paso > step.num ? 'bg-primary shadow-sm' : 'bg-gray-100 dark:bg-gray-800'
                     }`} />
                   )}
                 </React.Fragment>
@@ -677,13 +677,13 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                 <div className="lg:col-span-1">
                   <div className="sticky top-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
                     {/* Header del carrito */}
-                    <div className="bg-gradient-to-r from-primary to-tertiary px-4 py-3">
+                    <div className="bg-primary-fixed/60 dark:bg-tertiary/10 border-b border-primary/10 px-4 py-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2">
-                          <FiShoppingCart className="h-5 w-5 text-white" />
-                          <h4 className="font-semibold text-white">Carrito</h4>
+                          <FiShoppingCart className="h-5 w-5 text-primary" />
+                          <h4 className="font-semibold text-gray-800 dark:text-white">Carrito</h4>
                         </div>
-                        <span className="px-2.5 py-1 bg-white/20 backdrop-blur-lg text-white text-sm font-semibold rounded-lg">
+                        <span className="px-2.5 py-1 bg-primary text-white text-sm font-semibold rounded-lg">
                           {carrito.length}
                         </span>
                       </div>
@@ -847,7 +847,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
             {paso === 3 && (
               <div className="space-y-6">
                 {/* Info de la compra */}
-                <div className="bg-gradient-to-br from-primary to-tertiary dark:from-primary/20 dark:to-tertiary/20 rounded-xl p-6 border border-primary-fixed dark:border-tertiary">
+                <div className="bg-primary-fixed/40 dark:bg-tertiary/10 rounded-xl p-6 border border-primary-fixed dark:border-tertiary">
                   <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center space-x-2">
                     <FiUser className="h-5 w-5 text-primary" />
                     <span>Información de la Compra</span>
