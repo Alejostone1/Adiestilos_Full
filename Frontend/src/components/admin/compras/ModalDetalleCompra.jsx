@@ -28,29 +28,29 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
 
         <div className="inline-block align-bottom bg-white dark:bg-gray-950 rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-5xl sm:w-full border border-gray-100 dark:border-gray-800">
           {/* Header con gradiente Premium */}
-          <div className="bg-gradient-to-r from-primary via-primary-container to-tertiary px-8 py-6 flex justify-between items-center text-white">
-            <div className="flex items-center space-x-5">
-              <div className="bg-white/20 p-3 rounded-2xl backdrop-blur-md border border-white/30">
-                <FiPackage className="h-7 w-7" />
+          <div className="bg-gradient-to-r from-primary via-primary-container to-tertiary px-4 py-4 sm:px-8 sm:py-6 flex justify-between items-center gap-2 text-white">
+            <div className="flex items-center gap-3 sm:space-x-5 min-w-0">
+              <div className="bg-white/20 p-2 sm:p-3 shrink-0 rounded-2xl backdrop-blur-md border border-white/30">
+                <FiPackage className="h-5 w-5 sm:h-7 sm:w-7" />
               </div>
-              <div>
-                <h3 className="text-2xl font-semibold tracking-tight">Análisis Detallado de Compra</h3>
-                <div className="flex items-center space-x-3 mt-1 text-primary-fixed text-sm font-medium">
+              <div className="min-w-0">
+                <h3 className="text-base sm:text-2xl font-semibold tracking-tight truncate">Análisis Detallado de Compra</h3>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-1 text-primary-fixed text-xs sm:text-sm font-medium">
                   <span className="flex items-center gap-1"><FiHash className="h-3.5 w-3.5" /> {compra.numeroCompra || `#${compra.idCompra}`}</span>
-                  <span className="opacity-40">|</span>
-                  <span className="flex items-center gap-1"><FiClock className="h-3.5 w-3.5" /> ID Interno: {compra.idCompra}</span>
+                  <span className="hidden sm:inline opacity-40">|</span>
+                  <span className="hidden sm:flex items-center gap-1"><FiClock className="h-3.5 w-3.5" /> ID Interno: {compra.idCompra}</span>
                 </div>
               </div>
             </div>
-            <button 
-              onClick={onClose} 
-              className="bg-white/10 hover:bg-white/20 p-2.5 rounded-xl transition-all border border-white/20 group"
+            <button
+              onClick={onClose}
+              className="bg-white/10 hover:bg-white/20 p-2 sm:p-2.5 shrink-0 rounded-xl transition-all border border-white/20 group"
             >
-              <FiX className="h-6 w-6 group-hover:rotate-90 transition-transform duration-300" />
+              <FiX className="h-5 w-5 sm:h-6 sm:w-6 group-hover:rotate-90 transition-transform duration-300" />
             </button>
           </div>
 
-          <div className="p-8 bg-gray-50 dark:bg-gray-950 space-y-8 max-h-[75vh] overflow-y-auto custom-scrollbar">
+          <div className="p-4 sm:p-6 md:p-8 bg-gray-50 dark:bg-gray-950 space-y-6 sm:space-y-8 max-h-[75vh] overflow-y-auto custom-scrollbar">
             {/* Cards de Información Principal */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Proveedor */}
@@ -209,7 +209,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
 
             {/* Resumen Financiero Estilizado */}
             <div className="flex justify-end pt-4">
-              <div className="w-full md:w-80 bg-white dark:bg-gray-900 p-8 rounded-[40px] shadow-2xl shadow-primary/10 border border-gray-100 dark:border-gray-800 space-y-5">
+              <div className="w-full md:w-80 bg-white dark:bg-gray-900 p-5 sm:p-8 rounded-[28px] sm:rounded-[40px] shadow-2xl shadow-primary/10 border border-gray-100 dark:border-gray-800 space-y-5">
                 <h5 className="text-[11px] font-semibold text-gray-400 uppercase tracking-[0.1em] text-center mb-6">Conciliación Financiera</h5>
                 
                 <div className="flex justify-between items-center text-sm group">
@@ -240,11 +240,11 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
             </div>
           </div>
           
-          <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 px-8 py-5 flex justify-between items-center">
-            <p className="text-[11px] font-extrabold text-gray-400 uppercase tracking-[0.1em]">© AppVite 2026 - Módulo de Auditoría</p>
+          <div className="bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 px-4 py-4 sm:px-8 sm:py-5 flex justify-between items-center gap-3">
+            <p className="hidden sm:block text-[11px] font-extrabold text-gray-400 uppercase tracking-[0.1em]">© Adi Estilos 2026 - Módulo de Auditoría</p>
             <button
                onClick={onClose}
-               className="px-10 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold text-xs uppercase tracking-wide rounded-2xl hover:scale-105 transition-all shadow-xl shadow-gray-200 dark:shadow-none"
+               className="w-full sm:w-auto px-6 py-3 sm:px-10 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold text-xs uppercase tracking-wide rounded-2xl hover:scale-105 transition-all shadow-xl shadow-gray-200 dark:shadow-none"
              >
                Finalizar Revisión
              </button>

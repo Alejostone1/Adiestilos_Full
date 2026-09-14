@@ -371,7 +371,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                 </div>
 
                 {/* Sección de Pagos Multimetodo */}
-                <div className="bg-white dark:bg-gray-800/50 p-8 rounded-[3rem] border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden">
+                <div className="bg-white dark:bg-gray-800/50 p-4 sm:p-6 md:p-8 rounded-[2rem] sm:rounded-[3rem] border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden">
                    <div className="flex items-center gap-4 mb-8">
                       <div className="h-12 w-12 bg-primary-fixed dark:bg-tertiary/40 rounded-2xl flex items-center justify-center text-primary">
                          <FiCreditCard className="h-6 w-6" />
