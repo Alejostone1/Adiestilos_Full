@@ -1,5 +1,4 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const { prisma } = require('../../config/databaseConfig');
 
 /**
  * Crea un registro de crédito para una venta con saldo pendiente.
