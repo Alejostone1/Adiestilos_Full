@@ -333,7 +333,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
         {/* Modal */}
         <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-6xl sm:w-full">
           {/* Header con gradiente */}
-          <div className="bg-gradient-to-r from-primary via-primary-container to-pink-600 px-6 py-5">
+          <div className="bg-gradient-to-r from-primary via-primary-container to-tertiary px-6 py-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4">
                 <div className="bg-white/20 backdrop-blur-lg p-3 rounded-xl shadow-lg">
@@ -341,7 +341,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                 </div>
                 <div>
                   <h3 className="text-2xl font-semibold text-white">Nueva Orden de Compra</h3>
-                  <p className="text-sm text-primary-fixed mt-1">Paso {paso} de 3 - {
+                  <p className="text-sm text-white/80 mt-1">Paso {paso} de 3 - {
                     paso === 1 ? 'Seleccionar Proveedor' :
                     paso === 2 ? 'Agregar Productos' :
                     'Confirmar Compra'
@@ -377,7 +377,7 @@ const ModalCompra = ({ isOpen, onClose, onCompraCreada }) => {
                       )}
                     </div>
                     <span className={`mt-2 text-xs font-semibold ${
-                      paso >= step.num ? 'text-white' : 'text-primary-fixed'
+                      paso >= step.num ? 'text-white' : 'text-white/70'
                     }`}>
                       {step.label}
                     </span>

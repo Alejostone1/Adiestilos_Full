@@ -131,7 +131,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                             {cliente.nombres} {cliente.apellidos}
                           </span>
                           <div className={`flex items-center gap-4 mt-0.5 text-[11px] font-semibold uppercase tracking-wider ${
-                             seleccionado?.idUsuario === cliente.idUsuario ? 'text-primary-fixed' : 'text-gray-400'
+                             seleccionado?.idUsuario === cliente.idUsuario ? 'text-white/80' : 'text-gray-400'
                           }`}>
                             <span className="flex items-center gap-1">
                               <FiFileText className="h-3 w-3" />
@@ -173,11 +173,11 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
                 <h4 className="text-2xl font-semibold tracking-tight">{seleccionado.nombres} {seleccionado.apellidos}</h4>
                 <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-3">
                   <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10">
-                    <FiFileText className="h-4 w-4 text-primary-fixed" />
+                    <FiFileText className="h-4 w-4 text-white/80" />
                     <span className="text-xs font-semibold uppercase tracking-wide">{seleccionado.usuario || 'ID: NO REGISTRADO'}</span>
                   </div>
                   <div className="flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl backdrop-blur-sm border border-white/10">
-                    <FiMail className="h-4 w-4 text-primary-fixed" />
+                    <FiMail className="h-4 w-4 text-white/80" />
                     <span className="text-xs font-semibold">{seleccionado.correoElectronico}</span>
                   </div>
                 </div>
@@ -185,14 +185,14 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
 
               <div className="grid grid-cols-2 gap-3 w-full md:w-auto">
                 <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <p className="text-[11px] font-semibold uppercase text-primary-fixed mb-1">Teléfono</p>
+                  <p className="text-[11px] font-semibold uppercase text-white/70 mb-1">Teléfono</p>
                   <div className="flex items-center gap-2">
                     <FiPhone className="h-3 w-3" />
                     <span className="text-xs font-semibold">{seleccionado.telefono || 'Sin registro'}</span>
                   </div>
                 </div>
                 <div className="bg-white/10 p-3 rounded-2xl backdrop-blur-sm border border-white/10">
-                  <p className="text-[11px] font-semibold uppercase text-primary-fixed mb-1">Ubicación</p>
+                  <p className="text-[11px] font-semibold uppercase text-white/70 mb-1">Ubicación</p>
                   <div className="flex items-center gap-2">
                     <FiMapPin className="h-3 w-3" />
                     <span className="text-xs font-semibold truncate max-w-[100px]">{seleccionado.direccion || 'N/A'}</span>
@@ -204,7 +204,7 @@ const SelectorCliente = ({ seleccionado, alSeleccionar }) => {
             <div className="mt-6 pt-4 border-t border-white/10 flex justify-between items-center relative">
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-[11px] font-semibold uppercase tracking-wide text-primary-fixed">Cliente Verificado y Activo</span>
+                <span className="text-[11px] font-semibold uppercase tracking-wide text-white/80">Cliente Verificado y Activo</span>
               </div>
               <button 
                 onClick={() => alSeleccionar(null)}

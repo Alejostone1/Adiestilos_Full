@@ -35,7 +35,7 @@ const ModalDetalleCompra = ({ isOpen, onClose, compra }) => {
               </div>
               <div className="min-w-0">
                 <h3 className="text-base sm:text-2xl font-semibold tracking-tight truncate">Análisis Detallado de Compra</h3>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-1 text-primary-fixed text-xs sm:text-sm font-medium">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 mt-1 text-white/80 text-xs sm:text-sm font-medium">
                   <span className="flex items-center gap-1"><FiHash className="h-3.5 w-3.5" /> {compra.numeroCompra || `#${compra.idCompra}`}</span>
                   <span className="hidden sm:inline opacity-40">|</span>
                   <span className="hidden sm:flex items-center gap-1"><FiClock className="h-3.5 w-3.5" /> ID Interno: {compra.idCompra}</span>
