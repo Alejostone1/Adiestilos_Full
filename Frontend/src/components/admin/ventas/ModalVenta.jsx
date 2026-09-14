@@ -13,6 +13,7 @@ import { metodosPagoApi } from '../../../api/metodosPagoApi';
 import { estadosPedidoApi } from '../../../api/estadosPedidoApi';
 import { descuentosApi } from '../../../api/descuentosApi';
 import { FiPercent, FiHash, FiInfo } from 'react-icons/fi';
+import { getImagenURL } from '../../../utils/imageUrl';
 import { useAuth } from '../../../context/AuthContext';
 
 const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
@@ -198,8 +199,6 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
     if (paso === 2 && carrito.length === 0) return Swal.fire('Error', 'El carrito está vacío', 'error');
     if (paso < 5) setPaso(paso + 1);
   };
-
-  const UPLOAD_URL = (import.meta.env.VITE_API_URL || '').replace('/api', '');
 
   const formatearPrecio = (valor) => {
     return Number(valor).toLocaleString('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 });
@@ -705,7 +704,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
                          {carrito.map((item, idx) => (
                            <div key={idx} className="flex gap-4 p-3 rounded-2xl bg-gray-50 dark:bg-gray-700/30 border border-gray-100 dark:border-gray-600">
                               <div className="h-16 w-16 bg-white rounded-xl overflow-hidden shadow-sm flex-shrink-0">
-                                 <img src={`${UPLOAD_URL}${item.imagenVariante}`} alt="" className="h-full w-full object-cover" />
+                                 <img src={getImagenURL(item.imagenVariante)} alt="" className="h-full w-full object-cover" />
                               </div>
                               <div className="flex-1 min-w-0 flex flex-col justify-center">
                                  <h5 className="text-xs font-semibold text-gray-800 dark:text-gray-200 truncate">{item.producto.titulo}</h5>
@@ -767,7 +766,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           {/* Imagen */}
           <div className="h-10 w-10 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
             <img
-              src={`${UPLOAD_URL}${item.imagenVariante}`}
+              src={getImagenURL(item.imagenVariante)}
               alt={item.producto?.titulo}
               className="h-full w-full object-cover"
             />

@@ -1,12 +1,11 @@
 import React from 'react';
-import { 
-  FiTrash2, FiPlus, FiMinus, FiTag, FiAlertCircle, 
-  FiPackage, FiDollarSign, FiPercent 
+import {
+  FiTrash2, FiPlus, FiMinus, FiTag, FiAlertCircle,
+  FiPackage, FiDollarSign, FiPercent
 } from 'react-icons/fi';
+import { getImagenURL } from '../../../utils/imageUrl';
 
 const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuento, onEliminar }) => {
-  const UPLOAD_URL = (import.meta.env.VITE_API_URL || '').replace('/api', '');
-
   const formatearPrecio = (valor) => {
     return Number(valor).toLocaleString('es-CO', { 
       style: 'currency', 
@@ -55,7 +54,7 @@ const TablaDetalleVenta = ({ carrito, onActualizarCantidad, onActualizarDescuent
           <div className="flex items-center gap-4">
             <div className="h-14 w-14 rounded-2xl overflow-hidden bg-white dark:bg-gray-900 flex-shrink-0 shadow-inner border border-gray-100 dark:border-gray-700 relative group-hover:scale-105 transition-transform duration-500">
               <img
-                src={`${UPLOAD_URL}${item.imagenVariante}`}
+                src={getImagenURL(item.imagenVariante)}
                 alt={item.producto?.titulo}
                 className="h-full w-full object-cover"
               />

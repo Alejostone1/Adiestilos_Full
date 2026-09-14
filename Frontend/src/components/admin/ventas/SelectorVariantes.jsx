@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { galeriaApi } from '../../../api/galeriaApi';
-import { 
-  FiSearch, FiBox, FiChevronDown, FiPlus, FiAlertCircle, 
-  FiImage, FiTag, FiShoppingBag, FiInfo 
+import {
+  FiSearch, FiBox, FiChevronDown, FiPlus, FiAlertCircle,
+  FiImage, FiTag, FiShoppingBag, FiInfo
 } from 'react-icons/fi';
+import { getImagenURL } from '../../../utils/imageUrl';
 
 const SelectorVariantes = ({ alAgregar }) => {
   const [productos, setProductos] = useState([]);
@@ -32,11 +33,9 @@ const SelectorVariantes = ({ alAgregar }) => {
     setExpandidos(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const productosFiltrados = productos.filter(p => 
+  const productosFiltrados = productos.filter(p =>
     p.titulo.toLowerCase().includes(busqueda.toLowerCase())
   );
-
-  const UPLOAD_URL = (import.meta.env.VITE_API_URL || '').replace('/api', '');
 
   return (
     <div className="flex flex-col h-[600px] space-y-6">
@@ -98,8 +97,8 @@ const SelectorVariantes = ({ alAgregar }) => {
               >
                 <div className="h-20 w-20 rounded-2xl overflow-hidden bg-white flex-shrink-0 shadow-md border-2 border-white dark:border-gray-700 relative group-hover:scale-105 transition-transform duration-500">
                   {producto.imagen ? (
-                    <img 
-                      src={`${UPLOAD_URL}${producto.imagen}`} 
+                    <img
+                      src={getImagenURL(producto.imagen)}
                       alt={producto.titulo}
                       className="h-full w-full object-cover"
                     />
@@ -166,8 +165,8 @@ const SelectorVariantes = ({ alAgregar }) => {
                           className="flex items-center gap-4 bg-white dark:bg-gray-800/80 p-3 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-primary/50 hover:shadow-xl transition-all duration-300 group/item relative overflow-hidden"
                         >
                           <div className="h-14 w-14 rounded-xl overflow-hidden bg-gray-50 dark:bg-gray-900 flex-shrink-0 border border-gray-100 dark:border-gray-700 shadow-inner group-hover/item:scale-105 transition-transform duration-500">
-                             <img 
-                                src={`${UPLOAD_URL}${variante.imagen || producto.imagen}`} 
+                             <img
+                                src={getImagenURL(variante.imagen || producto.imagen)}
                                 alt="Variante"
                                 className="h-full w-full object-cover"
                               />
