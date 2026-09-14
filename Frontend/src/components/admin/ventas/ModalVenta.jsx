@@ -276,15 +276,15 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
       <div className="bg-white dark:bg-gray-900 w-full max-w-[95vw] h-[95vh] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden border border-white/20">
         
         {/* Header */}
-        <div className="px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50">
-          <div className="flex items-center gap-6">
-            <div className="h-14 w-14 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
-              <FiShoppingCart className="h-7 w-7" />
+        <div className="px-4 py-4 sm:px-8 sm:py-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white dark:from-gray-900 dark:to-gray-800/50">
+          <div className="flex items-center gap-3 sm:gap-6 min-w-0">
+            <div className="h-11 w-11 sm:h-14 sm:w-14 shrink-0 rounded-2xl bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/30">
+              <FiShoppingCart className="h-5 w-5 sm:h-7 sm:w-7" />
             </div>
-            <div className="flex flex-col md:flex-row md:items-center gap-4">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Nueva Venta Enterprise</h2>
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide">Paso {paso} de 5: {
+            <div className="flex flex-col md:flex-row md:items-center gap-1 sm:gap-4 min-w-0">
+              <div className="min-w-0">
+                <h2 className="text-base sm:text-xl font-semibold text-gray-800 dark:text-gray-100 truncate">Nueva Venta Enterprise</h2>
+                <p className="text-[10px] sm:text-xs font-semibold text-gray-400 uppercase tracking-wide">Paso {paso} de 5: {
                   paso === 1 ? 'Cliente' : paso === 2 ? 'Catálogo' : paso === 3 ? 'Detalle' : paso === 4 ? 'Logística' : 'Confirmación'
                 }</p>
               </div>
@@ -316,8 +316,8 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
               </div>
             </div>
           </div>
-          <button onClick={onClose} className="p-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-            <FiX className="h-6 w-6 text-gray-400" />
+          <button onClick={onClose} className="p-2 sm:p-3 shrink-0 rounded-2xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <FiX className="h-5 w-5 sm:h-6 sm:w-6 text-gray-400" />
           </button>
         </div>
 
@@ -334,7 +334,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
         {/* Content */}
         <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
           
-          <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 custom-scrollbar">
             {paso === 1 && <SelectorCliente seleccionado={cliente} alSeleccionar={setCliente} />}
             {paso === 2 && <SelectorVariantes alAgregar={agregarAlCarrito} />}
             {paso === 3 && (
@@ -742,7 +742,7 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           </div>
 
           {/* Sidebar / Resumen */}
-          <div className="w-full md:w-[340px] bg-gray-50/50 dark:bg-gray-800/30 p-8 border-l border-gray-100 dark:border-gray-800">
+          <div className="w-full md:w-[340px] bg-gray-50/50 dark:bg-gray-800/30 p-4 sm:p-6 md:p-8 border-t md:border-t-0 md:border-l border-gray-100 dark:border-gray-800">
             <ResumenVenta 
               subtotal={subtotalProductos} 
               descuentoTotal={totalDescuentosLinea + valorDescuentoGlobal} 
@@ -805,11 +805,11 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
         </div>
 
         {/* Footer */}
-        <div className="px-8 py-6 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 flex justify-between items-center">
-          <button 
+        <div className="px-4 py-4 sm:px-8 sm:py-6 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 flex justify-between items-center gap-2">
+          <button
             onClick={handleAnterior}
             disabled={paso === 1}
-            className={`flex items-center gap-2 px-6 py-3 rounded-2xl font-semibold transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-6 sm:py-3 rounded-2xl font-semibold text-sm sm:text-base transition-all shrink-0 ${
               paso === 1 ? 'opacity-0 invisible' : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
             }`}
           >
@@ -819,19 +819,21 @@ const ModalVenta = ({ isOpen, onClose, onVentaCreada }) => {
           <div className="flex items-center gap-4">
             <span className="hidden sm:block text-[11px] font-semibold text-gray-300 uppercase tracking-wide">Enterprise Edition v2026</span>
             {paso < 5 ? (
-              <button 
+              <button
                 onClick={handleSiguiente}
-                className="flex items-center gap-2 px-10 py-4 bg-primary text-white font-semibold rounded-2xl shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all"
+                className="flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-10 sm:py-4 bg-primary text-white font-semibold text-sm sm:text-base rounded-2xl shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-all shrink-0"
               >
                 Siguiente <FiChevronRight />
               </button>
             ) : (
-              <button 
+              <button
                 onClick={handleCrearVenta}
                 disabled={procesando}
-                className="flex items-center gap-2 px-10 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-2xl shadow-lg shadow-green-500/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100"
+                className="flex items-center gap-1.5 sm:gap-2 px-4 py-2.5 sm:px-10 sm:py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold text-xs sm:text-base rounded-2xl shadow-lg shadow-green-500/30 hover:scale-105 active:scale-95 transition-all disabled:opacity-50 disabled:scale-100 shrink-0"
               >
-                {procesando ? 'Procesando...' : 'Confirmar Venta Enterprise'} <FiCheck />
+                <span className="sm:hidden">{procesando ? 'Procesando...' : 'Confirmar'}</span>
+                <span className="hidden sm:inline">{procesando ? 'Procesando...' : 'Confirmar Venta Enterprise'}</span>
+                <FiCheck />
               </button>
             )}
           </div>
