@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiDollarSign, FiPercent, FiTag, FiShoppingBag } from 'react-icons/fi';
+import { FiPercent, FiTag, FiShoppingBag } from 'react-icons/fi';
 
 const ResumenVenta = ({ subtotal, descuentoTotal, impuestos, total }) => {
   const formatearPrecio = (valor) => {
@@ -48,18 +48,6 @@ const ResumenVenta = ({ subtotal, descuentoTotal, impuestos, total }) => {
               </span>
               <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-tighter">Iva Incluido (si aplica)</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-8 p-4 bg-gradient-to-br from-primary to-tertiary rounded-2xl shadow-lg shadow-primary/20">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white">
-            <FiDollarSign className="h-6 w-6" />
-          </div>
-          <div>
-            <p className="text-[11px] font-semibold text-primary-fixed uppercase tracking-wide">Valor Neto Venta</p>
-            <p className="text-lg font-semibold text-white leading-none">{formatearPrecio(total)}</p>
           </div>
         </div>
       </div>
