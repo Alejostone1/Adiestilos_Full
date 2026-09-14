@@ -171,23 +171,23 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
       <div className="relative bg-white dark:bg-gray-900 rounded-[3rem] shadow-2xl max-w-4xl w-full max-h-[92vh] flex flex-col overflow-hidden border border-white/20 animate-in zoom-in-95 duration-500">
         
         {/* Header Premium */}
-        <div className="bg-gradient-to-br from-primary via-primary-container to-tertiary p-8 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-br from-primary via-primary-container to-tertiary p-4 sm:p-6 md:p-8 text-white relative overflow-hidden">
            {/* Decoración fondo */}
            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-20 -mt-20 blur-3xl animate-pulse" />
            <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/10 rounded-full -ml-20 -mb-20 blur-2xl" />
 
-           <div className="relative z-10 flex justify-between items-center">
-              <div className="flex items-center gap-5">
-                 <div className="h-16 w-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white/30">
-                    <FiActivity className="h-8 w-8 text-white" />
+           <div className="relative z-10 flex justify-between items-center gap-2">
+              <div className="flex items-center gap-3 sm:gap-5 min-w-0">
+                 <div className="h-11 w-11 sm:h-16 sm:w-16 shrink-0 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-xl border border-white/30">
+                    <FiActivity className="h-5 w-5 sm:h-8 sm:w-8 text-white" />
                  </div>
-                 <div>
-                    <h2 className="text-2xl font-semibold tracking-tight leading-none mb-1">Registrar Abono</h2>
-                    <p className="text-white/70 font-semibold uppercase text-[11px] tracking-[0.1em]">Expediente de Crédito #{credito.idCredito}</p>
+                 <div className="min-w-0">
+                    <h2 className="text-base sm:text-2xl font-semibold tracking-tight leading-none mb-1 truncate">Registrar Abono</h2>
+                    <p className="text-white/70 font-semibold uppercase text-[10px] sm:text-[11px] tracking-[0.1em] truncate">Expediente de Crédito #{credito.idCredito}</p>
                  </div>
               </div>
-              <button onClick={onClose} className="p-3 hover:bg-white/10 rounded-2xl transition-all">
-                <FiX className="h-7 w-7" />
+              <button onClick={onClose} className="p-2 sm:p-3 shrink-0 hover:bg-white/10 rounded-2xl transition-all">
+                <FiX className="h-5 w-5 sm:h-7 sm:w-7" />
               </button>
            </div>
         </div>
@@ -211,7 +211,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
         </div>
 
         {/* Cuerpo del Formulario */}
-        <div className="flex-1 overflow-y-auto p-8 custom-scrollbar space-y-8">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 custom-scrollbar space-y-6 sm:space-y-8">
            
            {/* Selector de Métodos de Pago */}
            <section>
@@ -311,7 +311,7 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
            </section>
 
            {/* Notas y Extras */}
-           <section className="bg-gray-50/50 dark:bg-gray-800/20 p-8 rounded-[3rem] border border-gray-100 dark:border-gray-800">
+           <section className="bg-gray-50/50 dark:bg-gray-800/20 p-4 sm:p-6 md:p-8 rounded-[2rem] sm:rounded-[3rem] border border-gray-100 dark:border-gray-800">
               <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-[0.1em] mb-4 flex items-center gap-2">
                  Observaciones Adicionales
               </h3>
@@ -327,17 +327,17 @@ const ModalRegistrarAbono = ({ isOpen, onClose, credito, onAbonoRegistrado }) =>
         </div>
 
         {/* Footer con Acciones */}
-        <div className="p-8 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex gap-4">
+        <div className="p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex gap-3 sm:gap-4">
            <button
               onClick={onClose}
-              className="flex-1 px-8 py-5 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-semibold rounded-3xl hover:bg-gray-100 transition-all uppercase text-xs tracking-wide"
+              className="flex-1 px-4 py-3.5 sm:px-8 sm:py-5 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 font-semibold rounded-2xl sm:rounded-3xl hover:bg-gray-100 transition-all uppercase text-[11px] sm:text-xs tracking-wide"
            >
               Cancelar
            </button>
            <button
               onClick={handleSubmit}
               disabled={procesando || totalAbono <= 0}
-              className="flex-[2] px-8 py-5 bg-gradient-to-r from-primary to-tertiary text-white font-semibold rounded-3xl shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-3 uppercase text-xs tracking-wide"
+              className="flex-[2] px-4 py-3.5 sm:px-8 sm:py-5 bg-gradient-to-r from-primary to-tertiary text-white font-semibold rounded-2xl sm:rounded-3xl shadow-xl shadow-primary/30 hover:scale-[1.02] active:scale-95 transition-all disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 sm:gap-3 uppercase text-[11px] sm:text-xs tracking-wide"
            >
               {procesando ? (
                  <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
